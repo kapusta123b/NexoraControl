@@ -1,0 +1,70 @@
+services:
+  api:
+
+    container_name: api
+    build:
+      context: .
+      dockerfile: backend/dockerfile
+
+    restart: unless-stopped
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    expose: 8000
+
+    volumes:
+      - static_files:/app/staticfiles
+
+    environment:
+      - SECRET_KEY
+      - ALLOWED_HOSTS
+      - CSRF_TRUSTED_ORIGINS
+      - DB_NAME
+      - DB_USER
+      - DB_PASS
+      - DB_HOST
+      - DB_PORT
+
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --timeout 60 --workers 3
+
+  nginx:
+
+    container_name: nginx
+    image: nginx:alpine-slim
+
+    restart: unless-stopped
+
+    depends_on:
+      - api
+
+    ports:
+      - 80:80
+
+    volumes:
+      - conf.d:/etc/nginx/conf.d
+      - static_files:/app/staticfiles
+
+  db:
+    image: postgres:18.4
+
+    restart: unless-stopped
+
+    volumes:
+      - data:/var/lib/postgresql
+
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PASSWORD=${DB_PASS}
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  data:
+  static_files:
