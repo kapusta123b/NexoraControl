@@ -20,3 +20,5 @@ sqlparse==0.5.5
 typing_extensions==4.16.0
 uritemplate==4.2.0
 python-decouple==3.8
+psycopg2-binary==2.9.12
+httpx[http2]==0.28.1
