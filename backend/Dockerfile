@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM python:3.13-slim
 
 
@@ -9,8 +10,9 @@ WORKDIR /app/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
+    gosu \
     libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 
@@ -23,11 +25,11 @@ RUN useradd \
     --shell /bin/sh \
     nonroot
 
-COPY --chown=nonroot:nonroot backend/ .
+COPY --chown=nonroot:nonroot backend/ /app/
 
-RUN chmod 755 entrypoint.sh
-
-USER nonroot
+RUN mkdir -p /app/staticfiles \
+    && chown -R nonroot:nonroot /app \
+    && chmod 755 entrypoint.sh
 
 EXPOSE 8000
 

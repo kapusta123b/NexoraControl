@@ -4,7 +4,7 @@ services:
     container_name: api
     build:
       context: .
-      dockerfile: backend/dockerfile
+      dockerfile: backend/Dockerfile
 
     restart: unless-stopped
 
@@ -12,7 +12,8 @@ services:
       db:
         condition: service_healthy
 
-    expose: 8000
+    expose:
+      - 8000
 
     volumes:
       - static_files:/app/staticfiles
@@ -26,12 +27,14 @@ services:
       - DB_PASS
       - DB_HOST
       - DB_PORT
+      - DEBUG=False
 
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --timeout 60 --workers 3
 
   nginx:
 
     container_name: nginx
+
     image: nginx:alpine-slim
 
     restart: unless-stopped
@@ -43,7 +46,7 @@ services:
       - 80:80
 
     volumes:
-      - conf.d:/etc/nginx/conf.d
+      - ./conf.d:/etc/nginx/conf.d
       - static_files:/app/staticfiles
 
   db:

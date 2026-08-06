@@ -1,8 +1,11 @@
-#!bin/sh
+#!/bin/sh
 
 set -e
 
-python manage.py migrate
-python manage.py collectstatic --noinput
+mkdir -p /app/staticfiles
+chown -R nonroot:nonroot /app/staticfiles
 
-exec "$@"
+gosu nonroot python manage.py migrate --noinput
+gosu nonroot python manage.py collectstatic --noinput
+
+exec gosu nonroot "$@"
