@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from decouple import config
-  
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config("SECRET_KEY")
@@ -20,18 +20,13 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PATY_APPS = [
-    "rest_framework",
-]
+THIRD_PATY_APPS = ["rest_framework"]
 
-LOCAL_APPS = [
-    
-]
+LOCAL_APPS = []
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PATY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -64,11 +59,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("POSTGRES_DB", default="modelhub"),
-        "USER": config("POSTGRES_USER", default="postgres"),
-        "PASSWORD": config("POSTGRES_PASSWORD", default="password"),
-        "HOST": config("POSTGRES_HOST", default="localhost"),
-        "PORT": config("POSTGRES_PORT", default="5432"),
+        "NAME": config("DB_NAME", default="modelhub"),
+        "USER": config("DB_USER", default="postgres"),
+        "PASSWORD": config("DB_PASS", default="password"),
+        "HOST": config("DB_HOST", default="localhost"),
+        "PORT": config("DB_PORT", default="5432"),
         "ATOMIC_REQUESTS": True,
     }
 }
