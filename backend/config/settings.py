@@ -22,7 +22,7 @@ DJANGO_APPS = [
 
 THIRD_PATY_APPS = ["rest_framework"]
 
-LOCAL_APPS = []
+LOCAL_APPS = ["apps.agents"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PATY_APPS + LOCAL_APPS
 
