@@ -54,6 +54,8 @@ services:
 
     restart: unless-stopped
 
+    container_name: db
+
     volumes:
       - data:/var/lib/postgresql
 
