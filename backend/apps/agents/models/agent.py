@@ -17,8 +17,6 @@ class Agent(models.Model):
 
     ram_load = models.PositiveSmallIntegerField(null=True)
 
-    disc_load = models.PositiveSmallIntegerField(null=True)
-
     status = models.CharField(choices=Status.choices, default=Status.OFFLINE)
 
     last_seen = models.DateTimeField(
@@ -28,4 +26,4 @@ class Agent(models.Model):
 
     token = models.UUIDField(default=uuid.uuid4, unique=True)
 
-    
+    created_at = models.DateTimeField(auto_now_add=True)

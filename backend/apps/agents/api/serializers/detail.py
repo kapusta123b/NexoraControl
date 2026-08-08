@@ -13,7 +13,6 @@ class AgentDetailSerializer(ModelSerializer):
             "hostname",
             "cpu_load",
             "ram_load",
-            "disc_load",
             "last_seen",
             "status",
         ]
@@ -23,7 +22,6 @@ class AgentDetailSerializer(ModelSerializer):
             "last_seen",
             "created_at",
             "cpu_load",
-            "ram_load",
             "disc_load",
             "status",
         ]
@@ -36,5 +34,4 @@ class AgentHeartbeatSerializer(ModelSerializer):
         fields = [
             "cpu_load",
             "ram_load",
-            "disc_load",
         ]
