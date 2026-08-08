@@ -1,0 +1,9 @@
+API_URL = "http://127.0.0.1:8000/api/v1/"
+
+AGENT_ID = 0
+
+TOKEN = ''
+
+HEARTBEAT_INTERVAL = 5
+
+COMMAND_INTERVAL = 2
