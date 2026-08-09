@@ -14,8 +14,22 @@ class BasicClient:
             follow_redirects=True,
         )
 
-    async def send_heartbeat(self, params: dict) -> int:
-        response = await self.client.post(f"agents/{AGENT_ID}/heartbeat/", json=params)
+    async def send_heartbeat(self, heartbeat: dict) -> int:
+        response = await self.client.post(f"agents/{AGENT_ID}/heartbeat/", json=heartbeat)
+        status_code = response.status_code
+
+        return status_code
+
+    async def get_commands(self, params: dict) -> dict | int:
+        response = await self.client.get(f"agents/{AGENT_ID}/commands/", params=params)
+        status_code = response.status_code
+
+        return response.json()[0], status_code
+
+    async def send_commands(self, commands: list[dict]) -> int:
+        response = await self.client.patch(
+            f"agents/{AGENT_ID}/commands/results/", json=commands
+        )
         status_code = response.status_code
 
         return status_code
