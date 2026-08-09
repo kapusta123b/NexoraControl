@@ -5,6 +5,8 @@ from apps.agents.models.command import Command
 
 class CommandListSerializer(serializers.ModelSerializer):
 
+    output = serializers.ReadOnlyField()
+
     class Meta:
         model = Command
 
@@ -12,6 +14,7 @@ class CommandListSerializer(serializers.ModelSerializer):
             "id",
             "command_type",
             "payload",
+            "output",
             "status",
             "created_at",
         ]
@@ -27,4 +30,4 @@ class CommandPatchSerializer(serializers.ModelSerializer):
 
         model = Command
 
-        fields = ["id", "status"]
+        fields = ["id", "status", "output"]
