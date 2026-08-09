@@ -9,13 +9,16 @@ class Command(models.Model):
         SUCCESS = "SUCCESS"
         FAILED = "FAILED"
 
-    agent = models.ForeignKey("agents.Agent", on_delete=models.CASCADE, related_name="commands")
+    agent = models.ForeignKey(
+        "agents.Agent", on_delete=models.CASCADE, related_name="commands"
+    )
 
     command_type = models.CharField(max_length=50)
 
     payload = models.JSONField(default=dict)
 
+    output = models.TextField(null=True, max_length=500)
+
     status = models.CharField(choices=Status.choices, default=Status.PENDING)
 
     created_at = models.DateTimeField(auto_now_add=True)
-    
