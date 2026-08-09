@@ -106,7 +106,7 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.AnonRateThrottle",  # only for anonim users
     ],
     "DEFAULT_THROTTLE_RATES": {
-        "anon": "100/day",  # anonims: 100 requests per day
+        "anon": "1000/m",  # anonims: 100 requests per day
         "user": "1000/m",  # users: 1000 requests per minut
     },
     "DEFAULT_RENDERER_CLASSES": [

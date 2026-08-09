@@ -27,17 +27,23 @@ class CommandListView(ListCreateAPIView):
         command = serializer.save(agent=agent)
 
         return Response(
-            {"status": "ok"},
             status=status.HTTP_201_CREATED,
         )
 
     def get_queryset(self):
         pk = self.kwargs["pk"]
-        return (
+
+        queryset = (
             Command.objects.filter(agent_id=pk)
             .select_related("agent")
             .order_by("-created_at")
         )
+
+        status = self.request.query_params.get("status")
+        if status:
+            queryset = queryset.filter(status=status.upper())
+
+        return queryset
 
 
 class CommandBulkCreateView(APIView):
@@ -59,7 +65,12 @@ class CommandBulkCreateView(APIView):
 
         command_ids = [item["id"] for item in validated_data]
 
-        commands_dict = {c.id: c for c in Command.objects.filter(id__in=command_ids)}
+        commands_dict = {
+            c.id: c
+            for c in Command.objects.filter(
+                id__in=command_ids, agent_id=self.kwargs["pk"]
+            )
+        }
 
         commands_to_update = []
 
@@ -69,10 +80,14 @@ class CommandBulkCreateView(APIView):
             if command_id in commands_dict:
 
                 command = commands_dict[command_id]
+                command.output = item.get("output", "")
                 command.status = item["status"]
+
                 commands_to_update.append(command)
 
         if commands_to_update:
-            Command.objects.bulk_update(commands_to_update, ["status"])
+            Command.objects.bulk_update(commands_to_update, ["status", "output"])
 
-        return Response({"status": "ok"}, status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_200_CREATED)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
