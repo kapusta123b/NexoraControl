@@ -22,7 +22,7 @@ class CommandListView(ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
 
         pk = self.kwargs["pk"]
-        agent = objects.get(id=pk)
+        agent = Agent.objects.get(id=pk)
 
         command = serializer.save(agent=agent)
 
