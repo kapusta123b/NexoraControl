@@ -1,35 +1,40 @@
 from httpx import AsyncClient
 
-from config.config import AGENT_ID, API_URL, TOKEN
+from config import config
 
 
 class BasicClient:
 
     def __init__(self):
         self.client = AsyncClient(
-            base_url=API_URL,
+            base_url=config.API_URL,
             timeout=25,
-            headers={"Authorization": TOKEN, "Content-Type": "application/json"},
+            headers={"Authorization": config.TOKEN, "Content-Type": "application/json"},
             http2=False,
             follow_redirects=True,
         )
 
-    async def send_heartbeat(self, heartbeat: dict) -> int:
-        response = await self.client.post(f"agents/{AGENT_ID}/heartbeat/", json=heartbeat)
+    async def create_agent(self, data: dict) -> tuple[dict, int]:
+        response = await self.client.post(f"agents/", json=data)
+
         status_code = response.status_code
 
-        return status_code
+        return response.json(), status_code
 
-    async def get_commands(self, params: dict) -> dict | int:
-        response = await self.client.get(f"agents/{AGENT_ID}/commands/", params=params)
-        status_code = response.status_code
-
-        return response.json()[0], status_code
-
-    async def send_commands(self, commands: list[dict]) -> int:
-        response = await self.client.patch(
-            f"agents/{AGENT_ID}/commands/results/", json=commands
+    async def send_heartbeat(self, heartbeat: dict) -> None:
+        response = await self.client.post(
+            f"agents/{config.AGENT_ID}/heartbeat/", json=heartbeat
         )
-        status_code = response.status_code
+        response.raise_for_status()
 
-        return status_code
+    async def get_pengind_commands(self) -> dict:
+        response = await self.client.get(f"agents/{config.AGENT_ID}/commands/pending", )
+        response.raise_for_status()
+
+        return response.json()
+
+    async def send_commands(self, commands: list[dict]) -> None:
+        response = await self.client.patch(
+            f"agents/{config.AGENT_ID}/commands/results/", json=commands
+        )
+        response.raise_for_status()
