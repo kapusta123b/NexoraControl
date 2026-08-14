@@ -10,7 +10,7 @@ async def get_command_loop():
 
     while True:
 
-        response = await client.get_commands(params={"status": "pending"})
+        response = await client.get_pengind_commands()
 
         await command_parser(response)
 
