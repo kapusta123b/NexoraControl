@@ -5,7 +5,11 @@ from apps.agents.api.views.agent import (
     AgentHeartbeatView,
     AgentListView,
 )
-from apps.agents.api.views.command import CommandBulkCreateView, CommandListView
+from apps.agents.api.views.command import (
+    CommandBulkUpdateView,
+    CommandListView,
+    CommandPendingListView,
+)
 
 app_name = "notes"
 
@@ -23,8 +27,13 @@ urlpatterns = [
         name="agent-commands",
     ),
     path(
+        "agents/<int:pk>/commands/pending",
+        CommandPendingListView.as_view(),
+        name="agent-commands-pending",
+    ),
+    path(
         "agents/<int:pk>/commands/results/",
-        CommandBulkCreateView.as_view(),
+        CommandBulkUpdateView.as_view(),
         name="agent-commands-results",
     ),
 ]

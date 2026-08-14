@@ -9,7 +9,10 @@ from apps.agents.models.command import Command
 from apps.agents.api.serializers.command import (
     CommandListSerializer,
     CommandPatchSerializer,
+    CommandPendingListSerializer,
 )
+
+from django.utils import timezone
 
 from apps.agents.models.agent import Agent
 
@@ -46,7 +49,28 @@ class CommandListView(ListCreateAPIView):
         return queryset
 
 
-class CommandBulkCreateView(APIView):
+class CommandPendingListView(ListCreateAPIView):
+    serializer_class = CommandPendingListSerializer
+
+    def get_queryset(self):
+        return Command.objects.filter(
+            agent_id=self.kwargs["pk"],
+            status=Command.Status.PENDING,
+        )
+
+    def list(self, request, *args, **kwargs):
+        commands = list(self.get_queryset())
+
+        Command.objects.filter(id__in=[command.id for command in commands]).update(
+            status=Command.Status.RUNNING, started_at=timezone.now()
+        )
+
+        serializer = self.serializer_class(commands, many=True)
+
+        return Response(serializer.data)
+
+
+class CommandBulkUpdateView(APIView):
 
     def patch(self, request, *args, **kwargs):
 
@@ -82,12 +106,15 @@ class CommandBulkCreateView(APIView):
                 command = commands_dict[command_id]
                 command.output = item.get("output", "")
                 command.status = item["status"]
+                command.finished_at = item["finished_at"]
 
                 commands_to_update.append(command)
 
         if commands_to_update:
-            Command.objects.bulk_update(commands_to_update, ["status", "output"])
+            Command.objects.bulk_update(
+                commands_to_update, ["status", "output", "finished_at"]
+            )
 
-            return Response(status=status.HTTP_200_CREATED)
+            return Response(status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_204_NO_CONTENT)

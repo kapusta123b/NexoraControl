@@ -1,6 +1,8 @@
 from api.client import BasicClient
 from .system.registry import COMMAND_SYSTEM
 
+from datetime import datetime, timezone
+
 COMMANDS = COMMAND_SYSTEM
 
 async def command_parser(json: list) -> None:
@@ -19,6 +21,7 @@ async def command_parser(json: list) -> None:
             data = func(payload)
 
             data["id"] = command["id"]
+            data["finished_at"] = datetime.now(timezone.utc).isoformat()
 
             finished_commands.append(data)
 
