@@ -21,4 +21,8 @@ class Command(models.Model):
 
     status = models.CharField(choices=Status.choices, default=Status.PENDING)
 
+    started_at = models.DateTimeField(null=True)
+
+    finished_at = models.DateTimeField(null=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
