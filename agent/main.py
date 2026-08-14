@@ -22,7 +22,7 @@ async def tune_config():
             new_agent_id = response.get("id")
             new_token = response.get("token")
 
-            with open("config/config.py", "w", encoding="utf-8") as f:
+            with open("agent/config/config.py", "w", encoding="utf-8") as f:
                 f.write(f'API_URL = "{config.API_URL}"\n')
                 f.write(f"AGENT_ID = {new_agent_id}\n")
                 f.write(f'TOKEN = "{new_token}"\n')
