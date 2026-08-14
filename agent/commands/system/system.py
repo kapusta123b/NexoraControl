@@ -2,8 +2,15 @@ import subprocess
 
 
 def system_uptime(payload: dict) -> dict:
-    uptime = subprocess.run(
-        ["uptime", "-p"], capture_output=True, text=True
-    ).stdout.strip()
+    try:
+        result = subprocess.run(
+            ["uptime", "-p"], capture_output=True, text=True, check=True
+        )
+        return {"status": "SUCCESS", "output": result.stdout.strip()}
 
-    return {"status": "SUCCESS", "output": uptime}
+    except subprocess.CalledProcessError as e:
+        error_msg = e.stderr.strip() or f"The command finished with code {e.returncode}"
+        return {"status": "FAILED", "output": error_msg}
+
+    except Exception as e:
+        return {"status": "FAILED", "output": str(e)}
