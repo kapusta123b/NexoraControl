@@ -21,6 +21,7 @@ class AgentDetailSerializer(ModelSerializer):
             "id",
             "last_seen",
             "created_at",
+            "ram_load",
             "cpu_load",
             "disc_load",
             "status",
