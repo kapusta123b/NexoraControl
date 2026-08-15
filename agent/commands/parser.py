@@ -1,9 +1,10 @@
+from commands.docker.registry import COMMAND_DOCKER
 from api.client import BasicClient
 from .system.registry import COMMAND_SYSTEM
 
 from datetime import datetime, timezone
 
-COMMANDS = COMMAND_SYSTEM
+COMMANDS = COMMAND_SYSTEM | COMMAND_DOCKER
 
 async def command_parser(json: list) -> None:
     finished_commands = []
