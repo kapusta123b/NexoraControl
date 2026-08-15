@@ -17,7 +17,7 @@ class Command(models.Model):
 
     payload = models.JSONField(default=dict)
 
-    output = models.TextField(null=True, max_length=500)
+    output = models.TextField(null=True, max_length=1500)
 
     status = models.CharField(choices=Status.choices, default=Status.PENDING)
 
