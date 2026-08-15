@@ -14,9 +14,11 @@ from apps.agents.api.serializers.detail import (
     AgentHeartbeatSerializer,
 )
 
+from django.utils import timezone
+
 
 class AgentListView(ListCreateAPIView):
-    queryset = Agent.objects.all()
+    queryset = Agent.objects.all().order_by('-status')
     serializer_class = AgentListCreateSerializer
 
     def create(self, request, *args, **kwargs):
@@ -29,7 +31,6 @@ class AgentListView(ListCreateAPIView):
             {
                 "id": agent.id,
                 "token": str(agent.token),
-                "status": agent.status,
             },
             status=status.HTTP_201_CREATED,
         )
@@ -48,7 +49,6 @@ class AgentHeartbeatView(APIView):
         token = request.headers.get("Authorization")
 
         agent = Agent.objects.filter(id=pk, token=token).first()
-
         if not agent:
             return Response(
                 {"error": "Invalid token"}, status=status.HTTP_401_UNAUTHORIZED
@@ -57,7 +57,6 @@ class AgentHeartbeatView(APIView):
         serializer = AgentHeartbeatSerializer(agent, data=request.data, partial=True)
 
         serializer.is_valid(raise_exception=True)
-
-        serializer.save()
+        serializer.save(status=Agent.Status.ONLINE, last_seen=timezone.now())
 
         return Response({"status": "ok"}, status=status.HTTP_200_OK)
