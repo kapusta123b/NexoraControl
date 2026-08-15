@@ -16,6 +16,8 @@ from django.utils import timezone
 
 from apps.agents.models.agent import Agent
 
+from django.db import transaction
+
 
 class CommandListView(ListCreateAPIView):
     serializer_class = CommandListSerializer
@@ -27,7 +29,7 @@ class CommandListView(ListCreateAPIView):
         pk = self.kwargs["pk"]
         agent = Agent.objects.get(id=pk)
 
-        command = serializer.save(agent=agent)
+        serializer.save(agent=agent)
 
         return Response(
             status=status.HTTP_201_CREATED,
@@ -59,16 +61,16 @@ class CommandPendingListView(ListCreateAPIView):
         )
 
     def list(self, request, *args, **kwargs):
-        commands = list(self.get_queryset())
+        with transaction.atomic():
+            commands = list(self.get_queryset())
 
-        Command.objects.filter(id__in=[command.id for command in commands]).update(
-            status=Command.Status.RUNNING, started_at=timezone.now()
-        )
+            Command.objects.select_for_update().filter(
+                id__in=[command.id for command in commands]
+            ).update(status=Command.Status.RUNNING, started_at=timezone.now())
 
-        serializer = self.serializer_class(commands, many=True)
+            serializer = self.serializer_class(commands, many=True)
 
-        return Response(serializer.data)
-
+            return Response(serializer.data)
 
 class CommandBulkUpdateView(APIView):
 
