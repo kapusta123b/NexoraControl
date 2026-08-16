@@ -6,24 +6,52 @@ from datetime import datetime, timezone
 
 COMMANDS = COMMAND_SYSTEM | COMMAND_DOCKER
 
-async def command_parser(json: list) -> None:
+
+async def command_parser(commands: list) -> None:
     finished_commands = []
 
-    if json:
-        for command in json:
-            command_type = command["command_type"]
-            payload = command["payload"]
+    for command_data in commands:
+        command_type = command_data["command_type"]
+        payload = command_data["payload"]
 
-            func = COMMANDS.get(command_type, None)
+        result = {"id": command_data["id"], "errors": {}}
 
-            if func is None:
-                break
+        command = COMMANDS.get(command_type)
 
-            data = func(payload)
+        if command is None:
+            result.update(
+                {
+                    "status": "FAILED",
+                    "output": "Command not found",
+                }
+            )
 
-            data["id"] = command["id"]
-            data["finished_at"] = datetime.now(timezone.utc).isoformat()
+            result["finished_at"] = datetime.now(timezone.utc).isoformat()
+            finished_commands.append(result)
 
-            finished_commands.append(data)
+            continue
 
-    await BasicClient().send_commands(finished_commands)
+        if isinstance(command, tuple):
+            func, validator = command
+
+            errors = validator(payload)
+
+            if errors:
+                result.update(
+                    {
+                        "status": "FAILED",
+                        "errors": errors,
+                    }
+                )
+            else:
+                result.update(func(payload))
+
+        else:
+            result.update(command(payload))
+
+        result["finished_at"] = datetime.now(timezone.utc).isoformat()
+
+        finished_commands.append(result)
+
+    if finished_commands:
+        await BasicClient().send_commands(finished_commands)
