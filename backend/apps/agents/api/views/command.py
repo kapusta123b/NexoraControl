@@ -72,6 +72,7 @@ class CommandPendingListView(ListCreateAPIView):
 
             return Response(serializer.data)
 
+
 class CommandBulkUpdateView(APIView):
 
     def patch(self, request, *args, **kwargs):
@@ -108,13 +109,14 @@ class CommandBulkUpdateView(APIView):
                 command = commands_dict[command_id]
                 command.output = item.get("output", "")
                 command.status = item["status"]
+                command.errors = item.get("errors", {})
                 command.finished_at = item["finished_at"]
 
                 commands_to_update.append(command)
 
         if commands_to_update:
             Command.objects.bulk_update(
-                commands_to_update, ["status", "output", "finished_at"]
+                commands_to_update, ["status", "output", "finished_at", "errors"]
             )
 
             return Response(status=status.HTTP_200_OK)

@@ -13,6 +13,7 @@ class CommandListSerializer(serializers.ModelSerializer):
             "command_type",
             "payload",
             "output",
+            "errors",
             "status",
             "created_at",
             "started_at",
@@ -22,6 +23,7 @@ class CommandListSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
             "status",
+            "errors",
             "created_at",
             "output",
             "started_at",
@@ -51,4 +53,4 @@ class CommandPatchSerializer(serializers.ModelSerializer):
 
         model = Command
 
-        fields = ["id", "status", "output", "finished_at"]
+        fields = ["id", "errors", "status", "output", "finished_at"]
