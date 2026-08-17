@@ -5,9 +5,11 @@ from django.utils import timezone
 
 from apps.agents.models.agent import Agent
 
+from .command_recovery import recover_commands
+
 
 def check_agents():
-    threshold = timezone.now() - timedelta(seconds=30)
+    threshold = timezone.now() - timedelta(seconds=10)
 
     Agent.objects.filter(
         status=Agent.Status.ONLINE,
@@ -17,4 +19,5 @@ def check_agents():
 
 while True:
     check_agents()
-    time.sleep(15)
+    recover_commands()
+    time.sleep(4)
