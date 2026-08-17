@@ -7,6 +7,8 @@ def system_processes_validator(payload: dict) -> dict:
     if not lines:
         errors["lines"] = "This field is required."
 
+        return errors
+
     if not 0 < int(lines) < 100:
         errors["lines"] = "This field must be in the range of 0 to 100."
 

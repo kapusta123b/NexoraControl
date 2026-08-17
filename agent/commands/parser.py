@@ -1,3 +1,4 @@
+from commands.executor import subprocess_executor
 from commands.docker.registry import COMMAND_DOCKER
 from api.client import BasicClient
 from .system.registry import COMMAND_SYSTEM
@@ -14,11 +15,15 @@ async def command_parser(commands: list) -> None:
         command_type = command_data["command_type"]
         payload = command_data["payload"]
 
-        result = {"id": command_data["id"], "errors": {}}
+        result = {
+            "id": command_data["id"],
+            "errors": {},
+            "started_at": datetime.now(timezone.utc).isoformat(),
+        }
 
-        command = COMMANDS.get(command_type)
+        definition = COMMANDS.get(command_type)
 
-        if command is None:
+        if definition is None:
             result.update(
                 {
                     "status": "FAILED",
@@ -31,9 +36,12 @@ async def command_parser(commands: list) -> None:
 
             continue
 
-        if isinstance(command, tuple):
-            func, validator = command
+        handler = definition["handler"]
+        timeout = definition.get("timeout", 10)
+        validator = definition.get("validator")
+        output_parser = definition.get("output_parser")
 
+        if validator:
             errors = validator(payload)
 
             if errors:
@@ -43,11 +51,22 @@ async def command_parser(commands: list) -> None:
                         "errors": errors,
                     }
                 )
-            else:
-                result.update(func(payload))
+
+                result["finished_at"] = datetime.now(timezone.utc).isoformat()
+                finished_commands.append(result)
+
+                continue
+
+        command = handler(payload)
+
+        executor_result = subprocess_executor(command, timeout)
+
+        if output_parser and executor_result["status"] == "SUCCESS":
+            parser_result = output_parser(executor_result, payload)
+            result.update(parser_result)
 
         else:
-            result.update(command(payload))
+            result.update(executor_result)
 
         result["finished_at"] = datetime.now(timezone.utc).isoformat()
 
