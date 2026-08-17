@@ -53,4 +53,4 @@ class CommandPatchSerializer(serializers.ModelSerializer):
 
         model = Command
 
-        fields = ["id", "errors", "status", "output", "finished_at"]
+        fields = ["id", "errors", "status", "output", "finished_at", "started_at"]

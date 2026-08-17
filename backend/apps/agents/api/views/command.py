@@ -66,7 +66,7 @@ class CommandPendingListView(ListCreateAPIView):
 
             Command.objects.select_for_update().filter(
                 id__in=[command.id for command in commands]
-            ).update(status=Command.Status.RUNNING, started_at=timezone.now())
+            ).update(status=Command.Status.RUNNING)
 
             serializer = self.serializer_class(commands, many=True)
 
@@ -110,13 +110,15 @@ class CommandBulkUpdateView(APIView):
                 command.output = item.get("output", "")
                 command.status = item["status"]
                 command.errors = item.get("errors", {})
+                command.started_at = item["started_at"]
                 command.finished_at = item["finished_at"]
 
                 commands_to_update.append(command)
 
         if commands_to_update:
             Command.objects.bulk_update(
-                commands_to_update, ["status", "output", "finished_at", "errors"]
+                commands_to_update,
+                ["status", "output", "finished_at", "started_at", "errors"],
             )
 
             return Response(status=status.HTTP_200_OK)
