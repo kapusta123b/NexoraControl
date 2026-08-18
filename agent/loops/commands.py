@@ -1,12 +1,11 @@
 import asyncio
 
 from commands.parser import command_parser
-from config.config import COMMAND_INTERVAL
+from config.config import Settings
 from api.client import BasicClient
 
 
-async def get_command_loop():
-    client = BasicClient()
+async def get_command_loop(client):
 
     while True:
 
@@ -14,4 +13,4 @@ async def get_command_loop():
 
         await command_parser(response)
 
-        await asyncio.sleep(COMMAND_INTERVAL)
+        await asyncio.sleep(client.settings.command_interval)
