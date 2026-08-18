@@ -1,45 +1,50 @@
 import asyncio
+import time
 
-from services.utils import get_system_hostname
+from rich.console import Console
+
+from rich.spinner import Spinner
+from rich.live import Live
+
 from api.client import BasicClient
-
+from bootstrap.setup import setup_agent
 from loops.commands import get_command_loop
 from loops.heartbeat import heartbeat_loop
 
-from config import config
-
-
-async def tune_config():
-    if config.AGENT_ID == 0 or not config.TOKEN:
-        print("--- Configuration for Agent ---")
-
-        name = input("Enter name for your agent: ")
-        hostname = get_system_hostname()
-
-        response, status_code = await BasicClient().create_agent({"name": name, "hostname": hostname})
-        
-        if status_code == 201:
-            new_agent_id = response.get("id")
-            new_token = response.get("token")
-
-            with open("agent/config/config.py", "w", encoding="utf-8") as f:
-                f.write(f'API_URL = "{config.API_URL}"\n')
-                f.write(f"AGENT_ID = {new_agent_id}\n")
-                f.write(f'TOKEN = "{new_token}"\n')
-                f.write(f"HEARTBEAT_INTERVAL = {config.HEARTBEAT_INTERVAL}\n")
-                f.write(f"COMMAND_INTERVAL = {config.COMMAND_INTERVAL}\n")
-
-        else:
-            print('Error: API url not correct')
+console = Console()
 
 async def main():
-    
+    settings = await setup_agent()
+
+    if settings is None:
+        return
+
+    client = BasicClient(settings)
+
     await asyncio.gather(
-        heartbeat_loop(),
-        get_command_loop(),
+        heartbeat_loop(client),
+        get_command_loop(client),
     )
 
 
+async def run_agent():
+    with Live(
+        Spinner(
+            "dots",
+            text="[bold green]Agent is running... [dim](Ctrl+C to exit)[/dim]",
+        ),
+        refresh_per_second=10,
+        console=console,
+    ):
+        await main()
+
+
 if __name__ == "__main__":
-    asyncio.run(tune_config())
-    asyncio.run(main())
+    try:
+        asyncio.run(run_agent())
+
+    except KeyboardInterrupt:
+        console.print(
+            "\n[bold red]✖[/bold red] "
+            "[yellow]Agent stopped by user.[/yellow]"
+        )
