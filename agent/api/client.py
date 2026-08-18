@@ -1,16 +1,22 @@
 from httpx import AsyncClient
 
-from config import config
+from config.config import Settings
+
+from config.config import load_settings
 
 
 class BasicClient:
 
-    def __init__(self):
+    def __init__(self, settings=None, base_url=None):
+        self.settings = settings or load_settings()
+
         self.client = AsyncClient(
-            base_url=config.API_URL,
+            base_url=base_url or self.settings.api_url,
             timeout=25,
-            headers={"Authorization": config.TOKEN, "Content-Type": "application/json"},
-            http2=False,
+            headers={
+                "Authorization": self.settings.token,
+                "Content-Type": "application/json",
+            },
             follow_redirects=True,
         )
 
@@ -23,18 +29,20 @@ class BasicClient:
 
     async def send_heartbeat(self, heartbeat: dict) -> None:
         response = await self.client.post(
-            f"agents/{config.AGENT_ID}/heartbeat/", json=heartbeat
+            f"agents/{self.settings.agent_id}/heartbeat/", json=heartbeat
         )
         response.raise_for_status()
 
     async def get_pengind_commands(self) -> dict:
-        response = await self.client.get(f"agents/{config.AGENT_ID}/commands/pending", )
+        response = await self.client.get(
+            f"agents/{self.settings.agent_id}/commands/pending",
+        )
         response.raise_for_status()
 
         return response.json()
 
     async def send_commands(self, commands: list[dict]) -> None:
         response = await self.client.patch(
-            f"agents/{config.AGENT_ID}/commands/results/", json=commands
+            f"agents/{self.settings.agent_id}/commands/results/", json=commands
         )
         response.raise_for_status()
