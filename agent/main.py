@@ -1,22 +1,24 @@
 import asyncio
-import time
+import sys
 
 from rich.console import Console
 
-from rich.spinner import Spinner
-from rich.live import Live
-
 from api.client import BasicClient
 from bootstrap.setup import setup_agent
+from config.config import load_settings
 from loops.commands import get_command_loop
 from loops.heartbeat import heartbeat_loop
 
 console = Console()
 
-async def main():
-    settings = await setup_agent()
 
-    if settings is None:
+async def run():
+    settings = load_settings()
+
+    if not settings.agent_id or not settings.token:
+        console.print(
+            "[bold red]Agent is not configured.[/bold red]"
+        )
         return
 
     client = BasicClient(settings)
@@ -27,24 +29,30 @@ async def main():
     )
 
 
-async def run_agent():
-    with Live(
-        Spinner(
-            "dots",
-            text="[bold green]Agent is running... [dim](Ctrl+C to exit)[/dim]",
-        ),
-        refresh_per_second=10,
-        console=console,
-    ):
-        await main()
+async def setup():
+    await setup_agent()
+
+
+async def main():
+    mode = sys.argv[1] if len(sys.argv) > 1 else "run"
+
+    if mode == "setup":
+        await setup()
+        return
+
+    if mode == "run":
+        await run()
+        return
+
+    console.print(
+        "[bold red]Unknown command.[/bold red]"
+    )
 
 
 if __name__ == "__main__":
     try:
-        asyncio.run(run_agent())
-
+        asyncio.run(main())
     except KeyboardInterrupt:
         console.print(
-            "\n[bold red]✖[/bold red] "
-            "[yellow]Agent stopped by user.[/yellow]"
+            "\n[bold yellow]Agent stopped by user.[/bold yellow]"
         )
