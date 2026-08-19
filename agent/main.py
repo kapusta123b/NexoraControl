@@ -1,4 +1,5 @@
 import asyncio
+import os
 import sys
 
 from rich.console import Console
@@ -38,7 +39,7 @@ async def main():
 
     if mode == "setup":
         await setup()
-        return
+        os._exit(0)
 
     if mode == "run":
         await run()

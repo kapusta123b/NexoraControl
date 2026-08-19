@@ -159,7 +159,7 @@ echo
 
 sudo -u "${APP_USER}" \
     "${INSTALL_DIR}/.venv/bin/python" \
-    "${INSTALL_DIR}/main.py setup"
+    "${INSTALL_DIR}/main.py" setup </dev/tty
 
 # --------------------------------------------------
 # 12. Start service
