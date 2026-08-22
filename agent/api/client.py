@@ -21,7 +21,7 @@ class BasicClient:
         )
 
     async def create_agent(self, data: dict) -> tuple[dict, int]:
-        response = await self.client.post(f"agents/", json=data)
+        response = await self.client.post("agents/", json=data)
 
         status_code = response.status_code
 
