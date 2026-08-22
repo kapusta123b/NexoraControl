@@ -132,7 +132,6 @@ def show_configuration(
 async def setup_agent():
     settings = load_settings()
 
-    # Уже настроен — ничего больше не спрашиваем
     if settings.agent_id and settings.token:
         return settings
 
