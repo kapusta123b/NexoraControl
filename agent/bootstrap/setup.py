@@ -12,7 +12,7 @@ from decouple import config
 
 from api.client import BasicClient
 from config.config import Settings, load_settings
-from services.utils import get_system_hostname
+from services.utils import get_os_info, get_public_ip_native, get_system_hostname
 
 console = Console()
 
@@ -189,6 +189,10 @@ async def setup_agent():
 
     hostname = get_system_hostname()
 
+    ip = get_public_ip_native()
+
+    os = get_os_info()
+
     console.print(f"Detected hostname: [cyan]{hostname}[/cyan]\n")
 
     console.print(
@@ -229,19 +233,13 @@ async def setup_agent():
 
     console.print()
 
-    try:
-        with Status(
-            "[cyan]Connecting to NexoraControl API...[/cyan]",
-            console=console,
-        ):
-            client = BasicClient(base_url=api_url)
+    payload = {"name": name, "hostname": hostname, "ip": ip, "os": os}
 
-            response, status_code = await client.create_agent(
-                {
-                    "name": name,
-                    "hostname": hostname,
-                }
-            )
+
+    try:
+        with Status("[cyan]Connecting to NexoraControl API...[/cyan]", console=console):
+            client = BasicClient(base_url=api_url)
+            response, status_code = await client.create_agent(payload)
 
     except httpx.ConnectError:
         show_error(
