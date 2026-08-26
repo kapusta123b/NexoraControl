@@ -9,26 +9,6 @@
 
 NexoraControl is a distributed server monitoring and control system built with Django, Python, and PySide6.
 
-## Architecture
-
-```text
-                    ┌──────────────────┐
-                    │   Django API     │
-                    │   PostgreSQL     │
-                    └────────┬─────────┘
-                             │
-              ┌──────────────┼──────────────┐
-              ▼              ▼              ▼
-           Agent VPS      Agent VPS      Agent VPS
-              ▲              ▲              ▲
-              └──────────────┼──────────────┘
-                             │
-                      ┌──────┴──────┐
-                      │   Desktop   │
-                      │   PySide6   │
-                      └─────────────┘
-```
-
 ## Components
 
 ### Backend
@@ -63,6 +43,57 @@ NexoraControl is a distributed server monitoring and control system built with D
 * Agent recovery
 * Automated Agent installation
 * Docker Compose deployment
+
+## System Architecture
+
+```mermaid
+sequenceDiagram
+    autonumber
+
+    participant GUI as Desktop Client
+    participant API as Django API
+    participant DB as PostgreSQL
+    participant Agent as Nexora Agent
+
+    Note over GUI,DB: Agent registration
+    GUI->>API: POST /agents/
+    API->>DB: Create Agent
+    DB-->>API: Agent data
+    API-->>GUI: Agent ID + token
+
+    Note over Agent,DB: Monitoring
+    loop Every 5 seconds
+        Agent->>API: POST /agents/{id}/heartbeat/
+        API->>DB: Update status and metrics
+        DB-->>API: Updated state
+        API-->>Agent: 200 OK
+    end
+
+    Note over GUI,Agent: Command execution
+    GUI->>API: POST /agents/{id}/commands/
+    API->>DB: Create pending command
+    DB-->>API: Command created
+    API-->>GUI: 201 Created
+
+    loop Command polling
+        Agent->>API: GET /agents/{id}/commands/pending
+        API->>DB: Query pending commands
+        DB-->>API: Pending commands
+        API-->>Agent: Commands
+    end
+
+    Agent->>Agent: Validate command
+    Agent->>Agent: Execute command
+    Agent->>API: PATCH /agents/{id}/commands/results/
+    API->>DB: Update command result
+    DB-->>API: Updated command
+    API-->>Agent: 200 OK
+
+    GUI->>API: GET /agents/
+    API->>DB: Query agents
+    DB-->>API: Agent state
+    API-->>GUI: Agents data
+```
 
 ## Installation
 
