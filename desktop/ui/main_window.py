@@ -21,17 +21,19 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QHBoxLay
     QStackedWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
     QWidget)
 
+from pyqtgraph import PlotWidget
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(993, 564)
+        MainWindow.resize(993, 592)
         icon = QIcon()
         iconThemeName = u"camera-photo"
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon.addFile(u"../.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"QStackedWidget {\n"
@@ -97,7 +99,7 @@ class Ui_MainWindow(object):
 "    color: #8b949e;\n"
 "    font-size: 13px;\n"
 "    border-radius: 6px;\n"
-"    transition: background-color 0.2s, color 0.2s;\n"
+"\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -233,7 +235,7 @@ class Ui_MainWindow(object):
         self.content_stack = QStackedWidget(self.central_content)
         self.content_stack.setObjectName(u"content_stack")
         self.content_stack.setMinimumSize(QSize(500, 411))
-        self.content_stack.setMaximumSize(QSize(801, 623))
+        self.content_stack.setMaximumSize(QSize(16777215, 16777215))
         self.content_stack.setStyleSheet(u"QWidget {\n"
 "    color: #c9d1d9;\n"
 "	font: 200 10pt \"JetBrainsMonoNL Nerd Font Propo\";\n"
@@ -407,15 +409,19 @@ class Ui_MainWindow(object):
         self.agents_table.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         self.agents_table.setObjectName(u"agents_table")
         self.agents_table.setEnabled(True)
-        self.agents_table.setMaximumSize(QSize(787, 282))
+        self.agents_table.setMaximumSize(QSize(16777215, 16777215))
         self.agents_table.setStyleSheet(u"border-top-right: none;")
         self.agents_table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.agents_table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.agents_table.setAlternatingRowColors(False)
         self.agents_table.setVerticalScrollMode(QAbstractItemView.ScrollPerItem)
+        self.agents_table.setSortingEnabled(True)
+        self.agents_table.horizontalHeader().setVisible(True)
         self.agents_table.horizontalHeader().setCascadingSectionResizes(True)
         self.agents_table.horizontalHeader().setMinimumSectionSize(20)
-        self.agents_table.horizontalHeader().setDefaultSectionSize(130)
-        self.agents_table.horizontalHeader().setHighlightSections(True)
+        self.agents_table.horizontalHeader().setDefaultSectionSize(120)
+        self.agents_table.horizontalHeader().setHighlightSections(False)
+        self.agents_table.horizontalHeader().setProperty(u"showSortIndicator", True)
         self.agents_table.horizontalHeader().setStretchLastSection(False)
         self.agents_table.verticalHeader().setVisible(False)
         self.agents_table.verticalHeader().setCascadingSectionResizes(False)
@@ -433,15 +439,9 @@ class Ui_MainWindow(object):
 
         self.layout_buttons = QHBoxLayout()
         self.layout_buttons.setObjectName(u"layout_buttons")
-        self.add_agent_button = QPushButton(self.dashboard_page)
-        self.add_agent_button.setObjectName(u"add_agent_button")
-        self.add_agent_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.add_agent_button.setLayoutDirection(Qt.LeftToRight)
-
-        self.layout_buttons.addWidget(self.add_agent_button)
-
         self.refresh_table_button = QPushButton(self.dashboard_page)
         self.refresh_table_button.setObjectName(u"refresh_table_button")
+        self.refresh_table_button.setMaximumSize(QSize(350, 16777215))
         self.refresh_table_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.refresh_table_button.setLayoutDirection(Qt.LeftToRight)
 
@@ -500,6 +500,7 @@ class Ui_MainWindow(object):
 "    background-color: #1c202b; \n"
 "}")
         self.verticalLayout_8 = QVBoxLayout(self.agents_page)
+        self.verticalLayout_8.setSpacing(6)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.agents_main_layout = QVBoxLayout()
         self.agents_main_layout.setSpacing(0)
@@ -534,15 +535,9 @@ class Ui_MainWindow(object):
         self.help_bar_layout = QHBoxLayout()
         self.help_bar_layout.setSpacing(0)
         self.help_bar_layout.setObjectName(u"help_bar_layout")
-        self.add_agent_button_2 = QPushButton(self.agents_page)
-        self.add_agent_button_2.setObjectName(u"add_agent_button_2")
-        self.add_agent_button_2.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.horizontalSpacer_2 = QSpacerItem(10, 14, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.help_bar_layout.addWidget(self.add_agent_button_2)
-
-        self.horizontalSpacer_3 = QSpacerItem(65, 30, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-
-        self.help_bar_layout.addItem(self.horizontalSpacer_3)
+        self.help_bar_layout.addItem(self.horizontalSpacer_2)
 
         self.search_input_line = QLineEdit(self.agents_page)
         self.search_input_line.setObjectName(u"search_input_line")
@@ -550,9 +545,9 @@ class Ui_MainWindow(object):
 
         self.help_bar_layout.addWidget(self.search_input_line)
 
-        self.verticalSpacer_3 = QSpacerItem(23, 10, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.help_bar_layout.addItem(self.verticalSpacer_3)
+        self.help_bar_layout.addItem(self.horizontalSpacer)
 
         self.refresh_agents_button = QPushButton(self.agents_page)
         self.refresh_agents_button.setObjectName(u"refresh_agents_button")
@@ -560,22 +555,21 @@ class Ui_MainWindow(object):
 
         self.help_bar_layout.addWidget(self.refresh_agents_button)
 
-        self.horizontalSpacer_5 = QSpacerItem(39, 42, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        self.horizontalSpacer_3 = QSpacerItem(17, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.help_bar_layout.addItem(self.horizontalSpacer_5)
+        self.help_bar_layout.addItem(self.horizontalSpacer_3)
 
 
         self.agents_main_layout.addLayout(self.help_bar_layout)
 
-        self.verticalSpacer_4 = QSpacerItem(20, 17, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-
-        self.agents_main_layout.addItem(self.verticalSpacer_4)
-
         self.agent_list = QScrollArea(self.agents_page)
         self.agent_list.setObjectName(u"agent_list")
-        self.agent_list.setMaximumSize(QSize(16777215, 350))
+        self.agent_list.setMaximumSize(QSize(16777215, 300))
+        self.agent_list.setLayoutDirection(Qt.LeftToRight)
+        self.agent_list.setAutoFillBackground(False)
         self.agent_list.setStyleSheet(u"QScrollArea {\n"
 "    border: none;\n"
+"\n"
 "    background-color: transparent;\n"
 "}\n"
 "\n"
@@ -617,145 +611,20 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.agent_list.setFrameShape(QFrame.Box)
+        self.agent_list.setFrameShadow(QFrame.Plain)
         self.agent_list.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.agent_list.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.agent_list.setWidgetResizable(False)
+        self.agent_list.setWidgetResizable(True)
         self.agent_list.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.agent_scroll = QWidget()
         self.agent_scroll.setObjectName(u"agent_scroll")
-        self.agent_scroll.setGeometry(QRect(0, 0, 777, 500))
+        self.agent_scroll.setGeometry(QRect(0, 0, 794, 300))
         self.agent_scroll.setMaximumSize(QSize(16777215, 1000000))
         self.agent_scroll.setStyleSheet(u"")
         self.verticalLayout_4 = QVBoxLayout(self.agent_scroll)
-        self.verticalLayout_4.setSpacing(0)
+        self.verticalLayout_4.setSpacing(12)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.verticalLayout_4.setContentsMargins(10, 0, 10, 0)
-        self.agent_card = QWidget(self.agent_scroll)
-        self.agent_card.setObjectName(u"agent_card")
-        self.agent_card.setMinimumSize(QSize(0, 120))
-        self.agent_card.setMaximumSize(QSize(16777215, 120))
-        self.agent_card.setAcceptDrops(False)
-        self.agent_card.setStyleSheet(u"\n"
-"QWidget {\n"
-"    background-color: #161920;\n"
-"    border: 1px solid #242936;\n"
-"    border-radius: 4px;\n"
-"	border: none;\n"
-"}\n"
-"QLabel {\n"
-"    color: #a5b4fc;\n"
-"    border: none;\n"
-"    background: transparent;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    color: #a5b4fc; \n"
-"    background-color: transparent;\n"
-"    border: 1px solid #242936;\n"
-"    border-radius: 4px;\n"
-"    padding: 6px 12px;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #1e2230;\n"
-"    border-color: #38bdf8;\n"
-"    color: #ffffff;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #0f111a;\n"
-"}")
-        self.horizontalLayout_5 = QHBoxLayout(self.agent_card)
-        self.horizontalLayout_5.setSpacing(0)
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalLayout_5.setContentsMargins(10, 0, 10, 0)
-        self.agent_information_widget = QWidget(self.agent_card)
-        self.agent_information_widget.setObjectName(u"agent_information_widget")
-        self.agent_information_widget.setMinimumSize(QSize(300, 0))
-        self.agent_information_widget.setMaximumSize(QSize(400, 150))
-        self.agent_information_widget.setStyleSheet(u"")
-        self.horizontalLayout_8 = QHBoxLayout(self.agent_information_widget)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.online_dot = QLabel(self.agent_information_widget)
-        self.online_dot.setObjectName(u"online_dot")
-        self.online_dot.setMaximumSize(QSize(20, 100))
-        self.online_dot.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
-
-        self.horizontalLayout_8.addWidget(self.online_dot)
-
-        self.system_information_widget = QWidget(self.agent_information_widget)
-        self.system_information_widget.setObjectName(u"system_information_widget")
-        self.verticalLayout_6 = QVBoxLayout(self.system_information_widget)
-        self.verticalLayout_6.setSpacing(0)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.vps_name_label = QLabel(self.system_information_widget)
-        self.vps_name_label.setObjectName(u"vps_name_label")
-        self.vps_name_label.setStyleSheet(u"font: 12pt;")
-        self.vps_name_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.verticalLayout_6.addWidget(self.vps_name_label)
-
-        self.ip_os_label = QLabel(self.system_information_widget)
-        self.ip_os_label.setObjectName(u"ip_os_label")
-        self.ip_os_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.verticalLayout_6.addWidget(self.ip_os_label)
-
-        self.cpu_ram_label = QLabel(self.system_information_widget)
-        self.cpu_ram_label.setObjectName(u"cpu_ram_label")
-        self.cpu_ram_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.verticalLayout_6.addWidget(self.cpu_ram_label)
-
-
-        self.horizontalLayout_8.addWidget(self.system_information_widget)
-
-        self.status_label = QLabel(self.agent_information_widget)
-        self.status_label.setObjectName(u"status_label")
-        self.status_label.setStyleSheet(u"color: rgb(46, 194, 126);\n"
-"\n"
-"font: 12pt")
-        self.status_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.horizontalLayout_8.addWidget(self.status_label)
-
-
-        self.horizontalLayout_5.addWidget(self.agent_information_widget)
-
-        self.spacer1 = QSpacerItem(200, 29, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_5.addItem(self.spacer1)
-
-        self.right_widget = QWidget(self.agent_card)
-        self.right_widget.setObjectName(u"right_widget")
-        self.right_widget.setMaximumSize(QSize(150, 120))
-        self.right_widget.setStyleSheet(u"")
-        self.verticalLayout_5 = QVBoxLayout(self.right_widget)
-        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(-1, 80, -1, -1)
-        self.agent_open_button = QPushButton(self.right_widget)
-        self.agent_open_button.setObjectName(u"agent_open_button")
-        self.agent_open_button.setMaximumSize(QSize(104, 16777215))
-        self.agent_open_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.verticalLayout_5.addWidget(self.agent_open_button)
-
-
-        self.horizontalLayout_5.addWidget(self.right_widget)
-
-        self.spacer2 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_5.addItem(self.spacer2)
-
-
-        self.verticalLayout_4.addWidget(self.agent_card)
-
-        self.scroll_clamping_spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.verticalLayout_4.addItem(self.scroll_clamping_spacer)
-
+        self.verticalLayout_4.setContentsMargins(10, 16, 16, 16)
         self.agent_list.setWidget(self.agent_scroll)
 
         self.agents_main_layout.addWidget(self.agent_list)
@@ -764,6 +633,333 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.addLayout(self.agents_main_layout)
 
         self.content_stack.addWidget(self.agents_page)
+        self.agent_detail = QWidget()
+        self.agent_detail.setObjectName(u"agent_detail")
+        self.verticalLayout_3 = QVBoxLayout(self.agent_detail)
+        self.verticalLayout_3.setSpacing(0)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.widget = QWidget(self.agent_detail)
+        self.widget.setObjectName(u"widget")
+        self.verticalLayout = QVBoxLayout(self.widget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.widget_6 = QWidget(self.widget)
+        self.widget_6.setObjectName(u"widget_6")
+        self.widget_6.setMinimumSize(QSize(0, 0))
+        self.widget_6.setMaximumSize(QSize(16777215, 80))
+        self.horizontalLayout_7 = QHBoxLayout(self.widget_6)
+        self.horizontalLayout_7.setSpacing(0)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.pushButton_3 = QPushButton(self.widget_6)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.pushButton_3.setMinimumSize(QSize(180, 0))
+        self.pushButton_3.setMaximumSize(QSize(185, 16777215))
+        self.pushButton_3.setLayoutDirection(Qt.RightToLeft)
+        self.pushButton_3.setStyleSheet(u"QPushButton {\n"
+"	text-align: left;\n"
+"}")
+        self.pushButton_3.setCheckable(True)
+        self.pushButton_3.setAutoRepeat(False)
+
+        self.horizontalLayout_7.addWidget(self.pushButton_3)
+
+        self.horizontalSpacer_7 = QSpacerItem(400, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_7.addItem(self.horizontalSpacer_7)
+
+        self.widget_7 = QWidget(self.widget_6)
+        self.widget_7.setObjectName(u"widget_7")
+        self.widget_7.setMinimumSize(QSize(200, 0))
+        self.widget_7.setMaximumSize(QSize(243, 16777215))
+        self.horizontalLayout_8 = QHBoxLayout(self.widget_7)
+        self.horizontalLayout_8.setSpacing(20)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.label_3 = QLabel(self.widget_7)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setWordWrap(True)
+
+        self.horizontalLayout_8.addWidget(self.label_3)
+
+        self.horizontalSpacer_5 = QSpacerItem(28, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer_5)
+
+        self.label_5 = QLabel(self.widget_7)
+        self.label_5.setObjectName(u"label_5")
+
+        self.horizontalLayout_8.addWidget(self.label_5)
+
+
+        self.horizontalLayout_7.addWidget(self.widget_7)
+
+
+        self.verticalLayout.addWidget(self.widget_6)
+
+        self.line_3 = QFrame(self.widget)
+        self.line_3.setObjectName(u"line_3")
+        self.line_3.setFrameShape(QFrame.Shape.HLine)
+        self.line_3.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout.addWidget(self.line_3)
+
+        self.agent_detail_scroll = QScrollArea(self.widget)
+        self.agent_detail_scroll.setObjectName(u"agent_detail_scroll")
+        self.agent_detail_scroll.setStyleSheet(u"QScrollArea {\n"
+"    border: none;\n"
+"\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"QWidget#scrollAreaWidgetContents {\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #11141a;\n"
+"    width: 8px;\n"
+"    margin: 0px 0px 0px 0px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #242936;\n"
+"    min-height: 20px;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #38bdf8;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    height: 0px;\n"
+"}\n"
+"QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
+"    background: none;\n"
+"}\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"    background: none;\n"
+"}\n"
+"")
+        self.agent_detail_scroll.setWidgetResizable(True)
+        self.agent_detail_information = QWidget()
+        self.agent_detail_information.setObjectName(u"agent_detail_information")
+        self.agent_detail_information.setGeometry(QRect(0, -11, 796, 613))
+        self.verticalLayout_5 = QVBoxLayout(self.agent_detail_information)
+        self.verticalLayout_5.setSpacing(5)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.overview_widget = QWidget(self.agent_detail_information)
+        self.overview_widget.setObjectName(u"overview_widget")
+        self.overview_widget.setStyleSheet(u"#uptime_widget, #ram_widget, #disk_widget, #cpu_widget {\n"
+"	background-color: #161b22;\n"
+"	border: 1px solid #30363d;\n"
+"\n"
+"    padding: 10px;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"QLabel {\n"
+"	background-color: transparent;\n"
+"}")
+        self.verticalLayout_6 = QVBoxLayout(self.overview_widget)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.overview_label = QLabel(self.overview_widget)
+        self.overview_label.setObjectName(u"overview_label")
+        self.overview_label.setMaximumSize(QSize(16777215, 30))
+        self.overview_label.setStyleSheet(u"QLabel {\n"
+"	font: 500 15pt;\n"
+"}")
+        self.overview_label.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
+
+        self.verticalLayout_6.addWidget(self.overview_label)
+
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setSpacing(72)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.cpu_widget = QWidget(self.overview_widget)
+        self.cpu_widget.setObjectName(u"cpu_widget")
+        self.cpu_widget.setMinimumSize(QSize(0, 60))
+        self.cpu_widget.setMaximumSize(QSize(140, 90))
+        self.verticalLayout_14 = QVBoxLayout(self.cpu_widget)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.label_9 = QLabel(self.cpu_widget)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_14.addWidget(self.label_9)
+
+        self.label_2 = QLabel(self.cpu_widget)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_14.addWidget(self.label_2)
+
+
+        self.horizontalLayout_4.addWidget(self.cpu_widget)
+
+        self.ram_widget = QWidget(self.overview_widget)
+        self.ram_widget.setObjectName(u"ram_widget")
+        self.ram_widget.setMinimumSize(QSize(0, 60))
+        self.ram_widget.setMaximumSize(QSize(140, 90))
+        self.verticalLayout_11 = QVBoxLayout(self.ram_widget)
+        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
+        self.label_4 = QLabel(self.ram_widget)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_11.addWidget(self.label_4)
+
+        self.label_8 = QLabel(self.ram_widget)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_11.addWidget(self.label_8)
+
+
+        self.horizontalLayout_4.addWidget(self.ram_widget)
+
+        self.disk_widget = QWidget(self.overview_widget)
+        self.disk_widget.setObjectName(u"disk_widget")
+        self.disk_widget.setMinimumSize(QSize(0, 60))
+        self.disk_widget.setMaximumSize(QSize(140, 90))
+        self.verticalLayout_9 = QVBoxLayout(self.disk_widget)
+        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.label_6 = QLabel(self.disk_widget)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_9.addWidget(self.label_6)
+
+        self.label_7 = QLabel(self.disk_widget)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_9.addWidget(self.label_7)
+
+
+        self.horizontalLayout_4.addWidget(self.disk_widget)
+
+        self.uptime_widget = QWidget(self.overview_widget)
+        self.uptime_widget.setObjectName(u"uptime_widget")
+        self.uptime_widget.setMinimumSize(QSize(0, 60))
+        self.uptime_widget.setMaximumSize(QSize(140, 90))
+        self.verticalLayout_15 = QVBoxLayout(self.uptime_widget)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.label_10 = QLabel(self.uptime_widget)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_15.addWidget(self.label_10)
+
+        self.label_11 = QLabel(self.uptime_widget)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_15.addWidget(self.label_11)
+
+
+        self.horizontalLayout_4.addWidget(self.uptime_widget)
+
+
+        self.verticalLayout_6.addLayout(self.horizontalLayout_4)
+
+
+        self.verticalLayout_5.addWidget(self.overview_widget)
+
+        self.widget_3 = QWidget(self.agent_detail_information)
+        self.widget_3.setObjectName(u"widget_3")
+        self.widget_3.setStyleSheet(u"QPushButton {\n"
+"	text-align: center;\n"
+"	margin-top: 5px;\n"
+"	margin-bottom: 5px;\n"
+"}")
+        self.verticalLayout_16 = QVBoxLayout(self.widget_3)
+        self.verticalLayout_16.setSpacing(0)
+        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
+        self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
+        self.verticalSpacer = QSpacerItem(20, 15, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.verticalLayout_16.addItem(self.verticalSpacer)
+
+        self.label = QLabel(self.widget_3)
+        self.label.setObjectName(u"label")
+        self.label.setStyleSheet(u"QLabel {\n"
+"	font: 500 15pt;\n"
+"}")
+
+        self.verticalLayout_16.addWidget(self.label)
+
+        self.line_2 = QFrame(self.widget_3)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_16.addWidget(self.line_2)
+
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.pushButton = QPushButton(self.widget_3)
+        self.pushButton.setObjectName(u"pushButton")
+
+        self.horizontalLayout_5.addWidget(self.pushButton)
+
+        self.pushButton_2 = QPushButton(self.widget_3)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+
+        self.horizontalLayout_5.addWidget(self.pushButton_2)
+
+        self.pushButton_4 = QPushButton(self.widget_3)
+        self.pushButton_4.setObjectName(u"pushButton_4")
+
+        self.horizontalLayout_5.addWidget(self.pushButton_4)
+
+
+        self.verticalLayout_16.addLayout(self.horizontalLayout_5)
+
+        self.metric_graph = PlotWidget(self.widget_3)
+        self.metric_graph.setObjectName(u"metric_graph")
+        self.metric_graph.setMinimumSize(QSize(0, 400))
+        self.metric_graph.setStyleSheet(u"QWidget {\n"
+"    background-color: transparent;\n"
+"    border: 1px solid #30363d;\n"
+"    border-radius: 8px;\n"
+"    padding: 12px;\n"
+"}")
+
+        self.verticalLayout_16.addWidget(self.metric_graph)
+
+
+        self.verticalLayout_5.addWidget(self.widget_3)
+
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+
+        self.verticalLayout_5.addLayout(self.horizontalLayout_2)
+
+        self.widget_4 = QWidget(self.agent_detail_information)
+        self.widget_4.setObjectName(u"widget_4")
+
+        self.verticalLayout_5.addWidget(self.widget_4)
+
+        self.agent_detail_scroll.setWidget(self.agent_detail_information)
+
+        self.verticalLayout.addWidget(self.agent_detail_scroll)
+
+
+        self.verticalLayout_3.addWidget(self.widget)
+
+        self.content_stack.addWidget(self.agent_detail)
 
         self.horizontalLayout.addWidget(self.content_stack)
 
@@ -771,7 +967,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.content_stack.setCurrentIndex(0)
+        self.content_stack.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -807,18 +1003,26 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"RAM", None))
         ___qtablewidgetitem5 = self.agents_table.horizontalHeaderItem(5)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Seen", None))
-        self.add_agent_button.setText(QCoreApplication.translate("MainWindow", u"[ + Add Agent ]", None))
         self.refresh_table_button.setText(QCoreApplication.translate("MainWindow", u"[ Refresh ]", None))
         self.agents_headline_label.setText(QCoreApplication.translate("MainWindow", u"Agents", None))
         self.page_description_label.setText(QCoreApplication.translate("MainWindow", u"Manage connected machines", None))
-        self.add_agent_button_2.setText(QCoreApplication.translate("MainWindow", u"[ + Add Agent ]", None))
-        self.search_input_line.setPlaceholderText("")
+        self.search_input_line.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search...", None))
         self.refresh_agents_button.setText(QCoreApplication.translate("MainWindow", u"[ Refresh ]", None))
-        self.online_dot.setText(QCoreApplication.translate("MainWindow", u"\u25cf", None))
-        self.vps_name_label.setText(QCoreApplication.translate("MainWindow", u"VPS Production", None))
-        self.ip_os_label.setText(QCoreApplication.translate("MainWindow", u"1.2.3.4 \u00b7 Ubuntu 24.04", None))
-        self.cpu_ram_label.setText(QCoreApplication.translate("MainWindow", u"CPU 23%   RAM 41%", None))
-        self.status_label.setText(QCoreApplication.translate("MainWindow", u"ONLINE", None))
-        self.agent_open_button.setText(QCoreApplication.translate("MainWindow", u"[ Open \u2192 ]", None))
+        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"[ \u2190 Back to Agents ]", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"VPS Production ", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u25cf ON", None))
+        self.overview_label.setText(QCoreApplication.translate("MainWindow", u"Overview", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"23.4% ", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"RAM", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"41.2%", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"DISK", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"58.1%", None))
+        self.label_10.setText(QCoreApplication.translate("MainWindow", u"UPTIME", None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"3d 14h", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Resource Usage", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
+        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"RAM", None))
+        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"DISK", None))
     # retranslateUi
 
