@@ -5,28 +5,20 @@ import asyncio
 
 class NexoraClient:
 
-    def __init__(self, base_url, token):
+    def __init__(self, base_url: str, token: str):
+        self.base_url = base_url
+        self.token = token
+
         self.client = Client(
-            base_url=base_url,
-            headers={"Authorization": token},
+            base_url=self.base_url,
+            headers={"Authorization": self.token},
             timeout=10,
         )
 
-    def get_agents(self):
+    def get_agents(self) -> list[dict]:
 
         response = self.client.get("agents/")
 
         response.raise_for_status()
 
         return response.json()
-
-
-# client = NexoraClient(
-#     "http://127.0.0.1:8000/api/v1/", "30287dfd-d1ae-4efb-aa89-e26cf089bcb4"
-# )
-
-
-# agents = client.get_agents()
-
-
-# print(agents)
