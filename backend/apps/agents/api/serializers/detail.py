@@ -11,6 +11,8 @@ class AgentDetailSerializer(ModelSerializer):
             "id",
             "name",
             "hostname",
+            "ip",
+            "os",
             "cpu_load",
             "ram_load",
             "last_seen",
@@ -19,6 +21,8 @@ class AgentDetailSerializer(ModelSerializer):
 
         read_only_fields = [
             "id",
+            "ip",
+            "os",
             "last_seen",
             "created_at",
             "ram_load",

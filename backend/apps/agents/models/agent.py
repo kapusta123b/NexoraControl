@@ -13,6 +13,10 @@ class Agent(models.Model):
 
     hostname = models.CharField(max_length=100)
 
+    ip = models.CharField(null=True, max_length=15)
+
+    os = models.CharField(null=True, max_length=30)
+
     cpu_load = models.PositiveSmallIntegerField(null=True)
 
     ram_load = models.PositiveSmallIntegerField(null=True)

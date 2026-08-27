@@ -11,6 +11,8 @@ class AgentListCreateSerializer(ModelSerializer):
             "id",
             "name",
             "hostname",
+            "ip",
+            "os",
             "ram_load",
             "cpu_load",
             "status",
