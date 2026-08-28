@@ -97,15 +97,31 @@ sequenceDiagram
 
 ## Installation
 
-### 1. Backend
-Clone the repository on the server:
+### 1. Backend Server
+# On the VPS:
+
+Install Docker: https://docs.docker.com/engine/install/
+
+Clone the repository:
 
 ```bash
-git clone [https://github.com/kapusta123b/NexoraControl.git](https://github.com/kapusta123b/NexoraControl.git)
+git clone https://github.com/kapusta123b/NexoraControl.git
 cd NexoraControl
 ```
 
-Configure the environment and start the backend:
+Edit environment variables:
+
+```bash
+nano .env
+```
+
+Update Nginx server name:
+
+```bash
+nano conf.d/nginx.conf
+```
+
+Build and start containers:
 
 ```bash
 docker compose up -d --build
@@ -114,17 +130,18 @@ docker compose up -d --build
 Apply migrations:
 
 ```bash
-docker compose exec web python manage.py migrate
+docker exec web python manage.py migrate
 ```
+
 
 ### 2. Agent
 On the VPS you want to monitor:
 
 ```bash
-curl -fsSL [https://raw.githubusercontent.com/kapusta123b/NexoraControl/main/agent/install.sh](https://raw.githubusercontent.com/kapusta123b/NexoraControl/main/agent/install.sh) | sudo bash
+curl -fsSL https://raw.githubusercontent.com/kapusta123b/NexoraControl/main/agent/install.sh | sudo bash
 ```
 
-The installer downloads the Agent, creates its virtual environment, installs dependencies, configures systemd, and starts the initial setup. During setup, provide the API URL and machine name. 
+The installer downloads the Agent, creates its virtual environment, installs dependencies, configures systemd, and starts the initial setup. During setup, provide the Backend API URL and machine name. 
 
 Check the Agent status:
 
@@ -147,18 +164,6 @@ python main.py
 ```
 
 The Desktop Client connects to the Django API and provides monitoring and control of registered Agents.
-
-## Project Structure
-
-```text
-NexoraControl/
-├── agent/
-├── backend/
-├── desktop/
-├── conf.d/
-├── docker-compose.yml
-└── README.md
-```
 
 ## License
 MIT
