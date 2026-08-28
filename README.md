@@ -6,6 +6,8 @@
 ![PostgreSQL](https://img.shields.io/badge/postgresql-16-336791.svg)
 ![Docker](https://img.shields.io/badge/docker-supported-2496ED.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![GitHub repo size](https://img.shields.io/github/repo-size/kapusta123b/NexoraControl)
+
 
 NexoraControl is a distributed server monitoring and control system built with Django, Python, and PySide6.
 
