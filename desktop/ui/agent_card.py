@@ -24,7 +24,7 @@ class Ui_card_form(object):
             card_form.setObjectName(u"card_form")
         card_form.resize(800, 137)
         card_form.setMinimumSize(QSize(800, 120))
-        card_form.setMaximumSize(QSize(800, 137))
+        card_form.setMaximumSize(QSize(16777215, 137))
         card_form.setStyleSheet(u"#card_form {\n"
 "    background-color: #161920;\n"
 "    border-radius: 4px;\n"
