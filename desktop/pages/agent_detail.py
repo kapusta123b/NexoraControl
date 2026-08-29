@@ -1,23 +1,79 @@
 from datetime import datetime
+
+import numpy as np
+import pyqtgraph as pg
+
 from PySide6.QtCore import Qt
+
+from services.agent_poller import AgentPoller
+from services.agent_store import MetricStore
 
 from ui.main_window import Ui_MainWindow
 
-import pyqtgraph as pg
 
-
-class AgentDetail:
-    def __init__(self, ui: Ui_MainWindow):
+class AgentDetailController:
+    def __init__(self, ui: Ui_MainWindow, store: MetricStore, poller: AgentPoller):
         self.ui = ui
+        self.store = store
+        self.poller = poller
+
+        self.agent_id = None
+        self.from_timestamp = None
+
         self.x_data = []
         self.cpu_data = []
         self.ram_data = []
+
+        self.store.metrics_changed.connect(self.update_metrics)
+        self.ui.back_to_agents_button.clicked.connect(
+            lambda checked=False: self.ui.content_stack.setCurrentWidget(
+                self.ui.agents_page
+            )
+        )
 
         self._apply_graph_styles()
         self._create_curves()
         self._create_crosshair()
 
-    def update_graph_data(self, timestamps, cpu_values, ram_values):
+    def show_agent(self, agent_id: int, agent_name: str, from_timestamp: int):
+        self.agent_id = agent_id
+        self.from_timestamp = from_timestamp
+
+        self.ui.detail_top_agent_name_label.setText(agent_name)
+        self.ui.detail_top_agent_status_label.setText("Loading metrics...")
+        self.ui.cpu_load_label.setText("--")
+        self.ui.ram_load_label.setText("--")
+        self.ui.disk_load_label.setText("--")
+        self.ui.up_time_label.setText("--")
+
+        self._update_graph_data([], [], [])
+        self.poller.set_agent(agent_id, from_timestamp)
+        self.poller.refresh(force=True)
+
+    def update_metrics(self, metrics):
+        if not metrics:
+            self.ui.detail_top_agent_status_label.setText("No metrics yet")
+            self._update_graph_data([], [], [])
+            return
+
+        timestamps = metrics.get("timestamps", [])
+        cpu_values = metrics.get("cpu_values", [])
+        ram_values = metrics.get("ram_values", [])
+
+        timestamps = [int(value) for value in timestamps]
+        cpu_values = [value for value in cpu_values]
+        ram_values = [value for value in ram_values]
+
+        if not timestamps:
+            self.ui.detail_top_agent_status_label.setText("No metrics yet")
+
+        self._update_graph_data(
+            timestamps,
+            cpu_values,
+            ram_values,
+        )
+
+    def _update_graph_data(self, timestamps, cpu_values, ram_values):
         self.x_data = timestamps
         self.cpu_data = cpu_values
         self.ram_data = ram_values
@@ -25,11 +81,26 @@ class AgentDetail:
         self.cpu_curve.setData(timestamps, cpu_values)
         self.ram_curve.setData(timestamps, ram_values)
 
-        if timestamps:
-            self.ui.metric_graph.setXRange(min(timestamps), max(timestamps), padding=0)
-            self.ui.metric_graph.getViewBox().setLimits(
-                xMin=min(timestamps), xMax=max(timestamps)
-            )
+        self.tooltip_text.setHtml("")
+
+        if not timestamps:
+            self.ui.metric_graph.setXRange(0, 60, padding=0)
+            self.ui.metric_graph.getViewBox().setLimits(xMin=None, xMax=None)
+            return
+
+        self.ui.detail_top_agent_status_label.setText("Metrics loaded")
+        self.ui.cpu_load_label.setText(f"{cpu_values[-1]:.1f}%")
+        self.ui.ram_load_label.setText(f"{ram_values[-1]:.1f}%")
+
+        if len(timestamps) == 1:
+            x_min = timestamps[0] - 30
+            x_max = timestamps[0] + 30
+        else:
+            x_min = min(timestamps)
+            x_max = max(timestamps)
+
+        self.ui.metric_graph.setXRange(x_min, x_max, padding=0)
+        self.ui.metric_graph.getViewBox().setLimits(xMin=x_min, xMax=x_max)
 
     def _format_timestamp_ticks(self, values: list[int], scale, spacing):
         formatted = []
@@ -112,39 +183,39 @@ class AgentDetail:
             mouse_point = view_box.mapSceneToView(evt)
             x_val = mouse_point.x()
 
-            import numpy as np
+            idx = int(np.searchsorted(self.x_data, x_val))
+            idx = min(max(idx, 0), len(self.x_data) - 1)
 
-            idx = np.searchsorted(self.x_data, x_val)
-            if idx > 0 and idx < len(self.x_data):
+            if idx > 0:
                 if abs(self.x_data[idx] - x_val) > abs(self.x_data[idx - 1] - x_val):
                     idx -= 1
 
-                actual_x = self.x_data[idx]
-                cpu_val = self.cpu_data[idx]
-                ram_val = self.ram_data[idx]
+            actual_x = self.x_data[idx]
+            cpu_val = self.cpu_data[idx]
+            ram_val = self.ram_data[idx]
 
-                self.v_line.setPos(actual_x)
-                self.h_line.setPos(cpu_val)
+            self.v_line.setPos(actual_x)
+            self.h_line.setPos(cpu_val)
 
-                time_str = datetime.fromtimestamp(actual_x).strftime("%H:%M:%S")
+            time_str = datetime.fromtimestamp(actual_x).strftime("%H:%M:%S")
 
-                html_code = (
-                    f"<div style='font-size: 10pt; "
-                    f"background-color: rgba(22, 27, 34, 0.85); padding: 6px 10px; "
-                    f"border-radius: 4px; border: 1px solid #30363d;'>"
-                    f"<span style='color: #8b949e;'>Time:</span> {time_str}<br>"
-                    f"<span style='color: #426a97;'>● CPU:</span> {cpu_val:.1f}%<br>"
-                    f"<span style='color: #2F923B;'>■ RAM:</span> {ram_val:.1f}%"
-                    f"</div>"
-                )
-                self.tooltip_text.setHtml(html_code)
+            html_code = (
+                f"<div style='font-size: 10pt; "
+                f"background-color: rgba(22, 27, 34, 0.85); padding: 6px 10px; "
+                f"border-radius: 4px; border: 1px solid #30363d;'>"
+                f"<span style='color: #8b949e;'>Time:</span> {time_str}<br>"
+                f"<span style='color: #426a97;'>CPU:</span> {cpu_val:.1f}%<br>"
+                f"<span style='color: #2F923B;'>RAM:</span> {ram_val:.1f}%"
+                f"</div>"
+            )
+            self.tooltip_text.setHtml(html_code)
 
-                x_range, y_range = view_box.viewRange()
-                x_min, x_max = x_range
-                y_min, y_max = y_range
+            x_range, y_range = view_box.viewRange()
+            x_min, x_max = x_range
+            y_min, y_max = y_range
 
-                view_width = x_max - x_min
+            view_width = x_max - x_min
 
-                tooltip_x = x_max - (view_width * 0.20)
+            tooltip_x = x_max - (view_width * 0.20)
 
-                self.tooltip_text.setPos(tooltip_x, y_max)
+            self.tooltip_text.setPos(tooltip_x, y_max)
