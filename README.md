@@ -8,45 +8,18 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![GitHub repo size](https://img.shields.io/github/repo-size/kapusta123b/NexoraControl)
 
-
 NexoraControl is a distributed server monitoring and control system built with Django, Python, and PySide6.
 
-## Components
-
-### Backend
-* Django REST Framework
-* PostgreSQL
-* Agent management
-* Monitoring
-* Command lifecycle
-
-### Agent
-* Python
-* System monitoring
-* Command execution
-* Docker support
-* systemd deployment
-
-### Desktop
-* PySide6
-* Agent monitoring
-* Command management
-* REST API client
-* Background processing
-
 ## Features
-* Agent registration and authentication
-* CPU and RAM monitoring
-* Online / offline detection
-* Remote command execution
-* Docker and system commands
-* Command validation
-* Command result handling
-* Agent recovery
-* Automated Agent installation
-* Docker Compose deployment
+
+* **Backend (Django REST Framework, PostgreSQL):** Agent registration and authentication, API endpoints for command lifecycle, agent recovery handling, and Docker Compose deployment support.
+* **Agent (Python):** Automated installation (bash/systemd), CPU and RAM monitoring, online/offline detection, remote command execution (Docker and system commands), and command validation.
+* **Desktop Client (PySide6):** Visual agent monitoring, centralized command management, asynchronous REST API communication, and background processing.
 
 ## System Architecture
+
+<details>
+<summary>Click to view Sequence Diagram</summary>
 
 ```mermaid
 sequenceDiagram
@@ -97,71 +70,68 @@ sequenceDiagram
     API-->>GUI: Agents data
 ```
 
+</details>
+
 ## Installation
 
 ### 1. Backend Server
-# On the VPS:
+On the VPS:
 
-Install Docker: https://docs.docker.com/engine/install/
+Install Docker: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
 Clone the repository:
-
 ```bash
 git clone https://github.com/kapusta123b/NexoraControl.git
 cd NexoraControl
 ```
 
 Edit environment variables:
-
 ```bash
 nano .env
 ```
 
 Update Nginx server name:
-
 ```bash
 nano conf.d/nginx.conf
 ```
 
 Build and start containers:
-
 ```bash
 docker compose up -d --build
 ```
 
 Apply migrations:
-
 ```bash
 docker exec web python manage.py migrate
 ```
 
-
 ### 2. Agent
-On the VPS you want to monitor:
 
+On the VPS you want to monitor:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/kapusta123b/NexoraControl/main/agent/install.sh | sudo bash
 ```
 
-The installer downloads the Agent, creates its virtual environment, installs dependencies, configures systemd, and starts the initial setup. During setup, provide the Backend API URL and machine name. 
+The installer downloads the Agent, creates its virtual environment, installs dependencies, configures systemd, and starts the initial setup. During setup, provide the Backend API URL and machine name.
 
 Check the Agent status:
-
 ```bash
 sudo systemctl status nexora-agent
 ```
 
 View logs:
-
 ```bash
 sudo journalctl -u nexora-agent -f
 ```
 
 ### 3. Desktop
-Run the Desktop Client:
 
+Run the Desktop Client:
 ```bash
 cd desktop
+python -m venv venv
+source venv/bin/activate  # For Linux/macOS. For Windows: venv\Scripts\activate
+pip install -r requirements.txt
 python main.py
 ```
 
