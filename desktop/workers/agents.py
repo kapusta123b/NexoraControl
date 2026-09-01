@@ -43,7 +43,7 @@ class AgentMetricWorker(QObject):
     @Slot()
     def run(self):
         try:
-            metrics = self.client.get_agent_metrics(
+            metrics = self.client.get_agent_resource_metrics(
                 self.agent_id,
                 self.timestamp,
             )

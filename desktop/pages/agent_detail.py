@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import numpy as np
+
 import pyqtgraph as pg
 
 from PySide6.QtCore import Qt
@@ -18,28 +19,27 @@ class AgentDetailController:
         self.poller = poller
 
         self.agent_id = None
-        self.from_timestamp = None
+        self.from_hours = None
 
         self.x_data = []
         self.cpu_data = []
         self.ram_data = []
 
         self.store.metrics_changed.connect(self.update_metrics)
+        
         self.ui.back_to_agents_button.clicked.connect(
-            lambda checked=False: self.ui.content_stack.setCurrentWidget(
-                self.ui.agents_page
-            )
+            lambda: self.ui.content_stack.setCurrentWidget(self.ui.agents_page)
         )
 
         self._apply_graph_styles()
         self._create_curves()
         self._create_crosshair()
 
-    def show_agent(self, agent_id: int, agent_name: str, from_timestamp: int):
-        self.agent_id = agent_id
-        self.from_timestamp = from_timestamp
+    def show_agent(self, agent: dict, hours_count: int):
+        self.agent_id = agent["id"]
+        self.from_hours = hours_count
 
-        self.ui.detail_top_agent_name_label.setText(agent_name)
+        self.ui.detail_top_agent_name_label.setText(agent["name"])
         self.ui.detail_top_agent_status_label.setText("Loading metrics...")
         self.ui.cpu_load_label.setText("--")
         self.ui.ram_load_label.setText("--")
@@ -47,7 +47,7 @@ class AgentDetailController:
         self.ui.up_time_label.setText("--")
 
         self._update_graph_data([], [], [])
-        self.poller.set_agent(agent_id, from_timestamp)
+        self.poller.set_agent(self.agent_id, hours_count)
         self.poller.refresh(force=True)
 
     def update_metrics(self, metrics):

@@ -23,7 +23,7 @@ class AgentsController:
 
         self.setup_connections()
 
-    def populate_agents(self, agents):
+    def populate_agents(self, agents: list[dict]):
         self.clear_cards()
 
         layout = self.ui.agent_scroll.layout()
@@ -34,19 +34,19 @@ class AgentsController:
             card.set_agent(agent)
 
             card.ui.agent_open_button.clicked.connect(
-                lambda checked=False, agent_id=agent["id"], agent_name=agent['name']: self.open_agent(agent_id, agent_name)
+                lambda checked=False: self.open_agent(agent)
             )
-            card.open_requested.connect(self.open_agent)
+            card.open_requested.connect(lambda: self.open_agent(agent))
 
             layout.addWidget(card)
 
         layout.addStretch(1)
 
-    def open_agent(self, agent_id, agent_name):
-        from_timestamp = int((datetime.now() - timedelta(hours=1)).timestamp())
-        self.detail_controller.show_agent(agent_id, agent_name, from_timestamp)
+    def open_agent(self, agent: dict):
 
-        self.ui.content_stack.setCurrentWidget(self.ui.agent_detail)
+        self.detail_controller.show_agent(agent=agent, hours_count=1)
+
+        self.ui.content_stack.setCurrentWidget(self.ui.agent_detail_page)
 
     def clear_cards(self):
         layout = self.ui.agent_scroll.layout()
