@@ -21,11 +21,11 @@ class NexoraClient:
 
         return response.json()
 
-    def get_agent_metrics(self, agent_id, timestamp):
+    def get_agent_resource_metrics(self, agent_id, hours) -> dict:
 
         response = self.client.get(
-            f"agents/{agent_id}/heartbeat/",
-            params={"from_date": timestamp},
+            f"agents/{agent_id}/metrics/resources/",
+            params={"hours": hours},
         )
 
         response.raise_for_status()
