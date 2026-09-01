@@ -1,4 +1,5 @@
 from rest_framework import status
+
 from rest_framework.generics import ListCreateAPIView, UpdateAPIView
 
 from rest_framework.response import Response
@@ -11,13 +12,9 @@ from apps.agents.api.serializers.command import (
     CommandPatchSerializer,
     CommandPendingListSerializer,
 )
-
-from django.utils import timezone
-
 from apps.agents.models.agent import Agent
 
 from django.db import transaction
-
 
 class CommandListView(ListCreateAPIView):
     serializer_class = CommandListSerializer

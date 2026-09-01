@@ -1,7 +1,5 @@
 from httpx import AsyncClient
 
-from config.config import Settings
-
 from config.config import load_settings
 
 

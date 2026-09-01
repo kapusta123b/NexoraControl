@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+
 from django.utils.translation import gettext_lazy as _
 
 
@@ -13,7 +14,7 @@ class Agent(models.Model):
 
     hostname = models.CharField(max_length=100)
 
-    ip = models.CharField(null=True, max_length=15)
+    ip = models.GenericIPAddressField(null=True, blank=True)
 
     os = models.CharField(null=True, max_length=30)
 

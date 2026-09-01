@@ -1,6 +1,5 @@
 import subprocess
 import platform
-import os
 import urllib.request
 
 def get_system_hostname() -> str:
