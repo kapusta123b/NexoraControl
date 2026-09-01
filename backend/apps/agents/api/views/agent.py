@@ -1,15 +1,17 @@
-from datetime import datetime, timezone as datetime_timezone
-
 from django.db import transaction
-from django.utils import timezone
+
 from rest_framework import status
+
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-from rest_framework.request import Request
+
 from rest_framework.response import Response
+
 from rest_framework.views import APIView
+
+from django.utils import timezone
 
 from apps.agents.api.serializers.detail import (
     AgentDetailSerializer,
@@ -48,6 +50,7 @@ class AgentDetailView(RetrieveUpdateDestroyAPIView):
 class AgentHeartbeatView(APIView):
 
     def post(self, request, pk):
+
         auth_header = request.headers.get("Authorization", "")
         token = auth_header.split(" ")[1] if " " in auth_header else auth_header
 
@@ -69,41 +72,3 @@ class AgentHeartbeatView(APIView):
             serializer.save(status=Agent.Status.ONLINE, last_seen=timezone.now())
 
         return Response({"status": "ok"}, status=status.HTTP_200_OK)
-
-    def get(self, request: Request, pk):
-        from_ts_str = request.GET.get("from_date")
-
-        if not from_ts_str:
-            return Response({"error": "Missing from_date timestamp"}, status=400)
-
-        try:
-            from_timestamp = int(from_ts_str)
-
-        except ValueError:
-            return Response({"error": "from_date must be a unix timestamp"}, status=400)
-
-        start_time = datetime.fromtimestamp(from_timestamp, tz=datetime_timezone.utc)
-
-        metrics = (
-            AgentMetric.objects
-            .filter(agent_id=pk, created_at__gte=start_time)
-            .order_by("created_at")
-            .values("created_at", "cpu_load", "ram_load")
-        )
-
-        timestamps = []
-        cpu_values = []
-        ram_values = []
-
-        for m in metrics:
-            timestamps.append(int(m["created_at"].timestamp()))
-            cpu_values.append(m["cpu_load"])
-            ram_values.append(m["ram_load"])
-
-        return Response(
-            {
-                "timestamps": timestamps,
-                "cpu_values": cpu_values,
-                "ram_values": ram_values,
-            }
-        )

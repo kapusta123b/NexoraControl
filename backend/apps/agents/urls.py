@@ -10,6 +10,8 @@ from apps.agents.api.views.command import (
     CommandListView,
     CommandPendingListView,
 )
+from apps.agents.api.views.metric import ResourceMetric
+
 
 app_name = "notes"
 
@@ -19,6 +21,16 @@ urlpatterns = [
     path(
         "agents/<int:pk>/heartbeat/",
         AgentHeartbeatView.as_view(),
+        name="agent-detail-heartbeat",
+    ),
+    path(
+        "agents/<int:pk>/heartbeat/",
+        AgentHeartbeatView.as_view(),
+        name="agent-detail-heartbeat",
+    ),
+    path(
+        "agents/<int:pk>/metrics/resources/",
+        ResourceMetric.as_view(),
         name="agent-detail-heartbeat",
     ),
     path(
