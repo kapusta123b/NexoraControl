@@ -1,4 +1,5 @@
 from django.db import models
+
 from django.utils.translation import gettext_lazy as _
 
 
@@ -28,3 +29,9 @@ class Command(models.Model):
     finished_at = models.DateTimeField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["agent", "status"]),
+            models.Index(fields=["agent", "-created_at"]),
+        ]

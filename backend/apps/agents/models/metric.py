@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class AgentMetricQuerySet(models.QuerySet):
 
     def by_date(self, from_date):
@@ -9,12 +10,13 @@ class AgentMetricQuerySet(models.QuerySet):
         return self
 
 
-
 class AgentMetric(models.Model):
 
     objects = AgentMetricQuerySet.as_manager()
 
-    agent = models.ForeignKey("agents.Agent", related_name="metrics", on_delete=models.CASCADE)
+    agent = models.ForeignKey(
+        "agents.Agent", related_name="metrics", on_delete=models.CASCADE
+    )
 
     cpu_load = models.PositiveSmallIntegerField(null=True)
 
@@ -24,4 +26,8 @@ class AgentMetric(models.Model):
 
     class Meta:
 
-        verbose_name = 'Metric'
+        verbose_name = "Metric"
+
+        indexes = [
+            models.Index(fields=["agent", "-created_at"]),
+        ]
