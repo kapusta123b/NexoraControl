@@ -119,9 +119,12 @@ class Ui_MainWindow(object):
 "    max-height: 1px;\n"
 "}\n"
 "")
+        self.central_content_layout = QHBoxLayout(self.central_content)
+        self.central_content_layout.setSpacing(0)
+        self.central_content_layout.setObjectName(u"central_content_layout")
+        self.central_content_layout.setContentsMargins(0, 0, 0, 0)
         self.left_panel = QWidget(self.central_content)
         self.left_panel.setObjectName(u"left_panel")
-        self.left_panel.setGeometry(QRect(0, 0, 171, 555))
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -228,9 +231,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addItem(self.bottom_spacer)
 
+
+        self.central_content_layout.addWidget(self.left_panel)
+
         self.content_stack = QStackedWidget(self.central_content)
         self.content_stack.setObjectName(u"content_stack")
-        self.content_stack.setGeometry(QRect(171, 0, 769, 553))
         self.content_stack.setMinimumSize(QSize(500, 411))
         self.content_stack.setMaximumSize(QSize(16777215, 16777215))
         self.content_stack.setStyleSheet(u"QWidget {\n"
@@ -659,14 +664,14 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {\n"
 "    background-color: #0f111a;\n"
 "}")
-        self.verticalLayout_3 = QVBoxLayout(self.agent_detail_page)
-        self.verticalLayout_3.setSpacing(0)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.agent_detail_page_layout = QVBoxLayout(self.agent_detail_page)
+        self.agent_detail_page_layout.setSpacing(0)
+        self.agent_detail_page_layout.setObjectName(u"agent_detail_page_layout")
+        self.agent_detail_page_layout.setContentsMargins(0, 0, 0, 0)
         self.agent_detail_content = QWidget(self.agent_detail_page)
         self.agent_detail_content.setObjectName(u"agent_detail_content")
-        self.verticalLayout = QVBoxLayout(self.agent_detail_content)
-        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.agent_detail_content_layout = QVBoxLayout(self.agent_detail_content)
+        self.agent_detail_content_layout.setObjectName(u"agent_detail_content_layout")
         self.detail_top_widget = QWidget(self.agent_detail_content)
         self.detail_top_widget.setObjectName(u"detail_top_widget")
         self.detail_top_widget.setMinimumSize(QSize(0, 0))
@@ -752,14 +757,14 @@ class Ui_MainWindow(object):
         self.verticalLayout_17.addLayout(self.detail_top_navigation_layout)
 
 
-        self.verticalLayout.addWidget(self.detail_top_widget)
+        self.agent_detail_content_layout.addWidget(self.detail_top_widget)
 
         self.detail_top_line = QFrame(self.agent_detail_content)
         self.detail_top_line.setObjectName(u"detail_top_line")
         self.detail_top_line.setFrameShape(QFrame.Shape.HLine)
         self.detail_top_line.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.verticalLayout.addWidget(self.detail_top_line)
+        self.agent_detail_content_layout.addWidget(self.detail_top_line)
 
         self.agent_detail_stacked_content = QStackedWidget(self.agent_detail_content)
         self.agent_detail_stacked_content.setObjectName(u"agent_detail_stacked_content")
@@ -816,12 +821,12 @@ class Ui_MainWindow(object):
         self.overview_detail_scroll.setWidgetResizable(True)
         self.agent_detail_information = QWidget()
         self.agent_detail_information.setObjectName(u"agent_detail_information")
-        self.agent_detail_information.setGeometry(QRect(0, 0, 833, 700))
+        self.agent_detail_information.setGeometry(QRect(0, 0, 955, 700))
         self.agent_detail_information.setMinimumSize(QSize(0, 700))
-        self.verticalLayout_18 = QVBoxLayout(self.agent_detail_information)
-        self.verticalLayout_18.setSpacing(5)
-        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
-        self.verticalLayout_18.setContentsMargins(0, 0, 0, 0)
+        self.agent_detail_information_layout = QVBoxLayout(self.agent_detail_information)
+        self.agent_detail_information_layout.setSpacing(5)
+        self.agent_detail_information_layout.setObjectName(u"agent_detail_information_layout")
+        self.agent_detail_information_layout.setContentsMargins(0, 0, 0, 0)
         self.overview_widget = QWidget(self.agent_detail_information)
         self.overview_widget.setObjectName(u"overview_widget")
         self.overview_widget.setMaximumSize(QSize(16777215, 120))
@@ -837,9 +842,9 @@ class Ui_MainWindow(object):
 "QLabel {\n"
 "	background-color: transparent;\n"
 "}")
-        self.verticalLayout_19 = QVBoxLayout(self.overview_widget)
-        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
-        self.verticalLayout_19.setContentsMargins(0, 0, 0, 0)
+        self.overview_widget_layout = QVBoxLayout(self.overview_widget)
+        self.overview_widget_layout.setObjectName(u"overview_widget_layout")
+        self.overview_widget_layout.setContentsMargins(0, 0, 0, 0)
         self.overview_label = QLabel(self.overview_widget)
         self.overview_label.setObjectName(u"overview_label")
         self.overview_label.setMaximumSize(QSize(16777215, 30))
@@ -848,7 +853,7 @@ class Ui_MainWindow(object):
 "}")
         self.overview_label.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
 
-        self.verticalLayout_19.addWidget(self.overview_label)
+        self.overview_widget_layout.addWidget(self.overview_label)
 
         self.resource_boxes_widget = QWidget(self.overview_widget)
         self.resource_boxes_widget.setObjectName(u"resource_boxes_widget")
@@ -861,19 +866,19 @@ class Ui_MainWindow(object):
         self.cpu_widget.setObjectName(u"cpu_widget")
         self.cpu_widget.setMinimumSize(QSize(0, 60))
         self.cpu_widget.setMaximumSize(QSize(140, 90))
-        self.verticalLayout_20 = QVBoxLayout(self.cpu_widget)
-        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.cpu_widget_layout = QVBoxLayout(self.cpu_widget)
+        self.cpu_widget_layout.setObjectName(u"cpu_widget_layout")
         self.cpu_label = QLabel(self.cpu_widget)
         self.cpu_label.setObjectName(u"cpu_label")
         self.cpu_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_20.addWidget(self.cpu_label)
+        self.cpu_widget_layout.addWidget(self.cpu_label)
 
         self.cpu_load_label = QLabel(self.cpu_widget)
         self.cpu_load_label.setObjectName(u"cpu_load_label")
         self.cpu_load_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_20.addWidget(self.cpu_load_label)
+        self.cpu_widget_layout.addWidget(self.cpu_load_label)
 
 
         self.resource_boxes_layout.addWidget(self.cpu_widget)
@@ -882,19 +887,19 @@ class Ui_MainWindow(object):
         self.ram_widget.setObjectName(u"ram_widget")
         self.ram_widget.setMinimumSize(QSize(0, 60))
         self.ram_widget.setMaximumSize(QSize(140, 90))
-        self.verticalLayout_21 = QVBoxLayout(self.ram_widget)
-        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.ram_widget_layout = QVBoxLayout(self.ram_widget)
+        self.ram_widget_layout.setObjectName(u"ram_widget_layout")
         self.ram_label = QLabel(self.ram_widget)
         self.ram_label.setObjectName(u"ram_label")
         self.ram_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_21.addWidget(self.ram_label)
+        self.ram_widget_layout.addWidget(self.ram_label)
 
         self.ram_load_label = QLabel(self.ram_widget)
         self.ram_load_label.setObjectName(u"ram_load_label")
         self.ram_load_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_21.addWidget(self.ram_load_label)
+        self.ram_widget_layout.addWidget(self.ram_load_label)
 
 
         self.resource_boxes_layout.addWidget(self.ram_widget)
@@ -903,19 +908,19 @@ class Ui_MainWindow(object):
         self.disk_widget.setObjectName(u"disk_widget")
         self.disk_widget.setMinimumSize(QSize(0, 60))
         self.disk_widget.setMaximumSize(QSize(140, 90))
-        self.verticalLayout_22 = QVBoxLayout(self.disk_widget)
-        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.disk_widget_layout = QVBoxLayout(self.disk_widget)
+        self.disk_widget_layout.setObjectName(u"disk_widget_layout")
         self.disk_label = QLabel(self.disk_widget)
         self.disk_label.setObjectName(u"disk_label")
         self.disk_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_22.addWidget(self.disk_label)
+        self.disk_widget_layout.addWidget(self.disk_label)
 
         self.disk_load_label = QLabel(self.disk_widget)
         self.disk_load_label.setObjectName(u"disk_load_label")
         self.disk_load_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_22.addWidget(self.disk_load_label)
+        self.disk_widget_layout.addWidget(self.disk_load_label)
 
 
         self.resource_boxes_layout.addWidget(self.disk_widget)
@@ -924,28 +929,28 @@ class Ui_MainWindow(object):
         self.uptime_widget.setObjectName(u"uptime_widget")
         self.uptime_widget.setMinimumSize(QSize(0, 60))
         self.uptime_widget.setMaximumSize(QSize(140, 90))
-        self.verticalLayout_23 = QVBoxLayout(self.uptime_widget)
-        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
+        self.uptime_widget_layout = QVBoxLayout(self.uptime_widget)
+        self.uptime_widget_layout.setObjectName(u"uptime_widget_layout")
         self.uptime_label = QLabel(self.uptime_widget)
         self.uptime_label.setObjectName(u"uptime_label")
         self.uptime_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_23.addWidget(self.uptime_label)
+        self.uptime_widget_layout.addWidget(self.uptime_label)
 
         self.up_time_label = QLabel(self.uptime_widget)
         self.up_time_label.setObjectName(u"up_time_label")
         self.up_time_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_23.addWidget(self.up_time_label)
+        self.uptime_widget_layout.addWidget(self.up_time_label)
 
 
         self.resource_boxes_layout.addWidget(self.uptime_widget)
 
 
-        self.verticalLayout_19.addWidget(self.resource_boxes_widget)
+        self.overview_widget_layout.addWidget(self.resource_boxes_widget)
 
 
-        self.verticalLayout_18.addWidget(self.overview_widget)
+        self.agent_detail_information_layout.addWidget(self.overview_widget)
 
         self.system_status_widget = QWidget(self.agent_detail_information)
         self.system_status_widget.setObjectName(u"system_status_widget")
@@ -976,10 +981,10 @@ class Ui_MainWindow(object):
 "#system_status_box_widget QWidget {\n"
 "	background-color: transparent;\n"
 "}")
-        self.horizontalLayout_4 = QHBoxLayout(self.system_status_box_widget)
-        self.horizontalLayout_4.setSpacing(0)
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.system_status_box_widget_layout = QHBoxLayout(self.system_status_box_widget)
+        self.system_status_box_widget_layout.setSpacing(0)
+        self.system_status_box_widget_layout.setObjectName(u"system_status_box_widget_layout")
+        self.system_status_box_widget_layout.setContentsMargins(0, 0, 0, 0)
         self.system_status_box_layout = QHBoxLayout()
         self.system_status_box_layout.setObjectName(u"system_status_box_layout")
         self.system_status_rows_widget = QWidget(self.system_status_box_widget)
@@ -988,44 +993,44 @@ class Ui_MainWindow(object):
 "	font: 200 12pt;\n"
 "	margin-left: 20px;\n"
 "}")
-        self.verticalLayout_9 = QVBoxLayout(self.system_status_rows_widget)
-        self.verticalLayout_9.setSpacing(0)
-        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.verticalLayout_9.setContentsMargins(10, 0, 0, 0)
+        self.system_status_rows_widget_layout = QVBoxLayout(self.system_status_rows_widget)
+        self.system_status_rows_widget_layout.setSpacing(0)
+        self.system_status_rows_widget_layout.setObjectName(u"system_status_rows_widget_layout")
+        self.system_status_rows_widget_layout.setContentsMargins(10, 0, 0, 0)
         self.agent_row_label = QLabel(self.system_status_rows_widget)
         self.agent_row_label.setObjectName(u"agent_row_label")
         self.agent_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.agent_row_label.setMargin(0)
 
-        self.verticalLayout_9.addWidget(self.agent_row_label)
+        self.system_status_rows_widget_layout.addWidget(self.agent_row_label)
 
         self.last_seen_row_label = QLabel(self.system_status_rows_widget)
         self.last_seen_row_label.setObjectName(u"last_seen_row_label")
         self.last_seen_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.last_seen_row_label.setMargin(0)
 
-        self.verticalLayout_9.addWidget(self.last_seen_row_label)
+        self.system_status_rows_widget_layout.addWidget(self.last_seen_row_label)
 
         self.version_row_label = QLabel(self.system_status_rows_widget)
         self.version_row_label.setObjectName(u"version_row_label")
         self.version_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.version_row_label.setMargin(0)
 
-        self.verticalLayout_9.addWidget(self.version_row_label)
+        self.system_status_rows_widget_layout.addWidget(self.version_row_label)
 
         self.hostname_row_label = QLabel(self.system_status_rows_widget)
         self.hostname_row_label.setObjectName(u"hostname_row_label")
         self.hostname_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.hostname_row_label.setMargin(0)
 
-        self.verticalLayout_9.addWidget(self.hostname_row_label)
+        self.system_status_rows_widget_layout.addWidget(self.hostname_row_label)
 
         self.os_name_row_label = QLabel(self.system_status_rows_widget)
         self.os_name_row_label.setObjectName(u"os_name_row_label")
         self.os_name_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.os_name_row_label.setMargin(0)
 
-        self.verticalLayout_9.addWidget(self.os_name_row_label)
+        self.system_status_rows_widget_layout.addWidget(self.os_name_row_label)
 
 
         self.system_status_box_layout.addWidget(self.system_status_rows_widget)
@@ -1035,62 +1040,62 @@ class Ui_MainWindow(object):
         self.system_status_values_widget.setStyleSheet(u"QLabel {\n"
 "	font: 450 12pt;\n"
 "}")
-        self.verticalLayout_11 = QVBoxLayout(self.system_status_values_widget)
-        self.verticalLayout_11.setSpacing(0)
-        self.verticalLayout_11.setObjectName(u"verticalLayout_11")
-        self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.system_status_values_widget_layout = QVBoxLayout(self.system_status_values_widget)
+        self.system_status_values_widget_layout.setSpacing(0)
+        self.system_status_values_widget_layout.setObjectName(u"system_status_values_widget_layout")
+        self.system_status_values_widget_layout.setContentsMargins(0, 0, 0, 0)
         self.agent_status_value_label = QLabel(self.system_status_values_widget)
         self.agent_status_value_label.setObjectName(u"agent_status_value_label")
 
-        self.verticalLayout_11.addWidget(self.agent_status_value_label)
+        self.system_status_values_widget_layout.addWidget(self.agent_status_value_label)
 
         self.last_seen_value_label = QLabel(self.system_status_values_widget)
         self.last_seen_value_label.setObjectName(u"last_seen_value_label")
 
-        self.verticalLayout_11.addWidget(self.last_seen_value_label)
+        self.system_status_values_widget_layout.addWidget(self.last_seen_value_label)
 
         self.version_value_label = QLabel(self.system_status_values_widget)
         self.version_value_label.setObjectName(u"version_value_label")
 
-        self.verticalLayout_11.addWidget(self.version_value_label)
+        self.system_status_values_widget_layout.addWidget(self.version_value_label)
 
         self.hostname_value_label = QLabel(self.system_status_values_widget)
         self.hostname_value_label.setObjectName(u"hostname_value_label")
 
-        self.verticalLayout_11.addWidget(self.hostname_value_label)
+        self.system_status_values_widget_layout.addWidget(self.hostname_value_label)
 
         self.os_name_value_label = QLabel(self.system_status_values_widget)
         self.os_name_value_label.setObjectName(u"os_name_value_label")
 
-        self.verticalLayout_11.addWidget(self.os_name_value_label)
+        self.system_status_values_widget_layout.addWidget(self.os_name_value_label)
 
 
         self.system_status_box_layout.addWidget(self.system_status_values_widget)
 
 
-        self.horizontalLayout_4.addLayout(self.system_status_box_layout)
+        self.system_status_box_widget_layout.addLayout(self.system_status_box_layout)
 
 
         self.system_status_layout.addWidget(self.system_status_box_widget)
 
 
-        self.verticalLayout_18.addWidget(self.system_status_widget)
+        self.agent_detail_information_layout.addWidget(self.system_status_widget)
 
         self.quick_actions_widget = QWidget(self.agent_detail_information)
         self.quick_actions_widget.setObjectName(u"quick_actions_widget")
         self.quick_actions_widget.setMinimumSize(QSize(0, 80))
         self.quick_actions_widget.setMaximumSize(QSize(16777215, 80))
-        self.verticalLayout_14 = QVBoxLayout(self.quick_actions_widget)
-        self.verticalLayout_14.setSpacing(0)
-        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
-        self.verticalLayout_14.setContentsMargins(0, -1, 0, 0)
+        self.quick_actions_widget_layout = QVBoxLayout(self.quick_actions_widget)
+        self.quick_actions_widget_layout.setSpacing(0)
+        self.quick_actions_widget_layout.setObjectName(u"quick_actions_widget_layout")
+        self.quick_actions_widget_layout.setContentsMargins(0, -1, 0, 0)
         self.quick_actions_label = QLabel(self.quick_actions_widget)
         self.quick_actions_label.setObjectName(u"quick_actions_label")
         self.quick_actions_label.setStyleSheet(u"QLabel {\n"
 "	font: 350 12pt;\n"
 "}")
 
-        self.verticalLayout_14.addWidget(self.quick_actions_label)
+        self.quick_actions_widget_layout.addWidget(self.quick_actions_label)
 
         self.quick_actions_layout = QHBoxLayout()
         self.quick_actions_layout.setSpacing(10)
@@ -1117,10 +1122,10 @@ class Ui_MainWindow(object):
         self.quick_actions_layout.addWidget(self.reboot_quick_button)
 
 
-        self.verticalLayout_14.addLayout(self.quick_actions_layout)
+        self.quick_actions_widget_layout.addLayout(self.quick_actions_layout)
 
 
-        self.verticalLayout_18.addWidget(self.quick_actions_widget)
+        self.agent_detail_information_layout.addWidget(self.quick_actions_widget)
 
         self.recent_commands_widget = QWidget(self.agent_detail_information)
         self.recent_commands_widget.setObjectName(u"recent_commands_widget")
@@ -1134,10 +1139,10 @@ class Ui_MainWindow(object):
 "#recent_command_box_widget QWidget {\n"
 "	background-color: transparent;\n"
 "}")
-        self.verticalLayout_15 = QVBoxLayout(self.recent_commands_widget)
-        self.verticalLayout_15.setSpacing(5)
-        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
-        self.verticalLayout_15.setContentsMargins(0, 15, 0, 0)
+        self.recent_commands_widget_layout = QVBoxLayout(self.recent_commands_widget)
+        self.recent_commands_widget_layout.setSpacing(5)
+        self.recent_commands_widget_layout.setObjectName(u"recent_commands_widget_layout")
+        self.recent_commands_widget_layout.setContentsMargins(0, 15, 0, 0)
         self.recent_commands_label = QLabel(self.recent_commands_widget)
         self.recent_commands_label.setObjectName(u"recent_commands_label")
         self.recent_commands_label.setMaximumSize(QSize(16777215, 30))
@@ -1145,7 +1150,7 @@ class Ui_MainWindow(object):
 "	font: 350 12pt;\n"
 "}")
 
-        self.verticalLayout_15.addWidget(self.recent_commands_label)
+        self.recent_commands_widget_layout.addWidget(self.recent_commands_label)
 
         self.recent_command_box_widget = QWidget(self.recent_commands_widget)
         self.recent_command_box_widget.setObjectName(u"recent_command_box_widget")
@@ -1158,10 +1163,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
         self.horizontalLayout_6.setContentsMargins(10, 0, 0, 0)
 
-        self.verticalLayout_15.addWidget(self.recent_command_box_widget)
+        self.recent_commands_widget_layout.addWidget(self.recent_command_box_widget)
 
 
-        self.verticalLayout_18.addWidget(self.recent_commands_widget)
+        self.agent_detail_information_layout.addWidget(self.recent_commands_widget)
 
         self.overview_detail_scroll.setWidget(self.agent_detail_information)
 
@@ -1292,16 +1297,16 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addWidget(self.perfomance_detail_scroll)
 
         self.agent_detail_stacked_content.addWidget(self.perfomance_detail_page)
-        self.page = QWidget()
-        self.page.setObjectName(u"page")
-        self.verticalLayout_6 = QVBoxLayout(self.page)
+        self.hardware_detail_page = QWidget()
+        self.hardware_detail_page.setObjectName(u"hardware_detail_page")
+        self.verticalLayout_6 = QVBoxLayout(self.hardware_detail_page)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.scrollArea = QScrollArea(self.page)
+        self.scrollArea = QScrollArea(self.hardware_detail_page)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -281, 717, 940))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 951, 940))
         self.scrollAreaWidgetContents.setMinimumSize(QSize(0, 0))
         self.verticalLayout_27 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_27.setSpacing(0)
@@ -1883,14 +1888,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.scrollArea)
 
-        self.agent_detail_stacked_content.addWidget(self.page)
+        self.agent_detail_stacked_content.addWidget(self.hardware_detail_page)
 
-        self.verticalLayout.addWidget(self.agent_detail_stacked_content)
+        self.agent_detail_content_layout.addWidget(self.agent_detail_stacked_content)
 
 
-        self.verticalLayout_3.addWidget(self.agent_detail_content)
+        self.agent_detail_page_layout.addWidget(self.agent_detail_content)
 
         self.content_stack.addWidget(self.agent_detail_page)
+
+        self.central_content_layout.addWidget(self.content_stack)
+
         MainWindow.setCentralWidget(self.central_content)
 
         self.retranslateUi(MainWindow)
