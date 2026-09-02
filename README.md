@@ -13,7 +13,7 @@ NexoraControl is a distributed server monitoring and control system built with D
 ## Features
 
 * **Backend (Django REST Framework, PostgreSQL):** Agent registration and authentication, API endpoints for command lifecycle, agent recovery handling, and Docker Compose deployment support.
-* **Agent (Python):** Automated installation (bash/systemd), CPU and RAM monitoring, online/offline detection, remote command execution (Docker and system commands), and command validation.
+* **Agent (Python):** Automated installation (bash/systemd), CPU and RAM monitoring, online/offline detection, remote command execution (Docker and system commands).
 * **Desktop Client (PySide6):** Visual agent monitoring, centralized command management, asynchronous REST API communication, and background processing.
 
 ## System Architecture
