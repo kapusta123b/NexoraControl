@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1174, 558)
+        MainWindow.resize(1101, 558)
         icon = QIcon()
         iconThemeName = u"camera-photo"
         if QIcon.hasThemeIcon(iconThemeName):
@@ -67,7 +67,6 @@ class Ui_MainWindow(object):
 "    background-color: #161b22;\n"
 "    color: #e6edf3;\n"
 "    border: 1px solid #30363d;\n"
-"	border-top-right: none;\n"
 "    gridline-color: #21262d;\n"
 "    border-radius: 2px;\n"
 "}\n"
@@ -86,11 +85,11 @@ class Ui_MainWindow(object):
 "\n"
 "QTableWidget::item:selected {\n"
 "    background-color: #1f6feb;\n"
-"    color: #ff"
-                        "ffff;\n"
+"    color: #ffffff;\n"
 "}\n"
 "\n"
-"QPushButton {\n"
+"QPushBut"
+                        "ton {\n"
 "    text-align: left;\n"
 "    background-color: transparent;\n"
 "    border: none;\n"
@@ -155,8 +154,8 @@ class Ui_MainWindow(object):
 "\n"
 "}\n"
 "")
-        self.verticalLayout_2 = QVBoxLayout(self.left_panel)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.left_panel_layout = QVBoxLayout(self.left_panel)
+        self.left_panel_layout.setObjectName(u"left_panel_layout")
         self.nexora_logo = QLabel(self.left_panel)
         self.nexora_logo.setObjectName(u"nexora_logo")
         self.nexora_logo.setStyleSheet(u"QLabel {\n"
@@ -167,56 +166,56 @@ class Ui_MainWindow(object):
 "}")
         self.nexora_logo.setWordWrap(True)
 
-        self.verticalLayout_2.addWidget(self.nexora_logo)
+        self.left_panel_layout.addWidget(self.nexora_logo)
 
         self.dashboard_button = QPushButton(self.left_panel)
         self.dashboard_button.setObjectName(u"dashboard_button")
         self.dashboard_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.dashboard_button.setCheckable(True)
 
-        self.verticalLayout_2.addWidget(self.dashboard_button)
+        self.left_panel_layout.addWidget(self.dashboard_button)
 
         self.agents_button = QPushButton(self.left_panel)
         self.agents_button.setObjectName(u"agents_button")
         self.agents_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.agents_button.setCheckable(True)
 
-        self.verticalLayout_2.addWidget(self.agents_button)
+        self.left_panel_layout.addWidget(self.agents_button)
 
         self.commands_button = QPushButton(self.left_panel)
         self.commands_button.setObjectName(u"commands_button")
         self.commands_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.commands_button.setCheckable(True)
 
-        self.verticalLayout_2.addWidget(self.commands_button)
+        self.left_panel_layout.addWidget(self.commands_button)
 
         self.metrics_button = QPushButton(self.left_panel)
         self.metrics_button.setObjectName(u"metrics_button")
         self.metrics_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.metrics_button.setCheckable(True)
 
-        self.verticalLayout_2.addWidget(self.metrics_button)
+        self.left_panel_layout.addWidget(self.metrics_button)
 
         self.logs_button = QPushButton(self.left_panel)
         self.logs_button.setObjectName(u"logs_button")
         self.logs_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.logs_button.setCheckable(True)
 
-        self.verticalLayout_2.addWidget(self.logs_button)
+        self.left_panel_layout.addWidget(self.logs_button)
 
         self.line = QFrame(self.left_panel)
         self.line.setObjectName(u"line")
         self.line.setFrameShape(QFrame.Shape.HLine)
         self.line.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.verticalLayout_2.addWidget(self.line)
+        self.left_panel_layout.addWidget(self.line)
 
         self.settings_button = QPushButton(self.left_panel)
         self.settings_button.setObjectName(u"settings_button")
         self.settings_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.settings_button.setCheckable(True)
 
-        self.verticalLayout_2.addWidget(self.settings_button)
+        self.left_panel_layout.addWidget(self.settings_button)
 
         self.about_button = QPushButton(self.left_panel)
         self.about_button.setObjectName(u"about_button")
@@ -225,11 +224,11 @@ class Ui_MainWindow(object):
         self.about_button.setChecked(False)
         self.about_button.setAutoRepeat(False)
 
-        self.verticalLayout_2.addWidget(self.about_button)
+        self.left_panel_layout.addWidget(self.about_button)
 
         self.bottom_spacer = QSpacerItem(20, 200, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
-        self.verticalLayout_2.addItem(self.bottom_spacer)
+        self.left_panel_layout.addItem(self.bottom_spacer)
 
 
         self.central_content_layout.addWidget(self.left_panel)
@@ -264,8 +263,8 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {\n"
 "    background-color: #0f111a;\n"
 "}")
-        self.verticalLayout_7 = QVBoxLayout(self.dashboard_page)
-        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.dashboard_page_layout = QVBoxLayout(self.dashboard_page)
+        self.dashboard_page_layout.setObjectName(u"dashboard_page_layout")
         self.dashboard_layout = QVBoxLayout()
         self.dashboard_layout.setSpacing(6)
         self.dashboard_layout.setObjectName(u"dashboard_layout")
@@ -306,42 +305,42 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "")
-        self.horizontalLayout_3 = QHBoxLayout(self.cards)
-        self.horizontalLayout_3.setSpacing(6)
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.cards_layout = QHBoxLayout(self.cards)
+        self.cards_layout.setSpacing(6)
+        self.cards_layout.setObjectName(u"cards_layout")
+        self.cards_layout.setContentsMargins(0, 0, 0, 0)
         self.card_agents = QWidget(self.cards)
         self.card_agents.setObjectName(u"card_agents")
         self.card_agents.setMaximumSize(QSize(16777215, 65))
         self.card_agents.setStyleSheet(u"")
-        self.verticalLayout_12 = QVBoxLayout(self.card_agents)
-        self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.card_agents_layout = QVBoxLayout(self.card_agents)
+        self.card_agents_layout.setObjectName(u"card_agents_layout")
         self.agent_label = QLabel(self.card_agents)
         self.agent_label.setObjectName(u"agent_label")
         self.agent_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_12.addWidget(self.agent_label)
+        self.card_agents_layout.addWidget(self.agent_label)
 
         self.agents_count = QLabel(self.card_agents)
         self.agents_count.setObjectName(u"agents_count")
         self.agents_count.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_12.addWidget(self.agents_count)
+        self.card_agents_layout.addWidget(self.agents_count)
 
 
-        self.horizontalLayout_3.addWidget(self.card_agents)
+        self.cards_layout.addWidget(self.card_agents)
 
         self.card_online = QWidget(self.cards)
         self.card_online.setObjectName(u"card_online")
         self.card_online.setMaximumSize(QSize(16777215, 65))
         self.card_online.setStyleSheet(u"")
-        self.verticalLayout_13 = QVBoxLayout(self.card_online)
-        self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.card_online_layout = QVBoxLayout(self.card_online)
+        self.card_online_layout.setObjectName(u"card_online_layout")
         self.online_label = QLabel(self.card_online)
         self.online_label.setObjectName(u"online_label")
         self.online_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_13.addWidget(self.online_label)
+        self.card_online_layout.addWidget(self.online_label)
 
         self.online_count = QLabel(self.card_online)
         self.online_count.setObjectName(u"online_count")
@@ -351,22 +350,22 @@ class Ui_MainWindow(object):
 "}")
         self.online_count.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_13.addWidget(self.online_count)
+        self.card_online_layout.addWidget(self.online_count)
 
 
-        self.horizontalLayout_3.addWidget(self.card_online)
+        self.cards_layout.addWidget(self.card_online)
 
         self.card_offline = QWidget(self.cards)
         self.card_offline.setObjectName(u"card_offline")
         self.card_offline.setMaximumSize(QSize(16777215, 65))
         self.card_offline.setStyleSheet(u"")
-        self.verticalLayout_10 = QVBoxLayout(self.card_offline)
-        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.card_offline_layout = QVBoxLayout(self.card_offline)
+        self.card_offline_layout.setObjectName(u"card_offline_layout")
         self.offline_label = QLabel(self.card_offline)
         self.offline_label.setObjectName(u"offline_label")
         self.offline_label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_10.addWidget(self.offline_label)
+        self.card_offline_layout.addWidget(self.offline_label)
 
         self.offline_count = QLabel(self.card_offline)
         self.offline_count.setObjectName(u"offline_count")
@@ -376,10 +375,10 @@ class Ui_MainWindow(object):
 "}")
         self.offline_count.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_10.addWidget(self.offline_count)
+        self.card_offline_layout.addWidget(self.offline_count)
 
 
-        self.horizontalLayout_3.addWidget(self.card_offline)
+        self.cards_layout.addWidget(self.card_offline)
 
 
         self.dashboard_layout.addWidget(self.cards)
@@ -465,7 +464,7 @@ class Ui_MainWindow(object):
         self.dashboard_layout.addItem(self.bottom_spacer_2)
 
 
-        self.verticalLayout_7.addLayout(self.dashboard_layout)
+        self.dashboard_page_layout.addLayout(self.dashboard_layout)
 
         self.content_stack.addWidget(self.dashboard_page)
         self.agents_page = QWidget()
@@ -509,9 +508,9 @@ class Ui_MainWindow(object):
 "    border: 1px solid #38bdf8; \n"
 "    background-color: #1c202b; \n"
 "}")
-        self.verticalLayout_8 = QVBoxLayout(self.agents_page)
-        self.verticalLayout_8.setSpacing(6)
-        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.agents_page_layout = QVBoxLayout(self.agents_page)
+        self.agents_page_layout.setSpacing(6)
+        self.agents_page_layout.setObjectName(u"agents_page_layout")
         self.agents_main_layout = QVBoxLayout()
         self.agents_main_layout.setSpacing(0)
         self.agents_main_layout.setObjectName(u"agents_main_layout")
@@ -628,19 +627,19 @@ class Ui_MainWindow(object):
         self.agent_list.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.agent_scroll = QWidget()
         self.agent_scroll.setObjectName(u"agent_scroll")
-        self.agent_scroll.setGeometry(QRect(0, 0, 971, 300))
+        self.agent_scroll.setGeometry(QRect(0, 0, 898, 300))
         self.agent_scroll.setMaximumSize(QSize(16777215, 1000000))
         self.agent_scroll.setStyleSheet(u"")
-        self.verticalLayout_4 = QVBoxLayout(self.agent_scroll)
-        self.verticalLayout_4.setSpacing(12)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.verticalLayout_4.setContentsMargins(10, 16, 16, 16)
+        self.agent_scroll_layout = QVBoxLayout(self.agent_scroll)
+        self.agent_scroll_layout.setSpacing(12)
+        self.agent_scroll_layout.setObjectName(u"agent_scroll_layout")
+        self.agent_scroll_layout.setContentsMargins(10, 16, 16, 16)
         self.agent_list.setWidget(self.agent_scroll)
 
         self.agents_main_layout.addWidget(self.agent_list)
 
 
-        self.verticalLayout_8.addLayout(self.agents_main_layout)
+        self.agents_page_layout.addLayout(self.agents_main_layout)
 
         self.content_stack.addWidget(self.agents_page)
         self.agent_detail_page = QWidget()
@@ -677,10 +676,10 @@ class Ui_MainWindow(object):
         self.detail_top_widget.setMinimumSize(QSize(0, 0))
         self.detail_top_widget.setMaximumSize(QSize(16777215, 300))
         self.detail_top_widget.setStyleSheet(u"")
-        self.verticalLayout_17 = QVBoxLayout(self.detail_top_widget)
-        self.verticalLayout_17.setSpacing(10)
-        self.verticalLayout_17.setObjectName(u"verticalLayout_17")
-        self.verticalLayout_17.setContentsMargins(0, 0, 0, 0)
+        self.detail_top_widget_layout = QVBoxLayout(self.detail_top_widget)
+        self.detail_top_widget_layout.setSpacing(10)
+        self.detail_top_widget_layout.setObjectName(u"detail_top_widget_layout")
+        self.detail_top_widget_layout.setContentsMargins(0, 0, 0, 0)
         self.detail_top_layout = QHBoxLayout()
         self.detail_top_layout.setObjectName(u"detail_top_layout")
         self.back_to_agents_button = QPushButton(self.detail_top_widget)
@@ -717,7 +716,7 @@ class Ui_MainWindow(object):
         self.detail_top_layout.addWidget(self.detail_top_agent_status_label)
 
 
-        self.verticalLayout_17.addLayout(self.detail_top_layout)
+        self.detail_top_widget_layout.addLayout(self.detail_top_layout)
 
         self.detail_top_navigation_layout = QHBoxLayout()
         self.detail_top_navigation_layout.setSpacing(2)
@@ -754,7 +753,7 @@ class Ui_MainWindow(object):
         self.detail_top_navigation_layout.addWidget(self.commands_nav_button)
 
 
-        self.verticalLayout_17.addLayout(self.detail_top_navigation_layout)
+        self.detail_top_widget_layout.addLayout(self.detail_top_navigation_layout)
 
 
         self.agent_detail_content_layout.addWidget(self.detail_top_widget)
@@ -770,8 +769,8 @@ class Ui_MainWindow(object):
         self.agent_detail_stacked_content.setObjectName(u"agent_detail_stacked_content")
         self.overview_detail_page = QWidget()
         self.overview_detail_page.setObjectName(u"overview_detail_page")
-        self.verticalLayout_25 = QVBoxLayout(self.overview_detail_page)
-        self.verticalLayout_25.setObjectName(u"verticalLayout_25")
+        self.overview_detail_page_layout = QVBoxLayout(self.overview_detail_page)
+        self.overview_detail_page_layout.setObjectName(u"overview_detail_page_layout")
         self.overview_detail_scroll = QScrollArea(self.overview_detail_page)
         self.overview_detail_scroll.setObjectName(u"overview_detail_scroll")
         self.overview_detail_scroll.setStyleSheet(u"QScrollArea {\n"
@@ -821,7 +820,7 @@ class Ui_MainWindow(object):
         self.overview_detail_scroll.setWidgetResizable(True)
         self.agent_detail_information = QWidget()
         self.agent_detail_information.setObjectName(u"agent_detail_information")
-        self.agent_detail_information.setGeometry(QRect(0, 0, 955, 700))
+        self.agent_detail_information.setGeometry(QRect(0, 0, 882, 700))
         self.agent_detail_information.setMinimumSize(QSize(0, 700))
         self.agent_detail_information_layout = QVBoxLayout(self.agent_detail_information)
         self.agent_detail_information_layout.setSpacing(5)
@@ -1170,13 +1169,13 @@ class Ui_MainWindow(object):
 
         self.overview_detail_scroll.setWidget(self.agent_detail_information)
 
-        self.verticalLayout_25.addWidget(self.overview_detail_scroll)
+        self.overview_detail_page_layout.addWidget(self.overview_detail_scroll)
 
         self.agent_detail_stacked_content.addWidget(self.overview_detail_page)
         self.perfomance_detail_page = QWidget()
         self.perfomance_detail_page.setObjectName(u"perfomance_detail_page")
-        self.verticalLayout_5 = QVBoxLayout(self.perfomance_detail_page)
-        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.perfomance_detail_page_layout = QVBoxLayout(self.perfomance_detail_page)
+        self.perfomance_detail_page_layout.setObjectName(u"perfomance_detail_page_layout")
         self.perfomance_detail_scroll = QScrollArea(self.perfomance_detail_page)
         self.perfomance_detail_scroll.setObjectName(u"perfomance_detail_scroll")
         self.perfomance_detail_scroll.setStyleSheet(u"QScrollArea {\n"
@@ -1226,7 +1225,7 @@ class Ui_MainWindow(object):
         self.perfomance_detail_scroll.setWidgetResizable(True)
         self.agent_perfomance_information = QWidget()
         self.agent_perfomance_information.setObjectName(u"agent_perfomance_information")
-        self.agent_perfomance_information.setGeometry(QRect(0, 0, 721, 475))
+        self.agent_perfomance_information.setGeometry(QRect(0, 0, 882, 475))
         self.verticalLayout_26 = QVBoxLayout(self.agent_perfomance_information)
         self.verticalLayout_26.setSpacing(0)
         self.verticalLayout_26.setObjectName(u"verticalLayout_26")
@@ -1294,25 +1293,69 @@ class Ui_MainWindow(object):
 
         self.perfomance_detail_scroll.setWidget(self.agent_perfomance_information)
 
-        self.verticalLayout_5.addWidget(self.perfomance_detail_scroll)
+        self.perfomance_detail_page_layout.addWidget(self.perfomance_detail_scroll)
 
         self.agent_detail_stacked_content.addWidget(self.perfomance_detail_page)
         self.hardware_detail_page = QWidget()
         self.hardware_detail_page.setObjectName(u"hardware_detail_page")
-        self.verticalLayout_6 = QVBoxLayout(self.hardware_detail_page)
-        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.scrollArea = QScrollArea(self.hardware_detail_page)
-        self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollAreaWidgetContents = QWidget()
-        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 951, 940))
-        self.scrollAreaWidgetContents.setMinimumSize(QSize(0, 0))
-        self.verticalLayout_27 = QVBoxLayout(self.scrollAreaWidgetContents)
-        self.verticalLayout_27.setSpacing(0)
-        self.verticalLayout_27.setObjectName(u"verticalLayout_27")
-        self.verticalLayout_27.setContentsMargins(0, 0, 0, 0)
-        self.hardware_label = QLabel(self.scrollAreaWidgetContents)
+        self.hardware_detail_page_layout = QVBoxLayout(self.hardware_detail_page)
+        self.hardware_detail_page_layout.setObjectName(u"hardware_detail_page_layout")
+        self.hardware_info_scroll = QScrollArea(self.hardware_detail_page)
+        self.hardware_info_scroll.setObjectName(u"hardware_info_scroll")
+        self.hardware_info_scroll.setStyleSheet(u"QScrollArea {\n"
+"    border: none;\n"
+"\n"
+"\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"QWidget#scrollAreaWidgetContents {\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"QScrollBar:vertical {\n"
+"    border: none;\n"
+"    background: #11141a;\n"
+"    width: 12px;\n"
+"    margin: 0px 0px 0px 5px;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: #242936;\n"
+"    min-height: 20px;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: #38bdf8;\n"
+"}\n"
+"\n"
+"\n"
+"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    height: 0px;\n"
+"}\n"
+"QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
+"    background: none;\n"
+"}\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"    background: none;\n"
+"}\n"
+"")
+        self.hardware_info_scroll.setWidgetResizable(True)
+        self.hardware_info_scroll_content = QWidget()
+        self.hardware_info_scroll_content.setObjectName(u"hardware_info_scroll_content")
+        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 882, 940))
+        self.hardware_info_scroll_content.setMinimumSize(QSize(0, 0))
+        self.hardware_info_scroll_content_layout = QVBoxLayout(self.hardware_info_scroll_content)
+        self.hardware_info_scroll_content_layout.setSpacing(0)
+        self.hardware_info_scroll_content_layout.setObjectName(u"hardware_info_scroll_content_layout")
+        self.hardware_info_scroll_content_layout.setContentsMargins(0, 0, 0, 0)
+        self.hardware_label = QLabel(self.hardware_info_scroll_content)
         self.hardware_label.setObjectName(u"hardware_label")
         self.hardware_label.setMinimumSize(QSize(0, 0))
         self.hardware_label.setMaximumSize(QSize(16777215, 30))
@@ -1321,15 +1364,15 @@ class Ui_MainWindow(object):
 "}")
         self.hardware_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
-        self.verticalLayout_27.addWidget(self.hardware_label)
+        self.hardware_info_scroll_content_layout.addWidget(self.hardware_label)
 
-        self.cpu_info_widget = QWidget(self.scrollAreaWidgetContents)
+        self.cpu_info_widget = QWidget(self.hardware_info_scroll_content)
         self.cpu_info_widget.setObjectName(u"cpu_info_widget")
         self.cpu_info_widget.setMinimumSize(QSize(0, 250))
         self.cpu_info_widget.setMaximumSize(QSize(16777215, 350))
-        self.system_status_layout_2 = QVBoxLayout(self.cpu_info_widget)
-        self.system_status_layout_2.setObjectName(u"system_status_layout_2")
-        self.system_status_layout_2.setContentsMargins(5, 0, 0, 0)
+        self.cpu_info_widget_layout = QVBoxLayout(self.cpu_info_widget)
+        self.cpu_info_widget_layout.setObjectName(u"cpu_info_widget_layout")
+        self.cpu_info_widget_layout.setContentsMargins(5, 0, 0, 0)
         self.cpu_info_label = QLabel(self.cpu_info_widget)
         self.cpu_info_label.setObjectName(u"cpu_info_label")
         self.cpu_info_label.setMaximumSize(QSize(16777215, 40))
@@ -1337,7 +1380,7 @@ class Ui_MainWindow(object):
 "	font: 350 12pt;\n"
 "}")
 
-        self.system_status_layout_2.addWidget(self.cpu_info_label)
+        self.cpu_info_widget_layout.addWidget(self.cpu_info_label)
 
         self.cpu_info_box_widget = QWidget(self.cpu_info_widget)
         self.cpu_info_box_widget.setObjectName(u"cpu_info_box_widget")
@@ -1352,10 +1395,10 @@ class Ui_MainWindow(object):
 "#cpu_info_box_widget QWidget {\n"
 "	background-color: transparent;\n"
 "}")
-        self.horizontalLayout_5 = QHBoxLayout(self.cpu_info_box_widget)
-        self.horizontalLayout_5.setSpacing(0)
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalLayout_5.setContentsMargins(5, 0, 0, 0)
+        self.cpu_info_box_widget_layout = QHBoxLayout(self.cpu_info_box_widget)
+        self.cpu_info_box_widget_layout.setSpacing(0)
+        self.cpu_info_box_widget_layout.setObjectName(u"cpu_info_box_widget_layout")
+        self.cpu_info_box_widget_layout.setContentsMargins(5, 0, 0, 0)
         self.cpu_info_box_layout = QHBoxLayout()
         self.cpu_info_box_layout.setObjectName(u"cpu_info_box_layout")
         self.cpu_info_rows_widget = QWidget(self.cpu_info_box_widget)
@@ -1364,44 +1407,44 @@ class Ui_MainWindow(object):
 "	font: 200 12pt;\n"
 "	margin-left: 20px;\n"
 "}")
-        self.verticalLayout_16 = QVBoxLayout(self.cpu_info_rows_widget)
-        self.verticalLayout_16.setSpacing(0)
-        self.verticalLayout_16.setObjectName(u"verticalLayout_16")
-        self.verticalLayout_16.setContentsMargins(10, 0, 0, 0)
+        self.cpu_info_rows_widget_layout = QVBoxLayout(self.cpu_info_rows_widget)
+        self.cpu_info_rows_widget_layout.setSpacing(0)
+        self.cpu_info_rows_widget_layout.setObjectName(u"cpu_info_rows_widget_layout")
+        self.cpu_info_rows_widget_layout.setContentsMargins(10, 0, 0, 0)
         self.model_row_label = QLabel(self.cpu_info_rows_widget)
         self.model_row_label.setObjectName(u"model_row_label")
         self.model_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.model_row_label.setMargin(0)
 
-        self.verticalLayout_16.addWidget(self.model_row_label)
+        self.cpu_info_rows_widget_layout.addWidget(self.model_row_label)
 
         self.cores_row_label = QLabel(self.cpu_info_rows_widget)
         self.cores_row_label.setObjectName(u"cores_row_label")
         self.cores_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.cores_row_label.setMargin(0)
 
-        self.verticalLayout_16.addWidget(self.cores_row_label)
+        self.cpu_info_rows_widget_layout.addWidget(self.cores_row_label)
 
         self.threads_row_label = QLabel(self.cpu_info_rows_widget)
         self.threads_row_label.setObjectName(u"threads_row_label")
         self.threads_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.threads_row_label.setMargin(0)
 
-        self.verticalLayout_16.addWidget(self.threads_row_label)
+        self.cpu_info_rows_widget_layout.addWidget(self.threads_row_label)
 
         self.frequency_row_label = QLabel(self.cpu_info_rows_widget)
         self.frequency_row_label.setObjectName(u"frequency_row_label")
         self.frequency_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.frequency_row_label.setMargin(0)
 
-        self.verticalLayout_16.addWidget(self.frequency_row_label)
+        self.cpu_info_rows_widget_layout.addWidget(self.frequency_row_label)
 
         self.architecture_row_label = QLabel(self.cpu_info_rows_widget)
         self.architecture_row_label.setObjectName(u"architecture_row_label")
         self.architecture_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.architecture_row_label.setMargin(0)
 
-        self.verticalLayout_16.addWidget(self.architecture_row_label)
+        self.cpu_info_rows_widget_layout.addWidget(self.architecture_row_label)
 
 
         self.cpu_info_box_layout.addWidget(self.cpu_info_rows_widget)
@@ -1411,54 +1454,54 @@ class Ui_MainWindow(object):
         self.cpu_info_values_widget.setStyleSheet(u"QLabel {\n"
 "	font: 450 12pt;\n"
 "}")
-        self.verticalLayout_24 = QVBoxLayout(self.cpu_info_values_widget)
-        self.verticalLayout_24.setSpacing(0)
-        self.verticalLayout_24.setObjectName(u"verticalLayout_24")
-        self.verticalLayout_24.setContentsMargins(0, 0, 0, 0)
+        self.cpu_info_values_widget_layout = QVBoxLayout(self.cpu_info_values_widget)
+        self.cpu_info_values_widget_layout.setSpacing(0)
+        self.cpu_info_values_widget_layout.setObjectName(u"cpu_info_values_widget_layout")
+        self.cpu_info_values_widget_layout.setContentsMargins(0, 0, 0, 0)
         self.model_value_label = QLabel(self.cpu_info_values_widget)
         self.model_value_label.setObjectName(u"model_value_label")
 
-        self.verticalLayout_24.addWidget(self.model_value_label)
+        self.cpu_info_values_widget_layout.addWidget(self.model_value_label)
 
         self.cores_value_label = QLabel(self.cpu_info_values_widget)
         self.cores_value_label.setObjectName(u"cores_value_label")
 
-        self.verticalLayout_24.addWidget(self.cores_value_label)
+        self.cpu_info_values_widget_layout.addWidget(self.cores_value_label)
 
         self.threads_value_label = QLabel(self.cpu_info_values_widget)
         self.threads_value_label.setObjectName(u"threads_value_label")
 
-        self.verticalLayout_24.addWidget(self.threads_value_label)
+        self.cpu_info_values_widget_layout.addWidget(self.threads_value_label)
 
         self.frequency_value_label = QLabel(self.cpu_info_values_widget)
         self.frequency_value_label.setObjectName(u"frequency_value_label")
 
-        self.verticalLayout_24.addWidget(self.frequency_value_label)
+        self.cpu_info_values_widget_layout.addWidget(self.frequency_value_label)
 
         self.architecture_value_label = QLabel(self.cpu_info_values_widget)
         self.architecture_value_label.setObjectName(u"architecture_value_label")
 
-        self.verticalLayout_24.addWidget(self.architecture_value_label)
+        self.cpu_info_values_widget_layout.addWidget(self.architecture_value_label)
 
 
         self.cpu_info_box_layout.addWidget(self.cpu_info_values_widget)
 
 
-        self.horizontalLayout_5.addLayout(self.cpu_info_box_layout)
+        self.cpu_info_box_widget_layout.addLayout(self.cpu_info_box_layout)
 
 
-        self.system_status_layout_2.addWidget(self.cpu_info_box_widget)
+        self.cpu_info_widget_layout.addWidget(self.cpu_info_box_widget)
 
 
-        self.verticalLayout_27.addWidget(self.cpu_info_widget)
+        self.hardware_info_scroll_content_layout.addWidget(self.cpu_info_widget)
 
-        self.memory_info_widget = QWidget(self.scrollAreaWidgetContents)
+        self.memory_info_widget = QWidget(self.hardware_info_scroll_content)
         self.memory_info_widget.setObjectName(u"memory_info_widget")
         self.memory_info_widget.setMinimumSize(QSize(0, 180))
         self.memory_info_widget.setMaximumSize(QSize(16777215, 350))
-        self.system_status_layout_3 = QVBoxLayout(self.memory_info_widget)
-        self.system_status_layout_3.setObjectName(u"system_status_layout_3")
-        self.system_status_layout_3.setContentsMargins(5, 0, 0, 0)
+        self.memory_info_widget_layout = QVBoxLayout(self.memory_info_widget)
+        self.memory_info_widget_layout.setObjectName(u"memory_info_widget_layout")
+        self.memory_info_widget_layout.setContentsMargins(5, 0, 0, 0)
         self.memory_info_label = QLabel(self.memory_info_widget)
         self.memory_info_label.setObjectName(u"memory_info_label")
         self.memory_info_label.setMaximumSize(QSize(16777215, 40))
@@ -1466,427 +1509,427 @@ class Ui_MainWindow(object):
 "	font: 350 12pt;\n"
 "}")
 
-        self.system_status_layout_3.addWidget(self.memory_info_label)
+        self.memory_info_widget_layout.addWidget(self.memory_info_label)
 
         self.memory_info_box_widget = QWidget(self.memory_info_widget)
         self.memory_info_box_widget.setObjectName(u"memory_info_box_widget")
         self.memory_info_box_widget.setMaximumSize(QSize(500, 100))
-        self.memory_info_box_widget.setStyleSheet(u"#cpu_info_box_widget {\n"
+        self.memory_info_box_widget.setStyleSheet(u"#memory_info_box_widget {\n"
 "    background-color: #161b22;\n"
 "	border: 1px solid #30363d;\n"
 "	margin-left: 5px;\n"
 "	border-radius: 2px;\n"
 "}\n"
 "\n"
-"#cpu_info_box_widget QWidget {\n"
+"#memory_info_box_widget QWidget {\n"
 "	background-color: transparent;\n"
 "}")
-        self.horizontalLayout_7 = QHBoxLayout(self.memory_info_box_widget)
-        self.horizontalLayout_7.setSpacing(0)
-        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.horizontalLayout_7.setContentsMargins(5, 0, 0, 0)
+        self.memory_info_box_widget_layout = QHBoxLayout(self.memory_info_box_widget)
+        self.memory_info_box_widget_layout.setSpacing(0)
+        self.memory_info_box_widget_layout.setObjectName(u"memory_info_box_widget_layout")
+        self.memory_info_box_widget_layout.setContentsMargins(5, 0, 0, 0)
         self.memory_info_box_layout = QHBoxLayout()
         self.memory_info_box_layout.setObjectName(u"memory_info_box_layout")
-        self.cpu_info_rows_widget_2 = QWidget(self.memory_info_box_widget)
-        self.cpu_info_rows_widget_2.setObjectName(u"cpu_info_rows_widget_2")
-        self.cpu_info_rows_widget_2.setStyleSheet(u"QLabel {\n"
+        self.memory_info_columns_widget = QWidget(self.memory_info_box_widget)
+        self.memory_info_columns_widget.setObjectName(u"memory_info_columns_widget")
+        self.memory_info_columns_widget.setStyleSheet(u"QLabel {\n"
 "	font: 200 12pt;\n"
 "	margin-left: 20px;\n"
 "}")
-        self.verticalLayout_28 = QVBoxLayout(self.cpu_info_rows_widget_2)
-        self.verticalLayout_28.setSpacing(0)
-        self.verticalLayout_28.setObjectName(u"verticalLayout_28")
-        self.verticalLayout_28.setContentsMargins(10, 0, 0, 0)
-        self.model_row_label_2 = QLabel(self.cpu_info_rows_widget_2)
-        self.model_row_label_2.setObjectName(u"model_row_label_2")
-        self.model_row_label_2.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.model_row_label_2.setMargin(0)
+        self.memory_info_columns_widget_layout = QVBoxLayout(self.memory_info_columns_widget)
+        self.memory_info_columns_widget_layout.setSpacing(0)
+        self.memory_info_columns_widget_layout.setObjectName(u"memory_info_columns_widget_layout")
+        self.memory_info_columns_widget_layout.setContentsMargins(10, 0, 0, 0)
+        self.memory_total_row_label = QLabel(self.memory_info_columns_widget)
+        self.memory_total_row_label.setObjectName(u"memory_total_row_label")
+        self.memory_total_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.memory_total_row_label.setMargin(0)
 
-        self.verticalLayout_28.addWidget(self.model_row_label_2)
+        self.memory_info_columns_widget_layout.addWidget(self.memory_total_row_label)
 
-        self.cores_row_label_2 = QLabel(self.cpu_info_rows_widget_2)
-        self.cores_row_label_2.setObjectName(u"cores_row_label_2")
-        self.cores_row_label_2.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.cores_row_label_2.setMargin(0)
+        self.memory_type_row_label = QLabel(self.memory_info_columns_widget)
+        self.memory_type_row_label.setObjectName(u"memory_type_row_label")
+        self.memory_type_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.memory_type_row_label.setMargin(0)
 
-        self.verticalLayout_28.addWidget(self.cores_row_label_2)
+        self.memory_info_columns_widget_layout.addWidget(self.memory_type_row_label)
 
-        self.threads_row_label_2 = QLabel(self.cpu_info_rows_widget_2)
-        self.threads_row_label_2.setObjectName(u"threads_row_label_2")
-        self.threads_row_label_2.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.threads_row_label_2.setMargin(0)
+        self.memory_speed_row_label = QLabel(self.memory_info_columns_widget)
+        self.memory_speed_row_label.setObjectName(u"memory_speed_row_label")
+        self.memory_speed_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.memory_speed_row_label.setMargin(0)
 
-        self.verticalLayout_28.addWidget(self.threads_row_label_2)
+        self.memory_info_columns_widget_layout.addWidget(self.memory_speed_row_label)
 
 
-        self.memory_info_box_layout.addWidget(self.cpu_info_rows_widget_2)
+        self.memory_info_box_layout.addWidget(self.memory_info_columns_widget)
 
-        self.cpu_info_values_widget_2 = QWidget(self.memory_info_box_widget)
-        self.cpu_info_values_widget_2.setObjectName(u"cpu_info_values_widget_2")
-        self.cpu_info_values_widget_2.setStyleSheet(u"QLabel {\n"
+        self.memory_info_values_widget = QWidget(self.memory_info_box_widget)
+        self.memory_info_values_widget.setObjectName(u"memory_info_values_widget")
+        self.memory_info_values_widget.setStyleSheet(u"QLabel {\n"
 "	font: 450 12pt;\n"
 "}")
-        self.verticalLayout_29 = QVBoxLayout(self.cpu_info_values_widget_2)
-        self.verticalLayout_29.setSpacing(0)
-        self.verticalLayout_29.setObjectName(u"verticalLayout_29")
-        self.verticalLayout_29.setContentsMargins(0, 0, 0, 0)
-        self.model_value_label_2 = QLabel(self.cpu_info_values_widget_2)
-        self.model_value_label_2.setObjectName(u"model_value_label_2")
+        self.memory_info_values_widget_layout = QVBoxLayout(self.memory_info_values_widget)
+        self.memory_info_values_widget_layout.setSpacing(0)
+        self.memory_info_values_widget_layout.setObjectName(u"memory_info_values_widget_layout")
+        self.memory_info_values_widget_layout.setContentsMargins(0, 0, 0, 0)
+        self.memory_total_value_label = QLabel(self.memory_info_values_widget)
+        self.memory_total_value_label.setObjectName(u"memory_total_value_label")
 
-        self.verticalLayout_29.addWidget(self.model_value_label_2)
+        self.memory_info_values_widget_layout.addWidget(self.memory_total_value_label)
 
-        self.cores_value_label_2 = QLabel(self.cpu_info_values_widget_2)
-        self.cores_value_label_2.setObjectName(u"cores_value_label_2")
+        self.memory_type_value_label = QLabel(self.memory_info_values_widget)
+        self.memory_type_value_label.setObjectName(u"memory_type_value_label")
 
-        self.verticalLayout_29.addWidget(self.cores_value_label_2)
+        self.memory_info_values_widget_layout.addWidget(self.memory_type_value_label)
 
-        self.threads_value_label_2 = QLabel(self.cpu_info_values_widget_2)
-        self.threads_value_label_2.setObjectName(u"threads_value_label_2")
+        self.memory_speed_value_label = QLabel(self.memory_info_values_widget)
+        self.memory_speed_value_label.setObjectName(u"memory_speed_value_label")
 
-        self.verticalLayout_29.addWidget(self.threads_value_label_2)
-
-
-        self.memory_info_box_layout.addWidget(self.cpu_info_values_widget_2)
+        self.memory_info_values_widget_layout.addWidget(self.memory_speed_value_label)
 
 
-        self.horizontalLayout_7.addLayout(self.memory_info_box_layout)
+        self.memory_info_box_layout.addWidget(self.memory_info_values_widget)
 
 
-        self.system_status_layout_3.addWidget(self.memory_info_box_widget)
+        self.memory_info_box_widget_layout.addLayout(self.memory_info_box_layout)
 
 
-        self.verticalLayout_27.addWidget(self.memory_info_widget)
+        self.memory_info_widget_layout.addWidget(self.memory_info_box_widget)
 
-        self.cpu_info_widget_3 = QWidget(self.scrollAreaWidgetContents)
-        self.cpu_info_widget_3.setObjectName(u"cpu_info_widget_3")
-        self.cpu_info_widget_3.setMinimumSize(QSize(0, 150))
-        self.cpu_info_widget_3.setMaximumSize(QSize(16777215, 350))
-        self.system_status_layout_4 = QVBoxLayout(self.cpu_info_widget_3)
-        self.system_status_layout_4.setObjectName(u"system_status_layout_4")
-        self.system_status_layout_4.setContentsMargins(5, 0, 0, 0)
-        self.cpu_info_label_5 = QLabel(self.cpu_info_widget_3)
-        self.cpu_info_label_5.setObjectName(u"cpu_info_label_5")
-        self.cpu_info_label_5.setMaximumSize(QSize(16777215, 40))
-        self.cpu_info_label_5.setStyleSheet(u"QLabel {\n"
+
+        self.hardware_info_scroll_content_layout.addWidget(self.memory_info_widget)
+
+        self.gpu_info_widget = QWidget(self.hardware_info_scroll_content)
+        self.gpu_info_widget.setObjectName(u"gpu_info_widget")
+        self.gpu_info_widget.setMinimumSize(QSize(0, 150))
+        self.gpu_info_widget.setMaximumSize(QSize(16777215, 350))
+        self.gpu_info_widget_layout = QVBoxLayout(self.gpu_info_widget)
+        self.gpu_info_widget_layout.setObjectName(u"gpu_info_widget_layout")
+        self.gpu_info_widget_layout.setContentsMargins(5, 0, 0, 0)
+        self.gpu_info_label = QLabel(self.gpu_info_widget)
+        self.gpu_info_label.setObjectName(u"gpu_info_label")
+        self.gpu_info_label.setMaximumSize(QSize(16777215, 40))
+        self.gpu_info_label.setStyleSheet(u"QLabel {\n"
 "	font: 350 12pt;\n"
 "}")
 
-        self.system_status_layout_4.addWidget(self.cpu_info_label_5)
+        self.gpu_info_widget_layout.addWidget(self.gpu_info_label)
 
-        self.cpu_info_box_widget_3 = QWidget(self.cpu_info_widget_3)
-        self.cpu_info_box_widget_3.setObjectName(u"cpu_info_box_widget_3")
-        self.cpu_info_box_widget_3.setMaximumSize(QSize(500, 100))
-        self.cpu_info_box_widget_3.setStyleSheet(u"#cpu_info_box_widget {\n"
+        self.gpu_info_box_widget = QWidget(self.gpu_info_widget)
+        self.gpu_info_box_widget.setObjectName(u"gpu_info_box_widget")
+        self.gpu_info_box_widget.setMaximumSize(QSize(500, 100))
+        self.gpu_info_box_widget.setStyleSheet(u"#gpu_info_box_widget {\n"
 "    background-color: #161b22;\n"
 "	border: 1px solid #30363d;\n"
 "	margin-left: 5px;\n"
 "	border-radius: 2px;\n"
 "}\n"
 "\n"
-"#cpu_info_box_widget QWidget {\n"
+"#gpu_info_box_widget QWidget {\n"
 "	background-color: transparent;\n"
 "}")
-        self.horizontalLayout_8 = QHBoxLayout(self.cpu_info_box_widget_3)
-        self.horizontalLayout_8.setSpacing(0)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalLayout_8.setContentsMargins(5, 0, 0, 0)
-        self.cpu_info_box_layout_3 = QHBoxLayout()
-        self.cpu_info_box_layout_3.setObjectName(u"cpu_info_box_layout_3")
-        self.cpu_info_rows_widget_3 = QWidget(self.cpu_info_box_widget_3)
-        self.cpu_info_rows_widget_3.setObjectName(u"cpu_info_rows_widget_3")
-        self.cpu_info_rows_widget_3.setStyleSheet(u"QLabel {\n"
+        self.gpu_info_box_widget_layout = QHBoxLayout(self.gpu_info_box_widget)
+        self.gpu_info_box_widget_layout.setSpacing(0)
+        self.gpu_info_box_widget_layout.setObjectName(u"gpu_info_box_widget_layout")
+        self.gpu_info_box_widget_layout.setContentsMargins(5, 0, 0, 0)
+        self.gpu_info_box_layout = QHBoxLayout()
+        self.gpu_info_box_layout.setObjectName(u"gpu_info_box_layout")
+        self.gpu_info_columns_widget = QWidget(self.gpu_info_box_widget)
+        self.gpu_info_columns_widget.setObjectName(u"gpu_info_columns_widget")
+        self.gpu_info_columns_widget.setStyleSheet(u"QLabel {\n"
 "	font: 200 12pt;\n"
 "	margin-left: 20px;\n"
 "}")
-        self.verticalLayout_30 = QVBoxLayout(self.cpu_info_rows_widget_3)
-        self.verticalLayout_30.setSpacing(0)
-        self.verticalLayout_30.setObjectName(u"verticalLayout_30")
-        self.verticalLayout_30.setContentsMargins(10, 0, 0, 0)
-        self.model_row_label_3 = QLabel(self.cpu_info_rows_widget_3)
-        self.model_row_label_3.setObjectName(u"model_row_label_3")
-        self.model_row_label_3.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.model_row_label_3.setMargin(0)
+        self.gpu_info_columns_widget_layout = QVBoxLayout(self.gpu_info_columns_widget)
+        self.gpu_info_columns_widget_layout.setSpacing(0)
+        self.gpu_info_columns_widget_layout.setObjectName(u"gpu_info_columns_widget_layout")
+        self.gpu_info_columns_widget_layout.setContentsMargins(10, 0, 0, 0)
+        self.gpu_model_type_row_label = QLabel(self.gpu_info_columns_widget)
+        self.gpu_model_type_row_label.setObjectName(u"gpu_model_type_row_label")
+        self.gpu_model_type_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.gpu_model_type_row_label.setMargin(0)
 
-        self.verticalLayout_30.addWidget(self.model_row_label_3)
+        self.gpu_info_columns_widget_layout.addWidget(self.gpu_model_type_row_label)
 
-        self.cores_row_label_5 = QLabel(self.cpu_info_rows_widget_3)
-        self.cores_row_label_5.setObjectName(u"cores_row_label_5")
-        self.cores_row_label_5.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.cores_row_label_5.setMargin(0)
+        self.gpu_vram_row_label = QLabel(self.gpu_info_columns_widget)
+        self.gpu_vram_row_label.setObjectName(u"gpu_vram_row_label")
+        self.gpu_vram_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.gpu_vram_row_label.setMargin(0)
 
-        self.verticalLayout_30.addWidget(self.cores_row_label_5)
+        self.gpu_info_columns_widget_layout.addWidget(self.gpu_vram_row_label)
 
-        self.threads_row_label_3 = QLabel(self.cpu_info_rows_widget_3)
-        self.threads_row_label_3.setObjectName(u"threads_row_label_3")
-        self.threads_row_label_3.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.threads_row_label_3.setMargin(0)
+        self.gpu_memory_type_row_label = QLabel(self.gpu_info_columns_widget)
+        self.gpu_memory_type_row_label.setObjectName(u"gpu_memory_type_row_label")
+        self.gpu_memory_type_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.gpu_memory_type_row_label.setMargin(0)
 
-        self.verticalLayout_30.addWidget(self.threads_row_label_3)
+        self.gpu_info_columns_widget_layout.addWidget(self.gpu_memory_type_row_label)
 
 
-        self.cpu_info_box_layout_3.addWidget(self.cpu_info_rows_widget_3)
+        self.gpu_info_box_layout.addWidget(self.gpu_info_columns_widget)
 
-        self.cpu_info_values_widget_3 = QWidget(self.cpu_info_box_widget_3)
-        self.cpu_info_values_widget_3.setObjectName(u"cpu_info_values_widget_3")
-        self.cpu_info_values_widget_3.setStyleSheet(u"QLabel {\n"
+        self.gpu_info_values_widget = QWidget(self.gpu_info_box_widget)
+        self.gpu_info_values_widget.setObjectName(u"gpu_info_values_widget")
+        self.gpu_info_values_widget.setStyleSheet(u"QLabel {\n"
 "	font: 450 12pt;\n"
 "}")
-        self.verticalLayout_31 = QVBoxLayout(self.cpu_info_values_widget_3)
-        self.verticalLayout_31.setSpacing(0)
-        self.verticalLayout_31.setObjectName(u"verticalLayout_31")
-        self.verticalLayout_31.setContentsMargins(0, 0, 0, 0)
-        self.model_value_label_3 = QLabel(self.cpu_info_values_widget_3)
-        self.model_value_label_3.setObjectName(u"model_value_label_3")
+        self.gpu_info_values_widget_layout = QVBoxLayout(self.gpu_info_values_widget)
+        self.gpu_info_values_widget_layout.setSpacing(0)
+        self.gpu_info_values_widget_layout.setObjectName(u"gpu_info_values_widget_layout")
+        self.gpu_info_values_widget_layout.setContentsMargins(0, 0, 0, 0)
+        self.gpu_model_type_value_label = QLabel(self.gpu_info_values_widget)
+        self.gpu_model_type_value_label.setObjectName(u"gpu_model_type_value_label")
 
-        self.verticalLayout_31.addWidget(self.model_value_label_3)
+        self.gpu_info_values_widget_layout.addWidget(self.gpu_model_type_value_label)
 
-        self.cores_value_label_5 = QLabel(self.cpu_info_values_widget_3)
-        self.cores_value_label_5.setObjectName(u"cores_value_label_5")
+        self.gpu_vram_value_label = QLabel(self.gpu_info_values_widget)
+        self.gpu_vram_value_label.setObjectName(u"gpu_vram_value_label")
 
-        self.verticalLayout_31.addWidget(self.cores_value_label_5)
+        self.gpu_info_values_widget_layout.addWidget(self.gpu_vram_value_label)
 
-        self.threads_value_label_3 = QLabel(self.cpu_info_values_widget_3)
-        self.threads_value_label_3.setObjectName(u"threads_value_label_3")
+        self.gpu_memory_type_value_label = QLabel(self.gpu_info_values_widget)
+        self.gpu_memory_type_value_label.setObjectName(u"gpu_memory_type_value_label")
 
-        self.verticalLayout_31.addWidget(self.threads_value_label_3)
-
-
-        self.cpu_info_box_layout_3.addWidget(self.cpu_info_values_widget_3)
+        self.gpu_info_values_widget_layout.addWidget(self.gpu_memory_type_value_label)
 
 
-        self.horizontalLayout_8.addLayout(self.cpu_info_box_layout_3)
+        self.gpu_info_box_layout.addWidget(self.gpu_info_values_widget)
 
 
-        self.system_status_layout_4.addWidget(self.cpu_info_box_widget_3)
+        self.gpu_info_box_widget_layout.addLayout(self.gpu_info_box_layout)
 
 
-        self.verticalLayout_27.addWidget(self.cpu_info_widget_3)
+        self.gpu_info_widget_layout.addWidget(self.gpu_info_box_widget)
 
-        self.cpu_info_widget_4 = QWidget(self.scrollAreaWidgetContents)
-        self.cpu_info_widget_4.setObjectName(u"cpu_info_widget_4")
-        self.cpu_info_widget_4.setMinimumSize(QSize(0, 180))
-        self.cpu_info_widget_4.setMaximumSize(QSize(16777215, 350))
-        self.system_status_layout_9 = QVBoxLayout(self.cpu_info_widget_4)
-        self.system_status_layout_9.setObjectName(u"system_status_layout_9")
-        self.system_status_layout_9.setContentsMargins(5, 0, 0, 0)
-        self.cpu_info_label_6 = QLabel(self.cpu_info_widget_4)
-        self.cpu_info_label_6.setObjectName(u"cpu_info_label_6")
-        self.cpu_info_label_6.setMaximumSize(QSize(16777215, 40))
-        self.cpu_info_label_6.setStyleSheet(u"QLabel {\n"
+
+        self.hardware_info_scroll_content_layout.addWidget(self.gpu_info_widget)
+
+        self.motherboard_info_widget = QWidget(self.hardware_info_scroll_content)
+        self.motherboard_info_widget.setObjectName(u"motherboard_info_widget")
+        self.motherboard_info_widget.setMinimumSize(QSize(0, 180))
+        self.motherboard_info_widget.setMaximumSize(QSize(16777215, 350))
+        self.motherboard_info_widget_layout = QVBoxLayout(self.motherboard_info_widget)
+        self.motherboard_info_widget_layout.setObjectName(u"motherboard_info_widget_layout")
+        self.motherboard_info_widget_layout.setContentsMargins(5, 0, 0, 0)
+        self.motherboard_info_label = QLabel(self.motherboard_info_widget)
+        self.motherboard_info_label.setObjectName(u"motherboard_info_label")
+        self.motherboard_info_label.setMaximumSize(QSize(16777215, 40))
+        self.motherboard_info_label.setStyleSheet(u"QLabel {\n"
 "	font: 350 12pt;\n"
 "}")
 
-        self.system_status_layout_9.addWidget(self.cpu_info_label_6)
+        self.motherboard_info_widget_layout.addWidget(self.motherboard_info_label)
 
-        self.cpu_info_box_widget_8 = QWidget(self.cpu_info_widget_4)
-        self.cpu_info_box_widget_8.setObjectName(u"cpu_info_box_widget_8")
-        self.cpu_info_box_widget_8.setMaximumSize(QSize(500, 150))
-        self.cpu_info_box_widget_8.setStyleSheet(u"#cpu_info_box_widget {\n"
+        self.motherboard_info_box_widget = QWidget(self.motherboard_info_widget)
+        self.motherboard_info_box_widget.setObjectName(u"motherboard_info_box_widget")
+        self.motherboard_info_box_widget.setMaximumSize(QSize(500, 150))
+        self.motherboard_info_box_widget.setStyleSheet(u"#motherboard_info_box_widget {\n"
 "    background-color: #161b22;\n"
 "	border: 1px solid #30363d;\n"
 "	margin-left: 5px;\n"
 "	border-radius: 2px;\n"
 "}\n"
 "\n"
-"#cpu_info_box_widget QWidget {\n"
+"#motherboard_info_box_widget QWidget {\n"
 "	background-color: transparent;\n"
 "}")
-        self.horizontalLayout_13 = QHBoxLayout(self.cpu_info_box_widget_8)
-        self.horizontalLayout_13.setSpacing(0)
-        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-        self.horizontalLayout_13.setContentsMargins(5, 0, 0, 0)
-        self.cpu_info_box_layout_8 = QHBoxLayout()
-        self.cpu_info_box_layout_8.setObjectName(u"cpu_info_box_layout_8")
-        self.cpu_info_rows_widget_8 = QWidget(self.cpu_info_box_widget_8)
-        self.cpu_info_rows_widget_8.setObjectName(u"cpu_info_rows_widget_8")
-        self.cpu_info_rows_widget_8.setStyleSheet(u"QLabel {\n"
+        self.motherboard_info_box_widget_layout = QHBoxLayout(self.motherboard_info_box_widget)
+        self.motherboard_info_box_widget_layout.setSpacing(0)
+        self.motherboard_info_box_widget_layout.setObjectName(u"motherboard_info_box_widget_layout")
+        self.motherboard_info_box_widget_layout.setContentsMargins(5, 0, 0, 0)
+        self.motherboard_info_box_layout = QHBoxLayout()
+        self.motherboard_info_box_layout.setObjectName(u"motherboard_info_box_layout")
+        self.motherboard_info_columns_widget = QWidget(self.motherboard_info_box_widget)
+        self.motherboard_info_columns_widget.setObjectName(u"motherboard_info_columns_widget")
+        self.motherboard_info_columns_widget.setStyleSheet(u"QLabel {\n"
 "	font: 200 12pt;\n"
 "	margin-left: 20px;\n"
 "}")
-        self.verticalLayout_41 = QVBoxLayout(self.cpu_info_rows_widget_8)
-        self.verticalLayout_41.setSpacing(0)
-        self.verticalLayout_41.setObjectName(u"verticalLayout_41")
-        self.verticalLayout_41.setContentsMargins(10, 0, 0, 0)
-        self.model_row_label_8 = QLabel(self.cpu_info_rows_widget_8)
-        self.model_row_label_8.setObjectName(u"model_row_label_8")
-        self.model_row_label_8.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.model_row_label_8.setMargin(0)
+        self.motherboard_info_columns_widget_layout = QVBoxLayout(self.motherboard_info_columns_widget)
+        self.motherboard_info_columns_widget_layout.setSpacing(0)
+        self.motherboard_info_columns_widget_layout.setObjectName(u"motherboard_info_columns_widget_layout")
+        self.motherboard_info_columns_widget_layout.setContentsMargins(10, 0, 0, 0)
+        self.motherboard_vendor_column_label = QLabel(self.motherboard_info_columns_widget)
+        self.motherboard_vendor_column_label.setObjectName(u"motherboard_vendor_column_label")
+        self.motherboard_vendor_column_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.motherboard_vendor_column_label.setMargin(0)
 
-        self.verticalLayout_41.addWidget(self.model_row_label_8)
+        self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_vendor_column_label)
 
-        self.cores_row_label_6 = QLabel(self.cpu_info_rows_widget_8)
-        self.cores_row_label_6.setObjectName(u"cores_row_label_6")
-        self.cores_row_label_6.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.cores_row_label_6.setMargin(0)
+        self.motherboard_model_column_label = QLabel(self.motherboard_info_columns_widget)
+        self.motherboard_model_column_label.setObjectName(u"motherboard_model_column_label")
+        self.motherboard_model_column_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.motherboard_model_column_label.setMargin(0)
 
-        self.verticalLayout_41.addWidget(self.cores_row_label_6)
+        self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_model_column_label)
 
-        self.threads_row_label_8 = QLabel(self.cpu_info_rows_widget_8)
-        self.threads_row_label_8.setObjectName(u"threads_row_label_8")
-        self.threads_row_label_8.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.threads_row_label_8.setMargin(0)
+        self.motherboard_serial_column_label = QLabel(self.motherboard_info_columns_widget)
+        self.motherboard_serial_column_label.setObjectName(u"motherboard_serial_column_label")
+        self.motherboard_serial_column_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.motherboard_serial_column_label.setMargin(0)
 
-        self.verticalLayout_41.addWidget(self.threads_row_label_8)
+        self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_serial_column_label)
 
-        self.architecture_row_label_8 = QLabel(self.cpu_info_rows_widget_8)
-        self.architecture_row_label_8.setObjectName(u"architecture_row_label_8")
-        self.architecture_row_label_8.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.architecture_row_label_8.setMargin(0)
+        self.motherboard_architecture_column_label = QLabel(self.motherboard_info_columns_widget)
+        self.motherboard_architecture_column_label.setObjectName(u"motherboard_architecture_column_label")
+        self.motherboard_architecture_column_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.motherboard_architecture_column_label.setMargin(0)
 
-        self.verticalLayout_41.addWidget(self.architecture_row_label_8)
+        self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_architecture_column_label)
 
 
-        self.cpu_info_box_layout_8.addWidget(self.cpu_info_rows_widget_8)
+        self.motherboard_info_box_layout.addWidget(self.motherboard_info_columns_widget)
 
-        self.cpu_info_values_widget_8 = QWidget(self.cpu_info_box_widget_8)
-        self.cpu_info_values_widget_8.setObjectName(u"cpu_info_values_widget_8")
-        self.cpu_info_values_widget_8.setStyleSheet(u"QLabel {\n"
+        self.motherboard_info_values_widget = QWidget(self.motherboard_info_box_widget)
+        self.motherboard_info_values_widget.setObjectName(u"motherboard_info_values_widget")
+        self.motherboard_info_values_widget.setStyleSheet(u"QLabel {\n"
 "	font: 450 12pt;\n"
 "}")
-        self.verticalLayout_42 = QVBoxLayout(self.cpu_info_values_widget_8)
-        self.verticalLayout_42.setSpacing(0)
-        self.verticalLayout_42.setObjectName(u"verticalLayout_42")
-        self.verticalLayout_42.setContentsMargins(0, 0, 0, 0)
-        self.model_value_label_8 = QLabel(self.cpu_info_values_widget_8)
-        self.model_value_label_8.setObjectName(u"model_value_label_8")
+        self.motherboard_info_values_widget_layout = QVBoxLayout(self.motherboard_info_values_widget)
+        self.motherboard_info_values_widget_layout.setSpacing(0)
+        self.motherboard_info_values_widget_layout.setObjectName(u"motherboard_info_values_widget_layout")
+        self.motherboard_info_values_widget_layout.setContentsMargins(0, 0, 0, 0)
+        self.motherboard_vendor_value_label = QLabel(self.motherboard_info_values_widget)
+        self.motherboard_vendor_value_label.setObjectName(u"motherboard_vendor_value_label")
 
-        self.verticalLayout_42.addWidget(self.model_value_label_8)
+        self.motherboard_info_values_widget_layout.addWidget(self.motherboard_vendor_value_label)
 
-        self.cores_value_label_6 = QLabel(self.cpu_info_values_widget_8)
-        self.cores_value_label_6.setObjectName(u"cores_value_label_6")
+        self.motherboard_model_value_label = QLabel(self.motherboard_info_values_widget)
+        self.motherboard_model_value_label.setObjectName(u"motherboard_model_value_label")
 
-        self.verticalLayout_42.addWidget(self.cores_value_label_6)
+        self.motherboard_info_values_widget_layout.addWidget(self.motherboard_model_value_label)
 
-        self.threads_value_label_8 = QLabel(self.cpu_info_values_widget_8)
-        self.threads_value_label_8.setObjectName(u"threads_value_label_8")
+        self.motherboard_serial_value_label = QLabel(self.motherboard_info_values_widget)
+        self.motherboard_serial_value_label.setObjectName(u"motherboard_serial_value_label")
 
-        self.verticalLayout_42.addWidget(self.threads_value_label_8)
+        self.motherboard_info_values_widget_layout.addWidget(self.motherboard_serial_value_label)
 
-        self.architecture_value_label_8 = QLabel(self.cpu_info_values_widget_8)
-        self.architecture_value_label_8.setObjectName(u"architecture_value_label_8")
+        self.motherboard_architecture_value_label = QLabel(self.motherboard_info_values_widget)
+        self.motherboard_architecture_value_label.setObjectName(u"motherboard_architecture_value_label")
 
-        self.verticalLayout_42.addWidget(self.architecture_value_label_8)
-
-
-        self.cpu_info_box_layout_8.addWidget(self.cpu_info_values_widget_8)
+        self.motherboard_info_values_widget_layout.addWidget(self.motherboard_architecture_value_label)
 
 
-        self.horizontalLayout_13.addLayout(self.cpu_info_box_layout_8)
+        self.motherboard_info_box_layout.addWidget(self.motherboard_info_values_widget)
 
 
-        self.system_status_layout_9.addWidget(self.cpu_info_box_widget_8)
+        self.motherboard_info_box_widget_layout.addLayout(self.motherboard_info_box_layout)
 
 
-        self.verticalLayout_27.addWidget(self.cpu_info_widget_4)
+        self.motherboard_info_widget_layout.addWidget(self.motherboard_info_box_widget)
 
-        self.cpu_info_widget_7 = QWidget(self.scrollAreaWidgetContents)
-        self.cpu_info_widget_7.setObjectName(u"cpu_info_widget_7")
-        self.cpu_info_widget_7.setMinimumSize(QSize(0, 150))
-        self.cpu_info_widget_7.setMaximumSize(QSize(16777215, 350))
-        self.system_status_layout_11 = QVBoxLayout(self.cpu_info_widget_7)
-        self.system_status_layout_11.setObjectName(u"system_status_layout_11")
-        self.system_status_layout_11.setContentsMargins(5, 0, 0, 0)
-        self.cpu_info_label_8 = QLabel(self.cpu_info_widget_7)
-        self.cpu_info_label_8.setObjectName(u"cpu_info_label_8")
-        self.cpu_info_label_8.setMaximumSize(QSize(16777215, 40))
-        self.cpu_info_label_8.setStyleSheet(u"QLabel {\n"
+
+        self.hardware_info_scroll_content_layout.addWidget(self.motherboard_info_widget)
+
+        self.bios_info_widget = QWidget(self.hardware_info_scroll_content)
+        self.bios_info_widget.setObjectName(u"bios_info_widget")
+        self.bios_info_widget.setMinimumSize(QSize(0, 150))
+        self.bios_info_widget.setMaximumSize(QSize(16777215, 350))
+        self.bios_info_widget_layout = QVBoxLayout(self.bios_info_widget)
+        self.bios_info_widget_layout.setObjectName(u"bios_info_widget_layout")
+        self.bios_info_widget_layout.setContentsMargins(5, 0, 0, 0)
+        self.bios_info_label = QLabel(self.bios_info_widget)
+        self.bios_info_label.setObjectName(u"bios_info_label")
+        self.bios_info_label.setMaximumSize(QSize(16777215, 40))
+        self.bios_info_label.setStyleSheet(u"QLabel {\n"
 "	font: 350 12pt;\n"
 "}")
 
-        self.system_status_layout_11.addWidget(self.cpu_info_label_8)
+        self.bios_info_widget_layout.addWidget(self.bios_info_label)
 
-        self.cpu_info_box_widget_10 = QWidget(self.cpu_info_widget_7)
-        self.cpu_info_box_widget_10.setObjectName(u"cpu_info_box_widget_10")
-        self.cpu_info_box_widget_10.setMaximumSize(QSize(500, 100))
-        self.cpu_info_box_widget_10.setStyleSheet(u"#cpu_info_box_widget {\n"
+        self.bios_info_box_widget = QWidget(self.bios_info_widget)
+        self.bios_info_box_widget.setObjectName(u"bios_info_box_widget")
+        self.bios_info_box_widget.setMaximumSize(QSize(500, 100))
+        self.bios_info_box_widget.setStyleSheet(u"#bios_info_box_widget {\n"
 "    background-color: #161b22;\n"
 "	border: 1px solid #30363d;\n"
 "	margin-left: 5px;\n"
 "	border-radius: 2px;\n"
 "}\n"
 "\n"
-"#cpu_info_box_widget QWidget {\n"
+"#bios_info_box_widget QWidget {\n"
 "	background-color: transparent;\n"
 "}")
-        self.horizontalLayout_15 = QHBoxLayout(self.cpu_info_box_widget_10)
-        self.horizontalLayout_15.setSpacing(0)
-        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
-        self.horizontalLayout_15.setContentsMargins(5, 0, 0, 0)
-        self.cpu_info_box_layout_10 = QHBoxLayout()
-        self.cpu_info_box_layout_10.setObjectName(u"cpu_info_box_layout_10")
-        self.cpu_info_rows_widget_10 = QWidget(self.cpu_info_box_widget_10)
-        self.cpu_info_rows_widget_10.setObjectName(u"cpu_info_rows_widget_10")
-        self.cpu_info_rows_widget_10.setStyleSheet(u"QLabel {\n"
+        self.bios_info_box_widget_layout = QHBoxLayout(self.bios_info_box_widget)
+        self.bios_info_box_widget_layout.setSpacing(0)
+        self.bios_info_box_widget_layout.setObjectName(u"bios_info_box_widget_layout")
+        self.bios_info_box_widget_layout.setContentsMargins(5, 0, 0, 0)
+        self.bios_info_box_layout = QHBoxLayout()
+        self.bios_info_box_layout.setObjectName(u"bios_info_box_layout")
+        self.bios_info_columns_widget = QWidget(self.bios_info_box_widget)
+        self.bios_info_columns_widget.setObjectName(u"bios_info_columns_widget")
+        self.bios_info_columns_widget.setStyleSheet(u"QLabel {\n"
 "	font: 200 12pt;\n"
 "	margin-left: 20px;\n"
 "}")
-        self.verticalLayout_45 = QVBoxLayout(self.cpu_info_rows_widget_10)
-        self.verticalLayout_45.setSpacing(0)
-        self.verticalLayout_45.setObjectName(u"verticalLayout_45")
-        self.verticalLayout_45.setContentsMargins(10, 0, 0, 0)
-        self.model_row_label_10 = QLabel(self.cpu_info_rows_widget_10)
-        self.model_row_label_10.setObjectName(u"model_row_label_10")
-        self.model_row_label_10.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.model_row_label_10.setMargin(0)
+        self.bios_info_columns_widget_layout = QVBoxLayout(self.bios_info_columns_widget)
+        self.bios_info_columns_widget_layout.setSpacing(0)
+        self.bios_info_columns_widget_layout.setObjectName(u"bios_info_columns_widget_layout")
+        self.bios_info_columns_widget_layout.setContentsMargins(10, 0, 0, 0)
+        self.bios_vendor_row_label = QLabel(self.bios_info_columns_widget)
+        self.bios_vendor_row_label.setObjectName(u"bios_vendor_row_label")
+        self.bios_vendor_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.bios_vendor_row_label.setMargin(0)
 
-        self.verticalLayout_45.addWidget(self.model_row_label_10)
+        self.bios_info_columns_widget_layout.addWidget(self.bios_vendor_row_label)
 
-        self.cores_row_label_8 = QLabel(self.cpu_info_rows_widget_10)
-        self.cores_row_label_8.setObjectName(u"cores_row_label_8")
-        self.cores_row_label_8.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.cores_row_label_8.setMargin(0)
+        self.bios_version_row_label = QLabel(self.bios_info_columns_widget)
+        self.bios_version_row_label.setObjectName(u"bios_version_row_label")
+        self.bios_version_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.bios_version_row_label.setMargin(0)
 
-        self.verticalLayout_45.addWidget(self.cores_row_label_8)
+        self.bios_info_columns_widget_layout.addWidget(self.bios_version_row_label)
 
-        self.threads_row_label_10 = QLabel(self.cpu_info_rows_widget_10)
-        self.threads_row_label_10.setObjectName(u"threads_row_label_10")
-        self.threads_row_label_10.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.threads_row_label_10.setMargin(0)
+        self.bios_date_row_label = QLabel(self.bios_info_columns_widget)
+        self.bios_date_row_label.setObjectName(u"bios_date_row_label")
+        self.bios_date_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.bios_date_row_label.setMargin(0)
 
-        self.verticalLayout_45.addWidget(self.threads_row_label_10)
+        self.bios_info_columns_widget_layout.addWidget(self.bios_date_row_label)
 
 
-        self.cpu_info_box_layout_10.addWidget(self.cpu_info_rows_widget_10)
+        self.bios_info_box_layout.addWidget(self.bios_info_columns_widget)
 
-        self.cpu_info_values_widget_10 = QWidget(self.cpu_info_box_widget_10)
-        self.cpu_info_values_widget_10.setObjectName(u"cpu_info_values_widget_10")
-        self.cpu_info_values_widget_10.setStyleSheet(u"QLabel {\n"
+        self.bios_info_values_widget = QWidget(self.bios_info_box_widget)
+        self.bios_info_values_widget.setObjectName(u"bios_info_values_widget")
+        self.bios_info_values_widget.setStyleSheet(u"QLabel {\n"
 "	font: 450 12pt;\n"
 "}")
-        self.verticalLayout_46 = QVBoxLayout(self.cpu_info_values_widget_10)
-        self.verticalLayout_46.setSpacing(0)
-        self.verticalLayout_46.setObjectName(u"verticalLayout_46")
-        self.verticalLayout_46.setContentsMargins(0, 0, 0, 0)
-        self.model_value_label_10 = QLabel(self.cpu_info_values_widget_10)
-        self.model_value_label_10.setObjectName(u"model_value_label_10")
+        self.bios_info_values_widget_layout = QVBoxLayout(self.bios_info_values_widget)
+        self.bios_info_values_widget_layout.setSpacing(0)
+        self.bios_info_values_widget_layout.setObjectName(u"bios_info_values_widget_layout")
+        self.bios_info_values_widget_layout.setContentsMargins(0, 0, 0, 0)
+        self.bios_vendor_value_label = QLabel(self.bios_info_values_widget)
+        self.bios_vendor_value_label.setObjectName(u"bios_vendor_value_label")
 
-        self.verticalLayout_46.addWidget(self.model_value_label_10)
+        self.bios_info_values_widget_layout.addWidget(self.bios_vendor_value_label)
 
-        self.cores_value_label_8 = QLabel(self.cpu_info_values_widget_10)
-        self.cores_value_label_8.setObjectName(u"cores_value_label_8")
+        self.bios_version_value_label = QLabel(self.bios_info_values_widget)
+        self.bios_version_value_label.setObjectName(u"bios_version_value_label")
 
-        self.verticalLayout_46.addWidget(self.cores_value_label_8)
+        self.bios_info_values_widget_layout.addWidget(self.bios_version_value_label)
 
-        self.threads_value_label_10 = QLabel(self.cpu_info_values_widget_10)
-        self.threads_value_label_10.setObjectName(u"threads_value_label_10")
+        self.bios_date_value_label = QLabel(self.bios_info_values_widget)
+        self.bios_date_value_label.setObjectName(u"bios_date_value_label")
 
-        self.verticalLayout_46.addWidget(self.threads_value_label_10)
-
-
-        self.cpu_info_box_layout_10.addWidget(self.cpu_info_values_widget_10)
+        self.bios_info_values_widget_layout.addWidget(self.bios_date_value_label)
 
 
-        self.horizontalLayout_15.addLayout(self.cpu_info_box_layout_10)
+        self.bios_info_box_layout.addWidget(self.bios_info_values_widget)
 
 
-        self.system_status_layout_11.addWidget(self.cpu_info_box_widget_10)
+        self.bios_info_box_widget_layout.addLayout(self.bios_info_box_layout)
 
 
-        self.verticalLayout_27.addWidget(self.cpu_info_widget_7)
+        self.bios_info_widget_layout.addWidget(self.bios_info_box_widget)
 
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.verticalLayout_6.addWidget(self.scrollArea)
+        self.hardware_info_scroll_content_layout.addWidget(self.bios_info_widget)
+
+        self.hardware_info_scroll.setWidget(self.hardware_info_scroll_content)
+
+        self.hardware_detail_page_layout.addWidget(self.hardware_info_scroll)
 
         self.agent_detail_stacked_content.addWidget(self.hardware_detail_page)
 
@@ -1903,7 +1946,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.content_stack.setCurrentIndex(2)
+        self.content_stack.setCurrentIndex(0)
         self.agent_detail_stacked_content.setCurrentIndex(2)
 
 
@@ -1998,34 +2041,34 @@ class Ui_MainWindow(object):
         self.frequency_value_label.setText(QCoreApplication.translate("MainWindow", u"2.45 GHz", None))
         self.architecture_value_label.setText(QCoreApplication.translate("MainWindow", u"x86_64", None))
         self.memory_info_label.setText(QCoreApplication.translate("MainWindow", u"MEMORY", None))
-        self.model_row_label_2.setText(QCoreApplication.translate("MainWindow", u"Total", None))
-        self.cores_row_label_2.setText(QCoreApplication.translate("MainWindow", u"Type", None))
-        self.threads_row_label_2.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
-        self.model_value_label_2.setText(QCoreApplication.translate("MainWindow", u"16 GB", None))
-        self.cores_value_label_2.setText(QCoreApplication.translate("MainWindow", u"DDR4 ", None))
-        self.threads_value_label_2.setText(QCoreApplication.translate("MainWindow", u"3200 MHz", None))
-        self.cpu_info_label_5.setText(QCoreApplication.translate("MainWindow", u"GPU", None))
-        self.model_row_label_3.setText(QCoreApplication.translate("MainWindow", u"Model", None))
-        self.cores_row_label_5.setText(QCoreApplication.translate("MainWindow", u"VRAM", None))
-        self.threads_row_label_3.setText(QCoreApplication.translate("MainWindow", u"Memory Type", None))
-        self.model_value_label_3.setText(QCoreApplication.translate("MainWindow", u"NVIDIA RTX 3050", None))
-        self.cores_value_label_5.setText(QCoreApplication.translate("MainWindow", u"4 GB", None))
-        self.threads_value_label_3.setText(QCoreApplication.translate("MainWindow", u"GDDR6X", None))
-        self.cpu_info_label_6.setText(QCoreApplication.translate("MainWindow", u"MOTHERBOARD", None))
-        self.model_row_label_8.setText(QCoreApplication.translate("MainWindow", u"Vendor", None))
-        self.cores_row_label_6.setText(QCoreApplication.translate("MainWindow", u"Model", None))
-        self.threads_row_label_8.setText(QCoreApplication.translate("MainWindow", u"Serial", None))
-        self.architecture_row_label_8.setText(QCoreApplication.translate("MainWindow", u"Architecture", None))
-        self.model_value_label_8.setText(QCoreApplication.translate("MainWindow", u"ASUS", None))
-        self.cores_value_label_6.setText(QCoreApplication.translate("MainWindow", u"PRIME B550", None))
-        self.threads_value_label_8.setText(QCoreApplication.translate("MainWindow", u"********", None))
-        self.architecture_value_label_8.setText(QCoreApplication.translate("MainWindow", u"x86_64", None))
-        self.cpu_info_label_8.setText(QCoreApplication.translate("MainWindow", u"BIOS", None))
-        self.model_row_label_10.setText(QCoreApplication.translate("MainWindow", u"Vendor", None))
-        self.cores_row_label_8.setText(QCoreApplication.translate("MainWindow", u"Version", None))
-        self.threads_row_label_10.setText(QCoreApplication.translate("MainWindow", u"Date", None))
-        self.model_value_label_10.setText(QCoreApplication.translate("MainWindow", u"AMD EPYC 7763", None))
-        self.cores_value_label_8.setText(QCoreApplication.translate("MainWindow", u"8", None))
-        self.threads_value_label_10.setText(QCoreApplication.translate("MainWindow", u"2026-01-15", None))
+        self.memory_total_row_label.setText(QCoreApplication.translate("MainWindow", u"Total", None))
+        self.memory_type_row_label.setText(QCoreApplication.translate("MainWindow", u"Type", None))
+        self.memory_speed_row_label.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
+        self.memory_total_value_label.setText(QCoreApplication.translate("MainWindow", u"16 GB", None))
+        self.memory_type_value_label.setText(QCoreApplication.translate("MainWindow", u"DDR4 ", None))
+        self.memory_speed_value_label.setText(QCoreApplication.translate("MainWindow", u"3200 MHz", None))
+        self.gpu_info_label.setText(QCoreApplication.translate("MainWindow", u"GPU", None))
+        self.gpu_model_type_row_label.setText(QCoreApplication.translate("MainWindow", u"Model", None))
+        self.gpu_vram_row_label.setText(QCoreApplication.translate("MainWindow", u"VRAM", None))
+        self.gpu_memory_type_row_label.setText(QCoreApplication.translate("MainWindow", u"Memory Type", None))
+        self.gpu_model_type_value_label.setText(QCoreApplication.translate("MainWindow", u"NVIDIA RTX 3050", None))
+        self.gpu_vram_value_label.setText(QCoreApplication.translate("MainWindow", u"4 GB", None))
+        self.gpu_memory_type_value_label.setText(QCoreApplication.translate("MainWindow", u"GDDR6X", None))
+        self.motherboard_info_label.setText(QCoreApplication.translate("MainWindow", u"MOTHERBOARD", None))
+        self.motherboard_vendor_column_label.setText(QCoreApplication.translate("MainWindow", u"Vendor", None))
+        self.motherboard_model_column_label.setText(QCoreApplication.translate("MainWindow", u"Model", None))
+        self.motherboard_serial_column_label.setText(QCoreApplication.translate("MainWindow", u"Serial", None))
+        self.motherboard_architecture_column_label.setText(QCoreApplication.translate("MainWindow", u"Architecture", None))
+        self.motherboard_vendor_value_label.setText(QCoreApplication.translate("MainWindow", u"ASUS", None))
+        self.motherboard_model_value_label.setText(QCoreApplication.translate("MainWindow", u"PRIME B550", None))
+        self.motherboard_serial_value_label.setText(QCoreApplication.translate("MainWindow", u"********", None))
+        self.motherboard_architecture_value_label.setText(QCoreApplication.translate("MainWindow", u"x86_64", None))
+        self.bios_info_label.setText(QCoreApplication.translate("MainWindow", u"BIOS", None))
+        self.bios_vendor_row_label.setText(QCoreApplication.translate("MainWindow", u"Vendor", None))
+        self.bios_version_row_label.setText(QCoreApplication.translate("MainWindow", u"Version", None))
+        self.bios_date_row_label.setText(QCoreApplication.translate("MainWindow", u"Date", None))
+        self.bios_vendor_value_label.setText(QCoreApplication.translate("MainWindow", u"AMD EPYC 7763", None))
+        self.bios_version_value_label.setText(QCoreApplication.translate("MainWindow", u"8", None))
+        self.bios_date_value_label.setText(QCoreApplication.translate("MainWindow", u"2026-01-15", None))
     # retranslateUi
 
