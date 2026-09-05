@@ -5,16 +5,13 @@ from ui.agent_card import Ui_card_form
 
 
 class AgentCardWidget(QWidget):
-    open_requested = Signal(int, str)
+    open_requested = Signal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
 
         self.ui = Ui_card_form()
         self.ui.setupUi(self)
-
-        self.agent_id = None
-        self.agent_name = ""
 
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.ui.agent_information_widget.setAttribute(
@@ -24,27 +21,33 @@ class AgentCardWidget(QWidget):
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
     def set_agent(self, agent: dict):
-        self.agent_id = agent["id"]
-        self.agent_name = agent["name"]
+        self._update_agent_information(agent)
+        self._update_status(agent)
 
-        self.ui.vps_name_label.setText(self.agent_name)
+    def _update_agent_information(self, agent: dict) -> None:
+        self.ui.vps_name_label.setText(agent["name"])
         self.ui.ip_os_label.setText(f"{agent['ip']} · {agent['os']}")
         self.ui.cpu_ram_label.setText(
             f"CPU {agent['cpu_load']}%   RAM {agent['ram_load']}%"
         )
-        is_online = agent.get("status") in ("ON")
+
+    def _update_status(self, agent: dict) -> None:
+        is_online = agent.get("status") == ("ON")
+        status_val = "online" if is_online else "offline"
+        status_str = status_val.upper()
 
         self.ui.online_dot.setText("●" if is_online else "○")
-        self.ui.status_label.setText("ONLINE" if is_online else "OFFLINE")
+        self.ui.status_label.setText(status_str)
 
-        status_value = "online" if is_online else "offline"
-        self.ui.status_label.setProperty("agent_status", status_value)
+        self._apply_style_property(self.ui.status_label, "agent_status", status_val)
 
-        self.ui.status_label.style().unpolish(self.ui.status_label)
-        self.ui.status_label.style().polish(self.ui.status_label)
+    def _apply_style_property(self, widget, prop_name: str, prop_value: str) -> None:
+        widget.setProperty(prop_name, prop_value)
+        widget.style().unpolish(widget)
+        widget.style().polish(widget)
 
     def mousePressEvent(self, event):
-        if event.button() == Qt.MouseButton.LeftButton and self.agent_id is not None:
-            self.open_requested.emit(self.agent_id, self.agent_name)
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.open_requested.emit()
 
         super().mousePressEvent(event)
