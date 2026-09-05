@@ -20,7 +20,15 @@ class NexoraClient:
         response.raise_for_status()
 
         return response.json()
+    
+    def get_detail_agent(self, agent_id: int) -> dict:
 
+        response = self.client.get(f"agents/{agent_id}/")
+
+        response.raise_for_status()
+
+        return response.json()
+        
     def get_agent_resource_metrics(self, agent_id, hours) -> dict:
 
         response = self.client.get(
