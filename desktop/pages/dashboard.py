@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QHeaderView, QTableWidgetItem
 
-from services.agent_poller import AgentPoller
-from services.agent_store import AgentStore
+from services.pollers.agents_list_poller import AgentsListPoller
+from services.stores.agent_store import AgentsStore
 
 from datetime import datetime
 
@@ -9,7 +9,7 @@ from ui.main_window import Ui_MainWindow
 
 
 class DashboardController:
-    def __init__(self, ui: Ui_MainWindow, store: AgentStore, poller: AgentPoller):
+    def __init__(self, ui: Ui_MainWindow, store: AgentsStore, poller: AgentsListPoller):
         self.ui = ui
         self.store = store
         self.poller = poller

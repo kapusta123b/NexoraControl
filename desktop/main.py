@@ -4,12 +4,13 @@ from PySide6.QtWidgets import QApplication, QButtonGroup, QMainWindow
 
 from api.client import NexoraClient
 
-from pages.agent_detail import AgentDetailController
-from pages.agents import AgentsController
-from pages.dashboard import DashboardController
+from services.pollers.agents_list_poller import AgentsListPoller
 
-from services.agent_poller import AgentMetricPoller, AgentPoller
-from services.agent_store import AgentStore, MetricStore
+from services.stores.agent_store import AgentsStore
+
+from pages.agent_detail import AgentDetailController
+from pages.agents_list import AgentsController
+from pages.dashboard import DashboardController
 
 from ui.main_window import Ui_MainWindow
 
@@ -25,15 +26,6 @@ class MainWindow(QMainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-        self.agent_store = AgentStore()
-        self.metric_store = MetricStore()
-
-        self.agent_poller = AgentPoller(client=self.client, store=self.agent_store)
-        self.agent_metric_poller = AgentMetricPoller(
-            client=self.client,
-            store=self.metric_store,
-        )
 
         self.setup_pages()
         self.setup_navigation()
@@ -59,14 +51,15 @@ class MainWindow(QMainWindow):
             )
 
     def setup_pages(self):
+        self.agent_store = AgentsStore()
+        self.agent_poller = AgentsListPoller(client=self.client, store=self.agent_store)
+
         self.dashboard_controller = DashboardController(
             ui=self.ui, store=self.agent_store, poller=self.agent_poller
         )
 
         self.agent_detail_controller = AgentDetailController(
-            ui=self.ui,
-            store=self.metric_store,
-            poller=self.agent_metric_poller,
+            ui=self.ui, client=self.client
         )
 
         self.agents_controller = AgentsController(
