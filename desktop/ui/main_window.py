@@ -345,8 +345,15 @@ class Ui_MainWindow(object):
         self.online_count = QLabel(self.card_online)
         self.online_count.setObjectName(u"online_count")
         self.online_count.setStyleSheet(u"QLabel { \n"
-"	color: #4ef2d2;\n"
+"	color: #4caf50;\n"
 "    font-weight: bold;\n"
+"}\n"
+"\n"
+"QLabel[agent_status=\"online\"] {\n"
+"    color: #4caf50;\n"
+"}\n"
+"QLabel[agent_status=\"offline\"] {\n"
+"    color: #f44336;\n"
 "}")
         self.online_count.setAlignment(Qt.AlignCenter)
 
@@ -370,7 +377,7 @@ class Ui_MainWindow(object):
         self.offline_count = QLabel(self.card_offline)
         self.offline_count.setObjectName(u"offline_count")
         self.offline_count.setStyleSheet(u"QLabel {\n"
-"    color: #f85149;\n"
+"    color: #f44336;\n"
 "    font-weight: bold;\n"
 "}")
         self.offline_count.setAlignment(Qt.AlignCenter)
@@ -589,8 +596,8 @@ class Ui_MainWindow(object):
 "QScrollBar:vertical {\n"
 "    border: none;\n"
 "    background: #11141a;\n"
-"    width: 12px;\n"
-"    margin: 0px 0px 0px 5px;\n"
+"    width: 8px;\n"
+"    margin: 0px 0px 0px 0px;\n"
 "	\n"
 "}\n"
 "\n"
@@ -627,13 +634,13 @@ class Ui_MainWindow(object):
         self.agent_list.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.agent_scroll = QWidget()
         self.agent_scroll.setObjectName(u"agent_scroll")
-        self.agent_scroll.setGeometry(QRect(0, 0, 898, 300))
+        self.agent_scroll.setGeometry(QRect(0, 0, 902, 300))
         self.agent_scroll.setMaximumSize(QSize(16777215, 1000000))
         self.agent_scroll.setStyleSheet(u"")
         self.agent_scroll_layout = QVBoxLayout(self.agent_scroll)
         self.agent_scroll_layout.setSpacing(12)
         self.agent_scroll_layout.setObjectName(u"agent_scroll_layout")
-        self.agent_scroll_layout.setContentsMargins(10, 16, 16, 16)
+        self.agent_scroll_layout.setContentsMargins(10, 16, 0, 10)
         self.agent_list.setWidget(self.agent_scroll)
 
         self.agents_main_layout.addWidget(self.agent_list)
@@ -701,7 +708,7 @@ class Ui_MainWindow(object):
 
         self.detail_top_agent_name_label = QLabel(self.detail_top_widget)
         self.detail_top_agent_name_label.setObjectName(u"detail_top_agent_name_label")
-        self.detail_top_agent_name_label.setStyleSheet(u"font: 12pt")
+        self.detail_top_agent_name_label.setStyleSheet(u"font: 300 italic 12pt ;")
         self.detail_top_agent_name_label.setWordWrap(True)
 
         self.detail_top_layout.addWidget(self.detail_top_agent_name_label)
@@ -712,6 +719,12 @@ class Ui_MainWindow(object):
 
         self.detail_top_agent_status_label = QLabel(self.detail_top_widget)
         self.detail_top_agent_status_label.setObjectName(u"detail_top_agent_status_label")
+        self.detail_top_agent_status_label.setStyleSheet(u"QLabel[agent_status=\"online\"] {\n"
+"    color: #4caf50;\n"
+"}\n"
+"QLabel[agent_status=\"offline\"] {\n"
+"    color: #f44336;\n"
+"}")
 
         self.detail_top_layout.addWidget(self.detail_top_agent_status_label)
 
@@ -724,31 +737,43 @@ class Ui_MainWindow(object):
         self.detail_top_navigation_layout.setContentsMargins(0, 10, 0, 10)
         self.overview_nav_button = QPushButton(self.detail_top_widget)
         self.overview_nav_button.setObjectName(u"overview_nav_button")
+        self.overview_nav_button.setCheckable(True)
+        self.overview_nav_button.setChecked(False)
 
         self.detail_top_navigation_layout.addWidget(self.overview_nav_button)
 
         self.perfomance_nav_button = QPushButton(self.detail_top_widget)
         self.perfomance_nav_button.setObjectName(u"perfomance_nav_button")
+        self.perfomance_nav_button.setCheckable(True)
+        self.perfomance_nav_button.setChecked(False)
 
         self.detail_top_navigation_layout.addWidget(self.perfomance_nav_button)
 
         self.hardware_nav_button = QPushButton(self.detail_top_widget)
         self.hardware_nav_button.setObjectName(u"hardware_nav_button")
+        self.hardware_nav_button.setCheckable(True)
+        self.hardware_nav_button.setChecked(False)
 
         self.detail_top_navigation_layout.addWidget(self.hardware_nav_button)
 
         self.storage_nav_button = QPushButton(self.detail_top_widget)
         self.storage_nav_button.setObjectName(u"storage_nav_button")
+        self.storage_nav_button.setCheckable(True)
+        self.storage_nav_button.setChecked(False)
 
         self.detail_top_navigation_layout.addWidget(self.storage_nav_button)
 
         self.network_nav_button = QPushButton(self.detail_top_widget)
         self.network_nav_button.setObjectName(u"network_nav_button")
+        self.network_nav_button.setCheckable(True)
+        self.network_nav_button.setChecked(False)
 
         self.detail_top_navigation_layout.addWidget(self.network_nav_button)
 
         self.commands_nav_button = QPushButton(self.detail_top_widget)
         self.commands_nav_button.setObjectName(u"commands_nav_button")
+        self.commands_nav_button.setCheckable(True)
+        self.commands_nav_button.setChecked(False)
 
         self.detail_top_navigation_layout.addWidget(self.commands_nav_button)
 
@@ -771,6 +796,16 @@ class Ui_MainWindow(object):
         self.overview_detail_page.setObjectName(u"overview_detail_page")
         self.overview_detail_page_layout = QVBoxLayout(self.overview_detail_page)
         self.overview_detail_page_layout.setObjectName(u"overview_detail_page_layout")
+        self.perfomance_label_2 = QLabel(self.overview_detail_page)
+        self.perfomance_label_2.setObjectName(u"perfomance_label_2")
+        self.perfomance_label_2.setMinimumSize(QSize(0, 0))
+        self.perfomance_label_2.setStyleSheet(u"QLabel {\n"
+"	font: 600 italic 17pt;\n"
+"}")
+        self.perfomance_label_2.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+
+        self.overview_detail_page_layout.addWidget(self.perfomance_label_2)
+
         self.overview_detail_scroll = QScrollArea(self.overview_detail_page)
         self.overview_detail_scroll.setObjectName(u"overview_detail_scroll")
         self.overview_detail_scroll.setStyleSheet(u"QScrollArea {\n"
@@ -828,7 +863,7 @@ class Ui_MainWindow(object):
         self.agent_detail_information_layout.setContentsMargins(0, 0, 0, 0)
         self.overview_widget = QWidget(self.agent_detail_information)
         self.overview_widget.setObjectName(u"overview_widget")
-        self.overview_widget.setMaximumSize(QSize(16777215, 120))
+        self.overview_widget.setMaximumSize(QSize(16777215, 100))
         self.overview_widget.setStyleSheet(u"#uptime_widget, #ram_widget, #disk_widget, #cpu_widget {\n"
 "	background-color: #161b22;\n"
 "	border: 1px solid #30363d;\n"
@@ -841,22 +876,14 @@ class Ui_MainWindow(object):
 "QLabel {\n"
 "	background-color: transparent;\n"
 "}")
-        self.overview_widget_layout = QVBoxLayout(self.overview_widget)
-        self.overview_widget_layout.setObjectName(u"overview_widget_layout")
-        self.overview_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.overview_label = QLabel(self.overview_widget)
-        self.overview_label.setObjectName(u"overview_label")
-        self.overview_label.setMaximumSize(QSize(16777215, 30))
-        self.overview_label.setStyleSheet(u"QLabel {\n"
-"	font: 600 17pt;\n"
-"}")
-        self.overview_label.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
-
-        self.overview_widget_layout.addWidget(self.overview_label)
-
+        self.horizontalLayout = QHBoxLayout(self.overview_widget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.resource_boxes_widget = QWidget(self.overview_widget)
         self.resource_boxes_widget.setObjectName(u"resource_boxes_widget")
         self.resource_boxes_widget.setMaximumSize(QSize(16777215, 70))
+        self.resource_boxes_widget.setStyleSheet(u"#cpu_label, #ram_label, #disk_label, #uptime_label {\n"
+"	color: #8b949e;\n"
+"}")
         self.resource_boxes_layout = QHBoxLayout(self.resource_boxes_widget)
         self.resource_boxes_layout.setSpacing(100)
         self.resource_boxes_layout.setObjectName(u"resource_boxes_layout")
@@ -869,12 +896,27 @@ class Ui_MainWindow(object):
         self.cpu_widget_layout.setObjectName(u"cpu_widget_layout")
         self.cpu_label = QLabel(self.cpu_widget)
         self.cpu_label.setObjectName(u"cpu_label")
+        self.cpu_label.setStyleSheet(u"")
         self.cpu_label.setAlignment(Qt.AlignCenter)
 
         self.cpu_widget_layout.addWidget(self.cpu_label)
 
         self.cpu_load_label = QLabel(self.cpu_widget)
         self.cpu_load_label.setObjectName(u"cpu_load_label")
+        self.cpu_load_label.setStyleSheet(u"QLabel {\n"
+"	font-size: 14px;\n"
+"\n"
+"}\n"
+"\n"
+"QLabel[load_level=\"low\"] {\n"
+"    color: #4caf50;\n"
+"}\n"
+"QLabel[load_level=\"medium\"] {\n"
+"    color: #ff9800;\n"
+"}\n"
+"QLabel[load_level=\"high\"] {\n"
+"    color: #f44336;\n"
+"}")
         self.cpu_load_label.setAlignment(Qt.AlignCenter)
 
         self.cpu_widget_layout.addWidget(self.cpu_load_label)
@@ -896,6 +938,19 @@ class Ui_MainWindow(object):
 
         self.ram_load_label = QLabel(self.ram_widget)
         self.ram_load_label.setObjectName(u"ram_load_label")
+        self.ram_load_label.setStyleSheet(u"QLabel {\n"
+"	font-size: 14px;\n"
+"\n"
+"}\n"
+"QLabel[load_level=\"low\"] {\n"
+"    color: #4caf50;\n"
+"}\n"
+"QLabel[load_level=\"medium\"] {\n"
+"    color: #ff9800;\n"
+"}\n"
+"QLabel[load_level=\"high\"] {\n"
+"    color: #f44336;\n"
+"}")
         self.ram_load_label.setAlignment(Qt.AlignCenter)
 
         self.ram_widget_layout.addWidget(self.ram_load_label)
@@ -917,6 +972,10 @@ class Ui_MainWindow(object):
 
         self.disk_load_label = QLabel(self.disk_widget)
         self.disk_load_label.setObjectName(u"disk_load_label")
+        self.disk_load_label.setStyleSheet(u"QLabel {\n"
+"	font-size: 14px;\n"
+"\n"
+"}")
         self.disk_load_label.setAlignment(Qt.AlignCenter)
 
         self.disk_widget_layout.addWidget(self.disk_load_label)
@@ -938,6 +997,10 @@ class Ui_MainWindow(object):
 
         self.up_time_label = QLabel(self.uptime_widget)
         self.up_time_label.setObjectName(u"up_time_label")
+        self.up_time_label.setStyleSheet(u"QLabel {\n"
+"	font-size: 14px;\n"
+"\n"
+"}")
         self.up_time_label.setAlignment(Qt.AlignCenter)
 
         self.uptime_widget_layout.addWidget(self.up_time_label)
@@ -946,7 +1009,7 @@ class Ui_MainWindow(object):
         self.resource_boxes_layout.addWidget(self.uptime_widget)
 
 
-        self.overview_widget_layout.addWidget(self.resource_boxes_widget)
+        self.horizontalLayout.addWidget(self.resource_boxes_widget)
 
 
         self.agent_detail_information_layout.addWidget(self.overview_widget)
@@ -957,7 +1020,7 @@ class Ui_MainWindow(object):
         self.system_status_widget.setMaximumSize(QSize(16777215, 350))
         self.system_status_layout = QVBoxLayout(self.system_status_widget)
         self.system_status_layout.setObjectName(u"system_status_layout")
-        self.system_status_layout.setContentsMargins(5, 0, 0, 0)
+        self.system_status_layout.setContentsMargins(0, 0, 0, 0)
         self.system_status_label = QLabel(self.system_status_widget)
         self.system_status_label.setObjectName(u"system_status_label")
         self.system_status_label.setMaximumSize(QSize(16777215, 40))
@@ -969,7 +1032,7 @@ class Ui_MainWindow(object):
 
         self.system_status_box_widget = QWidget(self.system_status_widget)
         self.system_status_box_widget.setObjectName(u"system_status_box_widget")
-        self.system_status_box_widget.setMaximumSize(QSize(500, 300))
+        self.system_status_box_widget.setMaximumSize(QSize(400, 300))
         self.system_status_box_widget.setStyleSheet(u"#system_status_box_widget {\n"
 "    background-color: #161b22;\n"
 "	border: 1px solid #30363d;\n"
@@ -989,7 +1052,7 @@ class Ui_MainWindow(object):
         self.system_status_rows_widget = QWidget(self.system_status_box_widget)
         self.system_status_rows_widget.setObjectName(u"system_status_rows_widget")
         self.system_status_rows_widget.setStyleSheet(u"QLabel {\n"
-"	font: 200 12pt;\n"
+"	font: 200 11pt;\n"
 "	margin-left: 20px;\n"
 "}")
         self.system_status_rows_widget_layout = QVBoxLayout(self.system_status_rows_widget)
@@ -1010,12 +1073,12 @@ class Ui_MainWindow(object):
 
         self.system_status_rows_widget_layout.addWidget(self.last_seen_row_label)
 
-        self.version_row_label = QLabel(self.system_status_rows_widget)
-        self.version_row_label.setObjectName(u"version_row_label")
-        self.version_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.version_row_label.setMargin(0)
+        self.ip_row_label = QLabel(self.system_status_rows_widget)
+        self.ip_row_label.setObjectName(u"ip_row_label")
+        self.ip_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.ip_row_label.setMargin(0)
 
-        self.system_status_rows_widget_layout.addWidget(self.version_row_label)
+        self.system_status_rows_widget_layout.addWidget(self.ip_row_label)
 
         self.hostname_row_label = QLabel(self.system_status_rows_widget)
         self.hostname_row_label.setObjectName(u"hostname_row_label")
@@ -1037,7 +1100,7 @@ class Ui_MainWindow(object):
         self.system_status_values_widget = QWidget(self.system_status_box_widget)
         self.system_status_values_widget.setObjectName(u"system_status_values_widget")
         self.system_status_values_widget.setStyleSheet(u"QLabel {\n"
-"	font: 450 12pt;\n"
+"	font: 300 italic 11pt;\n"
 "}")
         self.system_status_values_widget_layout = QVBoxLayout(self.system_status_values_widget)
         self.system_status_values_widget_layout.setSpacing(0)
@@ -1045,18 +1108,25 @@ class Ui_MainWindow(object):
         self.system_status_values_widget_layout.setContentsMargins(0, 0, 0, 0)
         self.agent_status_value_label = QLabel(self.system_status_values_widget)
         self.agent_status_value_label.setObjectName(u"agent_status_value_label")
+        self.agent_status_value_label.setStyleSheet(u"QLabel[agent_status=\"online\"] {\n"
+"    color: #4caf50;\n"
+"}\n"
+"QLabel[agent_status=\"offline\"] {\n"
+"    color: #f44336;\n"
+"}")
 
         self.system_status_values_widget_layout.addWidget(self.agent_status_value_label)
 
         self.last_seen_value_label = QLabel(self.system_status_values_widget)
         self.last_seen_value_label.setObjectName(u"last_seen_value_label")
+        self.last_seen_value_label.setStyleSheet(u"")
 
         self.system_status_values_widget_layout.addWidget(self.last_seen_value_label)
 
-        self.version_value_label = QLabel(self.system_status_values_widget)
-        self.version_value_label.setObjectName(u"version_value_label")
+        self.ip_value_label = QLabel(self.system_status_values_widget)
+        self.ip_value_label.setObjectName(u"ip_value_label")
 
-        self.system_status_values_widget_layout.addWidget(self.version_value_label)
+        self.system_status_values_widget_layout.addWidget(self.ip_value_label)
 
         self.hostname_value_label = QLabel(self.system_status_values_widget)
         self.hostname_value_label.setObjectName(u"hostname_value_label")
@@ -1176,6 +1246,17 @@ class Ui_MainWindow(object):
         self.perfomance_detail_page.setObjectName(u"perfomance_detail_page")
         self.perfomance_detail_page_layout = QVBoxLayout(self.perfomance_detail_page)
         self.perfomance_detail_page_layout.setObjectName(u"perfomance_detail_page_layout")
+        self.perfomance_label = QLabel(self.perfomance_detail_page)
+        self.perfomance_label.setObjectName(u"perfomance_label")
+        self.perfomance_label.setMinimumSize(QSize(0, 0))
+        self.perfomance_label.setStyleSheet(u"QLabel {\n"
+"	font: 600 italic 17pt;\n"
+"\n"
+"}")
+        self.perfomance_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+
+        self.perfomance_detail_page_layout.addWidget(self.perfomance_label)
+
         self.perfomance_detail_scroll = QScrollArea(self.perfomance_detail_page)
         self.perfomance_detail_scroll.setObjectName(u"perfomance_detail_scroll")
         self.perfomance_detail_scroll.setStyleSheet(u"QScrollArea {\n"
@@ -1225,7 +1306,7 @@ class Ui_MainWindow(object):
         self.perfomance_detail_scroll.setWidgetResizable(True)
         self.agent_perfomance_information = QWidget()
         self.agent_perfomance_information.setObjectName(u"agent_perfomance_information")
-        self.agent_perfomance_information.setGeometry(QRect(0, 0, 882, 475))
+        self.agent_perfomance_information.setGeometry(QRect(0, 0, 882, 444))
         self.verticalLayout_26 = QVBoxLayout(self.agent_perfomance_information)
         self.verticalLayout_26.setSpacing(0)
         self.verticalLayout_26.setObjectName(u"verticalLayout_26")
@@ -1241,16 +1322,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_32.setSpacing(0)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
-        self.perfomance_label = QLabel(self.performance_content_widget)
-        self.perfomance_label.setObjectName(u"perfomance_label")
-        self.perfomance_label.setMinimumSize(QSize(0, 0))
-        self.perfomance_label.setStyleSheet(u"QLabel {\n"
-"	font: 600 17pt;\n"
-"}")
-        self.perfomance_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.verticalLayout_32.addWidget(self.perfomance_label)
-
         self.metric_buttons_layout = QHBoxLayout()
         self.metric_buttons_layout.setObjectName(u"metric_buttons_layout")
         self.compute_button = QPushButton(self.performance_content_widget)
@@ -1300,6 +1371,18 @@ class Ui_MainWindow(object):
         self.hardware_detail_page.setObjectName(u"hardware_detail_page")
         self.hardware_detail_page_layout = QVBoxLayout(self.hardware_detail_page)
         self.hardware_detail_page_layout.setObjectName(u"hardware_detail_page_layout")
+        self.hardware_label = QLabel(self.hardware_detail_page)
+        self.hardware_label.setObjectName(u"hardware_label")
+        self.hardware_label.setMinimumSize(QSize(0, 0))
+        self.hardware_label.setMaximumSize(QSize(16777215, 30))
+        self.hardware_label.setStyleSheet(u"QLabel {\n"
+"	font: 600 italic 17pt;\n"
+"\n"
+"}")
+        self.hardware_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+
+        self.hardware_detail_page_layout.addWidget(self.hardware_label)
+
         self.hardware_info_scroll = QScrollArea(self.hardware_detail_page)
         self.hardware_info_scroll.setObjectName(u"hardware_info_scroll")
         self.hardware_info_scroll.setStyleSheet(u"QScrollArea {\n"
@@ -1349,23 +1432,12 @@ class Ui_MainWindow(object):
         self.hardware_info_scroll.setWidgetResizable(True)
         self.hardware_info_scroll_content = QWidget()
         self.hardware_info_scroll_content.setObjectName(u"hardware_info_scroll_content")
-        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 882, 940))
+        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 882, 910))
         self.hardware_info_scroll_content.setMinimumSize(QSize(0, 0))
         self.hardware_info_scroll_content_layout = QVBoxLayout(self.hardware_info_scroll_content)
         self.hardware_info_scroll_content_layout.setSpacing(0)
         self.hardware_info_scroll_content_layout.setObjectName(u"hardware_info_scroll_content_layout")
         self.hardware_info_scroll_content_layout.setContentsMargins(0, 0, 0, 0)
-        self.hardware_label = QLabel(self.hardware_info_scroll_content)
-        self.hardware_label.setObjectName(u"hardware_label")
-        self.hardware_label.setMinimumSize(QSize(0, 0))
-        self.hardware_label.setMaximumSize(QSize(16777215, 30))
-        self.hardware_label.setStyleSheet(u"QLabel {\n"
-"	font: 600 17pt;\n"
-"}")
-        self.hardware_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.hardware_info_scroll_content_layout.addWidget(self.hardware_label)
-
         self.cpu_info_widget = QWidget(self.hardware_info_scroll_content)
         self.cpu_info_widget.setObjectName(u"cpu_info_widget")
         self.cpu_info_widget.setMinimumSize(QSize(0, 250))
@@ -1946,8 +2018,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.content_stack.setCurrentIndex(0)
-        self.agent_detail_stacked_content.setCurrentIndex(2)
+        self.content_stack.setCurrentIndex(2)
+        self.agent_detail_stacked_content.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1989,34 +2061,34 @@ class Ui_MainWindow(object):
         self.search_input_line.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search...", None))
         self.refresh_agents_button.setText(QCoreApplication.translate("MainWindow", u"[ Refresh ]", None))
         self.back_to_agents_button.setText(QCoreApplication.translate("MainWindow", u"[ \u2190 Back to Agents ]", None))
-        self.detail_top_agent_name_label.setText(QCoreApplication.translate("MainWindow", u"VPS Production ", None))
-        self.detail_top_agent_status_label.setText(QCoreApplication.translate("MainWindow", u"\u25cf ON", None))
+        self.detail_top_agent_name_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.detail_top_agent_status_label.setText(QCoreApplication.translate("MainWindow", u"\u25cf OFFLINE", None))
         self.overview_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Overview ]", None))
         self.perfomance_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Performance ]", None))
         self.hardware_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Hardware ]", None))
         self.storage_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Storage ]", None))
         self.network_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Network ]", None))
         self.commands_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Commands ]", None))
-        self.overview_label.setText(QCoreApplication.translate("MainWindow", u"OVERVIEW ", None))
+        self.perfomance_label_2.setText(QCoreApplication.translate("MainWindow", u"OVERVIEW", None))
         self.cpu_label.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
-        self.cpu_load_label.setText(QCoreApplication.translate("MainWindow", u"23.4% ", None))
+        self.cpu_load_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.ram_label.setText(QCoreApplication.translate("MainWindow", u"RAM", None))
-        self.ram_load_label.setText(QCoreApplication.translate("MainWindow", u"41.2%", None))
+        self.ram_load_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.disk_label.setText(QCoreApplication.translate("MainWindow", u"DISK", None))
-        self.disk_load_label.setText(QCoreApplication.translate("MainWindow", u"58.1%", None))
+        self.disk_load_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.uptime_label.setText(QCoreApplication.translate("MainWindow", u"UPTIME", None))
-        self.up_time_label.setText(QCoreApplication.translate("MainWindow", u"3d 14h", None))
+        self.up_time_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.system_status_label.setText(QCoreApplication.translate("MainWindow", u"SYSTEM STATUS", None))
         self.agent_row_label.setText(QCoreApplication.translate("MainWindow", u"Agent", None))
         self.last_seen_row_label.setText(QCoreApplication.translate("MainWindow", u"Last seen", None))
-        self.version_row_label.setText(QCoreApplication.translate("MainWindow", u"Version", None))
+        self.ip_row_label.setText(QCoreApplication.translate("MainWindow", u"IP", None))
         self.hostname_row_label.setText(QCoreApplication.translate("MainWindow", u"Hostname", None))
         self.os_name_row_label.setText(QCoreApplication.translate("MainWindow", u"OS", None))
-        self.agent_status_value_label.setText(QCoreApplication.translate("MainWindow", u"ONLINE", None))
-        self.last_seen_value_label.setText(QCoreApplication.translate("MainWindow", u"2 sec ago", None))
-        self.version_value_label.setText(QCoreApplication.translate("MainWindow", u"0.1.0", None))
-        self.hostname_value_label.setText(QCoreApplication.translate("MainWindow", u"prod-01", None))
-        self.os_name_value_label.setText(QCoreApplication.translate("MainWindow", u"Ubuntu 24.04", None))
+        self.agent_status_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.last_seen_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.ip_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.hostname_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.os_name_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.quick_actions_label.setText(QCoreApplication.translate("MainWindow", u"QUICK ACTIONS ", None))
         self.restart_all_docker_cont_quick_button.setText(QCoreApplication.translate("MainWindow", u"[ Restart All Docker Containers ]", None))
         self.stop_all_docker_cont_quick_button.setText(QCoreApplication.translate("MainWindow", u"[ Stop All Docker Containers ]", None))

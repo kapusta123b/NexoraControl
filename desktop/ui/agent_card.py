@@ -64,7 +64,7 @@ class Ui_card_form(object):
         self.horizontalLayout = QHBoxLayout(card_form)
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(9, 0, 9, 0)
+        self.horizontalLayout.setContentsMargins(0, 0, 9, 0)
         self.agent_information_widget = QWidget(card_form)
         self.agent_information_widget.setObjectName(u"agent_information_widget")
         self.agent_information_widget.setMinimumSize(QSize(300, 0))
@@ -72,11 +72,12 @@ class Ui_card_form(object):
         self.agent_information_widget.setStyleSheet(u"")
         self.horizontalLayout_10 = QHBoxLayout(self.agent_information_widget)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.horizontalLayout_10.setContentsMargins(2, 9, -1, -1)
+        self.horizontalLayout_10.setContentsMargins(0, 9, 0, 0)
         self.online_dot = QLabel(self.agent_information_widget)
         self.online_dot.setObjectName(u"online_dot")
         self.online_dot.setMaximumSize(QSize(20, 100))
-        self.online_dot.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
+        self.online_dot.setStyleSheet(u"")
+        self.online_dot.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.horizontalLayout_10.addWidget(self.online_dot)
 
