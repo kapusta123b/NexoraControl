@@ -1,29 +1,36 @@
 from PySide6.QtCore import QObject, QThread, QTimer
 
 from api.client import NexoraClient
-
+from services.stores.agent_command_store import CommandsStore
 from services.box_messages import MessageBox
 from services.stores.agent_store import DetailAgentStore
-
-from workers.overview_worker import OverviewWorker
+from workers.overview_worker import OverviewWorker, RecentCommandsWorker
 
 
 class DetailOverviewPoller(QObject):
 
-    def __init__(self, client: NexoraClient, store: DetailAgentStore):
+    def __init__(
+        self,
+        client: NexoraClient,
+        detail_agent_store: DetailAgentStore,
+        commands_store: CommandsStore,
+    ):
         super().__init__()
 
         self.client = client
-        self.store = store
+        self.detail_agent_store = detail_agent_store
+        self.commands_store = commands_store
 
-        self.thread: QThread | None = None
-        self.worker: OverviewWorker | None = None
+        self.agent_id: int | None = None
         self.is_polling = False
         self.api_error_shown = False
 
+        # Хранилище для активных потоков, чтобы Garbage Collector не удалял их на лету
+        self._active_workers = []
+
         self.timer = QTimer(self)
         self.timer.setInterval(5000)
-        self.timer.timeout.connect(self.refresh)
+        self.timer.timeout.connect(self.refresh_all)
 
     def on_clicked(self, agent_id: int) -> None:
         self.agent_id = agent_id
@@ -31,47 +38,82 @@ class DetailOverviewPoller(QObject):
         if self.client.base_url and not self.timer.isActive():
             self.timer.start()
 
-        self.refresh()
+        self.refresh_all()
 
     def stop_polling(self) -> None:
         if self.timer.isActive():
-            print('stop polling')
             self.timer.stop()
 
-    def refresh(self) -> None:
-        if self.is_polling or not self.client.base_url:
+    def refresh_all(self) -> None:
+        """Безопасно запускает оба обновления в изолированных потоках."""
+        if self.is_polling or not self.client.base_url or self.agent_id is None:
             return
 
         self.is_polling = True
+        
+        # Запуск первого воркера
+        self._start_overview_worker()
+        # Запуск второго воркера
+        self._start_commands_worker()
 
-        self.thread = QThread()
-        self.worker = OverviewWorker(self.client, self.agent_id)
-        self.worker.moveToThread(self.thread)
+    def _start_overview_worker(self) -> None:
+        thread = QThread(self)
+        worker = OverviewWorker(self.client, self.agent_id)
+        worker.moveToThread(thread)
 
-        self.thread.started.connect(self.worker.run)
+        # Сохраняем жесткую ссылку, предотвращая удаление воркера из памяти Python
+        worker_context = {"thread": thread, "worker": worker}
+        self._active_workers.append(worker_context)
 
-        self.worker.success.connect(self.store.set_agent)
-        self.worker.error.connect(self.show_api_error)
+        thread.started.connect(worker.run)
+        worker.success.connect(self.detail_agent_store.set_agent)
+        worker.error.connect(self.show_api_error)
 
-        self.worker.finished.connect(self.thread.quit)
-        self.worker.finished.connect(self.worker.deleteLater)
-        self.thread.finished.connect(self.thread.deleteLater)
-        self.thread.finished.connect(self.on_finished)
+        # Каскадное и безопасное удаление после завершения
+        worker.finished.connect(thread.quit)
+        worker.finished.connect(worker.deleteLater)
+        
+        def cleanup():
+            thread.deleteLater()
+            if worker_context in self._active_workers:
+                self._active_workers.remove(worker_context)
+            # Флаг сбрасываем только когда ОДИН из основных потоков гарантированно финишировал
+            self.is_polling = False
 
-        self.thread.start()
+        thread.finished.connect(cleanup)
+        thread.start()
 
-    def on_finished(self) -> None:
-        self.is_polling = False
-        self.thread = None
-        self.worker = None
+    def _start_commands_worker(self) -> None:
+        thread = QThread(self)
+        worker = RecentCommandsWorker(self.client, self.agent_id)
+        worker.moveToThread(thread)
 
-    def show_api_error(self, message=None) -> None:
+        # Сохраняем жесткую ссылку для второго воркера отдельно!
+        worker_context = {"thread": thread, "worker": worker}
+        self._active_workers.append(worker_context)
+
+        thread.started.connect(worker.run)
+        worker.success.connect(self.commands_store.set_commands)
+        worker.error.connect(self.show_api_error)
+
+        worker.finished.connect(thread.quit)
+        worker.finished.connect(worker.deleteLater)
+
+        def cleanup():
+            thread.deleteLater()
+            if worker_context in self._active_workers:
+                self._active_workers.remove(worker_context)
+
+        thread.finished.connect(cleanup)
+        thread.start()
+
+    def show_api_error(self, message: str = None) -> None:
         if not self.api_error_shown:
             self.api_error_shown = True
-            self.timer.stop()
+            self.stop_polling()
 
             MessageBox().show_message(
                 "critical",
                 "API error",
-                "API connection failed! Please change the API URL",
+                message or "API connection failed! Please change the API URL",
             )

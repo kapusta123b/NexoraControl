@@ -4,11 +4,11 @@ from PySide6.QtWidgets import QButtonGroup
 
 from api.client import NexoraClient
 
-from pages.detail.agent_performance import DetailPerformanceController
+from pages.detail_pages.agent_performance import DetailPerformanceController
 
 from ui.main_window import Ui_MainWindow
 
-from pages.detail.agent_overview import DetailOverviewController
+from pages.detail_pages.agent_overview import DetailOverviewController
 
 
 class AgentDetailController(QObject):
