@@ -15,9 +15,11 @@ class AgentsListWorker(QObject):
     @Slot()
     def run(self):
         try:
-            agents = self.client.get_agents()
+            agents = self.client.get_agents_list()
             self.success.emit(agents)
+
         except Exception as exc:
             self.error.emit(str(exc))
+        
         finally:
             self.finished.emit()
