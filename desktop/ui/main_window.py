@@ -855,7 +855,7 @@ class Ui_MainWindow(object):
         self.overview_detail_scroll.setWidgetResizable(True)
         self.agent_detail_information = QWidget()
         self.agent_detail_information.setObjectName(u"agent_detail_information")
-        self.agent_detail_information.setGeometry(QRect(0, 0, 882, 700))
+        self.agent_detail_information.setGeometry(QRect(0, -324, 882, 700))
         self.agent_detail_information.setMinimumSize(QSize(0, 700))
         self.agent_detail_information_layout = QVBoxLayout(self.agent_detail_information)
         self.agent_detail_information_layout.setSpacing(5)
@@ -1227,10 +1227,8 @@ class Ui_MainWindow(object):
         self.recent_command_box_widget.setStyleSheet(u"QLabel {\n"
 "	font: 300 10.5pt\n"
 "}")
-        self.horizontalLayout_6 = QHBoxLayout(self.recent_command_box_widget)
-        self.horizontalLayout_6.setSpacing(0)
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(10, 0, 0, 0)
+        self.verticalLayout = QVBoxLayout(self.recent_command_box_widget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
 
         self.recent_commands_widget_layout.addWidget(self.recent_command_box_widget)
 
@@ -1306,7 +1304,7 @@ class Ui_MainWindow(object):
         self.perfomance_detail_scroll.setWidgetResizable(True)
         self.agent_perfomance_information = QWidget()
         self.agent_perfomance_information.setObjectName(u"agent_perfomance_information")
-        self.agent_perfomance_information.setGeometry(QRect(0, 0, 882, 444))
+        self.agent_perfomance_information.setGeometry(QRect(0, 0, 484, 444))
         self.verticalLayout_26 = QVBoxLayout(self.agent_perfomance_information)
         self.verticalLayout_26.setSpacing(0)
         self.verticalLayout_26.setObjectName(u"verticalLayout_26")
@@ -1432,7 +1430,7 @@ class Ui_MainWindow(object):
         self.hardware_info_scroll.setWidgetResizable(True)
         self.hardware_info_scroll_content = QWidget()
         self.hardware_info_scroll_content.setObjectName(u"hardware_info_scroll_content")
-        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 882, 910))
+        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 308, 910))
         self.hardware_info_scroll_content.setMinimumSize(QSize(0, 0))
         self.hardware_info_scroll_content_layout = QVBoxLayout(self.hardware_info_scroll_content)
         self.hardware_info_scroll_content_layout.setSpacing(0)
