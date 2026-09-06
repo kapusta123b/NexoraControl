@@ -14,21 +14,23 @@ class Command(models.Model):
         "agents.Agent", on_delete=models.CASCADE, related_name="commands"
     )
 
-    command_type = models.CharField(max_length=50)
+    command_type = models.CharField(null=False, blank=False, max_length=50)
 
-    payload = models.JSONField(default=dict)
+    payload = models.JSONField(blank=True, default=dict)
 
-    output = models.TextField(null=True, max_length=10000)
+    output = models.TextField(blank=True, null=True, max_length=10000)
 
-    errors = models.JSONField(default=dict)
+    errors = models.JSONField(blank=True, default=dict)
 
-    status = models.CharField(choices=Status.choices, default=Status.PENDING)
+    status = models.CharField(
+        blank=True, choices=Status.choices, default=Status.PENDING
+    )
 
-    started_at = models.DateTimeField(null=True)
+    started_at = models.DateTimeField(blank=True, null=True)
 
-    finished_at = models.DateTimeField(null=True)
+    finished_at = models.DateTimeField(blank=True, null=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(blank=True, auto_now_add=True)
 
     class Meta:
         indexes = [

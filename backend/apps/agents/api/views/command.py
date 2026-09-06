@@ -16,6 +16,7 @@ from apps.agents.models.agent import Agent
 
 from django.db import transaction
 
+
 class CommandListView(ListCreateAPIView):
     serializer_class = CommandListSerializer
 
@@ -44,6 +45,16 @@ class CommandListView(ListCreateAPIView):
         status = self.request.query_params.get("status")
         if status:
             queryset = queryset.filter(status=status.upper())
+
+        count = self.request.query_params.get("count")
+        if count:
+            try:
+                count = int(count)
+
+                queryset = queryset[:count]
+                
+            except ValueError:
+                return queryset
 
         return queryset
 
