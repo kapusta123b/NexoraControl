@@ -1,3 +1,8 @@
+from api.client import NexoraClient
+
+from services.pollers.metrics_poller import AgentMetricPoller
+from services.stores.metric_store import MetricStore
+
 from ui.main_window import Ui_MainWindow
 
 import pyqtgraph as pg
@@ -8,30 +13,26 @@ from datetime import datetime
 
 from PySide6.QtCore import Qt
 
+
 class DetailPerformanceController:
 
-    def __init__(self, ui: Ui_MainWindow):
-
+    def __init__(self, ui: Ui_MainWindow, client: NexoraClient):
         self.ui = ui
+        self.agent = {}
 
-        self.agent_id = None
-        self.from_hours = None
+        self.perfomance_store = MetricStore()
 
-        self.x_data = []
-        self.cpu_data = []
-        self.ram_data = []
+        self.perfomance_poller = AgentMetricPoller(client, self.perfomance_store)
+
+        self.perfomance_store.metrics_changed.connect(self.update_metrics)
 
         self._apply_graph_styles()
         self._create_curves()
         self._create_crosshair()
 
-    def show_agent(self, agent: dict, hours_count: int):
-        self.agent_id = agent["id"]
-        self.from_hours = hours_count
-
-        self._update_graph_data([], [], [])
-        self.poller.set_agent(self.agent_id, hours_count)
-        self.poller.refresh(force=True)
+    def activate(self) -> None:
+        if self.agent:
+            self.perfomance_poller.on_clicked(self.agent.get("id"))
 
     def update_metrics(self, metrics):
         if not metrics:

@@ -2,17 +2,19 @@ from datetime import datetime
 from PySide6.QtWidgets import QLayout
 
 from api.client import NexoraClient
+
 from services.recent_command_card import CommandCardWidget
 from services.stores.agent_command_store import CommandsStore
 from services.pollers.overview_poller import DetailOverviewPoller
 from services.stores.agent_store import DetailAgentStore
+
 from ui.main_window import Ui_MainWindow
 
 
 class DetailOverviewController:
-    def __init__(self, ui: Ui_MainWindow, client: NexoraClient, agent: dict):
+    def __init__(self, ui: Ui_MainWindow, client: NexoraClient, ):
         self.ui = ui
-        self.agent = agent
+        self.agent = {}
 
         self.detail_agent_store = DetailAgentStore()
         self.commands_store = CommandsStore()
@@ -115,6 +117,7 @@ class DetailOverviewController:
         try:
             val = int(value)
             level = "low" if val < 30 else "medium" if val < 75 else "high"
+
         except (ValueError, TypeError):
             level = "low"
 

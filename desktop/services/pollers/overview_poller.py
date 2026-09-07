@@ -1,9 +1,11 @@
 from PySide6.QtCore import QObject, QThread, QTimer
 
 from api.client import NexoraClient
+
 from services.stores.agent_command_store import CommandsStore
 from services.box_messages import MessageBox
 from services.stores.agent_store import DetailAgentStore
+
 from workers.overview_worker import OverviewWorker, RecentCommandsWorker
 
 
@@ -25,7 +27,6 @@ class DetailOverviewPoller(QObject):
         self.is_polling = False
         self.api_error_shown = False
 
-        # Хранилище для активных потоков, чтобы Garbage Collector не удалял их на лету
         self._active_workers = []
 
         self.timer = QTimer(self)
@@ -45,15 +46,12 @@ class DetailOverviewPoller(QObject):
             self.timer.stop()
 
     def refresh_all(self) -> None:
-        """Безопасно запускает оба обновления в изолированных потоках."""
         if self.is_polling or not self.client.base_url or self.agent_id is None:
             return
 
         self.is_polling = True
         
-        # Запуск первого воркера
         self._start_overview_worker()
-        # Запуск второго воркера
         self._start_commands_worker()
 
     def _start_overview_worker(self) -> None:
@@ -61,15 +59,14 @@ class DetailOverviewPoller(QObject):
         worker = OverviewWorker(self.client, self.agent_id)
         worker.moveToThread(thread)
 
-        # Сохраняем жесткую ссылку, предотвращая удаление воркера из памяти Python
         worker_context = {"thread": thread, "worker": worker}
+
         self._active_workers.append(worker_context)
 
         thread.started.connect(worker.run)
         worker.success.connect(self.detail_agent_store.set_agent)
         worker.error.connect(self.show_api_error)
 
-        # Каскадное и безопасное удаление после завершения
         worker.finished.connect(thread.quit)
         worker.finished.connect(worker.deleteLater)
         
@@ -77,7 +74,7 @@ class DetailOverviewPoller(QObject):
             thread.deleteLater()
             if worker_context in self._active_workers:
                 self._active_workers.remove(worker_context)
-            # Флаг сбрасываем только когда ОДИН из основных потоков гарантированно финишировал
+
             self.is_polling = False
 
         thread.finished.connect(cleanup)
@@ -88,8 +85,8 @@ class DetailOverviewPoller(QObject):
         worker = RecentCommandsWorker(self.client, self.agent_id)
         worker.moveToThread(thread)
 
-        # Сохраняем жесткую ссылку для второго воркера отдельно!
         worker_context = {"thread": thread, "worker": worker}
+
         self._active_workers.append(worker_context)
 
         thread.started.connect(worker.run)

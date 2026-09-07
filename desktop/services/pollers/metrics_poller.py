@@ -2,105 +2,109 @@ from PySide6.QtCore import QObject, QThread, QTimer
 
 from api.client import NexoraClient
 
-from services.stores.metric_stores import MetricStore
+from services.stores.metric_store import MetricStore
 
-from workers.metric_worker import AgentResourceMetricWorker
+from workers.metric_worker import AgentMetricWorker
 
 from ..box_messages import MessageBox
 
 
 class AgentMetricPoller(QObject):
-    def __init__(self, client: NexoraClient, store: MetricStore):
+    def __init__(
+        self,
+        client: NexoraClient,
+        metric_store: MetricStore,
+    ):
         super().__init__()
 
         self.client = client
-        self.store = store
-
-        self.thread: QThread | None = None
-        self.worker: AgentResourceMetricWorker | None = None
-        self.is_polling = False
-        self.pending_refresh = False
-        self.api_error_shown = False
+        self.metric_store = metric_store
 
         self.agent_id: int | None = None
-        self.from_timestamp: int | None = None
 
-        self.setup_timer()
+        self.from_hours = 1
+        self.metric_type: str = None
 
-    def setup_timer(self) -> None:
-        if self.client.base_url:
-            self.timer = QTimer(self)
-            self.timer.setInterval(5000)
-            self.timer.timeout.connect(self.refresh)
+        self.is_polling = False
+        self.api_error_shown = False
+
+        self._active_workers = []
+
+        self.timer = QTimer(self)
+        self.timer.setInterval(5000)
+        self.timer.timeout.connect(self.refresh)
+
+    def on_clicked(self, agent_id: int, metric_type: str = None) -> None:
+        self.agent_id = agent_id
+
+        if not self.metric_type:
+            self.metric_type = "resources"
+
+        else:
+            self.metric_type = metric_type
+
+        if self.client.base_url and not self.timer.isActive():
             self.timer.start()
 
-    def set_agent(self, agent_id: int, from_timestamp: int) -> None:
-        self.agent_id = agent_id
-        self.from_timestamp = from_timestamp
+        self.refresh()
 
-    def refresh(self, force=False) -> None:
-        if self.is_polling:
-            if force:
-                self.pending_refresh = True
-            return
+    def change_hours(self, hours: int):
+        self.from_hours = hours
 
-        if (
-            not self.client.base_url
-            or self.agent_id is None
-            or self.from_timestamp is None
-        ):
-            return
+        self.refresh(force=True)
+
+    def stop_polling(self) -> None:
+        if self.timer.isActive():
+            self.timer.stop()
+
+    def refresh(self, force: bool = False) -> None:
+        if not force:
+            if self.is_polling or not self.client.base_url or self.agent_id is None:
+                return
 
         self.is_polling = True
 
-        self.thread = QThread()
+        self._start_metric_worker()
 
-        self.worker = AgentResourceMetricWorker(
-            client=self.client,
-            agent_id=self.agent_id,
-            timestamp=self.from_timestamp,
+    def _start_metric_worker(self) -> None:
+        thread = QThread(self)
+        worker = AgentMetricWorker(
+            self.client, self.agent_id, self.from_hours, self.metric_type
         )
+        worker.moveToThread(thread)
 
-        self.worker.moveToThread(self.thread)
+        worker_context = {"thread": thread, "worker": worker}
 
-        self.thread.started.connect(self.worker.run)
+        self._active_workers.append(worker_context)
 
-        self.worker.success.connect(self.on_success)
+        thread.started.connect(worker.run)
+        worker.success.connect(self.metric_store.set_metrics)
+        worker.error.connect(self.show_api_error)
 
-        self.worker.error.connect(self.show_api_error)
+        worker.finished.connect(thread.quit)
+        worker.finished.connect(worker.deleteLater)
 
-        self.worker.finished.connect(self.thread.quit)
+        def cleanup():
+            thread.deleteLater()
+            if worker_context in self._active_workers:
+                self._active_workers.remove(worker_context)
 
-        self.worker.finished.connect(self.worker.deleteLater)
+            self.is_polling = False
 
-        self.thread.finished.connect(self.thread.deleteLater)
+        thread.finished.connect(cleanup)
 
-        self.thread.finished.connect(self.on_finished)
+        thread.start()
 
-        self.thread.start()
-
-    def on_success(self, agent_id: int, from_timestamp: int, metrics: dict) -> None:
-        if agent_id != self.agent_id or from_timestamp != self.from_timestamp:
-            return
-
-        self.api_error_shown = False
-        self.store.set_metrics(metrics)
-
-    def on_finished(self) -> None:
+    def on_finished(self):
         self.is_polling = False
-        self.thread = None
-        self.worker = None
 
-        if self.pending_refresh:
-            self.pending_refresh = False
-            self.refresh()
-
-    def show_api_error(self, message=None) -> None:
+    def show_api_error(self, message: str = None) -> None:
         if not self.api_error_shown:
             self.api_error_shown = True
+            self.stop_polling()
 
             MessageBox().show_message(
                 "critical",
                 "API error",
-                "API connection failed! Please change the API URL",
+                message or "API connection failed! Please change the API URL",
             )

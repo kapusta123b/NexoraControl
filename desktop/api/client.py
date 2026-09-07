@@ -10,19 +10,23 @@ class NexoraClient:
         self.token = token
         self.headers = {"Authorization": self.token}
 
-    def _get(self, path: str, params: dict = None, timeout: int = 10) -> list[dict] | dict | None:
-        with Client(base_url=self.base_url, headers=self.headers, timeout=timeout) as client:
+    def _get(
+        self, path: str, params: dict = None, timeout: int = 10
+    ) -> list[dict] | dict | None:
+        with Client(
+            base_url=self.base_url, headers=self.headers, timeout=timeout
+        ) as client:
             try:
                 response = client.get(url=path, params=params)
-                
+
                 response.raise_for_status()
-                
+
                 return response.json()
-            
+
             except HTTPError as e:
                 logging.error(f"HTTP Error during GET {path}: {e}")
                 raise e
-            
+
             except Exception as e:
                 logging.error(f"Unexpected error during GET {path}: {e}")
                 raise e
@@ -33,9 +37,20 @@ class NexoraClient:
     def get_detail_agent(self, agent_id: int) -> dict:
         return self._get(f"{self.BASE_AGENT_URL}{agent_id}/")
 
-    def get_agent_resource_metrics(self, agent_id: int, hours: int) -> dict:
+    def get_agent_metrics(self, agent_id: int, hours: int, metric_type: str) -> dict:
+        BASE_AGENT_METRIC_URL = f"{self.BASE_AGENT_URL}{agent_id}/metrics/"
+
+        metric_types = {
+            "resources": f"{BASE_AGENT_METRIC_URL}resources/",
+            "thermals": f"{BASE_AGENT_METRIC_URL}thermals/",
+            "network": f"{BASE_AGENT_METRIC_URL}network/",
+            "storage": f"{BASE_AGENT_METRIC_URL}storage/",
+        }
+
+        metric_url = metric_types[metric_type]
+
         return self._get(
-            f"{self.BASE_AGENT_URL}{agent_id}/metrics/resources/",
+            metric_url,
             {"hours": hours},
         )
 

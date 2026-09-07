@@ -32,9 +32,7 @@ class AgentsController:
 
             card.set_agent(agent)
 
-            card.ui.agent_open_button.clicked.connect(
-                lambda checked=False: self.open_agent(agent)
-            )
+            card.ui.agent_open_button.clicked.connect(lambda: self.open_agent(agent))
             card.open_requested.connect(lambda: self.open_agent(agent))
 
             layout.addWidget(card)
@@ -46,7 +44,6 @@ class AgentsController:
         self.detail_controller.set_agent(agent=agent)
 
         self.ui.content_stack.setCurrentWidget(self.ui.agent_detail_page)
-        
         self.ui.agent_detail_stacked_content.setCurrentWidget(
             self.ui.overview_detail_page
         )
