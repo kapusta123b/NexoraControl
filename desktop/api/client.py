@@ -37,14 +37,17 @@ class NexoraClient:
     def get_detail_agent(self, agent_id: int) -> dict:
         return self._get(f"{self.BASE_AGENT_URL}{agent_id}/")
 
-    def get_agent_metrics(self, agent_id: int, hours: int, metric_type: str) -> dict:
+    def get_agent_metrics(
+        self, agent_id: int, hours: int, metric_type: str, partial: bool
+    ) -> dict:
         BASE_AGENT_METRIC_URL = f"{self.BASE_AGENT_URL}{agent_id}/metrics/"
+        url_for_last_metric = "latest" if partial else "history"
 
         metric_types = {
-            "resources": f"{BASE_AGENT_METRIC_URL}resources/",
-            "thermals": f"{BASE_AGENT_METRIC_URL}thermals/",
-            "network": f"{BASE_AGENT_METRIC_URL}network/",
-            "storage": f"{BASE_AGENT_METRIC_URL}storage/",
+            "resources": f"{BASE_AGENT_METRIC_URL}resources/{url_for_last_metric}/",
+            "thermals": f"{BASE_AGENT_METRIC_URL}thermals/{url_for_last_metric}/",
+            "network": f"{BASE_AGENT_METRIC_URL}network/{url_for_last_metric}/",
+            "storage": f"{BASE_AGENT_METRIC_URL}storage/{url_for_last_metric}/",
         }
 
         metric_url = metric_types[metric_type]

@@ -2,15 +2,27 @@ from PySide6.QtCore import QObject, Signal
 
 
 class MetricStore(QObject):
-    metrics_changed = Signal(dict)
+    metrics_loaded = Signal(dict)
+    metrics_appended = Signal(dict)
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self._metrics: dict | None = None
+        self._metrics: dict[str, list[float] | float] = {}
 
-    def set_metrics(self, metrics: dict) -> None:
-        self._metrics = metrics
-        self.metrics_changed.emit(metrics)
-
-    def get_metrics(self) -> dict | None:
+    @property
+    def metrics(self) -> dict[str, list[float] | float]:
         return self._metrics
+
+    def set_history(self, metrics: dict[str, list[float]]) -> None:
+        self._metrics = metrics
+        self.metrics_loaded.emit(self._metrics)
+
+    def append_point(self, new_metrics: dict[str, float]) -> None:
+        for key, value in new_metrics.items():
+            current = self._metrics.get(key)
+            if isinstance(current, list):
+                current.append(value)
+            else:
+                self._metrics[key] = value
+
+        self.metrics_appended.emit(new_metrics)

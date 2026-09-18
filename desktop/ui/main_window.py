@@ -17,9 +17,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QHBoxLayout,
     QHeaderView, QLabel, QLineEdit, QMainWindow,
-    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QStackedWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
-    QWidget)
+    QProgressBar, QPushButton, QScrollArea, QSizePolicy,
+    QSpacerItem, QStackedWidget, QTableWidget, QTableWidgetItem,
+    QVBoxLayout, QWidget)
 
 from pyqtgraph import PlotWidget
 
@@ -27,18 +27,16 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1101, 558)
+        MainWindow.resize(1181, 816)
         icon = QIcon()
         iconThemeName = u"camera-photo"
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
-            icon.addFile(u"../.designer/.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon.addFile(u"../.designer/.designer/.designer/.designer/.designer/.designer/.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         MainWindow.setWindowIcon(icon)
-        MainWindow.setStyleSheet(u"QStackedWidget {\n"
-"	background-color: rgb(237, 21, 59);\n"
-"}")
+        MainWindow.setStyleSheet(u"")
         self.central_content = QWidget(MainWindow)
         self.central_content.setObjectName(u"central_content")
         self.central_content.setMinimumSize(QSize(993, 300))
@@ -150,8 +148,9 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "Line {\n"
-"	background-color: rgba(244, 244, 244, 164);\n"
-"\n"
+"    background-color: #1E2633;\n"
+"    border: none;\n"
+"    max-height: 1px;\n"
 "}\n"
 "")
         self.left_panel_layout = QVBoxLayout(self.left_panel)
@@ -189,13 +188,6 @@ class Ui_MainWindow(object):
 
         self.left_panel_layout.addWidget(self.commands_button)
 
-        self.metrics_button = QPushButton(self.left_panel)
-        self.metrics_button.setObjectName(u"metrics_button")
-        self.metrics_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.metrics_button.setCheckable(True)
-
-        self.left_panel_layout.addWidget(self.metrics_button)
-
         self.logs_button = QPushButton(self.left_panel)
         self.logs_button.setObjectName(u"logs_button")
         self.logs_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -226,7 +218,7 @@ class Ui_MainWindow(object):
 
         self.left_panel_layout.addWidget(self.about_button)
 
-        self.bottom_spacer = QSpacerItem(20, 200, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        self.bottom_spacer = QSpacerItem(20, 200, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.left_panel_layout.addItem(self.bottom_spacer)
 
@@ -238,7 +230,7 @@ class Ui_MainWindow(object):
         self.content_stack.setMinimumSize(QSize(500, 411))
         self.content_stack.setMaximumSize(QSize(16777215, 16777215))
         self.content_stack.setStyleSheet(u"QWidget {\n"
-"    color: #c9d1d9;\n"
+"\n"
 "	font: 200 10pt \"JetBrainsMonoNL Nerd Font Propo\";\n"
 "}\n"
 "")
@@ -531,6 +523,10 @@ class Ui_MainWindow(object):
 
         self.agents_main_layout.addWidget(self.agents_headline_label)
 
+        self.verticalSpacer_2 = QSpacerItem(20, 8, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.agents_main_layout.addItem(self.verticalSpacer_2)
+
         self.page_description_label = QLabel(self.agents_page)
         self.page_description_label.setObjectName(u"page_description_label")
         self.page_description_label.setMaximumSize(QSize(16777215, 40))
@@ -580,7 +576,8 @@ class Ui_MainWindow(object):
 
         self.agent_list = QScrollArea(self.agents_page)
         self.agent_list.setObjectName(u"agent_list")
-        self.agent_list.setMaximumSize(QSize(16777215, 300))
+        self.agent_list.setMinimumSize(QSize(0, 400))
+        self.agent_list.setMaximumSize(QSize(16777215, 16777215))
         self.agent_list.setLayoutDirection(Qt.LeftToRight)
         self.agent_list.setAutoFillBackground(False)
         self.agent_list.setStyleSheet(u"QScrollArea {\n"
@@ -634,7 +631,7 @@ class Ui_MainWindow(object):
         self.agent_list.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.agent_scroll = QWidget()
         self.agent_scroll.setObjectName(u"agent_scroll")
-        self.agent_scroll.setGeometry(QRect(0, 0, 902, 300))
+        self.agent_scroll.setGeometry(QRect(0, 0, 72, 400))
         self.agent_scroll.setMaximumSize(QSize(16777215, 1000000))
         self.agent_scroll.setStyleSheet(u"")
         self.agent_scroll_layout = QVBoxLayout(self.agent_scroll)
@@ -644,6 +641,10 @@ class Ui_MainWindow(object):
         self.agent_list.setWidget(self.agent_scroll)
 
         self.agents_main_layout.addWidget(self.agent_list)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.agents_main_layout.addItem(self.verticalSpacer)
 
 
         self.agents_page_layout.addLayout(self.agents_main_layout)
@@ -702,9 +703,9 @@ class Ui_MainWindow(object):
 
         self.detail_top_layout.addWidget(self.back_to_agents_button)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.detail_top_center_spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.detail_top_layout.addItem(self.horizontalSpacer_4)
+        self.detail_top_layout.addItem(self.detail_top_center_spacer)
 
         self.detail_top_agent_name_label = QLabel(self.detail_top_widget)
         self.detail_top_agent_name_label.setObjectName(u"detail_top_agent_name_label")
@@ -742,12 +743,12 @@ class Ui_MainWindow(object):
 
         self.detail_top_navigation_layout.addWidget(self.overview_nav_button)
 
-        self.perfomance_nav_button = QPushButton(self.detail_top_widget)
-        self.perfomance_nav_button.setObjectName(u"perfomance_nav_button")
-        self.perfomance_nav_button.setCheckable(True)
-        self.perfomance_nav_button.setChecked(False)
+        self.performance_nav_button = QPushButton(self.detail_top_widget)
+        self.performance_nav_button.setObjectName(u"performance_nav_button")
+        self.performance_nav_button.setCheckable(True)
+        self.performance_nav_button.setChecked(False)
 
-        self.detail_top_navigation_layout.addWidget(self.perfomance_nav_button)
+        self.detail_top_navigation_layout.addWidget(self.performance_nav_button)
 
         self.hardware_nav_button = QPushButton(self.detail_top_widget)
         self.hardware_nav_button.setObjectName(u"hardware_nav_button")
@@ -755,20 +756,6 @@ class Ui_MainWindow(object):
         self.hardware_nav_button.setChecked(False)
 
         self.detail_top_navigation_layout.addWidget(self.hardware_nav_button)
-
-        self.storage_nav_button = QPushButton(self.detail_top_widget)
-        self.storage_nav_button.setObjectName(u"storage_nav_button")
-        self.storage_nav_button.setCheckable(True)
-        self.storage_nav_button.setChecked(False)
-
-        self.detail_top_navigation_layout.addWidget(self.storage_nav_button)
-
-        self.network_nav_button = QPushButton(self.detail_top_widget)
-        self.network_nav_button.setObjectName(u"network_nav_button")
-        self.network_nav_button.setCheckable(True)
-        self.network_nav_button.setChecked(False)
-
-        self.detail_top_navigation_layout.addWidget(self.network_nav_button)
 
         self.commands_nav_button = QPushButton(self.detail_top_widget)
         self.commands_nav_button.setObjectName(u"commands_nav_button")
@@ -855,7 +842,7 @@ class Ui_MainWindow(object):
         self.overview_detail_scroll.setWidgetResizable(True)
         self.agent_detail_information = QWidget()
         self.agent_detail_information.setObjectName(u"agent_detail_information")
-        self.agent_detail_information.setGeometry(QRect(0, -324, 882, 700))
+        self.agent_detail_information.setGeometry(QRect(0, 0, 889, 700))
         self.agent_detail_information.setMinimumSize(QSize(0, 700))
         self.agent_detail_information_layout = QVBoxLayout(self.agent_detail_information)
         self.agent_detail_information_layout.setSpacing(5)
@@ -1153,11 +1140,11 @@ class Ui_MainWindow(object):
         self.quick_actions_widget = QWidget(self.agent_detail_information)
         self.quick_actions_widget.setObjectName(u"quick_actions_widget")
         self.quick_actions_widget.setMinimumSize(QSize(0, 80))
-        self.quick_actions_widget.setMaximumSize(QSize(16777215, 80))
+        self.quick_actions_widget.setMaximumSize(QSize(16777215, 16777215))
         self.quick_actions_widget_layout = QVBoxLayout(self.quick_actions_widget)
         self.quick_actions_widget_layout.setSpacing(0)
         self.quick_actions_widget_layout.setObjectName(u"quick_actions_widget_layout")
-        self.quick_actions_widget_layout.setContentsMargins(0, -1, 0, 0)
+        self.quick_actions_widget_layout.setContentsMargins(0, 0, 0, 0)
         self.quick_actions_label = QLabel(self.quick_actions_widget)
         self.quick_actions_label.setObjectName(u"quick_actions_label")
         self.quick_actions_label.setStyleSheet(u"QLabel {\n"
@@ -1211,7 +1198,7 @@ class Ui_MainWindow(object):
         self.recent_commands_widget_layout = QVBoxLayout(self.recent_commands_widget)
         self.recent_commands_widget_layout.setSpacing(5)
         self.recent_commands_widget_layout.setObjectName(u"recent_commands_widget_layout")
-        self.recent_commands_widget_layout.setContentsMargins(0, 15, 0, 0)
+        self.recent_commands_widget_layout.setContentsMargins(0, 0, 0, 0)
         self.recent_commands_label = QLabel(self.recent_commands_widget)
         self.recent_commands_label.setObjectName(u"recent_commands_label")
         self.recent_commands_label.setMaximumSize(QSize(16777215, 30))
@@ -1240,11 +1227,13 @@ class Ui_MainWindow(object):
         self.overview_detail_page_layout.addWidget(self.overview_detail_scroll)
 
         self.agent_detail_stacked_content.addWidget(self.overview_detail_page)
-        self.perfomance_detail_page = QWidget()
-        self.perfomance_detail_page.setObjectName(u"perfomance_detail_page")
-        self.perfomance_detail_page_layout = QVBoxLayout(self.perfomance_detail_page)
+        self.performance_detail_page = QWidget()
+        self.performance_detail_page.setObjectName(u"performance_detail_page")
+        self.perfomance_detail_page_layout = QVBoxLayout(self.performance_detail_page)
+        self.perfomance_detail_page_layout.setSpacing(9)
         self.perfomance_detail_page_layout.setObjectName(u"perfomance_detail_page_layout")
-        self.perfomance_label = QLabel(self.perfomance_detail_page)
+        self.perfomance_detail_page_layout.setContentsMargins(0, 5, 0, 0)
+        self.perfomance_label = QLabel(self.performance_detail_page)
         self.perfomance_label.setObjectName(u"perfomance_label")
         self.perfomance_label.setMinimumSize(QSize(0, 0))
         self.perfomance_label.setStyleSheet(u"QLabel {\n"
@@ -1255,9 +1244,9 @@ class Ui_MainWindow(object):
 
         self.perfomance_detail_page_layout.addWidget(self.perfomance_label)
 
-        self.perfomance_detail_scroll = QScrollArea(self.perfomance_detail_page)
-        self.perfomance_detail_scroll.setObjectName(u"perfomance_detail_scroll")
-        self.perfomance_detail_scroll.setStyleSheet(u"QScrollArea {\n"
+        self.performance_detail_scroll = QScrollArea(self.performance_detail_page)
+        self.performance_detail_scroll.setObjectName(u"performance_detail_scroll")
+        self.performance_detail_scroll.setStyleSheet(u"QScrollArea {\n"
 "    border: none;\n"
 "\n"
 "\n"
@@ -1301,15 +1290,15 @@ class Ui_MainWindow(object):
 "    background: none;\n"
 "}\n"
 "")
-        self.perfomance_detail_scroll.setWidgetResizable(True)
-        self.agent_perfomance_information = QWidget()
-        self.agent_perfomance_information.setObjectName(u"agent_perfomance_information")
-        self.agent_perfomance_information.setGeometry(QRect(0, 0, 484, 444))
-        self.verticalLayout_26 = QVBoxLayout(self.agent_perfomance_information)
+        self.performance_detail_scroll.setWidgetResizable(True)
+        self.agent_performance_information = QWidget()
+        self.agent_performance_information.setObjectName(u"agent_performance_information")
+        self.agent_performance_information.setGeometry(QRect(0, -529, 980, 1311))
+        self.verticalLayout_26 = QVBoxLayout(self.agent_performance_information)
         self.verticalLayout_26.setSpacing(0)
         self.verticalLayout_26.setObjectName(u"verticalLayout_26")
         self.verticalLayout_26.setContentsMargins(0, 0, 0, 0)
-        self.performance_content_widget = QWidget(self.agent_perfomance_information)
+        self.performance_content_widget = QWidget(self.agent_performance_information)
         self.performance_content_widget.setObjectName(u"performance_content_widget")
         self.performance_content_widget.setStyleSheet(u"QPushButton {\n"
 "	text-align: center;\n"
@@ -1317,10 +1306,11 @@ class Ui_MainWindow(object):
 "	margin-bottom: 5px;\n"
 "}")
         self.verticalLayout_32 = QVBoxLayout(self.performance_content_widget)
-        self.verticalLayout_32.setSpacing(0)
+        self.verticalLayout_32.setSpacing(6)
         self.verticalLayout_32.setObjectName(u"verticalLayout_32")
         self.verticalLayout_32.setContentsMargins(0, 0, 0, 0)
         self.metric_buttons_layout = QHBoxLayout()
+        self.metric_buttons_layout.setSpacing(2)
         self.metric_buttons_layout.setObjectName(u"metric_buttons_layout")
         self.compute_button = QPushButton(self.performance_content_widget)
         self.compute_button.setObjectName(u"compute_button")
@@ -1345,26 +1335,585 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_32.addLayout(self.metric_buttons_layout)
 
-        self.metric_graph = PlotWidget(self.performance_content_widget)
-        self.metric_graph.setObjectName(u"metric_graph")
-        self.metric_graph.setMinimumSize(QSize(0, 400))
-        self.metric_graph.setStyleSheet(u"QWidget {\n"
+        self.performance_stacked_content = QStackedWidget(self.performance_content_widget)
+        self.performance_stacked_content.setObjectName(u"performance_stacked_content")
+        self.performance_stacked_content.setStyleSheet(u"#perfomance_stacked_content {\n"
+"    background-color: transparent;\n"
+"    border: 1px solid #1E2633;\n"
+"	border-radius: 2px\n"
+"\n"
+"}")
+        self.compute_page = QWidget()
+        self.compute_page.setObjectName(u"compute_page")
+        self.verticalLayout_2 = QVBoxLayout(self.compute_page)
+        self.verticalLayout_2.setSpacing(15)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(6, 6, 6, 6)
+        self.compute_label = QLabel(self.compute_page)
+        self.compute_label.setObjectName(u"compute_label")
+        self.compute_label.setStyleSheet(u"QLabel {\n"
+"	font: 350 italic 15pt;\n"
+"	margin-left: 0px;\n"
+"}")
+
+        self.verticalLayout_2.addWidget(self.compute_label)
+
+        self.compute_current_state_label = QLabel(self.compute_page)
+        self.compute_current_state_label.setObjectName(u"compute_current_state_label")
+
+        self.verticalLayout_2.addWidget(self.compute_current_state_label)
+
+        self.compute_gauge_widget = QWidget(self.compute_page)
+        self.compute_gauge_widget.setObjectName(u"compute_gauge_widget")
+        self.compute_gauge_widget.setStyleSheet(u"#compute_gauge_widget {\n"
+"	border: 1px solid #1E2633;\n"
+"}")
+        self.compute_gauge_layout = QHBoxLayout(self.compute_gauge_widget)
+        self.compute_gauge_layout.setObjectName(u"compute_gauge_layout")
+        self.compute_gauge_layout.setContentsMargins(-1, -1, -1, 1)
+
+        self.verticalLayout_2.addWidget(self.compute_gauge_widget)
+
+        self.cpu_ram_metric_label = QLabel(self.compute_page)
+        self.cpu_ram_metric_label.setObjectName(u"cpu_ram_metric_label")
+
+        self.verticalLayout_2.addWidget(self.cpu_ram_metric_label)
+
+        self.cpu_ram_utilization_widget = QWidget(self.compute_page)
+        self.cpu_ram_utilization_widget.setObjectName(u"cpu_ram_utilization_widget")
+        self.cpu_ram_utilization_widget.setMinimumSize(QSize(0, 300))
+        self.cpu_ram_utilization_widget.setMaximumSize(QSize(16777215, 600))
+        self.cpu_ram_utilization_layout = QHBoxLayout(self.cpu_ram_utilization_widget)
+        self.cpu_ram_utilization_layout.setObjectName(u"cpu_ram_utilization_layout")
+        self.cpu_ram_utilization_layout.setContentsMargins(0, 0, 0, 0)
+        self.cpu_ram_metric_graph = PlotWidget(self.cpu_ram_utilization_widget)
+        self.cpu_ram_metric_graph.setObjectName(u"cpu_ram_metric_graph")
+        self.cpu_ram_metric_graph.setMinimumSize(QSize(0, 0))
+        self.cpu_ram_metric_graph.setStyleSheet(u"QWidget {\n"
 "    background-color: transparent;\n"
 "    border: 1px solid #30363d;\n"
 "    border-radius: 8px;\n"
-"	margin: 10px 0px 0px 0px;\n"
+"	border-top-right-radius: 0px; \n"
+"	border-bottom-right-radius: 0px;\n"
 "}")
 
-        self.verticalLayout_32.addWidget(self.metric_graph)
+        self.cpu_ram_utilization_layout.addWidget(self.cpu_ram_metric_graph)
+
+        self.ram_utilization_widget = QWidget(self.cpu_ram_utilization_widget)
+        self.ram_utilization_widget.setObjectName(u"ram_utilization_widget")
+        self.ram_utilization_widget.setMinimumSize(QSize(0, 120))
+        self.ram_utilization_widget.setMaximumSize(QSize(200, 16777215))
+        self.ram_utilization_widget.setStyleSheet(u"#ram_utilization_widget {\n"
+"	border: 1px solid #30363d;\n"
+"	border-radius: 8px;\n"
+"	border-top-left-radius: 0px;\n"
+"	border-bottom-left-radius: 0px;\n"
+"}\n"
+"\n"
+"Line {\n"
+"    background-color: #1E2633;\n"
+"    border: none;\n"
+"    max-height: 1px;\n"
+"}")
+        self.ram_utilization_layout = QVBoxLayout(self.ram_utilization_widget)
+        self.ram_utilization_layout.setObjectName(u"ram_utilization_layout")
+        self.memory_label = QLabel(self.ram_utilization_widget)
+        self.memory_label.setObjectName(u"memory_label")
+        self.memory_label.setMaximumSize(QSize(16777215, 50))
+        self.memory_label.setStyleSheet(u"font: 200 italic 11pt;")
+
+        self.ram_utilization_layout.addWidget(self.memory_label)
+
+        self.memory_information_layout = QVBoxLayout()
+        self.memory_information_layout.setObjectName(u"memory_information_layout")
+        self.used_memory_layout = QHBoxLayout()
+        self.used_memory_layout.setObjectName(u"used_memory_layout")
+        self.used_memory_label = QLabel(self.ram_utilization_widget)
+        self.used_memory_label.setObjectName(u"used_memory_label")
+
+        self.used_memory_layout.addWidget(self.used_memory_label)
+
+        self.used_memory_value_label = QLabel(self.ram_utilization_widget)
+        self.used_memory_value_label.setObjectName(u"used_memory_value_label")
+
+        self.used_memory_layout.addWidget(self.used_memory_value_label)
+
+
+        self.memory_information_layout.addLayout(self.used_memory_layout)
+
+        self.memory_layout_top_line = QFrame(self.ram_utilization_widget)
+        self.memory_layout_top_line.setObjectName(u"memory_layout_top_line")
+        self.memory_layout_top_line.setFrameShape(QFrame.Shape.HLine)
+        self.memory_layout_top_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.memory_information_layout.addWidget(self.memory_layout_top_line)
+
+        self.available_memory_layout = QHBoxLayout()
+        self.available_memory_layout.setObjectName(u"available_memory_layout")
+        self.available_memory_label = QLabel(self.ram_utilization_widget)
+        self.available_memory_label.setObjectName(u"available_memory_label")
+
+        self.available_memory_layout.addWidget(self.available_memory_label)
+
+        self.available_memory_value_label = QLabel(self.ram_utilization_widget)
+        self.available_memory_value_label.setObjectName(u"available_memory_value_label")
+
+        self.available_memory_layout.addWidget(self.available_memory_value_label)
+
+
+        self.memory_information_layout.addLayout(self.available_memory_layout)
+
+        self.memory_layout_bottom_line = QFrame(self.ram_utilization_widget)
+        self.memory_layout_bottom_line.setObjectName(u"memory_layout_bottom_line")
+        self.memory_layout_bottom_line.setFrameShape(QFrame.Shape.HLine)
+        self.memory_layout_bottom_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.memory_information_layout.addWidget(self.memory_layout_bottom_line)
+
+        self.swap_memory_layout = QHBoxLayout()
+        self.swap_memory_layout.setObjectName(u"swap_memory_layout")
+        self.swap_memory_label = QLabel(self.ram_utilization_widget)
+        self.swap_memory_label.setObjectName(u"swap_memory_label")
+
+        self.swap_memory_layout.addWidget(self.swap_memory_label)
+
+        self.swap_memory_value_label = QLabel(self.ram_utilization_widget)
+        self.swap_memory_value_label.setObjectName(u"swap_memory_value_label")
+
+        self.swap_memory_layout.addWidget(self.swap_memory_value_label)
+
+
+        self.memory_information_layout.addLayout(self.swap_memory_layout)
+
+
+        self.ram_utilization_layout.addLayout(self.memory_information_layout)
+
+        self.memory_progress_bar = QProgressBar(self.ram_utilization_widget)
+        self.memory_progress_bar.setObjectName(u"memory_progress_bar")
+        self.memory_progress_bar.setStyleSheet(u"QProgressBar {\n"
+"    border: 1px solid #1E2B3E;\n"
+"    border-radius: 0px;\n"
+"    background-color: #090C12;\n"
+"    text-align: center;\n"
+"    color: #a5b4fc;\n"
+"	font-size: 11px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk {\n"
+"\n"
+"	background-color: rgba(11, 22, 35, 255);\n"
+"    border-radius: 0px;\n"
+"    margin: 1px;\n"
+"}")
+        self.memory_progress_bar.setValue(0)
+
+        self.ram_utilization_layout.addWidget(self.memory_progress_bar)
+
+
+        self.cpu_ram_utilization_layout.addWidget(self.ram_utilization_widget)
+
+
+        self.verticalLayout_2.addWidget(self.cpu_ram_utilization_widget)
+
+        self.compute_load_average_label = QLabel(self.compute_page)
+        self.compute_load_average_label.setObjectName(u"compute_load_average_label")
+
+        self.verticalLayout_2.addWidget(self.compute_load_average_label)
+
+        self.load_average_metric_graph = PlotWidget(self.compute_page)
+        self.load_average_metric_graph.setObjectName(u"load_average_metric_graph")
+        self.load_average_metric_graph.setMinimumSize(QSize(0, 300))
+        self.load_average_metric_graph.setStyleSheet(u"QWidget {\n"
+"    background-color: transparent;\n"
+"    border: 1px solid #30363d;\n"
+"    border-radius: 8px;\n"
+"\n"
+"\n"
+"	border-top-right-radius: 0px; \n"
+"	border-bottom-right-radius: 0px;\n"
+"}")
+
+        self.verticalLayout_2.addWidget(self.load_average_metric_graph)
+
+        self.compute_cpu_cores_label = QLabel(self.compute_page)
+        self.compute_cpu_cores_label.setObjectName(u"compute_cpu_cores_label")
+
+        self.verticalLayout_2.addWidget(self.compute_cpu_cores_label)
+
+        self.cpu_cores_metric_graph = PlotWidget(self.compute_page)
+        self.cpu_cores_metric_graph.setObjectName(u"cpu_cores_metric_graph")
+        self.cpu_cores_metric_graph.setMinimumSize(QSize(0, 300))
+        self.cpu_cores_metric_graph.setStyleSheet(u"QWidget {\n"
+"    background-color: transparent;\n"
+"    border: 1px solid #30363d;\n"
+"    border-radius: 8px;\n"
+"\n"
+"\n"
+"	border-top-right-radius: 0px; \n"
+"	border-bottom-right-radius: 0px;\n"
+"}")
+
+        self.verticalLayout_2.addWidget(self.cpu_cores_metric_graph)
+
+        self.compute_top_processes_label = QLabel(self.compute_page)
+        self.compute_top_processes_label.setObjectName(u"compute_top_processes_label")
+
+        self.verticalLayout_2.addWidget(self.compute_top_processes_label)
+
+        self.compute_top_processes_table = QTableWidget(self.compute_page)
+        if (self.compute_top_processes_table.columnCount() < 5):
+            self.compute_top_processes_table.setColumnCount(5)
+        __qtablewidgetitem6 = QTableWidgetItem()
+        self.compute_top_processes_table.setHorizontalHeaderItem(0, __qtablewidgetitem6)
+        __qtablewidgetitem7 = QTableWidgetItem()
+        self.compute_top_processes_table.setHorizontalHeaderItem(1, __qtablewidgetitem7)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        self.compute_top_processes_table.setHorizontalHeaderItem(2, __qtablewidgetitem8)
+        __qtablewidgetitem9 = QTableWidgetItem()
+        self.compute_top_processes_table.setHorizontalHeaderItem(3, __qtablewidgetitem9)
+        __qtablewidgetitem10 = QTableWidgetItem()
+        self.compute_top_processes_table.setHorizontalHeaderItem(4, __qtablewidgetitem10)
+        if (self.compute_top_processes_table.rowCount() < 1):
+            self.compute_top_processes_table.setRowCount(1)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        self.compute_top_processes_table.setVerticalHeaderItem(0, __qtablewidgetitem11)
+        __qtablewidgetitem12 = QTableWidgetItem()
+        self.compute_top_processes_table.setItem(0, 0, __qtablewidgetitem12)
+        __qtablewidgetitem13 = QTableWidgetItem()
+        self.compute_top_processes_table.setItem(0, 1, __qtablewidgetitem13)
+        __qtablewidgetitem14 = QTableWidgetItem()
+        self.compute_top_processes_table.setItem(0, 2, __qtablewidgetitem14)
+        __qtablewidgetitem15 = QTableWidgetItem()
+        self.compute_top_processes_table.setItem(0, 3, __qtablewidgetitem15)
+        __qtablewidgetitem16 = QTableWidgetItem()
+        self.compute_top_processes_table.setItem(0, 4, __qtablewidgetitem16)
+        self.compute_top_processes_table.setObjectName(u"compute_top_processes_table")
+        self.compute_top_processes_table.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.compute_top_processes_table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.compute_top_processes_table.horizontalHeader().setCascadingSectionResizes(True)
+        self.compute_top_processes_table.horizontalHeader().setDefaultSectionSize(100)
+        self.compute_top_processes_table.horizontalHeader().setHighlightSections(True)
+        self.compute_top_processes_table.horizontalHeader().setProperty(u"showSortIndicator", True)
+        self.compute_top_processes_table.horizontalHeader().setStretchLastSection(False)
+        self.compute_top_processes_table.verticalHeader().setCascadingSectionResizes(False)
+        self.compute_top_processes_table.verticalHeader().setHighlightSections(True)
+        self.compute_top_processes_table.verticalHeader().setProperty(u"showSortIndicator", False)
+        self.compute_top_processes_table.verticalHeader().setStretchLastSection(False)
+
+        self.verticalLayout_2.addWidget(self.compute_top_processes_table)
+
+        self.performance_stacked_content.addWidget(self.compute_page)
+        self.storage_page = QWidget()
+        self.storage_page.setObjectName(u"storage_page")
+        self.verticalLayout_6 = QVBoxLayout(self.storage_page)
+        self.verticalLayout_6.setSpacing(15)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(6, 6, 6, 6)
+        self.storage_label = QLabel(self.storage_page)
+        self.storage_label.setObjectName(u"storage_label")
+        self.storage_label.setMaximumSize(QSize(16777215, 40))
+        self.storage_label.setStyleSheet(u"QLabel {\n"
+"	font: 350 italic 15pt;\n"
+"	margin-left: 0px;\n"
+"}")
+
+        self.verticalLayout_6.addWidget(self.storage_label)
+
+        self.storage_legend_label = QLabel(self.storage_page)
+        self.storage_legend_label.setObjectName(u"storage_legend_label")
+
+        self.verticalLayout_6.addWidget(self.storage_legend_label)
+
+        self.legend_line = QFrame(self.storage_page)
+        self.legend_line.setObjectName(u"legend_line")
+        self.legend_line.setFrameShape(QFrame.Shape.HLine)
+        self.legend_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_6.addWidget(self.legend_line)
+
+        self.current_storage_label = QLabel(self.storage_page)
+        self.current_storage_label.setObjectName(u"current_storage_label")
+        self.current_storage_label.setMaximumSize(QSize(16777215, 30))
+
+        self.verticalLayout_6.addWidget(self.current_storage_label)
+
+        self.storage_gauge_widget = QWidget(self.storage_page)
+        self.storage_gauge_widget.setObjectName(u"storage_gauge_widget")
+        self.storage_gauge_widget.setStyleSheet(u"#storage_gauge_widget {\n"
+"	border: 1px solid #1E2633;\n"
+"}")
+        self.storage_gauge_layout = QHBoxLayout(self.storage_gauge_widget)
+        self.storage_gauge_layout.setObjectName(u"storage_gauge_layout")
+        self.storage_gauge_layout.setContentsMargins(-1, -1, -1, 1)
+
+        self.verticalLayout_6.addWidget(self.storage_gauge_widget)
+
+        self.current_storage_line = QFrame(self.storage_page)
+        self.current_storage_line.setObjectName(u"current_storage_line")
+        self.current_storage_line.setFrameShape(QFrame.Shape.HLine)
+        self.current_storage_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_6.addWidget(self.current_storage_line)
+
+        self.disk_i_o_label = QLabel(self.storage_page)
+        self.disk_i_o_label.setObjectName(u"disk_i_o_label")
+
+        self.verticalLayout_6.addWidget(self.disk_i_o_label)
+
+        self.cpu_ram_utilization_widget_2 = QWidget(self.storage_page)
+        self.cpu_ram_utilization_widget_2.setObjectName(u"cpu_ram_utilization_widget_2")
+        self.cpu_ram_utilization_widget_2.setMinimumSize(QSize(0, 300))
+        self.cpu_ram_utilization_widget_2.setMaximumSize(QSize(16777215, 600))
+        self.cpu_ram_utilization_layout_2 = QHBoxLayout(self.cpu_ram_utilization_widget_2)
+        self.cpu_ram_utilization_layout_2.setObjectName(u"cpu_ram_utilization_layout_2")
+        self.cpu_ram_utilization_layout_2.setContentsMargins(0, 0, 0, 0)
+        self.disk_write_read_graph = PlotWidget(self.cpu_ram_utilization_widget_2)
+        self.disk_write_read_graph.setObjectName(u"disk_write_read_graph")
+        self.disk_write_read_graph.setMinimumSize(QSize(0, 0))
+        self.disk_write_read_graph.setStyleSheet(u"QWidget {\n"
+"    background-color: transparent;\n"
+"    border: 1px solid #30363d;\n"
+"    border-radius: 8px;\n"
+"	border-top-right-radius: 0px; \n"
+"	border-bottom-right-radius: 0px;\n"
+"}")
+
+        self.cpu_ram_utilization_layout_2.addWidget(self.disk_write_read_graph)
+
+        self.disk_io_summary_widget = QWidget(self.cpu_ram_utilization_widget_2)
+        self.disk_io_summary_widget.setObjectName(u"disk_io_summary_widget")
+        self.disk_io_summary_widget.setMinimumSize(QSize(230, 120))
+        self.disk_io_summary_widget.setMaximumSize(QSize(300, 16777215))
+        self.disk_io_summary_widget.setStyleSheet(u"#disk_io_summary_widget {\n"
+"	border: 1px solid #30363d;\n"
+"	border-radius: 8px;\n"
+"	border-top-left-radius: 0px;\n"
+"	border-bottom-left-radius: 0px;\n"
+"}\n"
+"\n"
+"Line {\n"
+"    background-color: #1E2633;\n"
+"    border: none;\n"
+"    max-height: 1px;\n"
+"}")
+        self.disk_io_summary_layout = QVBoxLayout(self.disk_io_summary_widget)
+        self.disk_io_summary_layout.setSpacing(0)
+        self.disk_io_summary_layout.setObjectName(u"disk_io_summary_layout")
+        self.disk_io_summary_layout.setContentsMargins(6, 6, 6, 6)
+        self.disk_i_o_summary_label = QLabel(self.disk_io_summary_widget)
+        self.disk_i_o_summary_label.setObjectName(u"disk_i_o_summary_label")
+        self.disk_i_o_summary_label.setMaximumSize(QSize(16777215, 50))
+        self.disk_i_o_summary_label.setStyleSheet(u"font: 200 italic 11pt;")
+
+        self.disk_io_summary_layout.addWidget(self.disk_i_o_summary_label)
+
+        self.disk_information_layout = QVBoxLayout()
+        self.disk_information_layout.setSpacing(0)
+        self.disk_information_layout.setObjectName(u"disk_information_layout")
+        self.disk_i_o_summary_line = QFrame(self.disk_io_summary_widget)
+        self.disk_i_o_summary_line.setObjectName(u"disk_i_o_summary_line")
+        self.disk_i_o_summary_line.setFrameShape(QFrame.Shape.HLine)
+        self.disk_i_o_summary_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.disk_information_layout.addWidget(self.disk_i_o_summary_line)
+
+        self.disk_capacity_information_layout = QVBoxLayout()
+        self.disk_capacity_information_layout.setSpacing(0)
+        self.disk_capacity_information_layout.setObjectName(u"disk_capacity_information_layout")
+        self.disk_read_information_layout = QHBoxLayout()
+        self.disk_read_information_layout.setObjectName(u"disk_read_information_layout")
+        self.disk_read_information_label = QLabel(self.disk_io_summary_widget)
+        self.disk_read_information_label.setObjectName(u"disk_read_information_label")
+
+        self.disk_read_information_layout.addWidget(self.disk_read_information_label)
+
+        self.disk_read_information_value = QLabel(self.disk_io_summary_widget)
+        self.disk_read_information_value.setObjectName(u"disk_read_information_value")
+        self.disk_read_information_value.setAlignment(Qt.AlignCenter)
+
+        self.disk_read_information_layout.addWidget(self.disk_read_information_value)
+
+
+        self.disk_capacity_information_layout.addLayout(self.disk_read_information_layout)
+
+        self.disk_write_informatio_layout = QHBoxLayout()
+        self.disk_write_informatio_layout.setObjectName(u"disk_write_informatio_layout")
+        self.disk_write_information_label = QLabel(self.disk_io_summary_widget)
+        self.disk_write_information_label.setObjectName(u"disk_write_information_label")
+
+        self.disk_write_informatio_layout.addWidget(self.disk_write_information_label)
+
+        self.disk_write_information_value = QLabel(self.disk_io_summary_widget)
+        self.disk_write_information_value.setObjectName(u"disk_write_information_value")
+        self.disk_write_information_value.setAlignment(Qt.AlignCenter)
+
+        self.disk_write_informatio_layout.addWidget(self.disk_write_information_value)
+
+
+        self.disk_capacity_information_layout.addLayout(self.disk_write_informatio_layout)
+
+        self.disk_read_per_sec_information_layout = QHBoxLayout()
+        self.disk_read_per_sec_information_layout.setObjectName(u"disk_read_per_sec_information_layout")
+        self.disk_read_per_sec_information_label = QLabel(self.disk_io_summary_widget)
+        self.disk_read_per_sec_information_label.setObjectName(u"disk_read_per_sec_information_label")
+
+        self.disk_read_per_sec_information_layout.addWidget(self.disk_read_per_sec_information_label)
+
+        self.disk_read_per_sec_information_value = QLabel(self.disk_io_summary_widget)
+        self.disk_read_per_sec_information_value.setObjectName(u"disk_read_per_sec_information_value")
+        self.disk_read_per_sec_information_value.setAlignment(Qt.AlignCenter)
+
+        self.disk_read_per_sec_information_layout.addWidget(self.disk_read_per_sec_information_value)
+
+
+        self.disk_capacity_information_layout.addLayout(self.disk_read_per_sec_information_layout)
+
+        self.disk_write_per_sec_information_layout = QHBoxLayout()
+        self.disk_write_per_sec_information_layout.setObjectName(u"disk_write_per_sec_information_layout")
+        self.disk_write_per_sec_information_label = QLabel(self.disk_io_summary_widget)
+        self.disk_write_per_sec_information_label.setObjectName(u"disk_write_per_sec_information_label")
+
+        self.disk_write_per_sec_information_layout.addWidget(self.disk_write_per_sec_information_label)
+
+        self.disk_write_per_sec_information_value = QLabel(self.disk_io_summary_widget)
+        self.disk_write_per_sec_information_value.setObjectName(u"disk_write_per_sec_information_value")
+        self.disk_write_per_sec_information_value.setAlignment(Qt.AlignCenter)
+
+        self.disk_write_per_sec_information_layout.addWidget(self.disk_write_per_sec_information_value)
+
+
+        self.disk_capacity_information_layout.addLayout(self.disk_write_per_sec_information_layout)
+
+
+        self.disk_information_layout.addLayout(self.disk_capacity_information_layout)
+
+        self.disk_avg_latency_layout = QHBoxLayout()
+        self.disk_avg_latency_layout.setSpacing(0)
+        self.disk_avg_latency_layout.setObjectName(u"disk_avg_latency_layout")
+        self.disk_avg_latency_label = QLabel(self.disk_io_summary_widget)
+        self.disk_avg_latency_label.setObjectName(u"disk_avg_latency_label")
+        self.disk_avg_latency_label.setMaximumSize(QSize(16777215, 60))
+
+        self.disk_avg_latency_layout.addWidget(self.disk_avg_latency_label)
+
+        self.disk_avg_latency_value = QLabel(self.disk_io_summary_widget)
+        self.disk_avg_latency_value.setObjectName(u"disk_avg_latency_value")
+        self.disk_avg_latency_value.setMaximumSize(QSize(16777215, 60))
+        self.disk_avg_latency_value.setAlignment(Qt.AlignCenter)
+
+        self.disk_avg_latency_layout.addWidget(self.disk_avg_latency_value)
+
+
+        self.disk_information_layout.addLayout(self.disk_avg_latency_layout)
+
+
+        self.disk_io_summary_layout.addLayout(self.disk_information_layout)
+
+
+        self.cpu_ram_utilization_layout_2.addWidget(self.disk_io_summary_widget)
+
+
+        self.verticalLayout_6.addWidget(self.cpu_ram_utilization_widget_2)
+
+        self.disk_i_o_line = QFrame(self.storage_page)
+        self.disk_i_o_line.setObjectName(u"disk_i_o_line")
+        self.disk_i_o_line.setFrameShape(QFrame.Shape.HLine)
+        self.disk_i_o_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_6.addWidget(self.disk_i_o_line)
+
+        self.file_systems_label = QLabel(self.storage_page)
+        self.file_systems_label.setObjectName(u"file_systems_label")
+
+        self.verticalLayout_6.addWidget(self.file_systems_label)
+
+        self.file_systems_table = QTableWidget(self.storage_page)
+        if (self.file_systems_table.columnCount() < 5):
+            self.file_systems_table.setColumnCount(5)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(0, __qtablewidgetitem17)
+        __qtablewidgetitem18 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(1, __qtablewidgetitem18)
+        __qtablewidgetitem19 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(2, __qtablewidgetitem19)
+        __qtablewidgetitem20 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(3, __qtablewidgetitem20)
+        __qtablewidgetitem21 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(4, __qtablewidgetitem21)
+        self.file_systems_table.setObjectName(u"file_systems_table")
+        self.file_systems_table.horizontalHeader().setCascadingSectionResizes(True)
+
+        self.verticalLayout_6.addWidget(self.file_systems_table)
+
+        self.file_systems_line = QFrame(self.storage_page)
+        self.file_systems_line.setObjectName(u"file_systems_line")
+        self.file_systems_line.setFrameShape(QFrame.Shape.HLine)
+        self.file_systems_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_6.addWidget(self.file_systems_line)
+
+        self.storage_devices_label = QLabel(self.storage_page)
+        self.storage_devices_label.setObjectName(u"storage_devices_label")
+
+        self.verticalLayout_6.addWidget(self.storage_devices_label)
+
+        self.storage_devices_label_2 = QTableWidget(self.storage_page)
+        if (self.storage_devices_label_2.columnCount() < 5):
+            self.storage_devices_label_2.setColumnCount(5)
+        __qtablewidgetitem22 = QTableWidgetItem()
+        self.storage_devices_label_2.setHorizontalHeaderItem(0, __qtablewidgetitem22)
+        __qtablewidgetitem23 = QTableWidgetItem()
+        self.storage_devices_label_2.setHorizontalHeaderItem(1, __qtablewidgetitem23)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        self.storage_devices_label_2.setHorizontalHeaderItem(2, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        self.storage_devices_label_2.setHorizontalHeaderItem(3, __qtablewidgetitem25)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        self.storage_devices_label_2.setHorizontalHeaderItem(4, __qtablewidgetitem26)
+        self.storage_devices_label_2.setObjectName(u"storage_devices_label_2")
+
+        self.verticalLayout_6.addWidget(self.storage_devices_label_2)
+
+        self.storage_devices_line = QFrame(self.storage_page)
+        self.storage_devices_line.setObjectName(u"storage_devices_line")
+        self.storage_devices_line.setFrameShape(QFrame.Shape.HLine)
+        self.storage_devices_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_6.addWidget(self.storage_devices_line)
+
+        self.device_activity_label = QLabel(self.storage_page)
+        self.device_activity_label.setObjectName(u"device_activity_label")
+
+        self.verticalLayout_6.addWidget(self.device_activity_label)
+
+        self.device_activity_table = QTableWidget(self.storage_page)
+        self.device_activity_table.setObjectName(u"device_activity_table")
+
+        self.verticalLayout_6.addWidget(self.device_activity_table)
+
+        self.performance_stacked_content.addWidget(self.storage_page)
+        self.thermals_page = QWidget()
+        self.thermals_page.setObjectName(u"thermals_page")
+        self.verticalLayout_4 = QVBoxLayout(self.thermals_page)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.performance_stacked_content.addWidget(self.thermals_page)
+        self.network_page = QWidget()
+        self.network_page.setObjectName(u"network_page")
+        self.verticalLayout_7 = QVBoxLayout(self.network_page)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.performance_stacked_content.addWidget(self.network_page)
+
+        self.verticalLayout_32.addWidget(self.performance_stacked_content)
 
 
         self.verticalLayout_26.addWidget(self.performance_content_widget)
 
-        self.perfomance_detail_scroll.setWidget(self.agent_perfomance_information)
+        self.performance_detail_scroll.setWidget(self.agent_performance_information)
 
-        self.perfomance_detail_page_layout.addWidget(self.perfomance_detail_scroll)
+        self.perfomance_detail_page_layout.addWidget(self.performance_detail_scroll)
 
-        self.agent_detail_stacked_content.addWidget(self.perfomance_detail_page)
+        self.agent_detail_stacked_content.addWidget(self.performance_detail_page)
         self.hardware_detail_page = QWidget()
         self.hardware_detail_page.setObjectName(u"hardware_detail_page")
         self.hardware_detail_page_layout = QVBoxLayout(self.hardware_detail_page)
@@ -1430,7 +1979,7 @@ class Ui_MainWindow(object):
         self.hardware_info_scroll.setWidgetResizable(True)
         self.hardware_info_scroll_content = QWidget()
         self.hardware_info_scroll_content.setObjectName(u"hardware_info_scroll_content")
-        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 308, 910))
+        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 962, 910))
         self.hardware_info_scroll_content.setMinimumSize(QSize(0, 0))
         self.hardware_info_scroll_content_layout = QVBoxLayout(self.hardware_info_scroll_content)
         self.hardware_info_scroll_content_layout.setSpacing(0)
@@ -2017,7 +2566,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.content_stack.setCurrentIndex(2)
-        self.agent_detail_stacked_content.setCurrentIndex(0)
+        self.agent_detail_stacked_content.setCurrentIndex(1)
+        self.performance_stacked_content.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2029,7 +2579,6 @@ class Ui_MainWindow(object):
         self.dashboard_button.setText(QCoreApplication.translate("MainWindow", u"Dashboard", None))
         self.agents_button.setText(QCoreApplication.translate("MainWindow", u"Agents", None))
         self.commands_button.setText(QCoreApplication.translate("MainWindow", u"Commands", None))
-        self.metrics_button.setText(QCoreApplication.translate("MainWindow", u"Metrics", None))
         self.logs_button.setText(QCoreApplication.translate("MainWindow", u"Logs", None))
         self.settings_button.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.about_button.setText(QCoreApplication.translate("MainWindow", u"About", None))
@@ -2062,10 +2611,8 @@ class Ui_MainWindow(object):
         self.detail_top_agent_name_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.detail_top_agent_status_label.setText(QCoreApplication.translate("MainWindow", u"\u25cf OFFLINE", None))
         self.overview_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Overview ]", None))
-        self.perfomance_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Performance ]", None))
+        self.performance_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Performance ]", None))
         self.hardware_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Hardware ]", None))
-        self.storage_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Storage ]", None))
-        self.network_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Network ]", None))
         self.commands_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Commands ]", None))
         self.perfomance_label_2.setText(QCoreApplication.translate("MainWindow", u"OVERVIEW", None))
         self.cpu_label.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
@@ -2098,6 +2645,84 @@ class Ui_MainWindow(object):
         self.storage_button.setText(QCoreApplication.translate("MainWindow", u"[ STORAGE ]", None))
         self.thermals_button.setText(QCoreApplication.translate("MainWindow", u"[ THERMALS ]", None))
         self.network_button.setText(QCoreApplication.translate("MainWindow", u"[ NETWORK ]", None))
+        self.compute_label.setText(QCoreApplication.translate("MainWindow", u"COMPUTE", None))
+        self.compute_current_state_label.setText(QCoreApplication.translate("MainWindow", u"CURRENT STATE", None))
+        self.cpu_ram_metric_label.setText(QCoreApplication.translate("MainWindow", u"CPU / RAM UTILIZATION", None))
+        self.memory_label.setText(QCoreApplication.translate("MainWindow", u"MEMORY", None))
+        self.used_memory_label.setText(QCoreApplication.translate("MainWindow", u"Used", None))
+        self.used_memory_value_label.setText(QCoreApplication.translate("MainWindow", u"0 GB", None))
+        self.available_memory_label.setText(QCoreApplication.translate("MainWindow", u"Available", None))
+        self.available_memory_value_label.setText(QCoreApplication.translate("MainWindow", u"0 GB", None))
+        self.swap_memory_label.setText(QCoreApplication.translate("MainWindow", u"Swap", None))
+        self.swap_memory_value_label.setText(QCoreApplication.translate("MainWindow", u"0.0 GB", None))
+        self.compute_load_average_label.setText(QCoreApplication.translate("MainWindow", u"LOAD AVERAGE", None))
+        self.compute_cpu_cores_label.setText(QCoreApplication.translate("MainWindow", u"CPU CORES", None))
+        self.compute_top_processes_label.setText(QCoreApplication.translate("MainWindow", u"TOP PROCESSES", None))
+        ___qtablewidgetitem6 = self.compute_top_processes_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"PID", None))
+        ___qtablewidgetitem7 = self.compute_top_processes_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Process", None))
+        ___qtablewidgetitem8 = self.compute_top_processes_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
+        ___qtablewidgetitem9 = self.compute_top_processes_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"RAM", None))
+        ___qtablewidgetitem10 = self.compute_top_processes_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"Status", None))
+        ___qtablewidgetitem11 = self.compute_top_processes_table.verticalHeaderItem(0)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"New Row", None))
+
+        __sortingEnabled = self.compute_top_processes_table.isSortingEnabled()
+        self.compute_top_processes_table.setSortingEnabled(False)
+        ___qtablewidgetitem12 = self.compute_top_processes_table.item(0, 0)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"421", None))
+        ___qtablewidgetitem13 = self.compute_top_processes_table.item(0, 1)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"postgres", None))
+        ___qtablewidgetitem14 = self.compute_top_processes_table.item(0, 2)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"18.4%", None))
+        ___qtablewidgetitem15 = self.compute_top_processes_table.item(0, 3)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"1.2 GB", None))
+        ___qtablewidgetitem16 = self.compute_top_processes_table.item(0, 4)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"running", None))
+        self.compute_top_processes_table.setSortingEnabled(__sortingEnabled)
+
+        self.storage_label.setText(QCoreApplication.translate("MainWindow", u"STORAGE", None))
+        self.storage_legend_label.setText(QCoreApplication.translate("MainWindow", u"Disk capacity, I/O activity and storage devices", None))
+        self.current_storage_label.setText(QCoreApplication.translate("MainWindow", u"CURRENT STORAGE", None))
+        self.disk_i_o_label.setText(QCoreApplication.translate("MainWindow", u"DISK I/O", None))
+        self.disk_i_o_summary_label.setText(QCoreApplication.translate("MainWindow", u"I/O SUMMARY", None))
+        self.disk_read_information_label.setText(QCoreApplication.translate("MainWindow", u"Read", None))
+        self.disk_read_information_value.setText(QCoreApplication.translate("MainWindow", u"0.0 MB/s", None))
+        self.disk_write_information_label.setText(QCoreApplication.translate("MainWindow", u"Write", None))
+        self.disk_write_information_value.setText(QCoreApplication.translate("MainWindow", u"0.0 MB/s", None))
+        self.disk_read_per_sec_information_label.setText(QCoreApplication.translate("MainWindow", u"Read IOPS", None))
+        self.disk_read_per_sec_information_value.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.disk_write_per_sec_information_label.setText(QCoreApplication.translate("MainWindow", u"Write IOPS", None))
+        self.disk_write_per_sec_information_value.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.disk_avg_latency_label.setText(QCoreApplication.translate("MainWindow", u"Avg latency", None))
+        self.disk_avg_latency_value.setText(QCoreApplication.translate("MainWindow", u"3.4 ms", None))
+        self.file_systems_label.setText(QCoreApplication.translate("MainWindow", u"FILESYSTEMS", None))
+        ___qtablewidgetitem17 = self.file_systems_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"MOUNT", None))
+        ___qtablewidgetitem18 = self.file_systems_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
+        ___qtablewidgetitem19 = self.file_systems_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"USED", None))
+        ___qtablewidgetitem20 = self.file_systems_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"AVAILABLE", None))
+        ___qtablewidgetitem21 = self.file_systems_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"USAGE", None))
+        self.storage_devices_label.setText(QCoreApplication.translate("MainWindow", u"STORAGE DEVICES", None))
+        ___qtablewidgetitem22 = self.storage_devices_label_2.horizontalHeaderItem(0)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
+        ___qtablewidgetitem23 = self.storage_devices_label_2.horizontalHeaderItem(1)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"TYPE", None))
+        ___qtablewidgetitem24 = self.storage_devices_label_2.horizontalHeaderItem(2)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"CAPACITY", None))
+        ___qtablewidgetitem25 = self.storage_devices_label_2.horizontalHeaderItem(3)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
+        ___qtablewidgetitem26 = self.storage_devices_label_2.horizontalHeaderItem(4)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"TEMPERATURE", None))
+        self.device_activity_label.setText(QCoreApplication.translate("MainWindow", u"DEVICE ACTIVITY", None))
         self.hardware_label.setText(QCoreApplication.translate("MainWindow", u"HARDWARE", None))
         self.cpu_info_label.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
         self.model_row_label.setText(QCoreApplication.translate("MainWindow", u"Model", None))

@@ -1,3 +1,5 @@
+from functools import partial
+
 from PySide6.QtCore import QObject, QThread, QTimer
 
 from api.client import NexoraClient
@@ -6,7 +8,7 @@ from services.stores.metric_store import MetricStore
 
 from workers.metric_worker import AgentMetricWorker
 
-from ..box_messages import MessageBox
+from ..widgets.box_messages import MessageBox
 
 
 class AgentMetricPoller(QObject):
@@ -32,12 +34,13 @@ class AgentMetricPoller(QObject):
 
         self.timer = QTimer(self)
         self.timer.setInterval(5000)
-        self.timer.timeout.connect(self.refresh)
+        self.timer.timeout.connect(partial(self.refresh, partial=True))
 
-    def on_clicked(self, agent_id: int, metric_type: str = None) -> None:
-        self.agent_id = agent_id
+    def on_clicked(self, agent_id: int = None, metric_type: str = None) -> None:
+        if agent_id:
+            self.agent_id = agent_id
 
-        if not self.metric_type:
+        if not metric_type:
             self.metric_type = "resources"
 
         else:
@@ -57,11 +60,12 @@ class AgentMetricPoller(QObject):
         if self.timer.isActive():
             self.timer.stop()
 
-    def refresh(self, force: bool = False) -> None:
+    def refresh(self, force: bool = False, partial: bool = False) -> None:
         if not force:
             if self.is_polling or not self.client.base_url or self.agent_id is None:
                 return
 
+        self.partial = partial
         self.is_polling = True
 
         self._start_metric_worker()
@@ -69,22 +73,31 @@ class AgentMetricPoller(QObject):
     def _start_metric_worker(self) -> None:
         thread = QThread(self)
         worker = AgentMetricWorker(
-            self.client, self.agent_id, self.from_hours, self.metric_type
+            self.client,
+            self.agent_id,
+            self.from_hours,
+            self.metric_type,
+            self.partial,
         )
         worker.moveToThread(thread)
 
         worker_context = {"thread": thread, "worker": worker}
-
         self._active_workers.append(worker_context)
 
         thread.started.connect(worker.run)
-        worker.success.connect(self.metric_store.set_metrics)
+
+        target_slot = (
+            self.metric_store.append_point
+            if self.partial
+            else self.metric_store.set_history
+        )
+        worker.success.connect(target_slot)
         worker.error.connect(self.show_api_error)
 
         worker.finished.connect(thread.quit)
         worker.finished.connect(worker.deleteLater)
 
-        def cleanup():
+        def cleanup() -> None:
             thread.deleteLater()
             if worker_context in self._active_workers:
                 self._active_workers.remove(worker_context)
@@ -92,13 +105,9 @@ class AgentMetricPoller(QObject):
             self.is_polling = False
 
         thread.finished.connect(cleanup)
-
         thread.start()
 
-    def on_finished(self):
-        self.is_polling = False
-
-    def show_api_error(self, message: str = None) -> None:
+    def show_api_error(self, message: str | None = None) -> None:
         if not self.api_error_shown:
             self.api_error_shown = True
             self.stop_polling()

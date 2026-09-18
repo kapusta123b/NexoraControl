@@ -21,7 +21,7 @@ class AgentDetailController(QObject):
         self.overview_controller = DetailOverviewController(
             ui=self.ui, client=self.client
         )
-        self.perfomance_controller = DetailPerformanceController(
+        self.performance_controller = DetailPerformanceController(
             ui=self.ui, client=self.client
         )
 
@@ -31,7 +31,7 @@ class AgentDetailController(QObject):
         self.agent = agent
 
         self.overview_controller.agent = agent
-        self.perfomance_controller.agent = agent
+        self.performance_controller.agent = agent
         self.overview_controller.activate()
 
         if self.ui.content_stack.currentWidget() == self.ui.overview_detail_page:
@@ -48,9 +48,9 @@ class AgentDetailController(QObject):
                 self.ui.overview_detail_page,
                 self.overview_controller.activate,
             ),
-            self.ui.perfomance_nav_button: (
-                self.ui.perfomance_detail_page,
-                self.perfomance_controller.activate,
+            self.ui.performance_nav_button: (
+                self.ui.performance_detail_page,
+                self.performance_controller.activate,
             ),
         }
 
