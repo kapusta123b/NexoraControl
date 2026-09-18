@@ -66,8 +66,7 @@ class AgentHeartbeatView(APIView):
         with transaction.atomic():
             AgentMetric.objects.create(
                 agent=agent,
-                cpu_load=serializer.validated_data.get("cpu_load"),
-                ram_load=serializer.validated_data.get("ram_load"),
+                **serializer.validated_data,
             )
             serializer.save(status=Agent.Status.ONLINE, last_seen=timezone.now())
 

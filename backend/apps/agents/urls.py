@@ -10,8 +10,7 @@ from apps.agents.api.views.command import (
     CommandListView,
     CommandPendingListView,
 )
-from apps.agents.api.views.metric import ResourceMetric
-
+from apps.agents.api.views.metric import AgentMetricHistoryView, AgentMetricLatestView
 
 app_name = "notes"
 
@@ -24,14 +23,14 @@ urlpatterns = [
         name="agent-detail-heartbeat",
     ),
     path(
-        "agents/<int:pk>/heartbeat/",
-        AgentHeartbeatView.as_view(),
-        name="agent-detail-heartbeat",
+        "agents/<int:pk>/metrics/resources/history/",
+        AgentMetricHistoryView.as_view(),
+        name="agent-metrics-resources-history",
     ),
     path(
-        "agents/<int:pk>/metrics/resources/",
-        ResourceMetric.as_view(),
-        name="agent-detail-heartbeat",
+        "agents/<int:pk>/metrics/resources/latest/",
+        AgentMetricLatestView.as_view(),
+        name="agent-metrics-resources-latest",
     ),
     path(
         "agents/<int:pk>/commands/",
@@ -39,7 +38,7 @@ urlpatterns = [
         name="agent-commands",
     ),
     path(
-        "agents/<int:pk>/commands/pending",
+        "agents/<int:pk>/commands/pending/",
         CommandPendingListView.as_view(),
         name="agent-commands-pending",
     ),

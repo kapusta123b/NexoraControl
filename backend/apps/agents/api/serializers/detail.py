@@ -1,3 +1,5 @@
+from apps.agents.models.metric import AgentMetric
+
 from rest_framework.serializers import ModelSerializer
 
 from apps.agents.models.agent import Agent
@@ -34,9 +36,18 @@ class AgentDetailSerializer(ModelSerializer):
 
 class AgentHeartbeatSerializer(ModelSerializer):
     class Meta:
-        model = Agent
+        model = AgentMetric
 
         fields = [
+            # CPU
             "cpu_load",
+            "cpu_load_per_core",
+            "load_average",
+            
+            # MEMORY
             "ram_load",
+            "ram_used_bytes",
+            "ram_available_bytes",
+            "swap_used_bytes",
+            "swap_available_bytes",
         ]
