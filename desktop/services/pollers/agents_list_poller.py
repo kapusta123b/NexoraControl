@@ -6,7 +6,7 @@ from services.stores.agent_store import AgentsStore
 
 from workers.agents_list_worker import AgentsListWorker
 
-from ..box_messages import MessageBox
+from ..widgets.box_messages import MessageBox
 
 
 class AgentsListPoller(QObject):

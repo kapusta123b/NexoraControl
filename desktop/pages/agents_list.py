@@ -1,7 +1,7 @@
 from pages.agent_detail import AgentDetailController
 
 from services.pollers.agents_list_poller import AgentsListPoller
-from services.agent_card import AgentCardWidget
+from services.widgets.agent_card import AgentCardWidget
 from services.stores.agent_store import AgentsStore
 
 from ui.main_window import Ui_MainWindow

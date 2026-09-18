@@ -3,7 +3,7 @@ from PySide6.QtCore import QObject, QThread, QTimer
 from api.client import NexoraClient
 
 from services.stores.agent_command_store import CommandsStore
-from services.box_messages import MessageBox
+from services.widgets.box_messages import MessageBox
 from services.stores.agent_store import DetailAgentStore
 
 from workers.overview_worker import OverviewWorker, RecentCommandsWorker

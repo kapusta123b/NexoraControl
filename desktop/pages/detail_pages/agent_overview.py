@@ -3,7 +3,7 @@ from PySide6.QtWidgets import QLayout
 
 from api.client import NexoraClient
 
-from services.recent_command_card import CommandCardWidget
+from services.widgets.recent_command_card import CommandCardWidget
 from services.stores.agent_command_store import CommandsStore
 from services.pollers.overview_poller import DetailOverviewPoller
 from services.stores.agent_store import DetailAgentStore
