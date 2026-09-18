@@ -19,7 +19,13 @@ def system_disk_info(payload: dict) -> list:
 
 
 def system_processes(payload: dict) -> list:
-    return ["ps", "-eo", "pid,ppid,%cpu,%mem,comm", "--sort=-%cpu"]
+    limit = payload.get("limit", 5)
+
+    bash_script = (
+        f"ps -eo comm,%cpu,%mem,state --no-headers --sort=-%cpu | head -n {limit}"
+    )
+
+    return ["bash", "-c", bash_script]
 
 
 def system_reboot(payload: dict) -> list:

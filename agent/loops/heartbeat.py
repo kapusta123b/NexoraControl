@@ -1,12 +1,21 @@
 import asyncio
 
-from services.loop.system_info import _get_system_info
+from api.client import BasicClient
+
+from services.metrics.cpu import _collect_cpu_metrics
+from services.metrics.memory import _collect_memory_metrics
 
 
-async def heartbeat_loop(client):
+def collect_metrics() -> dict:
+    return {
+        **_collect_cpu_metrics(),
+        **_collect_memory_metrics(),
+    }
 
+
+async def heartbeat_loop(client: BasicClient) -> None:
     while True:
-        data = _get_system_info()
+        data = collect_metrics()
 
         await client.send_heartbeat(heartbeat=data)
 

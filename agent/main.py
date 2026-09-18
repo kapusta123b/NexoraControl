@@ -18,7 +18,7 @@ async def run():
 
     if not settings.agent_id or not settings.token:
         console.print(
-            "[bold red]Agent is not configured.[/bold red]"
+            "[bold red]Agent is not configured. Run python main.py setup[/bold red]"
         )
         return
 
