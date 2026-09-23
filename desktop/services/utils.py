@@ -16,7 +16,8 @@ def byte_converter(
     unit: UnitType = "mb",
     precision: int = 2,
     rate: bool = False,
-) -> str:
+    as_float: bool = False,
+) -> str | int:
     """Convert bytes into a formatted higher-order unit string.
 
     Args:
@@ -24,9 +25,10 @@ def byte_converter(
         unit: Target storage unit (case-insensitive).
         precision: Number of decimal places to round. Must be non-negative.
         rate: Append rate suffix '/s' if True.
+        as_float: result in bytes consists solely of integers, without string data.
 
     Returns:
-        Formatted string containing the converted value and unit.
+        Formatted string containing the converted value and the unit of measurement, or an integer number of bytes.
 
     Raises:
         TypeError: If value is not numeric, or precision/rate have invalid types.
@@ -39,7 +41,10 @@ def byte_converter(
         raise TypeError(f"precision must be int, got {type(precision).__name__}")
 
     if not isinstance(rate, bool):
-        raise TypeError(f"rate must be bool, got {type(rate).__name__}")
+        raise TypeError(f"rate argument must be bool, got {type(rate).__name__}")
+
+    if not isinstance(as_float, bool):
+        raise TypeError(f"only int argument must be bool, got {type(rate).__name__}")
 
     if value < 0:
         raise ValueError(f"value must be non-negative, got {value}")
@@ -56,6 +61,18 @@ def byte_converter(
 
     factor = UNIT_MAP[unit_key]
     converted = value / (1024**factor)
+
+    converted_with_precision = round(converted, precision)
+
+    if as_float:
+        return converted_with_precision
+
     rate_suffix = "/s" if rate else ""
 
-    return f"{converted:.{precision}f} {unit_key.upper()}{rate_suffix}"
+    return f"{converted_with_precision} {unit_key.upper()}{rate_suffix}"
+
+
+# def avg_disks_load(disks: dict):
+#     if disks:
+#         for disk_name, disk_info in disks.items():
+#             disk_info

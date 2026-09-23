@@ -4,7 +4,7 @@ from PySide6.QtWidgets import QWidget
 
 
 class SimpleNetdataGauge(QWidget):
-    def __init__(self, title="", unit="%", color="#a5b4fc", parent=None):
+    def __init__(self, title="", unit="%", color="#a5b4fc", max_value: float = 100.0, parent=None):
         super().__init__(parent)
         self.title = title
         self.unit = unit
@@ -14,7 +14,7 @@ class SimpleNetdataGauge(QWidget):
         self.text_white = QColor("#a5b4fc")
 
         self.value = 0.0
-        self.max_value = 100.0
+        self.max_value = max_value
         self.setMinimumSize(150, 150)
 
         self.font_title = QFont("JetBrainsMonoNL Nerd Font Propo", 9)

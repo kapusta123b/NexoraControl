@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QHBoxLayout,
-    QHeaderView, QLabel, QLineEdit, QMainWindow,
-    QProgressBar, QPushButton, QScrollArea, QSizePolicy,
-    QSpacerItem, QStackedWidget, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFrame,
+    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
+    QMainWindow, QProgressBar, QPushButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QStackedWidget, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
 from pyqtgraph import PlotWidget
 
@@ -33,7 +33,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
-            icon.addFile(u"../.designer/.designer/.designer/.designer/.designer/.designer/.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon.addFile(u"../.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"")
@@ -842,7 +842,7 @@ class Ui_MainWindow(object):
         self.overview_detail_scroll.setWidgetResizable(True)
         self.agent_detail_information = QWidget()
         self.agent_detail_information.setObjectName(u"agent_detail_information")
-        self.agent_detail_information.setGeometry(QRect(0, 0, 889, 700))
+        self.agent_detail_information.setGeometry(QRect(0, 0, 833, 700))
         self.agent_detail_information.setMinimumSize(QSize(0, 700))
         self.agent_detail_information_layout = QVBoxLayout(self.agent_detail_information)
         self.agent_detail_information_layout.setSpacing(5)
@@ -1293,7 +1293,7 @@ class Ui_MainWindow(object):
         self.performance_detail_scroll.setWidgetResizable(True)
         self.agent_performance_information = QWidget()
         self.agent_performance_information.setObjectName(u"agent_performance_information")
-        self.agent_performance_information.setGeometry(QRect(0, -529, 980, 1311))
+        self.agent_performance_information.setGeometry(QRect(0, -580, 980, 1309))
         self.verticalLayout_26 = QVBoxLayout(self.agent_performance_information)
         self.verticalLayout_26.setSpacing(0)
         self.verticalLayout_26.setObjectName(u"verticalLayout_26")
@@ -1606,6 +1606,81 @@ class Ui_MainWindow(object):
         self.performance_stacked_content.addWidget(self.compute_page)
         self.storage_page = QWidget()
         self.storage_page.setObjectName(u"storage_page")
+        self.storage_page.setStyleSheet(u"QComboBox {\n"
+"    color: #a5b4fc; \n"
+"    background-color: transparent;\n"
+"    border: 1px solid #242936;\n"
+"    border-radius: 4px;\n"
+"    padding: 6px 0px 6px 15px;	\n"
+"    font-size: 12px;\n"
+"    min-width: 100px;\n"
+"}\n"
+"QComboBox:hover {\n"
+"    background-color: #1e2230;\n"
+"    border-color: #38bdf8;\n"
+"    color: #ffffff;\n"
+"}\n"
+"\n"
+"QComboBox:on { \n"
+"    background-color: #0f111a;\n"
+"    border-color: #58a6ff;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"QComboBox QAbstractItemView,\n"
+"QComboBox QListView {\n"
+"    background-color: #161920;\n"
+"    border: 1px solid #242936; \n"
+"    border-radius: 4px;\n"
+"    padding: 0px !important;\n"
+"    margin: 0px !important;\n"
+"    outline: 0px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item {\n"
+"    min-height: 28px;\n"
+"    padding-left: 12px;\n"
+"    padding-right: 12px;\n"
+"    color: #a5b4fc;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item:hover,\n"
+"QComboBox QAbstractItemView::item:selected {\n"
+"    bac"
+                        "kground-color: #1e2230 !important;\n"
+"    color: #ffffff !important;\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox QScrollBar:vertical {\n"
+"    background-color: #161920;\n"
+"    width: 8px;\n"
+"    margin: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QComboBox QScrollBar::handle:vertical {\n"
+"    background-color: #242936; \n"
+"    border-radius: 4px;\n"
+"    min-height: 20px;\n"
+"}\n"
+"\n"
+"QComboBox QScrollBar::handle:vertical:hover {\n"
+"    background-color: #38bdf8;\n"
+"}\n"
+"\n"
+"QComboBox QScrollBar::add-line:vertical,\n"
+"QComboBox QScrollBar::sub-line:vertical,\n"
+"QComboBox QScrollBar::up-arrow:vertical, \n"
+"QComboBox QScrollBar::down-arrow:vertical {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    height: 0px;\n"
+"    width: 0px;\n"
+"}")
         self.verticalLayout_6 = QVBoxLayout(self.storage_page)
         self.verticalLayout_6.setSpacing(15)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
@@ -1656,10 +1731,42 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.current_storage_line)
 
-        self.disk_i_o_label = QLabel(self.storage_page)
-        self.disk_i_o_label.setObjectName(u"disk_i_o_label")
+        self.disk_io_layout = QHBoxLayout()
+        self.disk_io_layout.setObjectName(u"disk_io_layout")
+        self.disk_io_layout.setContentsMargins(0, 0, -1, -1)
+        self.disk_io_label = QLabel(self.storage_page)
+        self.disk_io_label.setObjectName(u"disk_io_label")
+        self.disk_io_label.setMinimumSize(QSize(0, 0))
+        self.disk_io_label.setMaximumSize(QSize(100, 16777215))
 
-        self.verticalLayout_6.addWidget(self.disk_i_o_label)
+        self.disk_io_layout.addWidget(self.disk_io_label)
+
+        self.disk_io_spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.disk_io_layout.addItem(self.disk_io_spacer)
+
+        self.disks_combo_box = QComboBox(self.storage_page)
+        self.disks_combo_box.setObjectName(u"disks_combo_box")
+        self.disks_combo_box.setMinimumSize(QSize(117, 0))
+        self.disks_combo_box.setMaximumSize(QSize(120, 16777215))
+        self.disks_combo_box.setEditable(False)
+        self.disks_combo_box.setMaxVisibleItems(4)
+        self.disks_combo_box.setIconSize(QSize(16, 16))
+        self.disks_combo_box.setFrame(True)
+
+        self.disk_io_layout.addWidget(self.disks_combo_box)
+
+        self.disk_data_unit_combo_box = QComboBox(self.storage_page)
+        self.disk_data_unit_combo_box.setObjectName(u"disk_data_unit_combo_box")
+        self.disk_data_unit_combo_box.setMinimumSize(QSize(117, 0))
+        self.disk_data_unit_combo_box.setMaximumSize(QSize(70, 16777215))
+        self.disk_data_unit_combo_box.setEditable(False)
+        self.disk_data_unit_combo_box.setInsertPolicy(QComboBox.InsertAtCurrent)
+
+        self.disk_io_layout.addWidget(self.disk_data_unit_combo_box)
+
+
+        self.verticalLayout_6.addLayout(self.disk_io_layout)
 
         self.cpu_ram_utilization_widget_2 = QWidget(self.storage_page)
         self.cpu_ram_utilization_widget_2.setObjectName(u"cpu_ram_utilization_widget_2")
@@ -1816,12 +1923,12 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.cpu_ram_utilization_widget_2)
 
-        self.disk_i_o_line = QFrame(self.storage_page)
-        self.disk_i_o_line.setObjectName(u"disk_i_o_line")
-        self.disk_i_o_line.setFrameShape(QFrame.Shape.HLine)
-        self.disk_i_o_line.setFrameShadow(QFrame.Shadow.Sunken)
+        self.disk_io_line = QFrame(self.storage_page)
+        self.disk_io_line.setObjectName(u"disk_io_line")
+        self.disk_io_line.setFrameShape(QFrame.Shape.HLine)
+        self.disk_io_line.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.verticalLayout_6.addWidget(self.disk_i_o_line)
+        self.verticalLayout_6.addWidget(self.disk_io_line)
 
         self.file_systems_label = QLabel(self.storage_page)
         self.file_systems_label.setObjectName(u"file_systems_label")
@@ -1829,8 +1936,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.addWidget(self.file_systems_label)
 
         self.file_systems_table = QTableWidget(self.storage_page)
-        if (self.file_systems_table.columnCount() < 5):
-            self.file_systems_table.setColumnCount(5)
+        if (self.file_systems_table.columnCount() < 6):
+            self.file_systems_table.setColumnCount(6)
         __qtablewidgetitem17 = QTableWidgetItem()
         self.file_systems_table.setHorizontalHeaderItem(0, __qtablewidgetitem17)
         __qtablewidgetitem18 = QTableWidgetItem()
@@ -1841,6 +1948,8 @@ class Ui_MainWindow(object):
         self.file_systems_table.setHorizontalHeaderItem(3, __qtablewidgetitem20)
         __qtablewidgetitem21 = QTableWidgetItem()
         self.file_systems_table.setHorizontalHeaderItem(4, __qtablewidgetitem21)
+        __qtablewidgetitem22 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(5, __qtablewidgetitem22)
         self.file_systems_table.setObjectName(u"file_systems_table")
         self.file_systems_table.horizontalHeader().setCascadingSectionResizes(True)
 
@@ -1858,22 +1967,22 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.storage_devices_label)
 
-        self.storage_devices_label_2 = QTableWidget(self.storage_page)
-        if (self.storage_devices_label_2.columnCount() < 5):
-            self.storage_devices_label_2.setColumnCount(5)
-        __qtablewidgetitem22 = QTableWidgetItem()
-        self.storage_devices_label_2.setHorizontalHeaderItem(0, __qtablewidgetitem22)
+        self.storage_devices_table = QTableWidget(self.storage_page)
+        if (self.storage_devices_table.columnCount() < 5):
+            self.storage_devices_table.setColumnCount(5)
         __qtablewidgetitem23 = QTableWidgetItem()
-        self.storage_devices_label_2.setHorizontalHeaderItem(1, __qtablewidgetitem23)
+        self.storage_devices_table.setHorizontalHeaderItem(0, __qtablewidgetitem23)
         __qtablewidgetitem24 = QTableWidgetItem()
-        self.storage_devices_label_2.setHorizontalHeaderItem(2, __qtablewidgetitem24)
+        self.storage_devices_table.setHorizontalHeaderItem(1, __qtablewidgetitem24)
         __qtablewidgetitem25 = QTableWidgetItem()
-        self.storage_devices_label_2.setHorizontalHeaderItem(3, __qtablewidgetitem25)
+        self.storage_devices_table.setHorizontalHeaderItem(2, __qtablewidgetitem25)
         __qtablewidgetitem26 = QTableWidgetItem()
-        self.storage_devices_label_2.setHorizontalHeaderItem(4, __qtablewidgetitem26)
-        self.storage_devices_label_2.setObjectName(u"storage_devices_label_2")
+        self.storage_devices_table.setHorizontalHeaderItem(3, __qtablewidgetitem26)
+        __qtablewidgetitem27 = QTableWidgetItem()
+        self.storage_devices_table.setHorizontalHeaderItem(4, __qtablewidgetitem27)
+        self.storage_devices_table.setObjectName(u"storage_devices_table")
 
-        self.verticalLayout_6.addWidget(self.storage_devices_label_2)
+        self.verticalLayout_6.addWidget(self.storage_devices_table)
 
         self.storage_devices_line = QFrame(self.storage_page)
         self.storage_devices_line.setObjectName(u"storage_devices_line")
@@ -1979,7 +2088,7 @@ class Ui_MainWindow(object):
         self.hardware_info_scroll.setWidgetResizable(True)
         self.hardware_info_scroll_content = QWidget()
         self.hardware_info_scroll_content.setObjectName(u"hardware_info_scroll_content")
-        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 962, 910))
+        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 308, 910))
         self.hardware_info_scroll_content.setMinimumSize(QSize(0, 0))
         self.hardware_info_scroll_content_layout = QVBoxLayout(self.hardware_info_scroll_content)
         self.hardware_info_scroll_content_layout.setSpacing(0)
@@ -2640,7 +2749,7 @@ class Ui_MainWindow(object):
         self.docker_ps_quick_button.setText(QCoreApplication.translate("MainWindow", u"[ Docker PS ]", None))
         self.reboot_quick_button.setText(QCoreApplication.translate("MainWindow", u"[ Reboot ] ", None))
         self.recent_commands_label.setText(QCoreApplication.translate("MainWindow", u"RECENT COMMANDS", None))
-        self.perfomance_label.setText(QCoreApplication.translate("MainWindow", u"PERFOMANCE", None))
+        self.perfomance_label.setText(QCoreApplication.translate("MainWindow", u"PERFORMANCE", None))
         self.compute_button.setText(QCoreApplication.translate("MainWindow", u"[ COMPUTE ]", None))
         self.storage_button.setText(QCoreApplication.translate("MainWindow", u"[ STORAGE ]", None))
         self.thermals_button.setText(QCoreApplication.translate("MainWindow", u"[ THERMALS ]", None))
@@ -2688,7 +2797,9 @@ class Ui_MainWindow(object):
         self.storage_label.setText(QCoreApplication.translate("MainWindow", u"STORAGE", None))
         self.storage_legend_label.setText(QCoreApplication.translate("MainWindow", u"Disk capacity, I/O activity and storage devices", None))
         self.current_storage_label.setText(QCoreApplication.translate("MainWindow", u"CURRENT STORAGE", None))
-        self.disk_i_o_label.setText(QCoreApplication.translate("MainWindow", u"DISK I/O", None))
+        self.disk_io_label.setText(QCoreApplication.translate("MainWindow", u"DISK I/O", None))
+        self.disks_combo_box.setPlaceholderText(QCoreApplication.translate("MainWindow", u"ALL DISKS", None))
+        self.disk_data_unit_combo_box.setPlaceholderText(QCoreApplication.translate("MainWindow", u"UNIT", None))
         self.disk_i_o_summary_label.setText(QCoreApplication.translate("MainWindow", u"I/O SUMMARY", None))
         self.disk_read_information_label.setText(QCoreApplication.translate("MainWindow", u"Read", None))
         self.disk_read_information_value.setText(QCoreApplication.translate("MainWindow", u"0.0 MB/s", None))
@@ -2699,29 +2810,31 @@ class Ui_MainWindow(object):
         self.disk_write_per_sec_information_label.setText(QCoreApplication.translate("MainWindow", u"Write IOPS", None))
         self.disk_write_per_sec_information_value.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.disk_avg_latency_label.setText(QCoreApplication.translate("MainWindow", u"Avg latency", None))
-        self.disk_avg_latency_value.setText(QCoreApplication.translate("MainWindow", u"3.4 ms", None))
+        self.disk_avg_latency_value.setText(QCoreApplication.translate("MainWindow", u"0 ms", None))
         self.file_systems_label.setText(QCoreApplication.translate("MainWindow", u"FILESYSTEMS", None))
         ___qtablewidgetitem17 = self.file_systems_table.horizontalHeaderItem(0)
         ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"MOUNT", None))
         ___qtablewidgetitem18 = self.file_systems_table.horizontalHeaderItem(1)
         ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
         ___qtablewidgetitem19 = self.file_systems_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"USED", None))
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"TYPE", None))
         ___qtablewidgetitem20 = self.file_systems_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"AVAILABLE", None))
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"USED", None))
         ___qtablewidgetitem21 = self.file_systems_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"USAGE", None))
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"AVAILABLE", None))
+        ___qtablewidgetitem22 = self.file_systems_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"USAGE", None))
         self.storage_devices_label.setText(QCoreApplication.translate("MainWindow", u"STORAGE DEVICES", None))
-        ___qtablewidgetitem22 = self.storage_devices_label_2.horizontalHeaderItem(0)
-        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
-        ___qtablewidgetitem23 = self.storage_devices_label_2.horizontalHeaderItem(1)
-        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"TYPE", None))
-        ___qtablewidgetitem24 = self.storage_devices_label_2.horizontalHeaderItem(2)
-        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"CAPACITY", None))
-        ___qtablewidgetitem25 = self.storage_devices_label_2.horizontalHeaderItem(3)
-        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
-        ___qtablewidgetitem26 = self.storage_devices_label_2.horizontalHeaderItem(4)
-        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"TEMPERATURE", None))
+        ___qtablewidgetitem23 = self.storage_devices_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
+        ___qtablewidgetitem24 = self.storage_devices_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"TYPE", None))
+        ___qtablewidgetitem25 = self.storage_devices_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"CAPACITY", None))
+        ___qtablewidgetitem26 = self.storage_devices_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
+        ___qtablewidgetitem27 = self.storage_devices_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"TEMPERATURE", None))
         self.device_activity_label.setText(QCoreApplication.translate("MainWindow", u"DEVICE ACTIVITY", None))
         self.hardware_label.setText(QCoreApplication.translate("MainWindow", u"HARDWARE", None))
         self.cpu_info_label.setText(QCoreApplication.translate("MainWindow", u"CPU", None))

@@ -16,7 +16,7 @@ class PerformanceComputePage:
 
         self.cpu_gauge = SimpleNetdataGauge("CPU", "%", "#38bdf8")
         self.ram_gauge = SimpleNetdataGauge("RAM", "%", "#c084fc")
-        self.disk_gauge = SimpleNetdataGauge("DISK", "%", "#34d399")
+        self.disk_gauge = SimpleNetdataGauge("AVG DISK", "%", "#34d399")
 
         self.ui.compute_gauge_layout.addWidget(self.cpu_gauge)
         self.ui.compute_gauge_layout.addWidget(self.ram_gauge)
@@ -26,13 +26,14 @@ class PerformanceComputePage:
             self.ui.cpu_ram_metric_graph, y_label="Usage (%)", y_range=(0, 100)
         )
         self.load_average_graph = MetricGraphHelper(
-            self.ui.load_average_metric_graph, y_label="Load Avg", y_range=None
+            self.ui.load_average_metric_graph, y_label="Load Avg", y_range=(0, 100)
         )
         self.cpu_cores_metric_graph = MetricGraphHelper(
             self.ui.cpu_cores_metric_graph, y_label="Usage (%)", y_range=(0, 100)
         )
 
         self.cores_initialized = False
+
         self._setup_static_series()
 
         self.performance_store.metrics_loaded.connect(self.on_history_received)
@@ -79,18 +80,18 @@ class PerformanceComputePage:
         if timestamp is None:
             return
 
-        cpu_value = float(metric.get("cpu_value", 0.0))
-        ram_value = float(metric.get("ram_value", 0.0))
-        disk_value = float(metric.get("disk_value", 0.0))
-        cpu_per_core_values = metric.get("cpu_per_core", [])
-        load_avg = metric.get("load_average", [0.0, 0.0, 0.0])
+        cpu_value = metric["cpu_metrics"].get("cpu_load", 0.0)
+        ram_value = metric["memory_metrics"].get("ram_load", 0.0)
+        disk_value = metric["storage_metrics"].get("disk_value", 0.0)
+        cpu_per_core_values = metric["cpu_metrics"].get("cpu_per_core", [])
+        load_avg = metric["cpu_metrics"].get("load_average", [0.0, 0.0, 0.0])
 
-        ram_used = metric.get("ram_used", 0)
-        ram_available = metric.get("ram_available", 0)
+        ram_used = metric["memory_metrics"].get("ram_used_bytes", 0)
+        ram_available = metric["memory_metrics"].get("ram_available_bytes", 0)
 
         self.cpu_ram_graph.append_point(
             timestamp,
-            {"CPU": metric.get("cpu_value", 0.0), "RAM": metric.get("ram_value", 0.0)},
+            {"CPU": cpu_value, "RAM": ram_value},
         )
         self.load_average_graph.append_point(
             timestamp,

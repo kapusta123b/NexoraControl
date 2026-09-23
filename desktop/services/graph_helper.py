@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Any
 import numpy as np
 import pyqtgraph as pg
 from PySide6.QtCore import Qt
@@ -43,7 +44,6 @@ class MetricGraphHelper:
         self.graph.disableAutoRange()
 
         self.graph.plotItem.getAxis("left").enableAutoSIPrefix(False)
-        self.graph.plotItem.getAxis("bottom").enableAutoSIPrefix(False)
 
         pg.setConfigOptions(antialias=antialias)
 
@@ -82,9 +82,7 @@ class MetricGraphHelper:
         self.graph.setXRange(x_min, x_max, padding=0)
         self.graph.getViewBox().setLimits(xMin=x_min, xMax=x_max)
 
-    def append_point(
-        self, timestamp: int, values_dict: dict[str, float | int]
-    ) -> None: 
+    def append_point(self, timestamp: int, values_dict: dict[str, float | int]) -> None:
         self.timestamps.append(timestamp)
 
         for name in self.series_data:
@@ -131,6 +129,7 @@ class MetricGraphHelper:
 
         time_axis = TimeAxisItem(orientation="bottom")
         time_axis.enableAutoSIPrefix(False)
+
         plot_item.setAxisItems({"bottom": time_axis})
         plot_item.layout.setContentsMargins(5, 0, 0, 5)
 
@@ -210,7 +209,7 @@ class MetricGraphHelper:
                 cell_html = (
                     f"<td style='padding: 2px 8px; min-width: 90px;'>"
                     f"<span style='color: {color}; font-weight: bold;'>{name}:</span> "
-                    f"<span style='color: #ffffff;'>{val:.2f}{suffix}</span>"
+                    f"<span style='color: #ffffff;'>{val}{suffix}</span>"
                     f"</td>"
                 )
                 lines.append(cell_html)
