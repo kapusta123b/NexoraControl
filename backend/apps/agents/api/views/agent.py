@@ -1,5 +1,9 @@
 from django.db import transaction
 
+from apps.agents.api.authentication import AgentTokenAuthentication
+
+from rest_framework.permissions import IsAuthenticated
+
 from rest_framework import status
 
 from rest_framework.generics import (
@@ -18,8 +22,13 @@ from apps.agents.api.serializers.detail import (
     AgentHeartbeatSerializer,
 )
 from apps.agents.api.serializers.create import AgentListCreateSerializer
+
 from apps.agents.models.agent import Agent
 from apps.agents.models.metric import AgentMetric
+
+
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 
 class AgentListView(ListCreateAPIView):
@@ -48,26 +57,45 @@ class AgentDetailView(RetrieveUpdateDestroyAPIView):
 
 
 class AgentHeartbeatView(APIView):
+    authentication_classes = [AgentTokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, pk):
+        agent = request.user
 
-        auth_header = request.headers.get("Authorization", "")
-        token = auth_header.split(" ")[1] if " " in auth_header else auth_header
-
-        agent = Agent.objects.filter(id=pk, token=token).first()
-        if not agent:
+        if str(agent.id) != str(pk):
             return Response(
-                {"error": "Invalid token"}, status=status.HTTP_401_UNAUTHORIZED
+                {"error": "Token does not match agent ID"},
+                status=status.HTTP_403_FORBIDDEN,
             )
 
-        serializer = AgentHeartbeatSerializer(agent, data=request.data, partial=True)
+        serializer = AgentHeartbeatSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        metrics_data = serializer.validated_data
+
+        now = timezone.now()
 
         with transaction.atomic():
             AgentMetric.objects.create(
                 agent=agent,
-                **serializer.validated_data,
+                **metrics_data,
             )
-            serializer.save(status=Agent.Status.ONLINE, last_seen=timezone.now())
+            agent.status = Agent.Status.ONLINE
+            agent.last_seen = now
+            agent.save(update_fields=["status", "last_seen"])
+
+        channel_layer = get_channel_layer()
+
+        if channel_layer:
+            socket_payload = dict(metrics_data)
+            socket_payload["timestamp"] = int(now.timestamp())
+
+            async_to_sync(channel_layer.group_send)(
+                f"agent_{pk}",
+                {
+                    "type": "send_agent_metrics",
+                    "metrics": socket_payload,
+                },
+            )
 
         return Response({"status": "ok"}, status=status.HTTP_200_OK)
