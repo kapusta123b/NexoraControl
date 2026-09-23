@@ -1,18 +1,28 @@
 from httpx import AsyncClient
 
-from config.config import load_settings
+from config.config import Settings, load_settings
+
+
+import httpx
+from httpx import AsyncClient
 
 
 class BasicClient:
 
-    def __init__(self, settings=None, base_url=None):
+    def __init__(self, settings: Settings | None = None, base_url: str | None = None):
         self.settings = settings or load_settings()
+
+        token_header = (
+            self.settings.token
+            if self.settings.token.startswith("Bearer ")
+            else f"Bearer {self.settings.token}"
+        )
 
         self.client = AsyncClient(
             base_url=base_url or self.settings.api_url,
-            timeout=25,
+            timeout=25.0,
             headers={
-                "Authorization": self.settings.token,
+                "Authorization": token_header,
                 "Content-Type": "application/json",
             },
             follow_redirects=True,
