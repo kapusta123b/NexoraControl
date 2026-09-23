@@ -1,6 +1,4 @@
-from functools import partial
-
-from PySide6.QtCore import QObject, QThread, QTimer
+from PySide6.QtCore import QObject, QThread
 
 from api.client import NexoraClient
 
@@ -26,17 +24,16 @@ class AgentMetricPoller(QObject):
 
         self.from_hours = 1
         self.metric_type: str = None
+        self.query_params = {}
 
         self.is_polling = False
         self.api_error_shown = False
 
         self._active_workers = []
 
-        self.timer = QTimer(self)
-        self.timer.setInterval(5000)
-        self.timer.timeout.connect(partial(self.refresh, partial=True))
-
-    def on_clicked(self, agent_id: int = None, metric_type: str = None) -> None:
+    def on_clicked(
+        self, agent_id: int = None, metric_type: str = None, query_params: dict = {}
+    ) -> None:
         if agent_id:
             self.agent_id = agent_id
 
@@ -46,8 +43,9 @@ class AgentMetricPoller(QObject):
         else:
             self.metric_type = metric_type
 
-        if self.client.base_url and not self.timer.isActive():
-            self.timer.start()
+        if isinstance(query_params, dict):
+
+            self.query_params = query_params
 
         self.refresh()
 
@@ -56,16 +54,11 @@ class AgentMetricPoller(QObject):
 
         self.refresh(force=True)
 
-    def stop_polling(self) -> None:
-        if self.timer.isActive():
-            self.timer.stop()
-
-    def refresh(self, force: bool = False, partial: bool = False) -> None:
+    def refresh(self, force: bool = False) -> None:
         if not force:
             if self.is_polling or not self.client.base_url or self.agent_id is None:
                 return
 
-        self.partial = partial
         self.is_polling = True
 
         self._start_metric_worker()
@@ -77,7 +70,7 @@ class AgentMetricPoller(QObject):
             self.agent_id,
             self.from_hours,
             self.metric_type,
-            self.partial,
+            self.query_params,
         )
         worker.moveToThread(thread)
 
@@ -86,12 +79,7 @@ class AgentMetricPoller(QObject):
 
         thread.started.connect(worker.run)
 
-        target_slot = (
-            self.metric_store.append_point
-            if self.partial
-            else self.metric_store.set_history
-        )
-        worker.success.connect(target_slot)
+        worker.success.connect(self.metric_store.set_history)
         worker.error.connect(self.show_api_error)
 
         worker.finished.connect(thread.quit)
@@ -110,7 +98,6 @@ class AgentMetricPoller(QObject):
     def show_api_error(self, message: str | None = None) -> None:
         if not self.api_error_shown:
             self.api_error_shown = True
-            self.stop_polling()
 
             MessageBox().show_message(
                 "critical",

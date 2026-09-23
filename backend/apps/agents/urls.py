@@ -10,9 +10,25 @@ from apps.agents.api.views.command import (
     CommandListView,
     CommandPendingListView,
 )
-from apps.agents.api.views.metric import AgentMetricHistoryView, AgentMetricLatestView
+from apps.agents.api.views.metric import (
+    AgentResourceMetricHistoryView,
+    AgentStorageMetricHistoryView,
+)
 
 app_name = "notes"
+
+url_metrics = [
+    path(
+        "agents/<int:pk>/metrics/resources/",
+        AgentResourceMetricHistoryView.as_view(),
+        name="agent-metrics-resources-history",
+    ),
+    path(
+        "agents/<int:pk>/metrics/storage/",
+        AgentStorageMetricHistoryView.as_view(),
+        name="agent-metrics-resources-history",
+    ),
+]
 
 urlpatterns = [
     path("agents/", AgentListView.as_view(), name="agent-list"),
@@ -21,16 +37,6 @@ urlpatterns = [
         "agents/<int:pk>/heartbeat/",
         AgentHeartbeatView.as_view(),
         name="agent-detail-heartbeat",
-    ),
-    path(
-        "agents/<int:pk>/metrics/resources/history/",
-        AgentMetricHistoryView.as_view(),
-        name="agent-metrics-resources-history",
-    ),
-    path(
-        "agents/<int:pk>/metrics/resources/latest/",
-        AgentMetricLatestView.as_view(),
-        name="agent-metrics-resources-latest",
     ),
     path(
         "agents/<int:pk>/commands/",
@@ -47,4 +53,4 @@ urlpatterns = [
         CommandBulkUpdateView.as_view(),
         name="agent-commands-results",
     ),
-]
+] + url_metrics
