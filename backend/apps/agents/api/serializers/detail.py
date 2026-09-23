@@ -39,15 +39,10 @@ class AgentHeartbeatSerializer(ModelSerializer):
         model = AgentMetric
 
         fields = [
-            # CPU
-            "cpu_load",
-            "cpu_load_per_core",
-            "load_average",
-            
-            # MEMORY
-            "ram_load",
-            "ram_used_bytes",
-            "ram_available_bytes",
-            "swap_used_bytes",
-            "swap_available_bytes",
+            "cpu_metrics",
+            "memory_metrics",
+            "storage_metrics",
+            "network_metrics",
+            "thermal_metrics",
+            "gpu_metrics",
         ]
