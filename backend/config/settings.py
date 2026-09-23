@@ -12,6 +12,8 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="").split(",")
 
 
 DJANGO_APPS = [
+    "daphne",
+    "channels",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -20,7 +22,9 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PATY_APPS = ["rest_framework"]
+THIRD_PATY_APPS = [
+    "rest_framework",
+]
 
 LOCAL_APPS = ["apps.agents"]
 
@@ -54,7 +58,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "config.wsgi.application"
+ASGI_APPLICATION = "config.asgi.application"
 
 DATABASES = {
     "default": {
@@ -66,6 +70,12 @@ DATABASES = {
         "PORT": config("DB_PORT", default="5432"),
         "ATOMIC_REQUESTS": True,
     }
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
 }
 
 AUTH_PASSWORD_VALIDATORS = [
