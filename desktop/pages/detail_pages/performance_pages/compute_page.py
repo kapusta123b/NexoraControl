@@ -23,13 +23,22 @@ class PerformanceComputePage:
         self.ui.compute_gauge_layout.addWidget(self.disk_gauge)
 
         self.cpu_ram_graph = MetricGraphHelper(
-            self.ui.cpu_ram_metric_graph, y_label="Usage (%)", y_range=(0, 100)
+            self.ui.cpu_ram_metric_graph,
+            y_label="Usage (%)",
+            antialias=True,
+            y_range=(0, 100),
         )
         self.load_average_graph = MetricGraphHelper(
-            self.ui.load_average_metric_graph, y_label="Load Avg", y_range=(0, 100)
+            self.ui.load_average_metric_graph,
+            y_label="Load Avg",
+            antialias=True,
+            y_range=(0, 100),
         )
         self.cpu_cores_metric_graph = MetricGraphHelper(
-            self.ui.cpu_cores_metric_graph, y_label="Usage (%)", y_range=(0, 100)
+            self.ui.cpu_cores_metric_graph,
+            y_label="Usage (%)",
+            antialias=True,
+            y_range=(0, 100),
         )
 
         self.cores_initialized = False

@@ -9,7 +9,7 @@ from services.stores.metric_store import MetricStore
 
 from ui.main_window import Ui_MainWindow
 
-from PySide6.QtWidgets import QButtonGroup, QPushButton, QWidget
+from PySide6.QtWidgets import QButtonGroup
 
 from PySide6.QtCore import QObject, QThread
 
@@ -76,7 +76,6 @@ class DetailPerformanceController(QObject):
         if clicked_button not in self.nav_mapping:
             return
 
-        # Pure Python elegance: tuple unpacking handles everything in 1 line
         page_widget, metric_type, query_params = self.nav_mapping[clicked_button]
 
         if self.current_page != clicked_button:
