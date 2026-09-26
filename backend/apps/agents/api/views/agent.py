@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from django.db import transaction
 
 from apps.agents.api.authentication import AgentTokenAuthentication
@@ -73,6 +75,33 @@ class AgentHeartbeatView(APIView):
         serializer.is_valid(raise_exception=True)
         metrics_data = serializer.validated_data
 
+        storage_devices = {}
+        file_systems = {}
+
+        for device_name, device_info in metrics_data["storage_metrics"].items():
+            if "mount" in device_info:
+                file_systems[device_name] = device_info
+            else:
+                storage_devices[device_name] = {
+                    "model": device_info.get("model"),
+                    "type": device_info.get("type"),
+                    "capacity": device_info.get("capacity"),
+                    "status": device_info.get("status"),
+                    "write_bytes": device_info.get("write_bytes"),
+                    "read_bytes": device_info.get("read_bytes"),
+                    "write_count": device_info.get("write_count"),
+                    "read_count": device_info.get("read_count"),
+                }
+
+        metrics_data["storage_metrics"] = {
+            device_name: {
+                "write_bytes": device_info.get("write_bytes"),
+                "read_bytes": device_info.get("read_bytes"),
+            }
+            for device_name, device_info in metrics_data["storage_metrics"].items()
+            if "mount" not in device_info
+        }
+
         now = timezone.now()
 
         with transaction.atomic():
@@ -87,14 +116,18 @@ class AgentHeartbeatView(APIView):
         channel_layer = get_channel_layer()
 
         if channel_layer:
-            socket_payload = dict(metrics_data)
-            socket_payload["timestamp"] = int(now.timestamp())
+            metrics_data["storage_metrics"] = {
+                "devices": storage_devices,
+                "filesystems": file_systems,
+            }
+
+            metrics_data["timestamp"] = int(now.timestamp())
 
             async_to_sync(channel_layer.group_send)(
                 f"agent_{pk}",
                 {
                     "type": "send_agent_metrics",
-                    "metrics": socket_payload,
+                    "metrics": metrics_data,
                 },
             )
 
