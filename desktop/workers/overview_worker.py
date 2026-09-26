@@ -4,6 +4,7 @@ from api.client import NexoraClient
 
 import traceback
 
+
 class OverviewWorker(QObject):
     finished = Signal()
     success = Signal(dict)
@@ -27,7 +28,6 @@ class OverviewWorker(QObject):
             self.finished.emit()
 
 
-
 class RecentCommandsWorker(QObject):
     finished = Signal()
     success = Signal(list)
@@ -39,12 +39,24 @@ class RecentCommandsWorker(QObject):
         self.agent_id = agent_id
 
     @Slot()
-    def run(self):
+    def get_commands(self):
         try:
             commands = self.client.get_agent_commands(self.agent_id, 5)
 
             self.success.emit(commands)
         except Exception as exc:
             self.error.emit(str(exc))
+
+        finally:
+            self.finished.emit()
+
+    def create_agent_command(self, command_type: str):
+        try:
+            self.client.create_agent_command(self.agent_id, command_type)
+
+            self.finished.emit()
+        except Exception as exc:
+            self.error.emit(str(exc))
+
         finally:
             self.finished.emit()

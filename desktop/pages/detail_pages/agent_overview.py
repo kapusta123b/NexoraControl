@@ -1,5 +1,5 @@
 from datetime import datetime
-from PySide6.QtWidgets import QLayout
+from PySide6.QtWidgets import QButtonGroup, QLayout
 
 from api.client import NexoraClient
 
@@ -10,9 +10,16 @@ from services.stores.agent_store import DetailAgentStore
 
 from ui.main_window import Ui_MainWindow
 
+from PySide6.QtCore import QObject
 
-class DetailOverviewController:
-    def __init__(self, ui: Ui_MainWindow, client: NexoraClient, ):
+
+class DetailOverviewController(QObject):
+    def __init__(
+        self,
+        ui: Ui_MainWindow,
+        client: NexoraClient,
+    ):
+        super().__init__()
         self.ui = ui
         self.agent = {}
 
@@ -22,6 +29,8 @@ class DetailOverviewController:
         self.overview_poller = DetailOverviewPoller(
             client, self.detail_agent_store, self.commands_store
         )
+
+        self.setup_connections()
 
         self.detail_agent_store.agent_changed.connect(self.set_overview_information)
         self.commands_store.commands_changed.connect(self.populate_recent_commands)
@@ -53,6 +62,33 @@ class DetailOverviewController:
             layout.addWidget(card)
 
         layout.addStretch(1)
+
+    def setup_connections(self) -> None:
+        self.quick_commands_nav_group = QButtonGroup(self)
+        self.quick_commands_nav_group.setExclusive(True)
+
+        self.command_mapping = {
+            self.ui.docker_ps_quick_button: "docker_ps",
+            self.ui.reboot_quick_button: "system_reboot",
+            self.ui.stop_all_docker_cont_quick_button: "stop_all_containers",
+            self.ui.restart_all_docker_cont_quick_button: "restart_all_containers",
+        }
+
+        for button in self.command_mapping:
+            self.quick_commands_nav_group.addButton(button)
+            button.clicked.connect(self.on_nav_button_clicked)
+
+    def on_nav_button_clicked(self) -> None:
+        clicked_button = self.sender()
+
+        if clicked_button not in self.command_mapping:
+            return
+
+        command_type = self.command_mapping[clicked_button]
+
+        self.overview_poller.on_clicked(
+            agent_id=self.agent.get("id"), command_type=command_type
+        )
 
     def _clear_layout(self, layout: QLayout) -> None:
         while layout.count():
