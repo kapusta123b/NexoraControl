@@ -33,8 +33,14 @@ class DetailOverviewPoller(QObject):
         self.timer.setInterval(5000)
         self.timer.timeout.connect(self.refresh_all)
 
-    def on_clicked(self, agent_id: int) -> None:
-        self.agent_id = agent_id
+    def on_clicked(self, agent_id: int = None, command_type: str = None) -> None:
+        if agent_id:
+            self.agent_id = agent_id
+
+        if command_type:
+            self._start_commands_worker(command_type)
+
+            return
 
         if self.client.base_url and not self.timer.isActive():
             self.timer.start()
@@ -50,7 +56,7 @@ class DetailOverviewPoller(QObject):
             return
 
         self.is_polling = True
-        
+
         self._start_overview_worker()
         self._start_commands_worker()
 
@@ -69,7 +75,7 @@ class DetailOverviewPoller(QObject):
 
         worker.finished.connect(thread.quit)
         worker.finished.connect(worker.deleteLater)
-        
+
         def cleanup():
             thread.deleteLater()
             if worker_context in self._active_workers:
@@ -80,7 +86,7 @@ class DetailOverviewPoller(QObject):
         thread.finished.connect(cleanup)
         thread.start()
 
-    def _start_commands_worker(self) -> None:
+    def _start_commands_worker(self, command_type: str = None) -> None:
         thread = QThread(self)
         worker = RecentCommandsWorker(self.client, self.agent_id)
         worker.moveToThread(thread)
@@ -89,8 +95,12 @@ class DetailOverviewPoller(QObject):
 
         self._active_workers.append(worker_context)
 
-        thread.started.connect(worker.run)
-        worker.success.connect(self.commands_store.set_commands)
+        if command_type:
+            thread.started.connect(lambda: worker.create_agent_command(command_type))
+        else:
+            thread.started.connect(worker.get_commands)
+            worker.success.connect(self.commands_store.set_commands)
+            
         worker.error.connect(self.show_api_error)
 
         worker.finished.connect(thread.quit)
