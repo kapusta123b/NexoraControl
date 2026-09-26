@@ -1,6 +1,6 @@
 import psutil
 
-def _collect_memory_metrics() -> dict:
+def collect_memory_metrics() -> dict:
     memory = psutil.virtual_memory()
     swap = psutil.swap_memory()
 

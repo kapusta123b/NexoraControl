@@ -2,16 +2,16 @@ import asyncio
 
 from api.client import BasicClient
 
-from services.metrics.disk import _collect_storage_data
-from services.metrics.cpu import _collect_cpu_metrics
-from services.metrics.memory import _collect_memory_metrics
+from services.metrics.disk import collect_storage_data
+from services.metrics.cpu import collect_cpu_metrics
+from services.metrics.memory import collect_memory_metrics
 
 
 def collect_metrics() -> dict:
     return {
-        "cpu_metrics": {**_collect_cpu_metrics()},
-        "memory_metrics": {**_collect_memory_metrics()},
-        "storage_metrics": {**_collect_storage_data()},
+        "cpu_metrics": {**collect_cpu_metrics()},
+        "memory_metrics": {**collect_memory_metrics()},
+        "storage_metrics": {**collect_storage_data()},
     }
 
 
@@ -22,5 +22,3 @@ async def heartbeat_loop(client: BasicClient) -> None:
         await client.send_heartbeat(heartbeat=data)
 
         await asyncio.sleep(client.settings.heartbeat_interval)
-
-

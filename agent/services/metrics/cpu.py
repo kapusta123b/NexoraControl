@@ -1,7 +1,7 @@
 import psutil
 
 
-def _collect_cpu_metrics() -> dict:
+def collect_cpu_metrics() -> dict:
     load_average = psutil.getloadavg()
 
     return {
