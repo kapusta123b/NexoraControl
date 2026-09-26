@@ -15,16 +15,19 @@ class SimpleNetdataGauge(QWidget):
 
         self.value = 0.0
         self.max_value = max_value
+
         self.setMinimumSize(150, 150)
 
         self.font_title = QFont("JetBrainsMonoNL Nerd Font Propo", 9)
         self.font_val = QFont("JetBrainsMonoNL Nerd Font Propo", 11, QFont.Weight.Bold)
         self.font_unit = QFont("JetBrainsMonoNL Nerd Font Propo", 8)
 
+
     def set_value(self, val: float = 0.0):
         new_val = max(0.0, min(float(val), self.max_value))
         if self.value == new_val:
             return
+        
         self.value = new_val
         self.update()
 

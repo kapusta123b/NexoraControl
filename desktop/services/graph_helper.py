@@ -1,4 +1,5 @@
 from datetime import datetime
+from re import S
 from typing import Any
 import numpy as np
 import pyqtgraph as pg
@@ -28,6 +29,9 @@ class MetricGraphHelper:
         self.TOOLTIP_COLS_COUNT = 3
 
         self.graph = graph
+
+        self.antialias = antialias
+
         self.curves: dict[str, pg.PlotDataItem] = {}
 
         self.series_colors: dict[str, str] = {}
@@ -44,8 +48,8 @@ class MetricGraphHelper:
         self.graph.disableAutoRange()
 
         self.graph.plotItem.getAxis("left").enableAutoSIPrefix(False)
+        self.graph.enableAutoRange(axis='y', enable=True)
 
-        pg.setConfigOptions(antialias=antialias)
 
     def update_data(
         self,
@@ -78,6 +82,12 @@ class MetricGraphHelper:
             if len(self.timestamps) == 1
             else max(self.timestamps)
         )
+
+        if len(timestamps) < 300:
+            pg.setConfigOptions(antialias=self.antialias)
+
+        else:
+            pg.setConfigOptions(antialias=False)
 
         self.graph.setXRange(x_min, x_max, padding=0)
         self.graph.getViewBox().setLimits(xMin=x_min, xMax=x_max)

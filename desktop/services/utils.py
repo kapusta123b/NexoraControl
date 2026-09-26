@@ -1,5 +1,7 @@
 from typing import Literal
 
+from PySide6.QtWidgets import QTableWidgetItem
+
 UnitType = Literal["kb", "mb", "gb", "tb", "pb", "KB", "MB", "GB", "TB", "PB"]
 
 UNIT_MAP: dict[str, int] = {
@@ -17,7 +19,7 @@ def byte_converter(
     precision: int = 2,
     rate: bool = False,
     as_float: bool = False,
-) -> str | int:
+) -> str | int | float:
     """Convert bytes into a formatted higher-order unit string.
 
     Args:
@@ -72,7 +74,10 @@ def byte_converter(
     return f"{converted_with_precision} {unit_key.upper()}{rate_suffix}"
 
 
-# def avg_disks_load(disks: dict):
-#     if disks:
-#         for disk_name, disk_info in disks.items():
-#             disk_info
+def update_or_create_row_item(table, row: int, column: int, text: str, text_color=None):
+    item = table.item(row, column)
+    if item:
+        if item.text() != text:
+            item.setText(text)
+    else:
+        table.setItem(row, column, QTableWidgetItem(text))
