@@ -1,5 +1,23 @@
-from httpx import Client, HTTPError
+from typing import Literal, Any
+
+import httpx
+
 import logging
+
+MethodType = Literal[
+    "get",
+    "post",
+    "put",
+    "patch",
+    "head",
+    "options",
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "HEAD",
+    "OPTIONS",
+]
 
 
 class NexoraClient:
@@ -8,37 +26,62 @@ class NexoraClient:
     def __init__(self, base_url: str, token: str):
         self.base_url = base_url
         self.token = token
-        self.headers = {"Authorization": self.token}
 
-    def _get(
-        self, path: str, params: dict = None, timeout: int = 10
-    ) -> list[dict] | dict | None:
-        with Client(
-            base_url=self.base_url, headers=self.headers, timeout=timeout
-        ) as client:
-            try:
-                response = client.get(url=path, params=params)
+        self.client = httpx.Client(
+            base_url=base_url,
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=10,
+        )
 
-                response.raise_for_status()
+    def _request(
+        self,
+        method: MethodType = "GET",
+        path: str = None,
+        params: dict = None,
+        json_data: dict = None,
+        timeout: int = 10,
+    ) -> Any:
+        method_name = method.lower()
 
-                return response.json()
+        try:
+            request_func = getattr(self.client, method_name)
 
-            except HTTPError as e:
-                logging.error(f"HTTP Error during GET {path}: {e}")
-                raise e
+            kwargs = {"url": path, "params": params, "timeout": timeout}
 
-            except Exception as e:
-                logging.error(f"Unexpected error during GET {path}: {e}")
-                raise e
+            if method_name in ("post", "put", "patch") and json_data is not None:
+                kwargs["json"] = json_data
+
+            response = request_func(**kwargs)
+
+            response.raise_for_status()
+
+            return response.json() if response.content else {}
+
+        except httpx.HTTPStatusError as e:
+            logging.error(f"Server/client error [Status {e.response.status_code}]: {e}")
+            return None
+
+        except httpx.RequestError as e:
+            logging.error(
+                f"Network error while executing the request {e.request.url}: {e}"
+            )
+            return None
+
+    def close(self):
+        self.client.close()
 
     def get_agents_list(self) -> list[dict]:
-        return self._get(f"{self.BASE_AGENT_URL}")
+        return self._request("get", self.BASE_AGENT_URL)
 
     def get_detail_agent(self, agent_id: int) -> dict:
-        return self._get(f"{self.BASE_AGENT_URL}{agent_id}/")
+        return self._request("get", f"{self.BASE_AGENT_URL}{agent_id}/")
 
     def get_agent_metrics(
-        self, agent_id: int, hours: int, metric_type: str, query_params: dict = {}
+        self,
+        agent_id: int,
+        hours: int,
+        metric_type: str,
+        query_params: dict | None = None,
     ) -> dict:
         BASE_AGENT_METRIC_URL = f"{self.BASE_AGENT_URL}{agent_id}/metrics/"
 
@@ -51,12 +94,23 @@ class NexoraClient:
 
         metric_url = metric_types[metric_type]
 
-        query_params.update({"hours": hours})
+        compiled_params = dict(query_params) if query_params else {}
+        compiled_params.update({"hours": hours})
 
-        return self._get(
-            metric_url,
-            query_params,
+        return self._request(
+            method="get",
+            path=metric_url,
+            params=compiled_params,
         )
 
     def get_agent_commands(self, agent_id: int, count: int | str) -> list[dict]:
-        return self._get(f"{self.BASE_AGENT_URL}{agent_id}/commands/", {"count": count})
+        return self._request(
+            "get", f"{self.BASE_AGENT_URL}{agent_id}/commands/", {"count": count}
+        )
+
+    def create_agent_command(self, agent_id: int, command_type: str) -> dict | None:
+        return self._request(
+            method="post",
+            path=f"{self.BASE_AGENT_URL}{agent_id}/commands/",
+            json_data={"command_type": command_type},
+        )
