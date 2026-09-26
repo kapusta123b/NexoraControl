@@ -70,39 +70,39 @@ class Ui_card_form(object):
         self.agent_information_widget.setMinimumSize(QSize(300, 0))
         self.agent_information_widget.setMaximumSize(QSize(400, 150))
         self.agent_information_widget.setStyleSheet(u"")
-        self.horizontalLayout_10 = QHBoxLayout(self.agent_information_widget)
-        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.horizontalLayout_10.setContentsMargins(0, 9, 0, 0)
+        self.agent_information_layout = QHBoxLayout(self.agent_information_widget)
+        self.agent_information_layout.setObjectName(u"agent_information_layout")
+        self.agent_information_layout.setContentsMargins(0, 9, 0, 0)
         self.online_dot = QLabel(self.agent_information_widget)
         self.online_dot.setObjectName(u"online_dot")
         self.online_dot.setMaximumSize(QSize(20, 100))
         self.online_dot.setStyleSheet(u"")
         self.online_dot.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
-        self.horizontalLayout_10.addWidget(self.online_dot)
+        self.agent_information_layout.addWidget(self.online_dot)
 
         self.system_information_widget = QWidget(self.agent_information_widget)
         self.system_information_widget.setObjectName(u"system_information_widget")
         self.system_information_widget.setMinimumSize(QSize(200, 100))
         self.system_information_widget.setMaximumSize(QSize(200, 16777215))
-        self.verticalLayout_9 = QVBoxLayout(self.system_information_widget)
-        self.verticalLayout_9.setSpacing(0)
-        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.system_information_layout = QVBoxLayout(self.system_information_widget)
+        self.system_information_layout.setSpacing(0)
+        self.system_information_layout.setObjectName(u"system_information_layout")
+        self.system_information_layout.setContentsMargins(0, 0, 0, 0)
         self.vps_name_label = QLabel(self.system_information_widget)
         self.vps_name_label.setObjectName(u"vps_name_label")
         self.vps_name_label.setStyleSheet(u"font: 12pt;")
         self.vps_name_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.vps_name_label.setWordWrap(True)
 
-        self.verticalLayout_9.addWidget(self.vps_name_label)
+        self.system_information_layout.addWidget(self.vps_name_label)
 
         self.ip_os_label = QLabel(self.system_information_widget)
         self.ip_os_label.setObjectName(u"ip_os_label")
         self.ip_os_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.ip_os_label.setWordWrap(True)
 
-        self.verticalLayout_9.addWidget(self.ip_os_label)
+        self.system_information_layout.addWidget(self.ip_os_label)
 
         self.cpu_ram_label = QLabel(self.system_information_widget)
         self.cpu_ram_label.setObjectName(u"cpu_ram_label")
@@ -110,10 +110,10 @@ class Ui_card_form(object):
         self.cpu_ram_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.cpu_ram_label.setWordWrap(True)
 
-        self.verticalLayout_9.addWidget(self.cpu_ram_label)
+        self.system_information_layout.addWidget(self.cpu_ram_label)
 
 
-        self.horizontalLayout_10.addWidget(self.system_information_widget)
+        self.agent_information_layout.addWidget(self.system_information_widget)
 
         self.status_label = QLabel(self.agent_information_widget)
         self.status_label.setObjectName(u"status_label")
@@ -128,35 +128,35 @@ class Ui_card_form(object):
 "}")
         self.status_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
-        self.horizontalLayout_10.addWidget(self.status_label)
+        self.agent_information_layout.addWidget(self.status_label)
 
 
         self.horizontalLayout.addWidget(self.agent_information_widget)
 
-        self.spacer1 = QSpacerItem(200, 29, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.card_content_spacer = QSpacerItem(200, 29, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout.addItem(self.spacer1)
+        self.horizontalLayout.addItem(self.card_content_spacer)
 
         self.right_widget = QWidget(card_form)
         self.right_widget.setObjectName(u"right_widget")
         self.right_widget.setMaximumSize(QSize(150, 120))
         self.right_widget.setStyleSheet(u"")
-        self.verticalLayout_10 = QVBoxLayout(self.right_widget)
-        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
-        self.verticalLayout_10.setContentsMargins(-1, 80, -1, -1)
+        self.right_widget_layout = QVBoxLayout(self.right_widget)
+        self.right_widget_layout.setObjectName(u"right_widget_layout")
+        self.right_widget_layout.setContentsMargins(-1, 80, -1, -1)
         self.agent_open_button = QPushButton(self.right_widget)
         self.agent_open_button.setObjectName(u"agent_open_button")
         self.agent_open_button.setMaximumSize(QSize(104, 16777215))
         self.agent_open_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.verticalLayout_10.addWidget(self.agent_open_button)
+        self.right_widget_layout.addWidget(self.agent_open_button)
 
 
         self.horizontalLayout.addWidget(self.right_widget)
 
-        self.spacer2 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.right_card_button_spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout.addItem(self.spacer2)
+        self.horizontalLayout.addItem(self.right_card_button_spacer)
 
 
         self.retranslateUi(card_form)
