@@ -5,7 +5,7 @@ from commands.parser import command_parser
 async def get_command_loop(client):
 
     while True:
-        response = await client.get_pengind_commands()
+        response = await client.get_pending_commands()
 
         await command_parser(response)
 
