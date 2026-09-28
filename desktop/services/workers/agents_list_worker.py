@@ -1,3 +1,4 @@
+import asyncio
 from PySide6.QtCore import QObject, Signal, Slot
 
 from api.client import NexoraClient
@@ -14,8 +15,11 @@ class AgentsListWorker(QObject):
 
     @Slot()
     def run(self):
+        asyncio.run(self._execute_request())
+
+    async def _execute_request(self):
         try:
-            agents = self.client.get_agents_list()
+            agents = await self.client.get_agents_list()
             self.success.emit(agents)
 
         except Exception as exc:
