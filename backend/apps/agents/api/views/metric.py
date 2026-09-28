@@ -50,12 +50,12 @@ class AgentResourceMetricHistoryView(APIView):
         for created_at, cpu_metrics, memory_metrics in raw_metrics:
             ts = int(created_at.timestamp())
             timestamps.append(ts)
-            cpu_values.append(cpu_metrics.get("cpu_load"))
-            ram_values.append(memory_metrics.get("ram_load"))
-            load_average.append(cpu_metrics.get("load_average"))
+            cpu_values.append(cpu_metrics["cpu_load"])
+            ram_values.append(memory_metrics["ram_load"])
+            load_average.append(cpu_metrics["load_average"])
 
             if ts >= one_minute_ago_ts:
-                cpu_load_per_core.append(cpu_metrics.get("cpu_load_per_core"))
+                cpu_load_per_core.append(cpu_metrics["cpu_load_per_core"])
                 cpu_load_per_core_timestamps.append(ts)
 
         return Response(
@@ -131,16 +131,16 @@ class AgentStorageMetricHistoryView(APIView):
                         disks_read_write_data[target_disk] = {"write": [], "read": []}
 
                     disks_read_write_data[target_disk]["write"].append(
-                        disk_info.get("write_bytes")
+                        disk_info["write_bytes"]
                     )
                     disks_read_write_data[target_disk]["read"].append(
-                        disk_info.get("read_bytes")
+                        disk_info["read_bytes"]
                     )
 
             else:
                 for disk_name, disk_info in storage_metrics.items():
-                    write_bytes = disk_info.get("write_bytes")
-                    read_bytes = disk_info.get("read_bytes")
+                    write_bytes = disk_info["write_bytes"]
+                    read_bytes = disk_info["read_bytes"]
 
                     if disk_name not in disks_read_write_data:
                         disks_read_write_data[disk_name] = {
