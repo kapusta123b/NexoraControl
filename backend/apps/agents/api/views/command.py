@@ -1,6 +1,6 @@
 from rest_framework import status
 
-from rest_framework.generics import ListCreateAPIView, UpdateAPIView
+from rest_framework.generics import ListCreateAPIView
 
 from rest_framework.response import Response
 
@@ -14,6 +14,8 @@ from apps.agents.api.serializers.command import (
 )
 from apps.agents.models.agent import Agent
 
+from django.shortcuts import get_object_or_404
+
 from django.db import transaction
 
 
@@ -25,7 +27,7 @@ class CommandListView(ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
 
         pk = self.kwargs["pk"]
-        agent = Agent.objects.get(id=pk)
+        agent = get_object_or_404(Agent, pk=pk)
 
         serializer.save(agent=agent)
 
@@ -52,7 +54,7 @@ class CommandListView(ListCreateAPIView):
                 count = int(count)
 
                 queryset = queryset[:count]
-                
+
             except ValueError:
                 return queryset
 
@@ -84,51 +86,53 @@ class CommandPendingListView(ListCreateAPIView):
 class CommandBulkUpdateView(APIView):
 
     def patch(self, request, *args, **kwargs):
+        try:
+            if not isinstance(request.data, list):
+                return Response(
+                    {"detail": "must be a list {JSON array}"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
 
-        if not isinstance(request.data, list):
-            return Response(
-                {"detail": "must be a list {JSON array}"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            serializer = CommandPatchSerializer(data=request.data, many=True)
 
-        serializer = CommandPatchSerializer(data=request.data, many=True)
+            if not serializer.is_valid():
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            validated_data = serializer.validated_data
 
-        validated_data = serializer.validated_data
+            command_ids = [item["id"] for item in validated_data]
 
-        command_ids = [item["id"] for item in validated_data]
+            commands_dict = {
+                c.id: c
+                for c in Command.objects.filter(
+                    id__in=command_ids, agent_id=self.kwargs["pk"]
+                )
+            }
 
-        commands_dict = {
-            c.id: c
-            for c in Command.objects.filter(
-                id__in=command_ids, agent_id=self.kwargs["pk"]
-            )
-        }
+            commands_to_update = []
 
-        commands_to_update = []
+            for item in validated_data:
+                command_id = item["id"]
 
-        for item in validated_data:
-            command_id = item["id"]
+                if command_id in commands_dict:
 
-            if command_id in commands_dict:
+                    command = commands_dict[command_id]
+                    command.output = item.get("output", "")
+                    command.status = item["status"]
+                    command.errors = item.get("errors", {})
+                    command.started_at = item["started_at"]
+                    command.finished_at = item["finished_at"]
 
-                command = commands_dict[command_id]
-                command.output = item.get("output", "")
-                command.status = item["status"]
-                command.errors = item.get("errors", {})
-                command.started_at = item["started_at"]
-                command.finished_at = item["finished_at"]
+                    commands_to_update.append(command)
 
-                commands_to_update.append(command)
+            if commands_to_update:
+                Command.objects.bulk_update(
+                    commands_to_update,
+                    ["status", "output", "finished_at", "started_at", "errors"],
+                )
 
-        if commands_to_update:
-            Command.objects.bulk_update(
-                commands_to_update,
-                ["status", "output", "finished_at", "started_at", "errors"],
-            )
+                return Response(status=status.HTTP_200_OK)
 
-            return Response(status=status.HTTP_200_OK)
-
-        return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Exception as e:
+            print(e)
