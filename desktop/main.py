@@ -1,3 +1,4 @@
+import asyncio
 import sys
 
 from PySide6.QtWidgets import QApplication, QButtonGroup, QMainWindow
@@ -29,6 +30,12 @@ class MainWindow(QMainWindow):
 
         self.setup_pages()
         self.setup_navigation()
+
+        if sys.platform == "win32":
+             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        else:
+            asyncio.get_event_loop_policy().get_event_loop = asyncio.new_event_loop
+
 
         self.ui.content_stack.setCurrentWidget(self.ui.dashboard_page)
         self.ui.dashboard_button.setChecked(True)
