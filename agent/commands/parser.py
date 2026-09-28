@@ -9,6 +9,9 @@ COMMANDS = COMMAND_SYSTEM | COMMAND_DOCKER
 
 
 async def command_parser(commands: list) -> None:
+    if not commands:
+        return
+
     finished_commands = []
 
     for command_data in commands:
