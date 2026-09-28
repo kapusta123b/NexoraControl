@@ -32,7 +32,7 @@ class AgentCardWidget(QWidget):
         )
 
     def _update_status(self, agent: dict) -> None:
-        is_online = agent.get("status") == ("ON")
+        is_online = agent["status"] == ("ON")
         status_val = "online" if is_online else "offline"
         status_str = status_val.upper()
 

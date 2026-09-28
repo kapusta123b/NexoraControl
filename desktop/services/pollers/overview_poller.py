@@ -1,15 +1,18 @@
-from PySide6.QtCore import QObject, QThread, QTimer
+from PySide6.QtCore import QThread, QTimer
 
 from api.client import NexoraClient
 
+from services.pollers.base_poller import BasePoller
+
 from services.stores.agent_command_store import CommandsStore
-from services.widgets.box_messages import MessageBox
 from services.stores.agent_store import DetailAgentStore
 
-from workers.overview_worker import OverviewWorker, RecentCommandsWorker
+from services.widgets.box_messages import MessageBox
+
+from services.workers.overview_worker import OverviewWorker, RecentCommandsWorker
 
 
-class DetailOverviewPoller(QObject):
+class DetailOverviewPoller(BasePoller):
 
     def __init__(
         self,
@@ -17,17 +20,13 @@ class DetailOverviewPoller(QObject):
         detail_agent_store: DetailAgentStore,
         commands_store: CommandsStore,
     ):
-        super().__init__()
+        super().__init__(client)
 
         self.client = client
         self.detail_agent_store = detail_agent_store
         self.commands_store = commands_store
 
         self.agent_id: int | None = None
-        self.is_polling = False
-        self.api_error_shown = False
-
-        self._active_workers = []
 
         self.timer = QTimer(self)
         self.timer.setInterval(5000)
@@ -35,11 +34,13 @@ class DetailOverviewPoller(QObject):
 
     def on_clicked(self, agent_id: int = None, command_type: str = None) -> None:
         if agent_id:
+            if self.agent_id != agent_id:
+                self._cancel_all_requests()
+
             self.agent_id = agent_id
 
         if command_type:
             self._start_commands_worker(command_type)
-
             return
 
         if self.client.base_url and not self.timer.isActive():
@@ -61,66 +62,29 @@ class DetailOverviewPoller(QObject):
         self._start_commands_worker()
 
     def _start_overview_worker(self) -> None:
-        thread = QThread(self)
         worker = OverviewWorker(self.client, self.agent_id)
-        worker.moveToThread(thread)
 
-        worker_context = {"thread": thread, "worker": worker}
-
-        self._active_workers.append(worker_context)
-
-        thread.started.connect(worker.run)
-        worker.success.connect(self.detail_agent_store.set_agent)
-        worker.error.connect(self.show_api_error)
-
-        worker.finished.connect(thread.quit)
-        worker.finished.connect(worker.deleteLater)
-
-        def cleanup():
-            thread.deleteLater()
-            if worker_context in self._active_workers:
-                self._active_workers.remove(worker_context)
-
-            self.is_polling = False
-
-        thread.finished.connect(cleanup)
-        thread.start()
+        self._start_worker(
+            worker=worker,
+            worker_slot=worker.run,
+            success_callback=self.detail_agent_store.set_agent,
+        )
 
     def _start_commands_worker(self, command_type: str = None) -> None:
-        thread = QThread(self)
         worker = RecentCommandsWorker(self.client, self.agent_id)
-        worker.moveToThread(thread)
-
-        worker_context = {"thread": thread, "worker": worker}
-
-        self._active_workers.append(worker_context)
 
         if command_type:
-            thread.started.connect(lambda: worker.create_agent_command(command_type))
-        else:
-            thread.started.connect(worker.get_commands)
-            worker.success.connect(self.commands_store.set_commands)
-            
-        worker.error.connect(self.show_api_error)
-
-        worker.finished.connect(thread.quit)
-        worker.finished.connect(worker.deleteLater)
-
-        def cleanup():
-            thread.deleteLater()
-            if worker_context in self._active_workers:
-                self._active_workers.remove(worker_context)
-
-        thread.finished.connect(cleanup)
-        thread.start()
-
-    def show_api_error(self, message: str = None) -> None:
-        if not self.api_error_shown:
-            self.api_error_shown = True
-            self.stop_polling()
-
-            MessageBox().show_message(
-                "critical",
-                "API error",
-                message or "API connection failed! Please change the API URL",
+            self._start_worker(
+                worker=worker,
+                worker_slot=lambda: worker.create_agent_command(command_type),
+                success_callback=self._on_command_created,
             )
+        else:
+            self._start_worker(
+                worker=worker,
+                worker_slot=worker.get_agent_commands,
+                success_callback=self.commands_store.set_commands,
+            )
+
+    def _on_command_created(self):
+        self._start_overview_worker()

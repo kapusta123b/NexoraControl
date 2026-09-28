@@ -25,12 +25,12 @@ class CommandCardWidget(QWidget):
             str(command.get("command_type", "Unknown Command"))
         )
 
-        created_at = command.get("created_at", "---")
+        created_at = command["created_at"]
         created_at = datetime.fromisoformat(created_at).strftime("%d %b, %H:%M")
         self.ui.command_executed_time.setText(str(created_at))
 
     def _update_status(self, command: dict) -> None:
-        status = str(command.get("status", "PENDING"))
+        status = str(command["status"])
 
         self.ui.command_status.setText(status)
 

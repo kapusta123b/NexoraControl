@@ -33,7 +33,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
-            icon.addFile(u"../.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon.addFile(u"../.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"")
@@ -163,10 +163,20 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "\n"
-"Line {\n"
+"\n"
+"QFrame[frameShape=\"4\"] {\n"
 "    background-color: #1E2633;\n"
 "    border: none;\n"
 "    max-height: 1px;\n"
+"    min-height: 1px;\n"
+"}\n"
+"\n"
+"\n"
+"QFrame[frameShape=\"5\"] {\n"
+"    background-color: #1E2633;\n"
+"    border: none;\n"
+"    max-width: 1px;\n"
+"    min-width: 1px;\n"
 "}\n"
 "")
         self.central_content_layout = QHBoxLayout(self.central_content)
@@ -200,12 +210,21 @@ class Ui_MainWindow(object):
 "    letter-spacing: 2px;\n"
 "}\n"
 "\n"
-"Line {\n"
+"\n"
+"QFrame[frameShape=\"4\"] {\n"
 "    background-color: #1E2633;\n"
 "    border: none;\n"
 "    max-height: 1px;\n"
+"    min-height: 1px;\n"
 "}\n"
-"")
+"\n"
+"\n"
+"QFrame[frameShape=\"5\"] {\n"
+"    background-color: #1E2633;\n"
+"    border: none;\n"
+"    max-width: 1px;\n"
+"    min-width: 1px;\n"
+"}")
         self.left_panel_layout = QVBoxLayout(self.left_panel)
         self.left_panel_layout.setObjectName(u"left_panel_layout")
         self.nexora_logo = QLabel(self.left_panel)
@@ -322,7 +341,8 @@ class Ui_MainWindow(object):
         self.dashboard_label.setSizePolicy(sizePolicy1)
         self.dashboard_label.setMaximumSize(QSize(16777215, 30))
         self.dashboard_label.setStyleSheet(u"QLabel {\n"
-"	font: 500 15pt;\n"
+"	font: 600 italic 17pt;\n"
+"\n"
 "}")
 
         self.dashboard_layout.addWidget(self.dashboard_label)
@@ -440,7 +460,8 @@ class Ui_MainWindow(object):
         self.agents_label.setEnabled(True)
         self.agents_label.setMaximumSize(QSize(16777215, 30))
         self.agents_label.setStyleSheet(u"QLabel {\n"
-"	font: 500 15pt;\n"
+"	font: 600 italic 17pt;\n"
+"\n"
 "}")
 
         self.dashboard_layout.addWidget(self.agents_label)
@@ -571,7 +592,8 @@ class Ui_MainWindow(object):
         self.agents_headline_label.setMinimumSize(QSize(0, 0))
         self.agents_headline_label.setMaximumSize(QSize(16777215, 25))
         self.agents_headline_label.setStyleSheet(u"QLabel {\n"
-"	font: 500 15pt;\n"
+"	font: 600 italic 17pt;\n"
+"\n"
 "}")
 
         self.agents_main_layout.addWidget(self.agents_headline_label)
@@ -895,7 +917,7 @@ class Ui_MainWindow(object):
         self.overview_detail_scroll.setWidgetResizable(True)
         self.agent_detail_information = QWidget()
         self.agent_detail_information.setObjectName(u"agent_detail_information")
-        self.agent_detail_information.setGeometry(QRect(0, 0, 962, 700))
+        self.agent_detail_information.setGeometry(QRect(0, 0, 833, 700))
         self.agent_detail_information.setMinimumSize(QSize(0, 700))
         self.agent_detail_information_layout = QVBoxLayout(self.agent_detail_information)
         self.agent_detail_information_layout.setSpacing(5)
@@ -1346,7 +1368,7 @@ class Ui_MainWindow(object):
         self.performance_detail_scroll.setWidgetResizable(True)
         self.agent_performance_information = QWidget()
         self.agent_performance_information.setObjectName(u"agent_performance_information")
-        self.agent_performance_information.setGeometry(QRect(0, 0, 980, 1309))
+        self.agent_performance_information.setGeometry(QRect(0, 0, 980, 1191))
         self.agent_performance_information_layout = QVBoxLayout(self.agent_performance_information)
         self.agent_performance_information_layout.setSpacing(0)
         self.agent_performance_information_layout.setObjectName(u"agent_performance_information_layout")
@@ -1608,53 +1630,6 @@ class Ui_MainWindow(object):
 "}")
 
         self.compute_page_layout.addWidget(self.cpu_cores_metric_graph)
-
-        self.compute_top_processes_label = QLabel(self.compute_page)
-        self.compute_top_processes_label.setObjectName(u"compute_top_processes_label")
-
-        self.compute_page_layout.addWidget(self.compute_top_processes_label)
-
-        self.compute_top_processes_tabel = QTableWidget(self.compute_page)
-        if (self.compute_top_processes_tabel.columnCount() < 5):
-            self.compute_top_processes_tabel.setColumnCount(5)
-        __qtablewidgetitem6 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setHorizontalHeaderItem(0, __qtablewidgetitem6)
-        __qtablewidgetitem7 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setHorizontalHeaderItem(1, __qtablewidgetitem7)
-        __qtablewidgetitem8 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setHorizontalHeaderItem(2, __qtablewidgetitem8)
-        __qtablewidgetitem9 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setHorizontalHeaderItem(3, __qtablewidgetitem9)
-        __qtablewidgetitem10 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setHorizontalHeaderItem(4, __qtablewidgetitem10)
-        if (self.compute_top_processes_tabel.rowCount() < 1):
-            self.compute_top_processes_tabel.setRowCount(1)
-        __qtablewidgetitem11 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setVerticalHeaderItem(0, __qtablewidgetitem11)
-        __qtablewidgetitem12 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setItem(0, 0, __qtablewidgetitem12)
-        __qtablewidgetitem13 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setItem(0, 1, __qtablewidgetitem13)
-        __qtablewidgetitem14 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setItem(0, 2, __qtablewidgetitem14)
-        __qtablewidgetitem15 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setItem(0, 3, __qtablewidgetitem15)
-        __qtablewidgetitem16 = QTableWidgetItem()
-        self.compute_top_processes_tabel.setItem(0, 4, __qtablewidgetitem16)
-        self.compute_top_processes_tabel.setObjectName(u"compute_top_processes_tabel")
-        self.compute_top_processes_tabel.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.compute_top_processes_tabel.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.compute_top_processes_tabel.horizontalHeader().setCascadingSectionResizes(True)
-        self.compute_top_processes_tabel.horizontalHeader().setDefaultSectionSize(100)
-        self.compute_top_processes_tabel.horizontalHeader().setHighlightSections(True)
-        self.compute_top_processes_tabel.horizontalHeader().setProperty(u"showSortIndicator", True)
-        self.compute_top_processes_tabel.horizontalHeader().setStretchLastSection(False)
-        self.compute_top_processes_tabel.verticalHeader().setCascadingSectionResizes(False)
-        self.compute_top_processes_tabel.verticalHeader().setHighlightSections(True)
-        self.compute_top_processes_tabel.verticalHeader().setProperty(u"showSortIndicator", False)
-        self.compute_top_processes_tabel.verticalHeader().setStretchLastSection(False)
-
-        self.compute_page_layout.addWidget(self.compute_top_processes_tabel)
 
         self.performance_stacked_content.addWidget(self.compute_page)
         self.storage_page = QWidget()
@@ -1991,18 +1966,18 @@ class Ui_MainWindow(object):
         self.file_systems_table = QTableWidget(self.storage_page)
         if (self.file_systems_table.columnCount() < 6):
             self.file_systems_table.setColumnCount(6)
-        __qtablewidgetitem17 = QTableWidgetItem()
-        self.file_systems_table.setHorizontalHeaderItem(0, __qtablewidgetitem17)
-        __qtablewidgetitem18 = QTableWidgetItem()
-        self.file_systems_table.setHorizontalHeaderItem(1, __qtablewidgetitem18)
-        __qtablewidgetitem19 = QTableWidgetItem()
-        self.file_systems_table.setHorizontalHeaderItem(2, __qtablewidgetitem19)
-        __qtablewidgetitem20 = QTableWidgetItem()
-        self.file_systems_table.setHorizontalHeaderItem(3, __qtablewidgetitem20)
-        __qtablewidgetitem21 = QTableWidgetItem()
-        self.file_systems_table.setHorizontalHeaderItem(4, __qtablewidgetitem21)
-        __qtablewidgetitem22 = QTableWidgetItem()
-        self.file_systems_table.setHorizontalHeaderItem(5, __qtablewidgetitem22)
+        __qtablewidgetitem6 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(0, __qtablewidgetitem6)
+        __qtablewidgetitem7 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(1, __qtablewidgetitem7)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(2, __qtablewidgetitem8)
+        __qtablewidgetitem9 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(3, __qtablewidgetitem9)
+        __qtablewidgetitem10 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(4, __qtablewidgetitem10)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        self.file_systems_table.setHorizontalHeaderItem(5, __qtablewidgetitem11)
         self.file_systems_table.setObjectName(u"file_systems_table")
         self.file_systems_table.horizontalHeader().setCascadingSectionResizes(True)
 
@@ -2023,16 +1998,16 @@ class Ui_MainWindow(object):
         self.storage_devices_table = QTableWidget(self.storage_page)
         if (self.storage_devices_table.columnCount() < 5):
             self.storage_devices_table.setColumnCount(5)
-        __qtablewidgetitem23 = QTableWidgetItem()
-        self.storage_devices_table.setHorizontalHeaderItem(0, __qtablewidgetitem23)
-        __qtablewidgetitem24 = QTableWidgetItem()
-        self.storage_devices_table.setHorizontalHeaderItem(1, __qtablewidgetitem24)
-        __qtablewidgetitem25 = QTableWidgetItem()
-        self.storage_devices_table.setHorizontalHeaderItem(2, __qtablewidgetitem25)
-        __qtablewidgetitem26 = QTableWidgetItem()
-        self.storage_devices_table.setHorizontalHeaderItem(3, __qtablewidgetitem26)
-        __qtablewidgetitem27 = QTableWidgetItem()
-        self.storage_devices_table.setHorizontalHeaderItem(4, __qtablewidgetitem27)
+        __qtablewidgetitem12 = QTableWidgetItem()
+        self.storage_devices_table.setHorizontalHeaderItem(0, __qtablewidgetitem12)
+        __qtablewidgetitem13 = QTableWidgetItem()
+        self.storage_devices_table.setHorizontalHeaderItem(1, __qtablewidgetitem13)
+        __qtablewidgetitem14 = QTableWidgetItem()
+        self.storage_devices_table.setHorizontalHeaderItem(2, __qtablewidgetitem14)
+        __qtablewidgetitem15 = QTableWidgetItem()
+        self.storage_devices_table.setHorizontalHeaderItem(3, __qtablewidgetitem15)
+        __qtablewidgetitem16 = QTableWidgetItem()
+        self.storage_devices_table.setHorizontalHeaderItem(4, __qtablewidgetitem16)
         self.storage_devices_table.setObjectName(u"storage_devices_table")
 
         self.storage_page_layout.addWidget(self.storage_devices_table)
@@ -2124,7 +2099,7 @@ class Ui_MainWindow(object):
         self.hardware_info_scroll.setWidgetResizable(True)
         self.hardware_info_scroll_content = QWidget()
         self.hardware_info_scroll_content.setObjectName(u"hardware_info_scroll_content")
-        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 962, 910))
+        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 308, 910))
         self.hardware_info_scroll_content.setMinimumSize(QSize(0, 0))
         self.hardware_info_scroll_content_layout = QVBoxLayout(self.hardware_info_scroll_content)
         self.hardware_info_scroll_content_layout.setSpacing(0)
@@ -2710,9 +2685,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.content_stack.setCurrentIndex(2)
-        self.agent_detail_stacked_content.setCurrentIndex(0)
-        self.performance_stacked_content.setCurrentIndex(3)
+        self.content_stack.setCurrentIndex(0)
+        self.agent_detail_stacked_content.setCurrentIndex(1)
+        self.performance_stacked_content.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2802,34 +2777,6 @@ class Ui_MainWindow(object):
         self.swap_memory_value_label.setText(QCoreApplication.translate("MainWindow", u"0.0 GB", None))
         self.compute_load_average_label.setText(QCoreApplication.translate("MainWindow", u"LOAD AVERAGE", None))
         self.compute_cpu_cores_label.setText(QCoreApplication.translate("MainWindow", u"CPU CORES", None))
-        self.compute_top_processes_label.setText(QCoreApplication.translate("MainWindow", u"TOP PROCESSES", None))
-        ___qtablewidgetitem6 = self.compute_top_processes_tabel.horizontalHeaderItem(0)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"PID", None))
-        ___qtablewidgetitem7 = self.compute_top_processes_tabel.horizontalHeaderItem(1)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"Process", None))
-        ___qtablewidgetitem8 = self.compute_top_processes_tabel.horizontalHeaderItem(2)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
-        ___qtablewidgetitem9 = self.compute_top_processes_tabel.horizontalHeaderItem(3)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"RAM", None))
-        ___qtablewidgetitem10 = self.compute_top_processes_tabel.horizontalHeaderItem(4)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"Status", None))
-        ___qtablewidgetitem11 = self.compute_top_processes_tabel.verticalHeaderItem(0)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"New Row", None))
-
-        __sortingEnabled = self.compute_top_processes_tabel.isSortingEnabled()
-        self.compute_top_processes_tabel.setSortingEnabled(False)
-        ___qtablewidgetitem12 = self.compute_top_processes_tabel.item(0, 0)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"421", None))
-        ___qtablewidgetitem13 = self.compute_top_processes_tabel.item(0, 1)
-        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"postgres", None))
-        ___qtablewidgetitem14 = self.compute_top_processes_tabel.item(0, 2)
-        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"18.4%", None))
-        ___qtablewidgetitem15 = self.compute_top_processes_tabel.item(0, 3)
-        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"1.2 GB", None))
-        ___qtablewidgetitem16 = self.compute_top_processes_tabel.item(0, 4)
-        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"running", None))
-        self.compute_top_processes_tabel.setSortingEnabled(__sortingEnabled)
-
         self.storage_label.setText(QCoreApplication.translate("MainWindow", u"STORAGE", None))
         self.storage_legend_label.setText(QCoreApplication.translate("MainWindow", u"Disk capacity, I/O activity and storage devices", None))
         self.current_storage_label.setText(QCoreApplication.translate("MainWindow", u"CURRENT STORAGE", None))
@@ -2848,29 +2795,29 @@ class Ui_MainWindow(object):
         self.disk_avg_latency_label.setText(QCoreApplication.translate("MainWindow", u"Avg latency", None))
         self.disk_avg_latency_value.setText(QCoreApplication.translate("MainWindow", u"0 ms", None))
         self.file_systems_label.setText(QCoreApplication.translate("MainWindow", u"FILESYSTEMS", None))
-        ___qtablewidgetitem17 = self.file_systems_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"MOUNT", None))
-        ___qtablewidgetitem18 = self.file_systems_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
-        ___qtablewidgetitem19 = self.file_systems_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"TYPE", None))
-        ___qtablewidgetitem20 = self.file_systems_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"USED", None))
-        ___qtablewidgetitem21 = self.file_systems_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"AVAILABLE", None))
-        ___qtablewidgetitem22 = self.file_systems_table.horizontalHeaderItem(5)
-        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"USAGE", None))
+        ___qtablewidgetitem6 = self.file_systems_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"MOUNT", None))
+        ___qtablewidgetitem7 = self.file_systems_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
+        ___qtablewidgetitem8 = self.file_systems_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"TYPE", None))
+        ___qtablewidgetitem9 = self.file_systems_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"USED", None))
+        ___qtablewidgetitem10 = self.file_systems_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"AVAILABLE", None))
+        ___qtablewidgetitem11 = self.file_systems_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"USAGE", None))
         self.storage_devices_label.setText(QCoreApplication.translate("MainWindow", u"STORAGE DEVICES", None))
-        ___qtablewidgetitem23 = self.storage_devices_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
-        ___qtablewidgetitem24 = self.storage_devices_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"MODEL", None))
-        ___qtablewidgetitem25 = self.storage_devices_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"TYPE", None))
-        ___qtablewidgetitem26 = self.storage_devices_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"CAPACITY", None))
-        ___qtablewidgetitem27 = self.storage_devices_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
+        ___qtablewidgetitem12 = self.storage_devices_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
+        ___qtablewidgetitem13 = self.storage_devices_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"MODEL", None))
+        ___qtablewidgetitem14 = self.storage_devices_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"TYPE", None))
+        ___qtablewidgetitem15 = self.storage_devices_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"CAPACITY", None))
+        ___qtablewidgetitem16 = self.storage_devices_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
         self.hardware_label.setText(QCoreApplication.translate("MainWindow", u"HARDWARE", None))
         self.cpu_info_label.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
         self.model_row_label.setText(QCoreApplication.translate("MainWindow", u"Model", None))

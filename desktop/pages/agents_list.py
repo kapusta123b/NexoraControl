@@ -22,6 +22,16 @@ class AgentsController:
 
         self.setup_connections()
 
+    def setup_connections(self) -> None:
+        self.ui.refresh_agents_button.clicked.connect(self.poller.refresh)
+        self.ui.agents_button.clicked.connect(
+            lambda checked=False: self.ui.content_stack.setCurrentWidget(
+                self.ui.agents_page
+            )
+        )
+
+        self.store.agents_changed.connect(self.populate_agents)
+
     def populate_agents(self, agents: list[dict]) -> None:
         self.clear_cards()
 
@@ -32,8 +42,10 @@ class AgentsController:
 
             card.set_agent(agent)
 
-            card.ui.agent_open_button.clicked.connect(lambda: self.open_agent(agent))
-            card.open_requested.connect(lambda: self.open_agent(agent))
+            card.ui.agent_open_button.clicked.connect(
+                lambda a=agent: self.open_agent(a)
+            )
+            card.open_requested.connect(lambda a=agent: self.open_agent(a))
 
             layout.addWidget(card)
 
@@ -63,13 +75,3 @@ class AgentsController:
 
             else:
                 del item
-
-    def setup_connections(self) -> None:
-        self.ui.refresh_agents_button.clicked.connect(self.poller.refresh)
-        self.ui.agents_button.clicked.connect(
-            lambda checked=False: self.ui.content_stack.setCurrentWidget(
-                self.ui.agents_page
-            )
-        )
-
-        self.store.agents_changed.connect(self.populate_agents)

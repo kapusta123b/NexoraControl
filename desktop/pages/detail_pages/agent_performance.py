@@ -1,5 +1,5 @@
 from api.client import NexoraClient
-from workers.metric_worker import LiveMetricsWorker
+from services.workers.metric_worker import LiveMetricsWorker
 
 from .performance_pages.storage_page import PerformanceStoragePage
 from .performance_pages.compute_page import PerformanceComputePage

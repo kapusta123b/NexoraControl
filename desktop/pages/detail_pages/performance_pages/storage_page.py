@@ -6,10 +6,10 @@ from services.stores.metric_store import MetricStore
 from services.graph_helper import MetricGraphHelper
 
 from services.widgets.gauge import SimpleNetdataGauge
+from services.widgets.box_messages import MessageBox
 
 from PySide6.QtWidgets import QHeaderView, QProgressBar
 
-from PySide6.QtCore import Qt
 from ui.main_window import Ui_MainWindow
 
 
@@ -23,11 +23,6 @@ class PerformanceStoragePage:
 
         self.ui = ui
 
-        self.disk_usage_gauge = SimpleNetdataGauge(
-            "DISK USAGE",
-            color="#34d399",
-        )
-
         self.disk_read_gauge = SimpleNetdataGauge(
             "READ",
             "MB/s",
@@ -40,7 +35,6 @@ class PerformanceStoragePage:
             "#f59e0b",
         )
 
-        self.ui.storage_gauge_layout.addWidget(self.disk_usage_gauge)
         self.ui.storage_gauge_layout.addWidget(self.disk_read_gauge)
         self.ui.storage_gauge_layout.addWidget(self.disk_write_gauge)
 
@@ -56,6 +50,8 @@ class PerformanceStoragePage:
 
         self.storage_io_counters = {}
 
+        self.delta_time = None
+
         self.last_storage_metric = {}
         self.current_metric = {}
 
@@ -70,7 +66,6 @@ class PerformanceStoragePage:
         self.performance_store.metrics_appended.connect(self.on_latest_received)
 
     def _setup_style_page(self):
-        # Растягиваем колонки [1]
         self.ui.file_systems_table.horizontalHeader().setSectionResizeMode(
             QHeaderView.ResizeMode.Stretch
         )
@@ -126,16 +121,16 @@ class PerformanceStoragePage:
         last_devices = self.last_storage_metric.get("devices", {})
         self.delta_time = timestamp - self.last_timestamp
 
+        self.current_devices = current_devices
+        self.last_devices = last_devices
+        self.current_filesystems = current_filesystems
+
         if self.delta_time > 0:
             for disk_name in list(self.storage_io_counters.keys()):
                 if disk_name in current_devices and disk_name in last_devices:
-                    self.current_disk_info = current_devices[disk_name]
-                    self.last_disk_info = last_devices[disk_name]
 
                     if disk_name == self.current_disk:
-                        self._prepare_dynamic_data(
-                            self.current_disk_info, self.last_disk_info, self.delta_time
-                        )
+                        self._prepare_dynamic_data()
 
                     self.storage_io_counters[disk_name]["timestamps"].append(timestamp)
                     self.storage_io_counters[disk_name]["read"].append(
@@ -168,7 +163,7 @@ class PerformanceStoragePage:
         )
 
     def _init_disk_selector(self, disks: list[str]):
-        if disks and isinstance(disks, list):
+        if disks:
             disks = [disk for disk in disks if not "p" in disk]
             self.ui.disks_combo_box.addItems(disks)
 
@@ -178,6 +173,19 @@ class PerformanceStoragePage:
             self.is_init_disk_selector = True
 
             self.ui.disk_data_unit_combo_box.setEnabled(True)
+        else:
+            MessageBox().show_message(
+                message_type="warning",
+                title="Disks not found",
+                text=(
+                    "Не удалось получить список доступных накопителей.\n\n"
+                    "Possible causes:\n"
+                    "1. The backend API is not running, or an incorrect API URL s specified in the settings.\n"
+                    "2. There are no mounted disks on the target server/agent.\n"
+                    "3. The NexoraControl agent does not have permission to read system metrics.\n\n"
+                    "Check the mount settings on the agent side."
+                ),
+            )
 
     def _change_disk_on_graph(self, disk_name):
         self.current_disk = disk_name
@@ -191,10 +199,8 @@ class PerformanceStoragePage:
 
             return
 
-        if self.current_disk_info and self.last_disk_info:
-            self._prepare_dynamic_data(
-                self.current_disk_info, self.last_disk_info, self.delta_time
-            )
+        if self.current_disk:
+            self._prepare_dynamic_data()
 
         disk_cache = self.storage_io_counters[disk_name]
         disk_timestamps = disk_cache["timestamps"]
@@ -222,6 +228,8 @@ class PerformanceStoragePage:
         self.disk_io_graph.series_suffixes["READ"] = self.current_unit
         self.disk_io_graph.series_suffixes["WRITE"] = self.current_unit
 
+        formatted_current_unit = self.current_unit.split("/")[0].lower()
+
         if raw_bytes and len(raw_bytes) == len(disk_timestamps):
             for i in range(1, len(raw_bytes)):
                 delta_raw_bytes = raw_bytes[i] - raw_bytes[i - 1]
@@ -234,27 +242,13 @@ class PerformanceStoragePage:
 
                 converted_speed = byte_converter(
                     bytes_per_second,
-                    unit=self.current_unit.split("/")[0].lower(),
+                    unit=formatted_current_unit,
                     precision=4,
                     as_float=True,
                 )
                 speed_in_bytes.append(converted_speed)
 
         return speed_in_bytes
-
-    def _set_gauges(self, r_speed: dict, w_speed: dict) -> None:
-        self.disk_write_gauge.set_value(r_speed)
-        self.disk_read_gauge.set_value(w_speed)
-
-        if self.current_unit:
-            self.disk_read_gauge.unit = self.current_unit
-            self.disk_write_gauge.unit = self.current_unit
-
-        if w_speed > self.disk_write_gauge.max_value:
-            self.disk_write_gauge.max_value = round(w_speed)
-
-        if r_speed > self.disk_read_gauge.max_value:
-            self.disk_read_gauge.max_value = round(r_speed)
 
     def _calculate_metric_rate(
         self, current_data: dict, last_data: dict, key: str, delta_time: float
@@ -267,63 +261,11 @@ class PerformanceStoragePage:
 
         return max(0.0, delta_value / delta_time)
 
-    def _prepare_dynamic_data(
-        self, current_disk: dict, last_disk: dict, delta_time: float
-    ) -> None:
-
-        r_bps = self._calculate_metric_rate(
-            current_disk, last_disk, "read_bytes", delta_time
-        )
-        w_bps = self._calculate_metric_rate(
-            current_disk, last_disk, "write_bytes", delta_time
-        )
-
-        r_iops = self._calculate_metric_rate(
-            current_disk, last_disk, "read_count", delta_time
-        )
-        w_iops = self._calculate_metric_rate(
-            current_disk, last_disk, "write_count", delta_time
-        )
-
-        current_unit = self.current_unit.split("/")[0].lower()
-
-        read_speed = byte_converter(
-            r_bps, unit=current_unit, precision=1, as_float=True
-        )
-        write_speed = byte_converter(
-            w_bps, unit=current_unit, precision=1, as_float=True
-        )
-
-        self._set_gauges(read_speed, write_speed)
-
-        io_data = {
-            "read_speed": read_speed,
-            "write_speed": write_speed,
-            "read_iops": int(r_iops),
-            "write_iops": int(w_iops),
-            "avg_latency": current_disk.get("avg_latency", 0),
-        }
-
-        self._set_io_summary(io_data)
-
-    def _set_io_summary(self, data: dict) -> None:
-        self.ui.disk_read_information_value.setText(
-            f"{data['read_speed']} {self.current_unit}"
-        )
-        self.ui.disk_write_information_value.setText(
-            f"{data['write_speed']} {self.current_unit}"
-        )
-
-        self.ui.disk_read_per_sec_information_value.setText(str(data["read_iops"]))
-        self.ui.disk_write_per_sec_information_value.setText(str(data["write_iops"]))
-
-        self.ui.disk_avg_latency_value.setText(str(data["avg_latency"]))
-
-    def _update_storage_tables(self, devices: dict, filesystems: dict):
+    def _update_storage_tables(self, devices: dict, filesystems: dict) -> None:
         self._update_devices_table(devices)
         self._update_filesystems_table(filesystems)
 
-    def _update_devices_table(self, devices: dict):
+    def _update_devices_table(self, devices: dict) -> None:
         table = self.ui.storage_devices_table
 
         for disk_name, info in devices.items():
@@ -344,7 +286,7 @@ class PerformanceStoragePage:
             update_or_create_row_item(table, row, 3, info.get("capacity", "N/A"))
             update_or_create_row_item(table, row, 4, info.get("status", "UNKNOWN"))
 
-    def _update_filesystems_table(self, filesystems: dict):
+    def _update_filesystems_table(self, filesystems: dict) -> None:
         table = self.ui.file_systems_table
 
         for fs_name, info in filesystems.items():
@@ -353,54 +295,121 @@ class PerformanceStoragePage:
                 item = table.item(r, 1)
                 if item and item.text() == fs_name:
                     row = r
+
                     break
 
             if row == -1:
                 row = table.rowCount()
                 table.insertRow(row)
 
-            percent = info.get("percent", 0)
-            used_pct = f"{percent}%"
+            percent = info["percent"]
 
-            update_or_create_row_item(table, row, 0, info.get("mount", "N/A"))
+            update_or_create_row_item(table, row, 0, info["mount"])
             update_or_create_row_item(table, row, 1, fs_name)
-            update_or_create_row_item(table, row, 2, info.get("fstype", "N/A"))
-            update_or_create_row_item(
-                table, row, 3, byte_converter(info.get("used", "N/A"), "gb")
-            )
-            update_or_create_row_item(
-                table, row, 4, byte_converter(info.get("free", "N/A"), "gb")
-            )
-            update_or_create_row_item(
-                table, row, 4, byte_converter(info.get("free", "N/A"), "gb")
-            )
+            update_or_create_row_item(table, row, 2, info["fstype"])
+            update_or_create_row_item(table, row, 3, byte_converter(info["used"], "gb"))
+            update_or_create_row_item(table, row, 4, byte_converter(info["free"], "gb"))
 
-            if percent < 60:
-                load_level = "low"
-            elif percent < 85:
-                load_level = "medium"
-            else:
-                load_level = "high"
+            self._setup_table_progress_bar(table, row, percent)
 
-            progress_bar = table.cellWidget(row, 5)
+    def _setup_table_progress_bar(self, table, row: int, percent: int) -> None:
+        if percent < 60:
+            load_level = "low"
+        elif percent < 85:
+            load_level = "medium"
+        else:
+            load_level = "high"
 
-            if not isinstance(progress_bar, QProgressBar):
-                progress_bar = QProgressBar()
-                progress_bar.setRange(0, 100)
+        progress_bar = table.cellWidget(row, 5)
 
-                table.setRowHeight(row, 34)
+        if not isinstance(progress_bar, QProgressBar):
+            progress_bar = QProgressBar()
+            progress_bar.setRange(0, 100)
 
-                table.setCellWidget(row, 5, progress_bar)
+            table.setRowHeight(row, 34)
 
-            if progress_bar.value() != percent:
-                progress_bar.setValue(percent)
-                progress_bar.setFormat(f"{percent}%")
+            table.setCellWidget(row, 5, progress_bar)
 
-                progress_bar.setProperty("load_level", load_level)
+        if progress_bar.value() != percent:
+            progress_bar.setValue(percent)
+            progress_bar.setFormat(f"{percent}%")
 
-                progress_bar.style().unpolish(progress_bar)
-                progress_bar.style().polish(progress_bar)
+            progress_bar.setProperty("load_level", load_level)
+
+            progress_bar.style().unpolish(progress_bar)
+            progress_bar.style().polish(progress_bar)
 
     def _setup_static_series(self):
         self.disk_io_graph.add_series("READ", "#60a5fa", suffix=" MB/s")
         self.disk_io_graph.add_series("WRITE", "#f59e0b", suffix=" MB/s")
+
+    def _set_gauges(self, r_speed: int, w_speed: int) -> None:
+        self.disk_write_gauge.set_value(r_speed)
+        self.disk_read_gauge.set_value(w_speed)
+
+        if self.current_unit:
+            self.disk_read_gauge.unit = self.current_unit
+            self.disk_write_gauge.unit = self.current_unit
+
+        if w_speed > self.disk_write_gauge.max_value:
+            self.disk_write_gauge.max_value = round(w_speed)
+
+        if r_speed > self.disk_read_gauge.max_value:
+            self.disk_read_gauge.max_value = round(r_speed)
+
+    def _prepare_dynamic_data(self) -> None:
+        if not self.delta_time:
+            return
+
+        delta_time = self.delta_time
+
+        current_device_disk = self.current_devices[self.current_disk]
+        last_device_disk = self.last_devices[self.current_disk]
+
+        r_bps = self._calculate_metric_rate(
+            current_device_disk, last_device_disk, "read_bytes", delta_time
+        )
+        w_bps = self._calculate_metric_rate(
+            current_device_disk, last_device_disk, "write_bytes", delta_time
+        )
+
+        r_iops = self._calculate_metric_rate(
+            current_device_disk, last_device_disk, "read_count", delta_time
+        )
+        w_iops = self._calculate_metric_rate(
+            current_device_disk, last_device_disk, "write_count", delta_time
+        )
+
+        current_unit = self.current_unit.split("/")[0].lower()
+
+        read_speed = byte_converter(
+            r_bps, unit=current_unit, precision=2, as_float=True
+        )
+        write_speed = byte_converter(
+            w_bps, unit=current_unit, precision=2, as_float=True
+        )
+
+        self._set_gauges(read_speed, write_speed)
+
+        io_data = {
+            "read_speed": read_speed,
+            "write_speed": write_speed,
+            "read_iops": int(r_iops),
+            "write_iops": int(w_iops),
+            # "avg_latency": current_device_disk["avg_latency"],
+        }
+
+        self._set_io_summary(io_data)
+
+    def _set_io_summary(self, data: dict) -> None:
+        self.ui.disk_read_information_value.setText(
+            f"{data['read_speed']} {self.current_unit}"
+        )
+        self.ui.disk_write_information_value.setText(
+            f"{data['write_speed']} {self.current_unit}"
+        )
+
+        self.ui.disk_read_per_sec_information_value.setText(str(data["read_iops"]))
+        self.ui.disk_write_per_sec_information_value.setText(str(data["write_iops"]))
+
+        # self.ui.disk_avg_latency_value.setText(f"{str(data["avg_latency"])} ms")

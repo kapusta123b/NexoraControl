@@ -19,7 +19,7 @@ def byte_converter(
     precision: int = 2,
     rate: bool = False,
     as_float: bool = False,
-) -> str | int | float:
+) -> str | float:
     """Convert bytes into a formatted higher-order unit string.
 
     Args:

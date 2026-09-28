@@ -70,8 +70,8 @@ class DetailOverviewController(QObject):
         self.command_mapping = {
             self.ui.docker_ps_quick_button: "docker_ps",
             self.ui.reboot_quick_button: "system_reboot",
-            self.ui.stop_all_docker_cont_quick_button: "stop_all_containers",
-            self.ui.restart_all_docker_cont_quick_button: "restart_all_containers",
+            self.ui.stop_all_docker_cont_quick_button: "docker_stop_all_containers",
+            self.ui.restart_all_docker_cont_quick_button: "docker_restart_all_containers",
         }
 
         for button in self.command_mapping:

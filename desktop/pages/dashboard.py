@@ -1,5 +1,6 @@
-from PySide6.QtWidgets import QHeaderView, QTableWidgetItem
+from PySide6.QtWidgets import QHeaderView
 
+from services.utils import update_or_create_row_item
 from services.pollers.agents_list_poller import AgentsListPoller
 from services.stores.agent_store import AgentsStore
 
@@ -12,62 +13,39 @@ class DashboardController:
     def __init__(self, ui: Ui_MainWindow, store: AgentsStore, poller: AgentsListPoller):
         self.ui = ui
         self.store = store
-        self.poller = poller
+        self.dashboard_poller = poller
 
         self.ui.agents_table.horizontalHeader().setSectionResizeMode(
             QHeaderView.ResizeMode.Stretch
         )
 
-        self.setup_connections()
+        self._setup_connections()
 
-    def setup_connections(self):
-        self.ui.refresh_table_button.clicked.connect(self.poller.refresh)
+    def _setup_connections(self):
+        self.ui.refresh_table_button.clicked.connect(self.dashboard_poller.refresh)
 
         self.store.agents_changed.connect(self.populate_agents_table)
 
     def populate_agents_table(self, agents: list[dict]):
-        if not isinstance(agents, list):
-            QMessageBox.critical(
-                None,
-                "Error!",
-                "Invalid agent data received.",
-            )
-            return
-
-        self.ui.agents_count.setText(str(len(agents)))
-
         table = self.ui.agents_table
-        table.setRowCount(len(agents))
 
         online_count = sum(agent["status"] == "ON" for agent in agents)
         offline_count = len(agents) - online_count
 
-        for row, agent in enumerate(agents):
-            table.setItem(
-                row,
-                0,
-                QTableWidgetItem(agent["status"]),
-            )
-            table.setItem(
-                row,
-                1,
-                QTableWidgetItem(agent["name"]),
-            )
-            table.setItem(
-                row,
-                2,
-                QTableWidgetItem(agent["hostname"]),
-            )
-            table.setItem(
-                row,
-                3,
-                QTableWidgetItem(str(agent["cpu_load"])),
-            )
-            table.setItem(
-                row,
-                4,
-                QTableWidgetItem(str(agent["ram_load"])),
-            )
+        for agent in agents:
+            name = agent["name"]
+            row = -1
+
+            for r in range(table.rowCount()):
+                item = table.item(r, 1)
+                if item and item.text() == name:
+                    row = r
+
+                    break
+
+            if row == -1:
+                row = table.rowCount()
+                table.insertRow(row)
 
             last_seen = agent.get("last_seen")
 
@@ -77,11 +55,13 @@ class DashboardController:
             else:
                 last_seen_text = "Never"
 
-            table.setItem(
-                row,
-                5,
-                QTableWidgetItem(last_seen_text),
-            )
+            update_or_create_row_item(table, row, 0, agent["status"])
+            update_or_create_row_item(table, row, 1, name)
+            update_or_create_row_item(table, row, 2, agent["hostname"])
+            update_or_create_row_item(table, row, 3, str(agent["cpu_load"]))
+            update_or_create_row_item(table, row, 4, str(agent["ram_load"]))
+            update_or_create_row_item(table, row, 5, last_seen_text)
 
         self.ui.online_count.setText(str(online_count))
         self.ui.offline_count.setText(str(offline_count))
+        self.ui.agents_count.setText(str(len(agents)))
