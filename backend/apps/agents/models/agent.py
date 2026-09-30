@@ -13,8 +13,8 @@ class Agent(models.Model):
     ip = models.GenericIPAddressField(null=True, blank=True)
     os = models.CharField(max_length=30, null=True, blank=True)
 
-    cpu_load = models.PositiveSmallIntegerField(null=True, blank=True)
-    ram_load = models.PositiveSmallIntegerField(null=True, blank=True)
+    cpu_load = models.PositiveSmallIntegerField(default=0, null=True, blank=True)
+    ram_load = models.PositiveSmallIntegerField(default=0, null=True, blank=True)
 
     status = models.CharField(
         max_length=3, choices=Status.choices, default=Status.OFFLINE
