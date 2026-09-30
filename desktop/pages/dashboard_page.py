@@ -10,7 +10,9 @@ from ui.main_window import Ui_MainWindow
 
 
 class DashboardController:
-    def __init__(self, ui: Ui_MainWindow, store: AgentsStore, poller: AgentsListPoller):
+    def __init__(
+        self, ui: Ui_MainWindow, store: AgentsStore, poller: AgentsListPoller
+    ) -> None:
         self.ui = ui
         self.store = store
         self.dashboard_poller = poller
@@ -21,12 +23,12 @@ class DashboardController:
 
         self._setup_connections()
 
-    def _setup_connections(self):
+    def _setup_connections(self) -> None:
         self.ui.refresh_table_button.clicked.connect(self.dashboard_poller.refresh)
 
         self.store.agents_changed.connect(self.populate_agents_table)
 
-    def populate_agents_table(self, agents: list[dict]):
+    def populate_agents_table(self, agents: list[dict]) -> None:
         table = self.ui.agents_table
 
         online_count = sum(agent["status"] == "ON" for agent in agents)

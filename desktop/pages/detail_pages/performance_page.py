@@ -1,6 +1,7 @@
 from api.client import NexoraClient
 from services.workers.metric_worker import LiveMetricsWorker
 
+from .performance_pages.thermals_page import PerformanceThermalPage
 from .performance_pages.storage_page import PerformanceStoragePage
 from .performance_pages.compute_page import PerformanceComputePage
 
@@ -25,6 +26,8 @@ class DetailPerformanceController(QObject):
 
         self.current_page = None
 
+        self.socket_is_active = False
+
         self.performance_store = MetricStore()
         self.performance_poller = AgentMetricPoller(self.client, self.performance_store)
 
@@ -37,6 +40,9 @@ class DetailPerformanceController(QObject):
 
         self.compute_page = PerformanceComputePage(self.ui, self.performance_store)
         self.storage_page = PerformanceStoragePage(
+            self.ui, self.performance_store, self.performance_poller
+        )
+        self.thermal_page = PerformanceThermalPage(
             self.ui, self.performance_store, self.performance_poller
         )
 
@@ -70,6 +76,8 @@ class DetailPerformanceController(QObject):
         self.socket_worker.metrics_received.connect(self.performance_store.append_point)
         self.socket_thread.start()
 
+        self.socket_is_active = True
+
     def on_nav_button_clicked(self) -> None:
         clicked_button = self.sender()
 
@@ -89,4 +97,6 @@ class DetailPerformanceController(QObject):
     def activate(self) -> None:
         if self.agent:
             self.performance_poller.on_clicked(self.agent.get("id"))
-            self.activate_socket()
+
+            if not self.socket_is_active:
+                self.activate_socket()
