@@ -76,5 +76,5 @@ class BasePoller(QObject):
             MessageBox().show_message(
                 "critical",
                 "API error",
-                message or "API connection failed! Please check your settings.",
+                "API connection failed! Please check your settings.",
             )

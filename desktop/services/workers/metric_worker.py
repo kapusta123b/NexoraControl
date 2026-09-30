@@ -1,8 +1,10 @@
 import json
+
 from PySide6.QtCore import Signal, Slot, QUrl
 from PySide6.QtWebSockets import QWebSocket
 
 from api.client import NexoraClient
+
 from services.workers.base_worker import BaseWorker
 
 
@@ -23,7 +25,7 @@ class AgentMetricWorker(BaseWorker):
         self.query_params = query_params
 
     @Slot()
-    def run(self):
+    def run(self) -> None:
         self._run_async(
             self.client.get_agent_metrics,
             agent_id=self.agent_id,
@@ -36,49 +38,54 @@ class AgentMetricWorker(BaseWorker):
 class LiveMetricsWorker(BaseWorker):
     metrics_received = Signal(dict)
 
-    def __init__(self, url: str):
+    def __init__(self, url: str) -> None:
         super().__init__(None)
         self.url = QUrl(url)
         self.socket = None
 
     @Slot()
-    def run(self):
+    def run(self) -> None:
         self.socket = QWebSocket()
         self.socket.textMessageReceived.connect(self.on_message_received)
         self.socket.error.connect(self.on_error)
         self.socket.disconnected.connect(self._on_disconnected)
         self.socket.open(self.url)
 
-    def on_message_received(self, message: str):
+    def on_message_received(self, message: str) -> None:
         try:
             data = json.loads(message)
             self.metrics_received.emit(data)
+
         except Exception as e:
             self.error.emit(f"Parser error: {e}")
 
-    def on_error(self, error_code):
+    def on_error(self, error_code) -> None:
         if self.socket:
             self.error.emit(f"WebSocket Error: {self.socket.errorString()}")
+
         self._clean_up()
 
-    def _on_disconnected(self):
+    def _on_disconnected(self) -> None:
         self._clean_up()
 
     @Slot()
-    def stop(self):
+    def stop(self) -> None:
         if self.socket and self.socket.isValid():
             self.socket.close()
+
         else:
             self._clean_up()
 
-    def _clean_up(self):
+    def _clean_up(self) -> None:
         if self.socket:
             try:
                 self.socket.textMessageReceived.disconnect()
                 self.socket.error.disconnect()
                 self.socket.disconnected.disconnect()
+
             except RuntimeError:
                 pass
+
             self.socket.deleteLater()
             self.socket = None
 

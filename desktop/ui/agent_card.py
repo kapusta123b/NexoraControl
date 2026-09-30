@@ -75,9 +75,10 @@ class Ui_card_form(object):
         self.agent_information_layout.setContentsMargins(0, 9, 0, 0)
         self.online_dot = QLabel(self.agent_information_widget)
         self.online_dot.setObjectName(u"online_dot")
-        self.online_dot.setMaximumSize(QSize(20, 100))
+        self.online_dot.setMinimumSize(QSize(30, 0))
+        self.online_dot.setMaximumSize(QSize(30, 16777215))
         self.online_dot.setStyleSheet(u"")
-        self.online_dot.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.online_dot.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.agent_information_layout.addWidget(self.online_dot)
 
@@ -133,7 +134,7 @@ class Ui_card_form(object):
 
         self.horizontalLayout.addWidget(self.agent_information_widget)
 
-        self.card_content_spacer = QSpacerItem(200, 29, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.card_content_spacer = QSpacerItem(200, 29, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.card_content_spacer)
 

@@ -1,16 +1,27 @@
 from PySide6.QtCore import Qt, QRectF
+
 from PySide6.QtGui import QPainter, QPen, QColor, QFont
+
 from PySide6.QtWidgets import QWidget
 
 
 class SimpleNetdataGauge(QWidget):
-    def __init__(self, title="", unit="%", color="#a5b4fc", max_value: float = 100.0, parent=None):
+    def __init__(
+        self,
+        title="",
+        legend="",
+        unit="%",
+        color="#a5b4fc",
+        max_value: float = 100.0,
+        parent=None,
+    ) -> None:
         super().__init__(parent)
         self.title = title
+        self.legend = legend
         self.unit = unit
         self.color = QColor(color)
         self.bg_color = QColor("#2A2C32")
-        self.text_muted = QColor("#8A8F9D")
+        self.text_muted = QColor("#A8ADBB")
         self.text_white = QColor("#a5b4fc")
 
         self.value = 0.0
@@ -22,16 +33,15 @@ class SimpleNetdataGauge(QWidget):
         self.font_val = QFont("JetBrainsMonoNL Nerd Font Propo", 11, QFont.Weight.Bold)
         self.font_unit = QFont("JetBrainsMonoNL Nerd Font Propo", 8)
 
-
-    def set_value(self, val: float = 0.0):
+    def set_value(self, val: float = 0.0) -> None:
         new_val = max(0.0, min(float(val), self.max_value))
         if self.value == new_val:
             return
-        
+
         self.value = new_val
         self.update()
 
-    def paintEvent(self, event):
+    def paintEvent(self, event) -> None:
         painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 
@@ -46,6 +56,7 @@ class SimpleNetdataGauge(QWidget):
         painter.setPen(self.text_muted)
         painter.setFont(self.font_title)
         painter.drawText(0, -1, w, 30, Qt.AlignmentFlag.AlignHCenter, self.title)
+        painter.drawText(0, h - 20, w, 30, Qt.AlignmentFlag.AlignHCenter, self.legend)
 
         bg_pen = QPen(
             self.bg_color,
@@ -80,4 +91,3 @@ class SimpleNetdataGauge(QWidget):
         painter.drawText(
             QRectF(0, center_y + 12, w, 20), Qt.AlignmentFlag.AlignCenter, self.unit
         )
-

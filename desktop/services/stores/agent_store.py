@@ -4,7 +4,7 @@ from PySide6.QtCore import QObject, Signal
 class AgentsStore(QObject):
     agents_changed = Signal(list)
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self._agents: list[dict] = []
 
@@ -14,14 +14,12 @@ class AgentsStore(QObject):
 
     def get_agents(self) -> list[dict]:
         return self._agents
-    
 
-from PySide6.QtCore import QObject, Signal
 
 class DetailAgentStore(QObject):
     agent_changed = Signal(dict)
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self._agent = {}
 
@@ -31,6 +29,3 @@ class DetailAgentStore(QObject):
 
     def get_agent(self) -> dict | None:
         return self._agent
-
-
-

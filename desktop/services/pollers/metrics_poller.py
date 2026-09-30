@@ -1,12 +1,12 @@
-from PySide6.QtCore import QObject
 from api.client import NexoraClient
+
 from services.stores.metric_store import MetricStore
 from services.pollers.base_poller import BasePoller
 from services.workers.metric_worker import AgentMetricWorker
 
 
 class AgentMetricPoller(BasePoller):
-    def __init__(self, client: NexoraClient, metric_store: MetricStore):
+    def __init__(self, client: NexoraClient, metric_store: MetricStore) -> None:
         super().__init__(client)
         self.metric_store = metric_store
 
@@ -28,7 +28,7 @@ class AgentMetricPoller(BasePoller):
 
         self.refresh()
 
-    def change_hours(self, hours: int):
+    def change_hours(self, hours: int) -> None:
         self.from_hours = hours
 
         self.refresh(force=True)

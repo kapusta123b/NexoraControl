@@ -1,14 +1,11 @@
 from datetime import datetime
-from re import S
-from typing import Any
 import numpy as np
 import pyqtgraph as pg
 from PySide6.QtCore import Qt
 
 
 class TimeAxisItem(pg.AxisItem):
-
-    def tickStrings(self, values, scale, spacing):
+    def tickStrings(self, values, scale, spacing) -> None:
         formatted = []
         for v in values:
             try:
@@ -25,11 +22,9 @@ class MetricGraphHelper:
         y_label: str = "Usage (%)",
         antialias: bool = False,
         y_range: tuple[float, float] | None = (0, 100),
-    ):
+    ) -> None:
         self.TOOLTIP_COLS_COUNT = 3
-
         self.graph = graph
-
         self.antialias = antialias
 
         self.curves: dict[str, pg.PlotDataItem] = {}
@@ -48,16 +43,18 @@ class MetricGraphHelper:
         self.graph.disableAutoRange()
 
         self.graph.plotItem.getAxis("left").enableAutoSIPrefix(False)
-        self.graph.enableAutoRange(axis='y', enable=True)
-
+        self.graph.enableAutoRange(axis="x", enable=True)
+        self.graph.enableAutoRange(axis="y", enable=True)
 
     def update_data(
         self,
         timestamps: list[int] = None,
         data_dict: dict[str, list[float | int]] = None,
-    ) -> dict:
-        self.timestamps = timestamps or []
-        self.series_data = data_dict or {}
+    ) -> dict | None:
+        self.timestamps = list(timestamps) if timestamps else []
+        self.series_data = {
+            name: list(values) for name, values in (data_dict or {}).items()
+        }
 
         if not self.timestamps:
             self.graph.setXRange(0, 60, padding=0)
@@ -70,76 +67,66 @@ class MetricGraphHelper:
                 continue
 
             if name in self.curves:
-                self.curves[name].setData(self.timestamps, values)
+                curve = self.curves[name]
+                curve.opts["antialias"] = self.antialias
+                curve.setData(self.timestamps, values)
 
-        x_min = (
-            self.timestamps[0] - 30
-            if len(self.timestamps) == 1
-            else min(self.timestamps)
-        )
-        x_max = (
-            self.timestamps[0] + 30
-            if len(self.timestamps) == 1
-            else max(self.timestamps)
-        )
-
-        if len(timestamps) < 300:
-            pg.setConfigOptions(antialias=self.antialias)
-
-        else:
-            pg.setConfigOptions(antialias=False)
-
-        self.graph.setXRange(x_min, x_max, padding=0)
-        self.graph.getViewBox().setLimits(xMin=x_min, xMax=x_max)
+        self.graph.autoRange(padding=0)
 
     def append_point(self, timestamp: int, values_dict: dict[str, float | int]) -> None:
         self.timestamps.append(timestamp)
+        current_len = len(self.timestamps)
 
-        for name in self.series_data:
+        for name in self.curves.keys():
+            if name not in self.series_data:
+                self.series_data[name] = [0.0] * (current_len - 1)
+
+        for name in self.series_data.keys():
             val = values_dict.get(name, 0.0)
             self.series_data[name].append(val)
 
-        target_len = len(self.timestamps)
-
         for name, data in self.series_data.items():
-            diff = target_len - len(data)
-            if diff > 0:
-                data.extend([0.0] * diff)
-            elif diff < 0:
-                self.series_data[name] = data[:target_len]
+            if len(data) > current_len:
+                self.series_data[name] = data[:current_len]
+
+            elif len(data) < current_len:
+                self.series_data[name].extend([0.0] * (current_len - len(data)))
 
         for name, curve in self.curves.items():
             if name in self.series_data:
                 curve.setData(self.timestamps, self.series_data[name])
 
+        self.graph.autoRange(padding=0)
+
     def add_series(
         self, name: str, color: str, width: float = 2.0, suffix: str = "%"
-    ) -> str:
+    ) -> None:
         pen = pg.mkPen(color=color, width=width)
-
         pen.setJoinStyle(Qt.PenJoinStyle.RoundJoin)
         pen.setCapStyle(Qt.PenCapStyle.RoundCap)
 
-        curve = self.graph.plot(name=name, pen=pen)
+        curve = self.graph.plot(
+            name=name,
+            pen=pen,
+            autoDownsample=True,
+            downsampleMethod="peak",
+            clipToView=True,
+            antialias=self.antialias,
+        )
 
         self.curves[name] = curve
         self.series_colors[name] = color
         self.series_suffixes[name] = suffix
         self.series_data[name] = []
 
-        return name
-
-    def _setup_style(self, y_label: str):
+    def _setup_style(self, y_label: str) -> None:
         self.graph.setBackground(None)
-
         axis_pen = pg.mkPen(color="#475569", width=1)
         text_pen = pg.mkPen(color="#adb3bb", width=1)
-
         plot_item = self.graph.plotItem
 
         time_axis = TimeAxisItem(orientation="bottom")
         time_axis.enableAutoSIPrefix(False)
-
         plot_item.setAxisItems({"bottom": time_axis})
         plot_item.layout.setContentsMargins(5, 0, 0, 5)
 
@@ -155,12 +142,20 @@ class MetricGraphHelper:
         plot_item.showAxis("top", False)
         plot_item.showAxis("right", False)
 
+        view_box = self.graph.getViewBox()
+
+        view_box.setMouseEnabled(x=True, y=True)
+
+        self.graph.enableAutoRange(axis="y", enable=True)
+
+        view_box.setLimits(minYRange=5.0)
+
         if self.y_range:
-            self.graph.getViewBox().setLimits(
-                yMin=self.y_range[0], yMax=self.y_range[1]
+            view_box.setLimits(
+                yMin=self.y_range[0], yMax=self.y_range[1], minYRange=5.0
             )
 
-    def _setup_crosshair(self):
+    def _setup_crosshair(self) -> None:
         self.v_line = pg.InfiniteLine(
             angle=90,
             movable=False,
@@ -176,10 +171,9 @@ class MetricGraphHelper:
         self.graph.addItem(self.v_line, ignoreBounds=True)
         self.graph.addItem(self.h_line, ignoreBounds=True)
         self.graph.addItem(self.tooltip, ignoreBounds=True)
-
         self.graph.scene().sigMouseMoved.connect(self._on_mouse_moved)
 
-    def _on_mouse_moved(self, pos):
+    def _on_mouse_moved(self, pos) -> None:
         if not self.timestamps:
             return
 
@@ -202,7 +196,6 @@ class MetricGraphHelper:
         self.v_line.setPos(actual_x)
 
         time_str = datetime.fromtimestamp(actual_x).strftime("%H:%M:%S")
-
         lines = [
             f"<td colspan='{self.TOOLTIP_COLS_COUNT}' style='padding: 2px 8px; font-weight: bold;'>"
             f"<span style='color: #8b949e;'>Time:</span> {time_str}"
@@ -223,7 +216,6 @@ class MetricGraphHelper:
                     f"</td>"
                 )
                 lines.append(cell_html)
-
                 if first_val is None:
                     first_val = val
 

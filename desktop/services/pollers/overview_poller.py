@@ -19,7 +19,7 @@ class DetailOverviewPoller(BasePoller):
         client: NexoraClient,
         detail_agent_store: DetailAgentStore,
         commands_store: CommandsStore,
-    ):
+    ) -> None:
         super().__init__(client)
 
         self.client = client
@@ -86,5 +86,5 @@ class DetailOverviewPoller(BasePoller):
                 success_callback=self.commands_store.set_commands,
             )
 
-    def _on_command_created(self):
+    def _on_command_created(self) -> None:
         self._start_overview_worker()

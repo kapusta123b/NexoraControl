@@ -14,9 +14,11 @@ class PerformanceComputePage:
         self.performance_store = store
         self.ui = ui
 
-        self.cpu_gauge = SimpleNetdataGauge("CPU", "%", "#38bdf8")
-        self.ram_gauge = SimpleNetdataGauge("RAM", "%", "#c084fc")
-        self.disk_gauge = SimpleNetdataGauge("AVG DISK", "%", "#34d399")
+        self.cpu_gauge = SimpleNetdataGauge(title="CPU", unit="%", color="#38bdf8")
+        self.ram_gauge = SimpleNetdataGauge(title="RAM", unit="%", color="#c084fc")
+        self.disk_gauge = SimpleNetdataGauge(
+            title="AVG DISK", unit="%", color="#34d399"
+        )
 
         self.ui.compute_gauge_layout.addWidget(self.cpu_gauge)
         self.ui.compute_gauge_layout.addWidget(self.ram_gauge)
@@ -42,6 +44,8 @@ class PerformanceComputePage:
         )
 
         self.cores_initialized = False
+
+        self.compute_metrics = {}
 
         self._setup_static_series()
 
@@ -86,7 +90,7 @@ class PerformanceComputePage:
 
     def on_latest_received(self, metric: dict):
         timestamp = metric.get("timestamp")
-        if timestamp is None:
+        if not timestamp:
             return
 
         cpu_value = metric["cpu_metrics"].get("cpu_load", 0.0)

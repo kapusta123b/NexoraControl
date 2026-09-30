@@ -27,13 +27,13 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1181, 816)
+        MainWindow.resize(1187, 803)
         icon = QIcon()
         iconThemeName = u"camera-photo"
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
-            icon.addFile(u"../.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon.addFile(u"../.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"")
@@ -341,11 +341,15 @@ class Ui_MainWindow(object):
         self.dashboard_label.setSizePolicy(sizePolicy1)
         self.dashboard_label.setMaximumSize(QSize(16777215, 30))
         self.dashboard_label.setStyleSheet(u"QLabel {\n"
-"	font: 600 italic 17pt;\n"
-"\n"
+"	font: 600 17pt;\n"
 "}")
 
         self.dashboard_layout.addWidget(self.dashboard_label)
+
+        self.dashboard_legend_label = QLabel(self.dashboard_page)
+        self.dashboard_legend_label.setObjectName(u"dashboard_legend_label")
+
+        self.dashboard_layout.addWidget(self.dashboard_legend_label)
 
         self.dashboard_line = QFrame(self.dashboard_page)
         self.dashboard_line.setObjectName(u"dashboard_line")
@@ -353,10 +357,6 @@ class Ui_MainWindow(object):
         self.dashboard_line.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.dashboard_layout.addWidget(self.dashboard_line)
-
-        self.top_spacer = QSpacerItem(20, 22, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-
-        self.dashboard_layout.addItem(self.top_spacer)
 
         self.cards = QWidget(self.dashboard_page)
         self.cards.setObjectName(u"cards")
@@ -460,11 +460,15 @@ class Ui_MainWindow(object):
         self.agents_label.setEnabled(True)
         self.agents_label.setMaximumSize(QSize(16777215, 30))
         self.agents_label.setStyleSheet(u"QLabel {\n"
-"	font: 600 italic 17pt;\n"
-"\n"
+"	font: 600 17pt;\n"
 "}")
 
         self.dashboard_layout.addWidget(self.agents_label)
+
+        self.agents_table_legend_label = QLabel(self.dashboard_page)
+        self.agents_table_legend_label.setObjectName(u"agents_table_legend_label")
+
+        self.dashboard_layout.addWidget(self.agents_table_legend_label)
 
         self.line_4 = QFrame(self.dashboard_page)
         self.line_4.setObjectName(u"line_4")
@@ -592,19 +596,15 @@ class Ui_MainWindow(object):
         self.agents_headline_label.setMinimumSize(QSize(0, 0))
         self.agents_headline_label.setMaximumSize(QSize(16777215, 25))
         self.agents_headline_label.setStyleSheet(u"QLabel {\n"
-"	font: 600 italic 17pt;\n"
-"\n"
+"	font: 600 17pt;\n"
 "}")
 
         self.agents_main_layout.addWidget(self.agents_headline_label)
 
-        self.agents_top_spacer = QSpacerItem(20, 8, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-
-        self.agents_main_layout.addItem(self.agents_top_spacer)
-
         self.page_description_label = QLabel(self.agents_page)
         self.page_description_label.setObjectName(u"page_description_label")
-        self.page_description_label.setMaximumSize(QSize(16777215, 40))
+        self.page_description_label.setMinimumSize(QSize(0, 30))
+        self.page_description_label.setMaximumSize(QSize(16777215, 30))
 
         self.agents_main_layout.addWidget(self.page_description_label)
 
@@ -615,17 +615,13 @@ class Ui_MainWindow(object):
 
         self.agents_main_layout.addWidget(self.page_description_line)
 
-        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        self.input_line_top_spacer = QSpacerItem(20, 18, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
-        self.agents_main_layout.addItem(self.verticalSpacer_5)
+        self.agents_main_layout.addItem(self.input_line_top_spacer)
 
         self.help_bar_layout = QHBoxLayout()
         self.help_bar_layout.setSpacing(0)
         self.help_bar_layout.setObjectName(u"help_bar_layout")
-        self.left_spacer = QSpacerItem(10, 14, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.help_bar_layout.addItem(self.left_spacer)
-
         self.search_input_line = QLineEdit(self.agents_page)
         self.search_input_line.setObjectName(u"search_input_line")
         self.search_input_line.setClearButtonEnabled(False)
@@ -642,16 +638,16 @@ class Ui_MainWindow(object):
 
         self.help_bar_layout.addWidget(self.refresh_agents_button)
 
-        self.horizontalSpacer_3 = QSpacerItem(17, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.help_bar_right_spacer = QSpacerItem(17, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.help_bar_layout.addItem(self.horizontalSpacer_3)
+        self.help_bar_layout.addItem(self.help_bar_right_spacer)
 
 
         self.agents_main_layout.addLayout(self.help_bar_layout)
 
         self.agent_list = QScrollArea(self.agents_page)
         self.agent_list.setObjectName(u"agent_list")
-        self.agent_list.setMinimumSize(QSize(0, 400))
+        self.agent_list.setMinimumSize(QSize(0, 600))
         self.agent_list.setMaximumSize(QSize(16777215, 16777215))
         self.agent_list.setLayoutDirection(Qt.LeftToRight)
         self.agent_list.setAutoFillBackground(False)
@@ -706,13 +702,17 @@ class Ui_MainWindow(object):
         self.agent_list.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.agent_scroll = QWidget()
         self.agent_scroll.setObjectName(u"agent_scroll")
-        self.agent_scroll.setGeometry(QRect(0, 0, 982, 400))
+        self.agent_scroll.setGeometry(QRect(0, 0, 988, 600))
         self.agent_scroll.setMaximumSize(QSize(16777215, 1000000))
         self.agent_scroll.setStyleSheet(u"")
         self.agent_scroll_layout = QVBoxLayout(self.agent_scroll)
         self.agent_scroll_layout.setSpacing(12)
         self.agent_scroll_layout.setObjectName(u"agent_scroll_layout")
-        self.agent_scroll_layout.setContentsMargins(10, 16, 0, 10)
+        self.agent_scroll_layout.setContentsMargins(0, 0, 0, 10)
+        self.agent_scroll_spacer = QSpacerItem(20, 19, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.agent_scroll_layout.addItem(self.agent_scroll_spacer)
+
         self.agent_list.setWidget(self.agent_scroll)
 
         self.agents_main_layout.addWidget(self.agent_list)
@@ -858,15 +858,28 @@ class Ui_MainWindow(object):
         self.overview_detail_page.setObjectName(u"overview_detail_page")
         self.overview_detail_page_layout = QVBoxLayout(self.overview_detail_page)
         self.overview_detail_page_layout.setObjectName(u"overview_detail_page_layout")
+        self.overview_detail_page_layout.setContentsMargins(0, -1, -1, -1)
         self.overview_label = QLabel(self.overview_detail_page)
         self.overview_label.setObjectName(u"overview_label")
         self.overview_label.setMinimumSize(QSize(0, 0))
         self.overview_label.setStyleSheet(u"QLabel {\n"
-"	font: 600 italic 17pt;\n"
+"	font: 600 17pt;\n"
 "}")
         self.overview_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.overview_detail_page_layout.addWidget(self.overview_label)
+
+        self.overview_legend_label = QLabel(self.overview_detail_page)
+        self.overview_legend_label.setObjectName(u"overview_legend_label")
+
+        self.overview_detail_page_layout.addWidget(self.overview_legend_label)
+
+        self.overview_legend_line = QFrame(self.overview_detail_page)
+        self.overview_legend_line.setObjectName(u"overview_legend_line")
+        self.overview_legend_line.setFrameShape(QFrame.Shape.HLine)
+        self.overview_legend_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.overview_detail_page_layout.addWidget(self.overview_legend_line)
 
         self.overview_detail_scroll = QScrollArea(self.overview_detail_page)
         self.overview_detail_scroll.setObjectName(u"overview_detail_scroll")
@@ -917,7 +930,7 @@ class Ui_MainWindow(object):
         self.overview_detail_scroll.setWidgetResizable(True)
         self.agent_detail_information = QWidget()
         self.agent_detail_information.setObjectName(u"agent_detail_information")
-        self.agent_detail_information.setGeometry(QRect(0, 0, 833, 700))
+        self.agent_detail_information.setGeometry(QRect(0, 0, 977, 700))
         self.agent_detail_information.setMinimumSize(QSize(0, 700))
         self.agent_detail_information_layout = QVBoxLayout(self.agent_detail_information)
         self.agent_detail_information_layout.setSpacing(5)
@@ -929,17 +942,16 @@ class Ui_MainWindow(object):
         self.overview_widget.setStyleSheet(u"#uptime_widget, #ram_widget, #disk_widget, #cpu_widget {\n"
 "	background-color: #161b22;\n"
 "	border: 1px solid #30363d;\n"
-"\n"
-"    padding: 10px;\n"
-"\n"
 "}\n"
 "\n"
 "\n"
 "QLabel {\n"
 "	background-color: transparent;\n"
 "}")
-        self.horizontalLayout = QHBoxLayout(self.overview_widget)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.overview_layout = QHBoxLayout(self.overview_widget)
+        self.overview_layout.setSpacing(0)
+        self.overview_layout.setObjectName(u"overview_layout")
+        self.overview_layout.setContentsMargins(0, 0, 0, 0)
         self.resource_boxes_widget = QWidget(self.overview_widget)
         self.resource_boxes_widget.setObjectName(u"resource_boxes_widget")
         self.resource_boxes_widget.setMaximumSize(QSize(16777215, 70))
@@ -1071,7 +1083,7 @@ class Ui_MainWindow(object):
         self.resource_boxes_layout.addWidget(self.uptime_widget)
 
 
-        self.horizontalLayout.addWidget(self.resource_boxes_widget)
+        self.overview_layout.addWidget(self.resource_boxes_widget)
 
 
         self.agent_detail_information_layout.addWidget(self.overview_widget)
@@ -1086,9 +1098,7 @@ class Ui_MainWindow(object):
         self.system_status_label = QLabel(self.system_status_widget)
         self.system_status_label.setObjectName(u"system_status_label")
         self.system_status_label.setMaximumSize(QSize(16777215, 40))
-        self.system_status_label.setStyleSheet(u"QLabel {\n"
-"	font: 350 12pt;\n"
-"}")
+        self.system_status_label.setStyleSheet(u"")
 
         self.system_status_layout.addWidget(self.system_status_label)
 
@@ -1098,7 +1108,6 @@ class Ui_MainWindow(object):
         self.system_status_box_widget.setStyleSheet(u"#system_status_box_widget {\n"
 "    background-color: #161b22;\n"
 "	border: 1px solid #30363d;\n"
-"	margin-left: 5px;\n"
 "	border-radius: 2px;\n"
 "}\n"
 "\n"
@@ -1161,9 +1170,7 @@ class Ui_MainWindow(object):
 
         self.system_status_values_widget = QWidget(self.system_status_box_widget)
         self.system_status_values_widget.setObjectName(u"system_status_values_widget")
-        self.system_status_values_widget.setStyleSheet(u"QLabel {\n"
-"	font: 300 italic 11pt;\n"
-"}")
+        self.system_status_values_widget.setStyleSheet(u"")
         self.system_status_values_widget_layout = QVBoxLayout(self.system_status_values_widget)
         self.system_status_values_widget_layout.setSpacing(0)
         self.system_status_values_widget_layout.setObjectName(u"system_status_values_widget_layout")
@@ -1215,55 +1222,58 @@ class Ui_MainWindow(object):
         self.quick_actions_widget = QWidget(self.agent_detail_information)
         self.quick_actions_widget.setObjectName(u"quick_actions_widget")
         self.quick_actions_widget.setMinimumSize(QSize(0, 80))
-        self.quick_actions_widget.setMaximumSize(QSize(16777215, 16777215))
+        self.quick_actions_widget.setMaximumSize(QSize(16777215, 100))
         self.quick_actions_widget_layout = QVBoxLayout(self.quick_actions_widget)
         self.quick_actions_widget_layout.setSpacing(0)
         self.quick_actions_widget_layout.setObjectName(u"quick_actions_widget_layout")
         self.quick_actions_widget_layout.setContentsMargins(0, 0, 0, 0)
         self.quick_actions_label = QLabel(self.quick_actions_widget)
         self.quick_actions_label.setObjectName(u"quick_actions_label")
-        self.quick_actions_label.setStyleSheet(u"QLabel {\n"
-"	font: 350 12pt;\n"
-"}")
+        self.quick_actions_label.setMaximumSize(QSize(16777215, 30))
+        self.quick_actions_label.setStyleSheet(u"")
 
         self.quick_actions_widget_layout.addWidget(self.quick_actions_label)
 
-        self.quick_actions_layout = QHBoxLayout()
-        self.quick_actions_layout.setSpacing(10)
-        self.quick_actions_layout.setObjectName(u"quick_actions_layout")
-        self.quick_actions_layout.setContentsMargins(10, -1, -1, -1)
-        self.restart_all_docker_cont_quick_button = QPushButton(self.quick_actions_widget)
+        self.quick_actions_buttons_widget = QWidget(self.quick_actions_widget)
+        self.quick_actions_buttons_widget.setObjectName(u"quick_actions_buttons_widget")
+        self.quick_actions_buttons_widget.setMaximumSize(QSize(16777215, 40))
+        self.quick_actions_buttons_layout = QHBoxLayout(self.quick_actions_buttons_widget)
+        self.quick_actions_buttons_layout.setSpacing(10)
+        self.quick_actions_buttons_layout.setObjectName(u"quick_actions_buttons_layout")
+        self.quick_actions_buttons_layout.setContentsMargins(0, 0, 0, 0)
+        self.restart_all_docker_cont_quick_button = QPushButton(self.quick_actions_buttons_widget)
         self.restart_all_docker_cont_quick_button.setObjectName(u"restart_all_docker_cont_quick_button")
 
-        self.quick_actions_layout.addWidget(self.restart_all_docker_cont_quick_button)
+        self.quick_actions_buttons_layout.addWidget(self.restart_all_docker_cont_quick_button)
 
-        self.stop_all_docker_cont_quick_button = QPushButton(self.quick_actions_widget)
+        self.stop_all_docker_cont_quick_button = QPushButton(self.quick_actions_buttons_widget)
         self.stop_all_docker_cont_quick_button.setObjectName(u"stop_all_docker_cont_quick_button")
 
-        self.quick_actions_layout.addWidget(self.stop_all_docker_cont_quick_button)
+        self.quick_actions_buttons_layout.addWidget(self.stop_all_docker_cont_quick_button)
 
-        self.docker_ps_quick_button = QPushButton(self.quick_actions_widget)
+        self.docker_ps_quick_button = QPushButton(self.quick_actions_buttons_widget)
         self.docker_ps_quick_button.setObjectName(u"docker_ps_quick_button")
 
-        self.quick_actions_layout.addWidget(self.docker_ps_quick_button)
+        self.quick_actions_buttons_layout.addWidget(self.docker_ps_quick_button)
 
-        self.reboot_quick_button = QPushButton(self.quick_actions_widget)
+        self.reboot_quick_button = QPushButton(self.quick_actions_buttons_widget)
         self.reboot_quick_button.setObjectName(u"reboot_quick_button")
 
-        self.quick_actions_layout.addWidget(self.reboot_quick_button)
+        self.quick_actions_buttons_layout.addWidget(self.reboot_quick_button)
 
 
-        self.quick_actions_widget_layout.addLayout(self.quick_actions_layout)
+        self.quick_actions_widget_layout.addWidget(self.quick_actions_buttons_widget)
 
 
         self.agent_detail_information_layout.addWidget(self.quick_actions_widget)
 
         self.recent_commands_widget = QWidget(self.agent_detail_information)
         self.recent_commands_widget.setObjectName(u"recent_commands_widget")
+        self.recent_commands_widget.setMaximumSize(QSize(16777215, 200))
         self.recent_commands_widget.setStyleSheet(u"#recent_command_box_widget {\n"
 "    background-color: #161b22;\n"
 "	border: 1px solid #30363d;\n"
-"	margin-left: 5px;\n"
+"\n"
 "	border-radius: 2px;\n"
 "}\n"
 "\n"
@@ -1277,9 +1287,7 @@ class Ui_MainWindow(object):
         self.recent_commands_label = QLabel(self.recent_commands_widget)
         self.recent_commands_label.setObjectName(u"recent_commands_label")
         self.recent_commands_label.setMaximumSize(QSize(16777215, 30))
-        self.recent_commands_label.setStyleSheet(u"QLabel {\n"
-"	font: 350 12pt;\n"
-"}")
+        self.recent_commands_label.setStyleSheet(u"")
 
         self.recent_commands_widget_layout.addWidget(self.recent_commands_label)
 
@@ -1291,6 +1299,7 @@ class Ui_MainWindow(object):
 "}")
         self.recent_command_box_layout = QVBoxLayout(self.recent_command_box_widget)
         self.recent_command_box_layout.setObjectName(u"recent_command_box_layout")
+        self.recent_command_box_layout.setContentsMargins(9, -1, -1, -1)
 
         self.recent_commands_widget_layout.addWidget(self.recent_command_box_widget)
 
@@ -1312,12 +1321,50 @@ class Ui_MainWindow(object):
         self.performance_label.setObjectName(u"performance_label")
         self.performance_label.setMinimumSize(QSize(0, 0))
         self.performance_label.setStyleSheet(u"QLabel {\n"
-"	font: 600 italic 17pt;\n"
+"	font: 600 17pt;\n"
 "\n"
 "}")
         self.performance_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.performance_detail_page_layout.addWidget(self.performance_label)
+
+        self.performance_legend_label = QLabel(self.performance_detail_page)
+        self.performance_legend_label.setObjectName(u"performance_legend_label")
+
+        self.performance_detail_page_layout.addWidget(self.performance_legend_label)
+
+        self.performance_legend_line = QFrame(self.performance_detail_page)
+        self.performance_legend_line.setObjectName(u"performance_legend_line")
+        self.performance_legend_line.setFrameShape(QFrame.Shape.HLine)
+        self.performance_legend_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.performance_detail_page_layout.addWidget(self.performance_legend_line)
+
+        self.metric_buttons_layout = QHBoxLayout()
+        self.metric_buttons_layout.setSpacing(2)
+        self.metric_buttons_layout.setObjectName(u"metric_buttons_layout")
+        self.compute_button = QPushButton(self.performance_detail_page)
+        self.compute_button.setObjectName(u"compute_button")
+
+        self.metric_buttons_layout.addWidget(self.compute_button)
+
+        self.storage_button = QPushButton(self.performance_detail_page)
+        self.storage_button.setObjectName(u"storage_button")
+
+        self.metric_buttons_layout.addWidget(self.storage_button)
+
+        self.thermals_button = QPushButton(self.performance_detail_page)
+        self.thermals_button.setObjectName(u"thermals_button")
+
+        self.metric_buttons_layout.addWidget(self.thermals_button)
+
+        self.network_button = QPushButton(self.performance_detail_page)
+        self.network_button.setObjectName(u"network_button")
+
+        self.metric_buttons_layout.addWidget(self.network_button)
+
+
+        self.performance_detail_page_layout.addLayout(self.metric_buttons_layout)
 
         self.performance_detail_scroll = QScrollArea(self.performance_detail_page)
         self.performance_detail_scroll.setObjectName(u"performance_detail_scroll")
@@ -1368,7 +1415,7 @@ class Ui_MainWindow(object):
         self.performance_detail_scroll.setWidgetResizable(True)
         self.agent_performance_information = QWidget()
         self.agent_performance_information.setObjectName(u"agent_performance_information")
-        self.agent_performance_information.setGeometry(QRect(0, 0, 980, 1191))
+        self.agent_performance_information.setGeometry(QRect(0, 0, 986, 1190))
         self.agent_performance_information_layout = QVBoxLayout(self.agent_performance_information)
         self.agent_performance_information_layout.setSpacing(0)
         self.agent_performance_information_layout.setObjectName(u"agent_performance_information_layout")
@@ -1384,32 +1431,6 @@ class Ui_MainWindow(object):
         self.performance_content_layout.setSpacing(6)
         self.performance_content_layout.setObjectName(u"performance_content_layout")
         self.performance_content_layout.setContentsMargins(0, 0, 0, 0)
-        self.metric_buttons_layout = QHBoxLayout()
-        self.metric_buttons_layout.setSpacing(2)
-        self.metric_buttons_layout.setObjectName(u"metric_buttons_layout")
-        self.compute_button = QPushButton(self.performance_content_widget)
-        self.compute_button.setObjectName(u"compute_button")
-
-        self.metric_buttons_layout.addWidget(self.compute_button)
-
-        self.storage_button = QPushButton(self.performance_content_widget)
-        self.storage_button.setObjectName(u"storage_button")
-
-        self.metric_buttons_layout.addWidget(self.storage_button)
-
-        self.thermals_button = QPushButton(self.performance_content_widget)
-        self.thermals_button.setObjectName(u"thermals_button")
-
-        self.metric_buttons_layout.addWidget(self.thermals_button)
-
-        self.network_button = QPushButton(self.performance_content_widget)
-        self.network_button.setObjectName(u"network_button")
-
-        self.metric_buttons_layout.addWidget(self.network_button)
-
-
-        self.performance_content_layout.addLayout(self.metric_buttons_layout)
-
         self.performance_stacked_content = QStackedWidget(self.performance_content_widget)
         self.performance_stacked_content.setObjectName(u"performance_stacked_content")
         self.performance_stacked_content.setStyleSheet(u"#perfomance_stacked_content {\n"
@@ -1417,6 +1438,82 @@ class Ui_MainWindow(object):
 "    border: 1px solid #1E2633;\n"
 "	border-radius: 2px\n"
 "\n"
+"}\n"
+"\n"
+"QComboBox {\n"
+"    color: #a5b4fc; \n"
+"    background-color: transparent;\n"
+"    border: 1px solid #242936;\n"
+"    border-radius: 4px;\n"
+"    padding: 6px 0px 6px 15px;	\n"
+"    font-size: 12px;\n"
+"    min-width: 100px;\n"
+"}\n"
+"QComboBox:hover {\n"
+"    background-color: #1e2230;\n"
+"    border-color: #38bdf8;\n"
+"    color: #ffffff;\n"
+"}\n"
+"\n"
+"QComboBox:on { \n"
+"    background-color: #0f111a;\n"
+"    border-color: #58a6ff;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"QComboBox QAbstractItemView,\n"
+"QComboBox QListView {\n"
+"    background-color: #161920;\n"
+"    border: 1px solid #242936; \n"
+"    border-radius: 4px;\n"
+"    padding: 0px !important;\n"
+"    margin: 0px !important;\n"
+"    outline: 0px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item {\n"
+"    min-height: 28px;\n"
+"    padding-left: 12px;\n"
+"    padding-right: 12px;\n"
+"    color: #a5b4fc;\n"
+"   "
+                        " background-color: transparent;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item:hover,\n"
+"QComboBox QAbstractItemView::item:selected {\n"
+"    background-color: #1e2230 !important;\n"
+"    color: #ffffff !important;\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox QScrollBar:vertical {\n"
+"    background-color: #161920;\n"
+"    width: 8px;\n"
+"    margin: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QComboBox QScrollBar::handle:vertical {\n"
+"    background-color: #242936; \n"
+"    border-radius: 4px;\n"
+"    min-height: 20px;\n"
+"}\n"
+"\n"
+"QComboBox QScrollBar::handle:vertical:hover {\n"
+"    background-color: #38bdf8;\n"
+"}\n"
+"\n"
+"QComboBox QScrollBar::add-line:vertical,\n"
+"QComboBox QScrollBar::sub-line:vertical,\n"
+"QComboBox QScrollBar::up-arrow:vertical, \n"
+"QComboBox QScrollBar::down-arrow:vertical {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    height: 0px;\n"
+"    width: 0px;\n"
 "}")
         self.compute_page = QWidget()
         self.compute_page.setObjectName(u"compute_page")
@@ -1432,6 +1529,18 @@ class Ui_MainWindow(object):
 "}")
 
         self.compute_page_layout.addWidget(self.compute_label)
+
+        self.compute_legend_label = QLabel(self.compute_page)
+        self.compute_legend_label.setObjectName(u"compute_legend_label")
+
+        self.compute_page_layout.addWidget(self.compute_legend_label)
+
+        self.compute_legend_line = QFrame(self.compute_page)
+        self.compute_legend_line.setObjectName(u"compute_legend_line")
+        self.compute_legend_line.setFrameShape(QFrame.Shape.HLine)
+        self.compute_legend_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.compute_page_layout.addWidget(self.compute_legend_line)
 
         self.compute_current_state_label = QLabel(self.compute_page)
         self.compute_current_state_label.setObjectName(u"compute_current_state_label")
@@ -1634,81 +1743,7 @@ class Ui_MainWindow(object):
         self.performance_stacked_content.addWidget(self.compute_page)
         self.storage_page = QWidget()
         self.storage_page.setObjectName(u"storage_page")
-        self.storage_page.setStyleSheet(u"QComboBox {\n"
-"    color: #a5b4fc; \n"
-"    background-color: transparent;\n"
-"    border: 1px solid #242936;\n"
-"    border-radius: 4px;\n"
-"    padding: 6px 0px 6px 15px;	\n"
-"    font-size: 12px;\n"
-"    min-width: 100px;\n"
-"}\n"
-"QComboBox:hover {\n"
-"    background-color: #1e2230;\n"
-"    border-color: #38bdf8;\n"
-"    color: #ffffff;\n"
-"}\n"
-"\n"
-"QComboBox:on { \n"
-"    background-color: #0f111a;\n"
-"    border-color: #58a6ff;\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"QComboBox QAbstractItemView,\n"
-"QComboBox QListView {\n"
-"    background-color: #161920;\n"
-"    border: 1px solid #242936; \n"
-"    border-radius: 4px;\n"
-"    padding: 0px !important;\n"
-"    margin: 0px !important;\n"
-"    outline: 0px;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView::item {\n"
-"    min-height: 28px;\n"
-"    padding-left: 12px;\n"
-"    padding-right: 12px;\n"
-"    color: #a5b4fc;\n"
-"    background-color: transparent;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView::item:hover,\n"
-"QComboBox QAbstractItemView::item:selected {\n"
-"    bac"
-                        "kground-color: #1e2230 !important;\n"
-"    color: #ffffff !important;\n"
-"}\n"
-"\n"
-"\n"
-"QComboBox QScrollBar:vertical {\n"
-"    background-color: #161920;\n"
-"    width: 8px;\n"
-"    margin: 0px;\n"
-"    border: none;\n"
-"}\n"
-"\n"
-"QComboBox QScrollBar::handle:vertical {\n"
-"    background-color: #242936; \n"
-"    border-radius: 4px;\n"
-"    min-height: 20px;\n"
-"}\n"
-"\n"
-"QComboBox QScrollBar::handle:vertical:hover {\n"
-"    background-color: #38bdf8;\n"
-"}\n"
-"\n"
-"QComboBox QScrollBar::add-line:vertical,\n"
-"QComboBox QScrollBar::sub-line:vertical,\n"
-"QComboBox QScrollBar::up-arrow:vertical, \n"
-"QComboBox QScrollBar::down-arrow:vertical {\n"
-"    border: none;\n"
-"    background: none;\n"
-"    height: 0px;\n"
-"    width: 0px;\n"
-"}")
+        self.storage_page.setStyleSheet(u"")
         self.storage_page_layout = QVBoxLayout(self.storage_page)
         self.storage_page_layout.setSpacing(15)
         self.storage_page_layout.setObjectName(u"storage_page_layout")
@@ -1728,12 +1763,12 @@ class Ui_MainWindow(object):
 
         self.storage_page_layout.addWidget(self.storage_legend_label)
 
-        self.legend_line = QFrame(self.storage_page)
-        self.legend_line.setObjectName(u"legend_line")
-        self.legend_line.setFrameShape(QFrame.Shape.HLine)
-        self.legend_line.setFrameShadow(QFrame.Shadow.Sunken)
+        self.storage_legend_line = QFrame(self.storage_page)
+        self.storage_legend_line.setObjectName(u"storage_legend_line")
+        self.storage_legend_line.setFrameShape(QFrame.Shape.HLine)
+        self.storage_legend_line.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.storage_page_layout.addWidget(self.legend_line)
+        self.storage_page_layout.addWidget(self.storage_legend_line)
 
         self.current_storage_label = QLabel(self.storage_page)
         self.current_storage_label.setObjectName(u"current_storage_label")
@@ -1800,9 +1835,9 @@ class Ui_MainWindow(object):
         self.storage_disk_io_widget.setObjectName(u"storage_disk_io_widget")
         self.storage_disk_io_widget.setMinimumSize(QSize(0, 300))
         self.storage_disk_io_widget.setMaximumSize(QSize(16777215, 600))
-        self.cpu_ram_utilization_layout_2 = QHBoxLayout(self.storage_disk_io_widget)
-        self.cpu_ram_utilization_layout_2.setObjectName(u"cpu_ram_utilization_layout_2")
-        self.cpu_ram_utilization_layout_2.setContentsMargins(0, 0, 0, 0)
+        self.storage_disk_io_layout = QHBoxLayout(self.storage_disk_io_widget)
+        self.storage_disk_io_layout.setObjectName(u"storage_disk_io_layout")
+        self.storage_disk_io_layout.setContentsMargins(0, 0, 0, 0)
         self.disk_write_read_graph = PlotWidget(self.storage_disk_io_widget)
         self.disk_write_read_graph.setObjectName(u"disk_write_read_graph")
         self.disk_write_read_graph.setMinimumSize(QSize(0, 0))
@@ -1814,7 +1849,7 @@ class Ui_MainWindow(object):
 "	border-bottom-right-radius: 0px;\n"
 "}")
 
-        self.cpu_ram_utilization_layout_2.addWidget(self.disk_write_read_graph)
+        self.storage_disk_io_layout.addWidget(self.disk_write_read_graph)
 
         self.disk_io_summary_widget = QWidget(self.storage_disk_io_widget)
         self.disk_io_summary_widget.setObjectName(u"disk_io_summary_widget")
@@ -1946,7 +1981,7 @@ class Ui_MainWindow(object):
         self.disk_io_summary_layout.addLayout(self.disk_information_layout)
 
 
-        self.cpu_ram_utilization_layout_2.addWidget(self.disk_io_summary_widget)
+        self.storage_disk_io_layout.addWidget(self.disk_io_summary_widget)
 
 
         self.storage_page_layout.addWidget(self.storage_disk_io_widget)
@@ -2009,6 +2044,7 @@ class Ui_MainWindow(object):
         __qtablewidgetitem16 = QTableWidgetItem()
         self.storage_devices_table.setHorizontalHeaderItem(4, __qtablewidgetitem16)
         self.storage_devices_table.setObjectName(u"storage_devices_table")
+        self.storage_devices_table.horizontalHeader().setCascadingSectionResizes(True)
 
         self.storage_page_layout.addWidget(self.storage_devices_table)
 
@@ -2016,7 +2052,155 @@ class Ui_MainWindow(object):
         self.thermals_page = QWidget()
         self.thermals_page.setObjectName(u"thermals_page")
         self.thermals_page_layout = QVBoxLayout(self.thermals_page)
+        self.thermals_page_layout.setSpacing(15)
         self.thermals_page_layout.setObjectName(u"thermals_page_layout")
+        self.thermals_page_layout.setContentsMargins(6, 6, 6, 6)
+        self.thermals_label = QLabel(self.thermals_page)
+        self.thermals_label.setObjectName(u"thermals_label")
+        self.thermals_label.setMaximumSize(QSize(16777215, 40))
+        self.thermals_label.setStyleSheet(u"QLabel {\n"
+"	font: 350 italic 15pt;\n"
+"	margin-left: 0px;\n"
+"}")
+        self.thermals_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+
+        self.thermals_page_layout.addWidget(self.thermals_label)
+
+        self.thermals_legend_label = QLabel(self.thermals_page)
+        self.thermals_legend_label.setObjectName(u"thermals_legend_label")
+        self.thermals_legend_label.setMaximumSize(QSize(16777215, 30))
+
+        self.thermals_page_layout.addWidget(self.thermals_legend_label)
+
+        self.thermal_legend_line = QFrame(self.thermals_page)
+        self.thermal_legend_line.setObjectName(u"thermal_legend_line")
+        self.thermal_legend_line.setFrameShape(QFrame.Shape.HLine)
+        self.thermal_legend_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.thermals_page_layout.addWidget(self.thermal_legend_line)
+
+        self.current_thermals_label = QLabel(self.thermals_page)
+        self.current_thermals_label.setObjectName(u"current_thermals_label")
+        self.current_thermals_label.setMaximumSize(QSize(16777215, 30))
+
+        self.thermals_page_layout.addWidget(self.current_thermals_label)
+
+        self.thermals_gauge_widget = QWidget(self.thermals_page)
+        self.thermals_gauge_widget.setObjectName(u"thermals_gauge_widget")
+        self.thermals_gauge_widget.setStyleSheet(u"#thermals_gauge_widget {\n"
+"	border: 1px solid #1E2633;\n"
+"}")
+        self.thermals_gauge_layout = QHBoxLayout(self.thermals_gauge_widget)
+        self.thermals_gauge_layout.setObjectName(u"thermals_gauge_layout")
+        self.thermals_gauge_layout.setContentsMargins(-1, -1, -1, 1)
+
+        self.thermals_page_layout.addWidget(self.thermals_gauge_widget)
+
+        self.current_thermals_line = QFrame(self.thermals_page)
+        self.current_thermals_line.setObjectName(u"current_thermals_line")
+        self.current_thermals_line.setFrameShape(QFrame.Shape.HLine)
+        self.current_thermals_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.thermals_page_layout.addWidget(self.current_thermals_line)
+
+        self.thermals_combo_box_layout = QHBoxLayout()
+        self.thermals_combo_box_layout.setObjectName(u"thermals_combo_box_layout")
+        self.thermals_combo_box_layout.setContentsMargins(0, 0, -1, -1)
+        self.temperature_history_label = QLabel(self.thermals_page)
+        self.temperature_history_label.setObjectName(u"temperature_history_label")
+        self.temperature_history_label.setMinimumSize(QSize(0, 0))
+        self.temperature_history_label.setMaximumSize(QSize(16777215, 30))
+
+        self.thermals_combo_box_layout.addWidget(self.temperature_history_label)
+
+        self.thermals_combo_box_right_spacer = QSpacerItem(35, 50, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.thermals_combo_box_layout.addItem(self.thermals_combo_box_right_spacer)
+
+        self.sensor_group_label = QLabel(self.thermals_page)
+        self.sensor_group_label.setObjectName(u"sensor_group_label")
+        self.sensor_group_label.setMinimumSize(QSize(0, 0))
+        self.sensor_group_label.setMaximumSize(QSize(100, 40))
+
+        self.thermals_combo_box_layout.addWidget(self.sensor_group_label)
+
+        self.sensor_group_combo_box = QComboBox(self.thermals_page)
+        self.sensor_group_combo_box.setObjectName(u"sensor_group_combo_box")
+        self.sensor_group_combo_box.setMinimumSize(QSize(117, 0))
+        self.sensor_group_combo_box.setMaximumSize(QSize(120, 30))
+        self.sensor_group_combo_box.setEditable(False)
+        self.sensor_group_combo_box.setMaxVisibleItems(4)
+        self.sensor_group_combo_box.setIconSize(QSize(16, 16))
+        self.sensor_group_combo_box.setFrame(True)
+
+        self.thermals_combo_box_layout.addWidget(self.sensor_group_combo_box)
+
+        self.thernals_combo_box_separate_spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.thermals_combo_box_layout.addItem(self.thernals_combo_box_separate_spacer)
+
+        self.sensor_name_label = QLabel(self.thermals_page)
+        self.sensor_name_label.setObjectName(u"sensor_name_label")
+        self.sensor_name_label.setMaximumSize(QSize(60, 30))
+
+        self.thermals_combo_box_layout.addWidget(self.sensor_name_label)
+
+        self.thermal_sensor_name_combo_box = QComboBox(self.thermals_page)
+        self.thermal_sensor_name_combo_box.setObjectName(u"thermal_sensor_name_combo_box")
+        self.thermal_sensor_name_combo_box.setMinimumSize(QSize(117, 0))
+        self.thermal_sensor_name_combo_box.setMaximumSize(QSize(70, 30))
+        self.thermal_sensor_name_combo_box.setEditable(False)
+        self.thermal_sensor_name_combo_box.setInsertPolicy(QComboBox.InsertAtCurrent)
+
+        self.thermals_combo_box_layout.addWidget(self.thermal_sensor_name_combo_box)
+
+
+        self.thermals_page_layout.addLayout(self.thermals_combo_box_layout)
+
+        self.thermals_graph = PlotWidget(self.thermals_page)
+        self.thermals_graph.setObjectName(u"thermals_graph")
+        self.thermals_graph.setMinimumSize(QSize(0, 300))
+        self.thermals_graph.setStyleSheet(u"QWidget {\n"
+"    background-color: transparent;\n"
+"    border: 1px solid #30363d;\n"
+"    border-radius: 8px;\n"
+"	border-bottom-left-radius: 0px; \n"
+"	border-bottom-right-radius: 0px;\n"
+"}")
+
+        self.thermals_page_layout.addWidget(self.thermals_graph)
+
+        self.thermals_graph_line = QFrame(self.thermals_page)
+        self.thermals_graph_line.setObjectName(u"thermals_graph_line")
+        self.thermals_graph_line.setFrameShape(QFrame.Shape.HLine)
+        self.thermals_graph_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.thermals_page_layout.addWidget(self.thermals_graph_line)
+
+        self.sensors_label = QLabel(self.thermals_page)
+        self.sensors_label.setObjectName(u"sensors_label")
+        self.sensors_label.setMaximumSize(QSize(16777215, 30))
+
+        self.thermals_page_layout.addWidget(self.sensors_label)
+
+        self.sensors_table = QTableWidget(self.thermals_page)
+        if (self.sensors_table.columnCount() < 5):
+            self.sensors_table.setColumnCount(5)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        self.sensors_table.setHorizontalHeaderItem(0, __qtablewidgetitem17)
+        __qtablewidgetitem18 = QTableWidgetItem()
+        self.sensors_table.setHorizontalHeaderItem(1, __qtablewidgetitem18)
+        __qtablewidgetitem19 = QTableWidgetItem()
+        self.sensors_table.setHorizontalHeaderItem(2, __qtablewidgetitem19)
+        __qtablewidgetitem20 = QTableWidgetItem()
+        self.sensors_table.setHorizontalHeaderItem(3, __qtablewidgetitem20)
+        __qtablewidgetitem21 = QTableWidgetItem()
+        self.sensors_table.setHorizontalHeaderItem(4, __qtablewidgetitem21)
+        self.sensors_table.setObjectName(u"sensors_table")
+        self.sensors_table.horizontalHeader().setCascadingSectionResizes(True)
+
+        self.thermals_page_layout.addWidget(self.sensors_table)
+
         self.performance_stacked_content.addWidget(self.thermals_page)
         self.network_page = QWidget()
         self.network_page.setObjectName(u"network_page")
@@ -2038,17 +2222,30 @@ class Ui_MainWindow(object):
         self.hardware_detail_page.setObjectName(u"hardware_detail_page")
         self.hardware_detail_page_layout = QVBoxLayout(self.hardware_detail_page)
         self.hardware_detail_page_layout.setObjectName(u"hardware_detail_page_layout")
+        self.hardware_detail_page_layout.setContentsMargins(0, -1, -1, -1)
         self.hardware_label = QLabel(self.hardware_detail_page)
         self.hardware_label.setObjectName(u"hardware_label")
         self.hardware_label.setMinimumSize(QSize(0, 0))
         self.hardware_label.setMaximumSize(QSize(16777215, 30))
         self.hardware_label.setStyleSheet(u"QLabel {\n"
-"	font: 600 italic 17pt;\n"
-"\n"
-"}")
+"	font: 600 17pt;\n"
+"}\n"
+"")
         self.hardware_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.hardware_detail_page_layout.addWidget(self.hardware_label)
+
+        self.hardware_legend_label = QLabel(self.hardware_detail_page)
+        self.hardware_legend_label.setObjectName(u"hardware_legend_label")
+
+        self.hardware_detail_page_layout.addWidget(self.hardware_legend_label)
+
+        self.hardware_legend_line = QFrame(self.hardware_detail_page)
+        self.hardware_legend_line.setObjectName(u"hardware_legend_line")
+        self.hardware_legend_line.setFrameShape(QFrame.Shape.HLine)
+        self.hardware_legend_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.hardware_detail_page_layout.addWidget(self.hardware_legend_line)
 
         self.hardware_info_scroll = QScrollArea(self.hardware_detail_page)
         self.hardware_info_scroll.setObjectName(u"hardware_info_scroll")
@@ -2099,7 +2296,7 @@ class Ui_MainWindow(object):
         self.hardware_info_scroll.setWidgetResizable(True)
         self.hardware_info_scroll_content = QWidget()
         self.hardware_info_scroll_content.setObjectName(u"hardware_info_scroll_content")
-        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 308, 910))
+        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 977, 910))
         self.hardware_info_scroll_content.setMinimumSize(QSize(0, 0))
         self.hardware_info_scroll_content_layout = QVBoxLayout(self.hardware_info_scroll_content)
         self.hardware_info_scroll_content_layout.setSpacing(0)
@@ -2115,9 +2312,7 @@ class Ui_MainWindow(object):
         self.cpu_info_label = QLabel(self.cpu_info_widget)
         self.cpu_info_label.setObjectName(u"cpu_info_label")
         self.cpu_info_label.setMaximumSize(QSize(16777215, 40))
-        self.cpu_info_label.setStyleSheet(u"QLabel {\n"
-"	font: 350 12pt;\n"
-"}")
+        self.cpu_info_label.setStyleSheet(u"")
 
         self.cpu_info_widget_layout.addWidget(self.cpu_info_label)
 
@@ -2190,9 +2385,7 @@ class Ui_MainWindow(object):
 
         self.cpu_info_values_widget = QWidget(self.cpu_info_box_widget)
         self.cpu_info_values_widget.setObjectName(u"cpu_info_values_widget")
-        self.cpu_info_values_widget.setStyleSheet(u"QLabel {\n"
-"	font: 450 12pt;\n"
-"}")
+        self.cpu_info_values_widget.setStyleSheet(u"")
         self.cpu_info_values_widget_layout = QVBoxLayout(self.cpu_info_values_widget)
         self.cpu_info_values_widget_layout.setSpacing(0)
         self.cpu_info_values_widget_layout.setObjectName(u"cpu_info_values_widget_layout")
@@ -2244,9 +2437,7 @@ class Ui_MainWindow(object):
         self.memory_info_label = QLabel(self.memory_info_widget)
         self.memory_info_label.setObjectName(u"memory_info_label")
         self.memory_info_label.setMaximumSize(QSize(16777215, 40))
-        self.memory_info_label.setStyleSheet(u"QLabel {\n"
-"	font: 350 12pt;\n"
-"}")
+        self.memory_info_label.setStyleSheet(u"")
 
         self.memory_info_widget_layout.addWidget(self.memory_info_label)
 
@@ -2305,9 +2496,7 @@ class Ui_MainWindow(object):
 
         self.memory_info_values_widget = QWidget(self.memory_info_box_widget)
         self.memory_info_values_widget.setObjectName(u"memory_info_values_widget")
-        self.memory_info_values_widget.setStyleSheet(u"QLabel {\n"
-"	font: 450 12pt;\n"
-"}")
+        self.memory_info_values_widget.setStyleSheet(u"")
         self.memory_info_values_widget_layout = QVBoxLayout(self.memory_info_values_widget)
         self.memory_info_values_widget_layout.setSpacing(0)
         self.memory_info_values_widget_layout.setObjectName(u"memory_info_values_widget_layout")
@@ -2349,9 +2538,7 @@ class Ui_MainWindow(object):
         self.gpu_info_label = QLabel(self.gpu_info_widget)
         self.gpu_info_label.setObjectName(u"gpu_info_label")
         self.gpu_info_label.setMaximumSize(QSize(16777215, 40))
-        self.gpu_info_label.setStyleSheet(u"QLabel {\n"
-"	font: 350 12pt;\n"
-"}")
+        self.gpu_info_label.setStyleSheet(u"")
 
         self.gpu_info_widget_layout.addWidget(self.gpu_info_label)
 
@@ -2410,9 +2597,7 @@ class Ui_MainWindow(object):
 
         self.gpu_info_values_widget = QWidget(self.gpu_info_box_widget)
         self.gpu_info_values_widget.setObjectName(u"gpu_info_values_widget")
-        self.gpu_info_values_widget.setStyleSheet(u"QLabel {\n"
-"	font: 450 12pt;\n"
-"}")
+        self.gpu_info_values_widget.setStyleSheet(u"")
         self.gpu_info_values_widget_layout = QVBoxLayout(self.gpu_info_values_widget)
         self.gpu_info_values_widget_layout.setSpacing(0)
         self.gpu_info_values_widget_layout.setObjectName(u"gpu_info_values_widget_layout")
@@ -2454,9 +2639,7 @@ class Ui_MainWindow(object):
         self.motherboard_info_label = QLabel(self.motherboard_info_widget)
         self.motherboard_info_label.setObjectName(u"motherboard_info_label")
         self.motherboard_info_label.setMaximumSize(QSize(16777215, 40))
-        self.motherboard_info_label.setStyleSheet(u"QLabel {\n"
-"	font: 350 12pt;\n"
-"}")
+        self.motherboard_info_label.setStyleSheet(u"")
 
         self.motherboard_info_widget_layout.addWidget(self.motherboard_info_label)
 
@@ -2522,9 +2705,7 @@ class Ui_MainWindow(object):
 
         self.motherboard_info_values_widget = QWidget(self.motherboard_info_box_widget)
         self.motherboard_info_values_widget.setObjectName(u"motherboard_info_values_widget")
-        self.motherboard_info_values_widget.setStyleSheet(u"QLabel {\n"
-"	font: 450 12pt;\n"
-"}")
+        self.motherboard_info_values_widget.setStyleSheet(u"")
         self.motherboard_info_values_widget_layout = QVBoxLayout(self.motherboard_info_values_widget)
         self.motherboard_info_values_widget_layout.setSpacing(0)
         self.motherboard_info_values_widget_layout.setObjectName(u"motherboard_info_values_widget_layout")
@@ -2571,9 +2752,7 @@ class Ui_MainWindow(object):
         self.bios_info_label = QLabel(self.bios_info_widget)
         self.bios_info_label.setObjectName(u"bios_info_label")
         self.bios_info_label.setMaximumSize(QSize(16777215, 40))
-        self.bios_info_label.setStyleSheet(u"QLabel {\n"
-"	font: 350 12pt;\n"
-"}")
+        self.bios_info_label.setStyleSheet(u"")
 
         self.bios_info_widget_layout.addWidget(self.bios_info_label)
 
@@ -2632,9 +2811,7 @@ class Ui_MainWindow(object):
 
         self.bios_info_values_widget = QWidget(self.bios_info_box_widget)
         self.bios_info_values_widget.setObjectName(u"bios_info_values_widget")
-        self.bios_info_values_widget.setStyleSheet(u"QLabel {\n"
-"	font: 450 12pt;\n"
-"}")
+        self.bios_info_values_widget.setStyleSheet(u"")
         self.bios_info_values_widget_layout = QVBoxLayout(self.bios_info_values_widget)
         self.bios_info_values_widget_layout.setSpacing(0)
         self.bios_info_values_widget_layout.setObjectName(u"bios_info_values_widget_layout")
@@ -2685,9 +2862,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.content_stack.setCurrentIndex(0)
-        self.agent_detail_stacked_content.setCurrentIndex(1)
-        self.performance_stacked_content.setCurrentIndex(1)
+        self.content_stack.setCurrentIndex(2)
+        self.agent_detail_stacked_content.setCurrentIndex(0)
+        self.performance_stacked_content.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2702,14 +2879,16 @@ class Ui_MainWindow(object):
         self.logs_button.setText(QCoreApplication.translate("MainWindow", u"Logs", None))
         self.settings_button.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.about_button.setText(QCoreApplication.translate("MainWindow", u"About", None))
-        self.dashboard_label.setText(QCoreApplication.translate("MainWindow", u"Dashboard", None))
+        self.dashboard_label.setText(QCoreApplication.translate("MainWindow", u"DASHBOARD", None))
+        self.dashboard_legend_label.setText(QCoreApplication.translate("MainWindow", u"Fleet availability metrics", None))
         self.agent_label.setText(QCoreApplication.translate("MainWindow", u"Agents", None))
         self.agents_count.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.online_label.setText(QCoreApplication.translate("MainWindow", u"Online", None))
         self.online_count.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.offline_label.setText(QCoreApplication.translate("MainWindow", u"Offline", None))
         self.offline_count.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.agents_label.setText(QCoreApplication.translate("MainWindow", u"Agents", None))
+        self.agents_label.setText(QCoreApplication.translate("MainWindow", u"AGENTS", None))
+        self.agents_table_legend_label.setText(QCoreApplication.translate("MainWindow", u"Endpoint telemetry, host metrics and execution status", None))
         ___qtablewidgetitem = self.agents_table.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Status", None))
         ___qtablewidgetitem1 = self.agents_table.horizontalHeaderItem(1)
@@ -2723,18 +2902,19 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem5 = self.agents_table.horizontalHeaderItem(5)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"Seen", None))
         self.refresh_table_button.setText(QCoreApplication.translate("MainWindow", u"[ Refresh ]", None))
-        self.agents_headline_label.setText(QCoreApplication.translate("MainWindow", u"Agents", None))
+        self.agents_headline_label.setText(QCoreApplication.translate("MainWindow", u"AGENTS", None))
         self.page_description_label.setText(QCoreApplication.translate("MainWindow", u"Manage connected machines", None))
         self.search_input_line.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search...", None))
         self.refresh_agents_button.setText(QCoreApplication.translate("MainWindow", u"[ Refresh ]", None))
         self.back_to_agents_button.setText(QCoreApplication.translate("MainWindow", u"[ \u2190 Back to Agents ]", None))
         self.detail_top_agent_name_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.detail_top_agent_status_label.setText(QCoreApplication.translate("MainWindow", u"\u25cf OFFLINE", None))
+        self.detail_top_agent_status_label.setText(QCoreApplication.translate("MainWindow", u"\u25cb OFFLINE", None))
         self.overview_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Overview ]", None))
         self.performance_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Performance ]", None))
         self.hardware_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Hardware ]", None))
         self.commands_nav_button.setText(QCoreApplication.translate("MainWindow", u"[ Commands ]", None))
         self.overview_label.setText(QCoreApplication.translate("MainWindow", u"OVERVIEW", None))
+        self.overview_legend_label.setText(QCoreApplication.translate("MainWindow", u"System health, resource utilization and real-time activity summary", None))
         self.cpu_label.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
         self.cpu_load_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.ram_label.setText(QCoreApplication.translate("MainWindow", u"RAM", None))
@@ -2761,11 +2941,13 @@ class Ui_MainWindow(object):
         self.reboot_quick_button.setText(QCoreApplication.translate("MainWindow", u"[ Reboot ] ", None))
         self.recent_commands_label.setText(QCoreApplication.translate("MainWindow", u"RECENT COMMANDS", None))
         self.performance_label.setText(QCoreApplication.translate("MainWindow", u"PERFORMANCE", None))
+        self.performance_legend_label.setText(QCoreApplication.translate("MainWindow", u"Real-time resource tracking, system workloads and efficiency metrics", None))
         self.compute_button.setText(QCoreApplication.translate("MainWindow", u"[ COMPUTE ]", None))
         self.storage_button.setText(QCoreApplication.translate("MainWindow", u"[ STORAGE ]", None))
         self.thermals_button.setText(QCoreApplication.translate("MainWindow", u"[ THERMALS ]", None))
         self.network_button.setText(QCoreApplication.translate("MainWindow", u"[ NETWORK ]", None))
         self.compute_label.setText(QCoreApplication.translate("MainWindow", u"COMPUTE", None))
+        self.compute_legend_label.setText(QCoreApplication.translate("MainWindow", u"Processor load, per-core performance and system memory tracking", None))
         self.compute_current_state_label.setText(QCoreApplication.translate("MainWindow", u"CURRENT STATE", None))
         self.cpu_ram_metric_label.setText(QCoreApplication.translate("MainWindow", u"CPU / RAM UTILIZATION", None))
         self.memory_label.setText(QCoreApplication.translate("MainWindow", u"MEMORY", None))
@@ -2818,47 +3000,67 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"CAPACITY", None))
         ___qtablewidgetitem16 = self.storage_devices_table.horizontalHeaderItem(4)
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
+        self.thermals_label.setText(QCoreApplication.translate("MainWindow", u"THERMALS", None))
+        self.thermals_legend_label.setText(QCoreApplication.translate("MainWindow", u"Temperature sensors and thermal activity", None))
+        self.current_thermals_label.setText(QCoreApplication.translate("MainWindow", u"CURRENT THERMALS", None))
+        self.temperature_history_label.setText(QCoreApplication.translate("MainWindow", u"TEMPERATURE HISTORY", None))
+        self.sensor_group_label.setText(QCoreApplication.translate("MainWindow", u"SENSOR GROUP", None))
+        self.sensor_group_combo_box.setPlaceholderText(QCoreApplication.translate("MainWindow", u"GROUP", None))
+        self.sensor_name_label.setText(QCoreApplication.translate("MainWindow", u"SENSOR", None))
+        self.thermal_sensor_name_combo_box.setPlaceholderText(QCoreApplication.translate("MainWindow", u"NAME", None))
+        self.sensors_label.setText(QCoreApplication.translate("MainWindow", u"SENSORS", None))
+        ___qtablewidgetitem17 = self.sensors_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"GROUP", None))
+        ___qtablewidgetitem18 = self.sensors_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"SENSOR", None))
+        ___qtablewidgetitem19 = self.sensors_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"CURRENT", None))
+        ___qtablewidgetitem20 = self.sensors_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"HIGH", None))
+        ___qtablewidgetitem21 = self.sensors_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"CRITICAL", None))
         self.hardware_label.setText(QCoreApplication.translate("MainWindow", u"HARDWARE", None))
+        self.hardware_legend_label.setText(QCoreApplication.translate("MainWindow", u"Component specifications, hardware model data and system architecture", None))
         self.cpu_info_label.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
         self.model_row_label.setText(QCoreApplication.translate("MainWindow", u"Model", None))
         self.cores_row_label.setText(QCoreApplication.translate("MainWindow", u"Cores", None))
         self.threads_row_label.setText(QCoreApplication.translate("MainWindow", u"Threads", None))
         self.frequency_row_label.setText(QCoreApplication.translate("MainWindow", u"Frequency", None))
         self.architecture_row_label.setText(QCoreApplication.translate("MainWindow", u"Architecture", None))
-        self.model_value_label.setText(QCoreApplication.translate("MainWindow", u"AMD EPYC 7763", None))
-        self.cores_value_label.setText(QCoreApplication.translate("MainWindow", u"8", None))
-        self.threads_value_label.setText(QCoreApplication.translate("MainWindow", u"16", None))
-        self.frequency_value_label.setText(QCoreApplication.translate("MainWindow", u"2.45 GHz", None))
-        self.architecture_value_label.setText(QCoreApplication.translate("MainWindow", u"x86_64", None))
+        self.model_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.cores_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.threads_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.frequency_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.architecture_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.memory_info_label.setText(QCoreApplication.translate("MainWindow", u"MEMORY", None))
         self.memory_total_row_label.setText(QCoreApplication.translate("MainWindow", u"Total", None))
         self.memory_type_row_label.setText(QCoreApplication.translate("MainWindow", u"Type", None))
         self.memory_speed_row_label.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
-        self.memory_total_value_label.setText(QCoreApplication.translate("MainWindow", u"16 GB", None))
-        self.memory_type_value_label.setText(QCoreApplication.translate("MainWindow", u"DDR4 ", None))
-        self.memory_speed_value_label.setText(QCoreApplication.translate("MainWindow", u"3200 MHz", None))
+        self.memory_total_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.memory_type_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.memory_speed_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.gpu_info_label.setText(QCoreApplication.translate("MainWindow", u"GPU", None))
         self.gpu_model_type_row_label.setText(QCoreApplication.translate("MainWindow", u"Model", None))
         self.gpu_vram_row_label.setText(QCoreApplication.translate("MainWindow", u"VRAM", None))
         self.gpu_memory_type_row_label.setText(QCoreApplication.translate("MainWindow", u"Memory Type", None))
-        self.gpu_model_type_value_label.setText(QCoreApplication.translate("MainWindow", u"NVIDIA RTX 3050", None))
-        self.gpu_vram_value_label.setText(QCoreApplication.translate("MainWindow", u"4 GB", None))
-        self.gpu_memory_type_value_label.setText(QCoreApplication.translate("MainWindow", u"GDDR6X", None))
+        self.gpu_model_type_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.gpu_vram_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.gpu_memory_type_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.motherboard_info_label.setText(QCoreApplication.translate("MainWindow", u"MOTHERBOARD", None))
         self.motherboard_vendor_column_label.setText(QCoreApplication.translate("MainWindow", u"Vendor", None))
         self.motherboard_model_column_label.setText(QCoreApplication.translate("MainWindow", u"Model", None))
         self.motherboard_serial_column_label.setText(QCoreApplication.translate("MainWindow", u"Serial", None))
         self.motherboard_architecture_column_label.setText(QCoreApplication.translate("MainWindow", u"Architecture", None))
-        self.motherboard_vendor_value_label.setText(QCoreApplication.translate("MainWindow", u"ASUS", None))
-        self.motherboard_model_value_label.setText(QCoreApplication.translate("MainWindow", u"PRIME B550", None))
-        self.motherboard_serial_value_label.setText(QCoreApplication.translate("MainWindow", u"********", None))
-        self.motherboard_architecture_value_label.setText(QCoreApplication.translate("MainWindow", u"x86_64", None))
+        self.motherboard_vendor_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.motherboard_model_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.motherboard_serial_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.motherboard_architecture_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.bios_info_label.setText(QCoreApplication.translate("MainWindow", u"BIOS", None))
         self.bios_vendor_row_label.setText(QCoreApplication.translate("MainWindow", u"Vendor", None))
         self.bios_version_row_label.setText(QCoreApplication.translate("MainWindow", u"Version", None))
         self.bios_date_row_label.setText(QCoreApplication.translate("MainWindow", u"Date", None))
-        self.bios_vendor_value_label.setText(QCoreApplication.translate("MainWindow", u"AMD EPYC 7763", None))
-        self.bios_version_value_label.setText(QCoreApplication.translate("MainWindow", u"8", None))
-        self.bios_date_value_label.setText(QCoreApplication.translate("MainWindow", u"2026-01-15", None))
+        self.bios_vendor_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.bios_version_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
+        self.bios_date_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
     # retranslateUi
 

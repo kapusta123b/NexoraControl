@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import QWidget
 
@@ -8,7 +9,7 @@ from ui.recent_command_widget import Ui_recent_command_widget
 class CommandCardWidget(QWidget):
     open_requested = Signal()
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         super().__init__(parent)
 
         self.ui = Ui_recent_command_widget()

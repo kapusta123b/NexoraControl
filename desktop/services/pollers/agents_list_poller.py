@@ -1,4 +1,4 @@
-from PySide6.QtCore import QObject, QThread, QTimer
+from PySide6.QtCore import QTimer
 
 from api.client import NexoraClient
 from services.pollers.base_poller import BasePoller
@@ -6,11 +6,9 @@ from services.stores.agent_store import AgentsStore
 
 from services.workers.agents_list_worker import AgentsListWorker
 
-from ..widgets.box_messages import MessageBox
-
 
 class AgentsListPoller(BasePoller):
-    def __init__(self, client: NexoraClient, store: AgentsStore):
+    def __init__(self, client: NexoraClient, store: AgentsStore) -> None:
         super().__init__(client)
 
         self.agents_store = store

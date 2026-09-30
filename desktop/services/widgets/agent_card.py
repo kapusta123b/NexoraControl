@@ -1,4 +1,5 @@
 from PySide6.QtCore import Qt, Signal
+
 from PySide6.QtWidgets import QWidget
 
 from ui.agent_card import Ui_card_form
@@ -7,7 +8,7 @@ from ui.agent_card import Ui_card_form
 class AgentCardWidget(QWidget):
     open_requested = Signal()
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         super().__init__(parent)
 
         self.ui = Ui_card_form()
@@ -20,7 +21,7 @@ class AgentCardWidget(QWidget):
         )
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
-    def set_agent(self, agent: dict):
+    def set_agent(self, agent: dict) -> None:
         self._update_agent_information(agent)
         self._update_status(agent)
 
@@ -46,7 +47,7 @@ class AgentCardWidget(QWidget):
         widget.style().unpolish(widget)
         widget.style().polish(widget)
 
-    def mousePressEvent(self, event):
+    def mousePressEvent(self, event) -> None:
         if event.button() == Qt.MouseButton.LeftButton:
             self.open_requested.emit()
 

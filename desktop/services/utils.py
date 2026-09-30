@@ -1,6 +1,6 @@
 from typing import Literal
 
-from PySide6.QtWidgets import QTableWidgetItem
+from PySide6.QtWidgets import QTableWidget, QTableWidgetItem
 
 UnitType = Literal["kb", "mb", "gb", "tb", "pb", "KB", "MB", "GB", "TB", "PB"]
 
@@ -74,7 +74,9 @@ def byte_converter(
     return f"{converted_with_precision} {unit_key.upper()}{rate_suffix}"
 
 
-def update_or_create_row_item(table, row: int, column: int, text: str, text_color=None):
+def update_or_create_row_item(
+    table: QTableWidget, row: int, column: int, text: str
+) -> None:
     item = table.item(row, column)
     if item:
         if item.text() != text:

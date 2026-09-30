@@ -1,11 +1,10 @@
 from PySide6.QtCore import QObject, Signal
 
 
-
 class CommandsStore(QObject):
     commands_changed = Signal(list)
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self._commands: list[dict] = []
 
