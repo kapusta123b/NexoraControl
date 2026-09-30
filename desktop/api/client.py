@@ -1,5 +1,5 @@
-import asyncio
 from typing import Any, Literal
+
 import httpx
 
 MethodType = Literal["GET", "POST", "PUT", "PATCH", "DELETE"]
@@ -8,7 +8,7 @@ MethodType = Literal["GET", "POST", "PUT", "PATCH", "DELETE"]
 class NexoraClient:
     BASE_AGENT_URL = "agents/"
 
-    def __init__(self, base_url: str, token: str):
+    def __init__(self, base_url: str, token: str) -> None:
         self.base_url = base_url
         self.token = token
 
@@ -56,7 +56,7 @@ class NexoraClient:
         hours: int,
         metric_type: str,
         query_params: dict | None = None,
-    ):
+    ) -> dict:
 
         BASE_AGENT_METRIC_URL = f"{self.BASE_AGENT_URL}{agent_id}/metrics/"
 
