@@ -4,15 +4,15 @@ from PySide6.QtWidgets import QButtonGroup
 
 from api.client import NexoraClient
 
-from pages.detail_pages.agent_performance import DetailPerformanceController
+from pages.detail_pages.performance_page import DetailPerformanceController
 
 from ui.main_window import Ui_MainWindow
 
-from pages.detail_pages.agent_overview import DetailOverviewController
+from pages.detail_pages.overview_page import DetailOverviewController
 
 
 class AgentDetailController(QObject):
-    def __init__(self, ui: Ui_MainWindow, client: NexoraClient):
+    def __init__(self, ui: Ui_MainWindow, client: NexoraClient) -> None:
         super().__init__()
         self.ui = ui
         self.client = client
