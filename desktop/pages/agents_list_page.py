@@ -1,4 +1,4 @@
-from pages.agent_detail import AgentDetailController
+from pages.agent_detail_page import AgentDetailController
 
 from services.pollers.agents_list_poller import AgentsListPoller
 from services.widgets.agent_card import AgentCardWidget
@@ -20,6 +20,10 @@ class AgentsController:
         self.poller = poller
         self.detail_controller = detail_controller
 
+        self.agent_cards = []
+
+        self.ui.search_input_line.textChanged.connect(self.filter_agents)
+
         self.setup_connections()
 
     def setup_connections(self) -> None:
@@ -36,10 +40,11 @@ class AgentsController:
         self.clear_cards()
 
         layout = self.ui.agent_scroll.layout()
+        if layout is None:
+            return
 
         for agent in agents:
             card = AgentCardWidget(self.ui.agent_scroll)
-
             card.set_agent(agent)
 
             card.ui.agent_open_button.clicked.connect(
@@ -47,12 +52,16 @@ class AgentsController:
             )
             card.open_requested.connect(lambda a=agent: self.open_agent(a))
 
+            search_string = f"{agent['name']} {agent['ip']}".lower()
+
+            self.agent_cards.append((card, search_string))
             layout.addWidget(card)
 
         layout.addStretch(1)
 
-    def open_agent(self, agent: dict) -> None:
+        self.filter_agents(self.ui.search_input_line.text())
 
+    def open_agent(self, agent: dict) -> None:
         self.detail_controller.set_agent(agent=agent)
 
         self.ui.content_stack.setCurrentWidget(self.ui.agent_detail_page)
@@ -60,18 +69,29 @@ class AgentsController:
             self.ui.overview_detail_page
         )
 
+    def filter_agents(self, text):
+        search_query = text.strip().lower()
+
+        for card_widget, search_string in self.agent_cards:
+            if not search_query or search_query in search_string:
+                card_widget.show()
+            else:
+                card_widget.hide()
+
     def clear_cards(self) -> None:
+        self.agent_cards = []
+
         layout = self.ui.agent_scroll.layout()
         if layout is None:
             return
 
         while layout.count():
             item = layout.takeAt(0)
-            widget = item.widget()
 
+            widget = item.widget()
             if widget is not None:
                 widget.setParent(None)
                 widget.deleteLater()
-
             else:
-                del item
+                if item.spacerItem() is not None:
+                    del item
