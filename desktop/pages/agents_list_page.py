@@ -2,7 +2,7 @@ from pages.agent_detail_page import AgentDetailController
 
 from services.pollers.agents_list_poller import AgentsListPoller
 from services.widgets.agent_card import AgentCardWidget
-from services.stores.agent_store import AgentsStore
+from services.stores.agent_store import AgentsListStore
 
 from ui.main_window import Ui_MainWindow
 
@@ -11,7 +11,7 @@ class AgentsController:
     def __init__(
         self,
         ui: Ui_MainWindow,
-        store: AgentsStore,
+        store: AgentsListStore,
         poller: AgentsListPoller,
         detail_controller: AgentDetailController,
     ):
@@ -62,12 +62,11 @@ class AgentsController:
         self.filter_agents(self.ui.search_input_line.text())
 
     def open_agent(self, agent: dict) -> None:
-        self.detail_controller.set_agent(agent=agent)
-
         self.ui.content_stack.setCurrentWidget(self.ui.agent_detail_page)
         self.ui.agent_detail_stacked_content.setCurrentWidget(
             self.ui.overview_detail_page
         )
+        self.detail_controller.set_agent(agent=agent)
 
     def filter_agents(self, text):
         search_query = text.strip().lower()

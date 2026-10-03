@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QHeaderView
 
 from services.utils import update_or_create_row_item
 from services.pollers.agents_list_poller import AgentsListPoller
-from services.stores.agent_store import AgentsStore
+from services.stores.agent_store import AgentsListStore
 
 from datetime import datetime
 
@@ -11,7 +11,7 @@ from ui.main_window import Ui_MainWindow
 
 class DashboardController:
     def __init__(
-        self, ui: Ui_MainWindow, store: AgentsStore, poller: AgentsListPoller
+        self, ui: Ui_MainWindow, store: AgentsListStore, poller: AgentsListPoller
     ) -> None:
         self.ui = ui
         self.store = store

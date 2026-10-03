@@ -2,13 +2,13 @@ from PySide6.QtCore import QTimer
 
 from api.client import NexoraClient
 from services.pollers.base_poller import BasePoller
-from services.stores.agent_store import AgentsStore
+from services.stores.agent_store import AgentsListStore
 
 from services.workers.agents_list_worker import AgentsListWorker
 
 
 class AgentsListPoller(BasePoller):
-    def __init__(self, client: NexoraClient, store: AgentsStore) -> None:
+    def __init__(self, client: NexoraClient, store: AgentsListStore) -> None:
         super().__init__(client)
 
         self.agents_store = store

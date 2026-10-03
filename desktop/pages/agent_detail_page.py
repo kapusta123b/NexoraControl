@@ -4,11 +4,11 @@ from PySide6.QtWidgets import QButtonGroup
 
 from api.client import NexoraClient
 
+from pages.detail_pages.hardware_page import DetailHardwareController
 from pages.detail_pages.performance_page import DetailPerformanceController
+from pages.detail_pages.overview_page import DetailOverviewController
 
 from ui.main_window import Ui_MainWindow
-
-from pages.detail_pages.overview_page import DetailOverviewController
 
 
 class AgentDetailController(QObject):
@@ -24,6 +24,9 @@ class AgentDetailController(QObject):
         self.performance_controller = DetailPerformanceController(
             ui=self.ui, client=self.client
         )
+        self.hardware_controller = DetailHardwareController(
+            ui=self.ui, client=self.client
+        )
 
         self.setup_connections()
 
@@ -32,9 +35,11 @@ class AgentDetailController(QObject):
 
         self.overview_controller.agent = agent
         self.performance_controller.agent = agent
-        self.overview_controller.activate()
 
-        if self.ui.content_stack.currentWidget() == self.ui.overview_detail_page:
+        if (
+            self.ui.agent_detail_stacked_content.currentWidget()
+            == self.ui.overview_detail_page
+        ):
             self.overview_controller.activate()
 
     def setup_connections(self) -> None:
@@ -51,6 +56,10 @@ class AgentDetailController(QObject):
             self.ui.performance_nav_button: (
                 self.ui.performance_detail_page,
                 self.performance_controller.activate,
+            ),
+            self.ui.hardware_nav_button: (
+                self.ui.hardware_detail_page,
+                self.hardware_controller.activate,
             ),
         }
 
