@@ -5,28 +5,34 @@ from apps.agents.api.views.agent import (
     AgentHeartbeatView,
     AgentListView,
 )
-from apps.agents.api.views.command import (
+from apps.agents.api.views.commands import (
     CommandBulkUpdateView,
     CommandListView,
     CommandPendingListView,
 )
-from apps.agents.api.views.metric import (
+from apps.agents.api.views.metrics import (
     AgentResourceMetricHistoryView,
     AgentStorageMetricHistoryView,
+    AgentThermalMetricHistoryView,
 )
 
-app_name = "notes"
+app_name = "agents"
 
 url_metrics = [
     path(
-        "agents/<int:pk>/metrics/resources/",
+        "agents/<int:pk>/metrics/resource/",
         AgentResourceMetricHistoryView.as_view(),
-        name="agent-metrics-resources-history",
+        name="agent-metrics-resource-history",
     ),
     path(
         "agents/<int:pk>/metrics/storage/",
         AgentStorageMetricHistoryView.as_view(),
-        name="agent-metrics-resources-history",
+        name="agent-metrics-storage-history",
+    ),
+    path(
+        "agents/<int:pk>/metrics/thermal/",
+        AgentThermalMetricHistoryView.as_view(),
+        name="agent-metrics-thermal-history",
     ),
 ]
 
