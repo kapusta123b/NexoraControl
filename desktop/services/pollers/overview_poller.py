@@ -41,6 +41,7 @@ class DetailOverviewPoller(BasePoller):
 
         if command_type:
             self._start_commands_worker(command_type)
+            
             return
 
         if self.client.base_url and not self.timer.isActive():

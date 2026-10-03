@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from PySide6.QtWidgets import QButtonGroup, QLayout
 
 from api.client import NexoraClient
@@ -37,7 +38,7 @@ class DetailOverviewController(QObject):
 
     def activate(self) -> None:
         if self.agent:
-            self.overview_poller.on_clicked(self.agent.get("id"))
+            self.overview_poller.on_clicked(self.agent["id"])
 
     def set_overview_information(self, agent: dict | None = None) -> None:
         current_agent = agent or self.agent
