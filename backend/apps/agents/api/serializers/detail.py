@@ -1,7 +1,6 @@
-from apps.agents.models.metric import AgentMetric
-
 from rest_framework.serializers import ModelSerializer
 
+from apps.agents.models.metric import AgentMetric
 from apps.agents.models.agent import Agent
 
 
