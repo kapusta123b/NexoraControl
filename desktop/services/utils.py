@@ -78,6 +78,7 @@ def update_or_create_row_item(
     table: QTableWidget, row: int, column: int, text: str
 ) -> None:
     item = table.item(row, column)
+
     if item:
         if item.text() != text:
             item.setText(text)
