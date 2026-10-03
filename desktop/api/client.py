@@ -61,8 +61,8 @@ class NexoraClient:
         BASE_AGENT_METRIC_URL = f"{self.BASE_AGENT_URL}{agent_id}/metrics/"
 
         metric_types = {
-            "resources": f"{BASE_AGENT_METRIC_URL}resources/",
-            "thermals": f"{BASE_AGENT_METRIC_URL}thermals/",
+            "resource": f"{BASE_AGENT_METRIC_URL}resource/",
+            "thermal": f"{BASE_AGENT_METRIC_URL}thermals/",
             "network": f"{BASE_AGENT_METRIC_URL}network/",
             "storage": f"{BASE_AGENT_METRIC_URL}storage/",
         }

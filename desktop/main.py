@@ -7,7 +7,7 @@ from api.client import NexoraClient
 
 from services.pollers.agents_list_poller import AgentsListPoller
 
-from services.stores.agent_store import AgentsStore
+from services.stores.agent_store import AgentsListStore
 
 from pages.agent_detail_page import AgentDetailController
 from pages.agents_list_page import AgentsController
@@ -57,7 +57,7 @@ class MainWindow(QMainWindow):
             )
 
     def setup_pages(self) -> None:
-        self.agent_store = AgentsStore()
+        self.agent_store = AgentsListStore()
         self.agent_poller = AgentsListPoller(client=self.client, store=self.agent_store)
 
         self.dashboard_controller = DashboardController(
