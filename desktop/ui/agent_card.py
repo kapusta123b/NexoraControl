@@ -61,10 +61,10 @@ class Ui_card_form(object):
 "    background-color: #0f111a;\n"
 "}\n"
 "")
-        self.horizontalLayout = QHBoxLayout(card_form)
-        self.horizontalLayout.setSpacing(6)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 9, 0)
+        self.card_form_layout = QHBoxLayout(card_form)
+        self.card_form_layout.setSpacing(6)
+        self.card_form_layout.setObjectName(u"card_form_layout")
+        self.card_form_layout.setContentsMargins(0, 0, 0, 0)
         self.agent_information_widget = QWidget(card_form)
         self.agent_information_widget.setObjectName(u"agent_information_widget")
         self.agent_information_widget.setMinimumSize(QSize(300, 0))
@@ -132,19 +132,20 @@ class Ui_card_form(object):
         self.agent_information_layout.addWidget(self.status_label)
 
 
-        self.horizontalLayout.addWidget(self.agent_information_widget)
+        self.card_form_layout.addWidget(self.agent_information_widget)
 
         self.card_content_spacer = QSpacerItem(200, 29, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout.addItem(self.card_content_spacer)
+        self.card_form_layout.addItem(self.card_content_spacer)
 
         self.right_widget = QWidget(card_form)
         self.right_widget.setObjectName(u"right_widget")
         self.right_widget.setMaximumSize(QSize(150, 120))
         self.right_widget.setStyleSheet(u"")
         self.right_widget_layout = QVBoxLayout(self.right_widget)
+        self.right_widget_layout.setSpacing(0)
         self.right_widget_layout.setObjectName(u"right_widget_layout")
-        self.right_widget_layout.setContentsMargins(-1, 80, -1, -1)
+        self.right_widget_layout.setContentsMargins(0, 60, 0, 0)
         self.agent_open_button = QPushButton(self.right_widget)
         self.agent_open_button.setObjectName(u"agent_open_button")
         self.agent_open_button.setMaximumSize(QSize(104, 16777215))
@@ -153,11 +154,11 @@ class Ui_card_form(object):
         self.right_widget_layout.addWidget(self.agent_open_button)
 
 
-        self.horizontalLayout.addWidget(self.right_widget)
+        self.card_form_layout.addWidget(self.right_widget)
 
         self.right_card_button_spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout.addItem(self.right_card_button_spacer)
+        self.card_form_layout.addItem(self.right_card_button_spacer)
 
 
         self.retranslateUi(card_form)
