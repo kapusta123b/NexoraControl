@@ -1,6 +1,6 @@
 from api.client import NexoraClient
 
-from services.stores.metric_store import MetricStore
+from services.stores.agent_metric_store import MetricStore
 from services.pollers.base_poller import BasePoller
 from services.workers.metric_worker import AgentMetricWorker
 
@@ -12,7 +12,7 @@ class AgentMetricPoller(BasePoller):
 
         self.agent_id: int | None = None
         self.from_hours = 1
-        self.metric_type: str = "resources"
+        self.metric_type: str = "resource"
         self.query_params = {}
 
     def on_clicked(
@@ -21,7 +21,7 @@ class AgentMetricPoller(BasePoller):
         if agent_id:
             self.agent_id = agent_id
 
-        self.metric_type = metric_type or "resources"
+        self.metric_type = metric_type or "resource"
 
         if isinstance(query_params, dict):
             self.query_params = query_params

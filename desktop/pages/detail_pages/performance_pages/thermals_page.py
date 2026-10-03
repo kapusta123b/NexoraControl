@@ -1,5 +1,5 @@
 from services.pollers.metrics_poller import AgentMetricPoller
-from services.stores.metric_store import MetricStore
+from services.stores.agent_metric_store import MetricStore
 
 from services.graph_helper import MetricGraphHelper
 

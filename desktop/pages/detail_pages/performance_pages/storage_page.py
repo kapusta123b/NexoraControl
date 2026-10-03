@@ -1,7 +1,7 @@
 from services.utils import UNIT_MAP, byte_converter, update_or_create_row_item
 
 from services.pollers.metrics_poller import AgentMetricPoller
-from services.stores.metric_store import MetricStore
+from services.stores.agent_metric_store import MetricStore
 
 from services.graph_helper import MetricGraphHelper
 
@@ -84,7 +84,7 @@ class PerformanceStoragePage:
     def on_history_received(self, metrics: dict) -> None:
         current_page_widget = self.ui.performance_stacked_content.currentWidget()
 
-        if not current_page_widget == self.ui.storage_page:
+        if not current_page_widget == self.ui.performance_storage_page:
             return
 
         incoming_timestamps = metrics.get("timestamps", [])

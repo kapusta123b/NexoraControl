@@ -6,7 +6,7 @@ from ui.main_window import Ui_MainWindow
 
 from services.widgets.gauge import SimpleNetdataGauge
 from services.graph_helper import MetricGraphHelper
-from services.stores.metric_store import MetricStore
+from services.stores.agent_metric_store import MetricStore
 
 
 class PerformanceComputePage:

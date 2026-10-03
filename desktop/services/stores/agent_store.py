@@ -1,7 +1,7 @@
 from PySide6.QtCore import QObject, Signal
 
 
-class AgentsStore(QObject):
+class AgentsListStore(QObject):
     agents_changed = Signal(list)
 
     def __init__(self) -> None:
@@ -12,8 +12,26 @@ class AgentsStore(QObject):
         self._agents = agents
         self.agents_changed.emit(agents)
 
-    def get_agents(self) -> list[dict]:
+    @property
+    def agents(self) -> list[dict | None]:
         return self._agents
+
+
+class AgentSystemInfoStore(QObject):
+    system_info_changed = Signal(dict)
+
+    def __init__(self):
+        super().__init__()
+
+        self._agent_system_info = {}
+
+    def set_system_info(self, system_info: dict | None) -> None:
+        self._agent_system_info = system_info
+        self.system_info_changed.emit(system_info)
+
+    @property
+    def system_info(self) -> dict:
+        return self._agent_system_info
 
 
 class DetailAgentStore(QObject):
@@ -27,5 +45,6 @@ class DetailAgentStore(QObject):
         self._agent = agent
         self.agent_changed.emit(agent)
 
-    def get_agent(self) -> dict | None:
+    @property
+    def agent(self) -> dict | None:
         return self._agent

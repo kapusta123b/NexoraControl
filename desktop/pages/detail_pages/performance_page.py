@@ -6,7 +6,7 @@ from .performance_pages.storage_page import PerformanceStoragePage
 from .performance_pages.compute_page import PerformanceComputePage
 
 from services.pollers.metrics_poller import AgentMetricPoller
-from services.stores.metric_store import MetricStore
+from services.stores.agent_metric_store import MetricStore
 
 from ui.main_window import Ui_MainWindow
 
@@ -36,7 +36,9 @@ class DetailPerformanceController(QObject):
 
     def setup_pages(self):
         # always place the compute page first in the page queue
-        self.ui.performance_stacked_content.setCurrentWidget(self.ui.compute_page)
+        self.ui.performance_stacked_content.setCurrentWidget(
+            self.ui.performance_compute_page
+        )
 
         self.compute_page = PerformanceComputePage(self.ui, self.performance_store)
         self.storage_page = PerformanceStoragePage(
@@ -51,14 +53,18 @@ class DetailPerformanceController(QObject):
         self.performance_nav_group.setExclusive(True)
 
         self.nav_mapping = {
-            self.ui.compute_button: (self.ui.compute_page, "resources", {}),
+            self.ui.compute_button: (self.ui.performance_compute_page, "resource", {}),
             self.ui.storage_button: (
-                self.ui.storage_page,
+                self.ui.performance_storage_page,
                 "storage",
                 {"disks_names": "true"},
             ),
-            self.ui.thermals_button: (self.ui.thermals_page, "thermals", {}),
-            self.ui.network_button: (self.ui.network_page, "network", {}),
+            self.ui.thermals_button: (
+                self.ui.performance_thermals_page,
+                "thermal",
+                {},
+            ),
+            self.ui.network_button: (self.ui.performance_network_page, "network", {}),
         }
 
         for button in self.nav_mapping:
@@ -96,7 +102,7 @@ class DetailPerformanceController(QObject):
 
     def activate(self) -> None:
         if self.agent:
-            self.performance_poller.on_clicked(self.agent.get("id"))
+            self.performance_poller.on_clicked(self.agent["id"])
 
             if not self.socket_is_active:
                 self.activate_socket()
