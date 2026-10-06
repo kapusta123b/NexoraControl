@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 from rest_framework.generics import (
+    ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
 
@@ -24,9 +25,12 @@ from apps.agents.selectors.agents import register_new_agent
 from apps.agents.services.heartbeat import heartbeat_manager
 
 
-class AgentListView(APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = AgentListCreateSerializer(data=request.data)
+class AgentListView(ListCreateAPIView):
+    queryset = Agent.objects.all().order_by("-status")
+    serializer_class = AgentListCreateSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         agent_id, token = register_new_agent(serializer.validated_data)
