@@ -10,13 +10,14 @@ def get_command_queryset(request, pk):
         .order_by("-created_at")
     )
 
-    status = request.query_params.get("status")
-    if isinstance(status, str):
-        queryset = queryset.filter(status=status.upper())
-    else:
-        raise ValidationError(
-            {"status": "Invalid 'status' parameter. Must be a string."}
-        )
+    status = request.query_params.get("status", None)
+    if status:
+        if isinstance(status, str):
+            queryset = queryset.filter(status=status.upper())
+        else:
+            raise ValidationError(
+                {"status": "Invalid 'status' parameter. Must be a string."}
+            )
 
     count = request.query_params.get("count")
 
