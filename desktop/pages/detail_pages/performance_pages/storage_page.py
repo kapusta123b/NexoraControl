@@ -1,4 +1,9 @@
-from services.utils import UNIT_MAP, byte_converter, update_or_create_row_item
+from services.utils.widgets_utils import (
+    set_gauge,
+    setup_table_progress_bar,
+    update_or_create_row_item,
+)
+from services.utils.string_utils import UNIT_MAP, byte_converter
 
 from services.pollers.metrics_poller import AgentMetricPoller
 from services.stores.agent_metric_store import MetricStore
@@ -8,7 +13,7 @@ from services.graph_helper import MetricGraphHelper
 from services.widgets.gauge import SimpleNetdataGauge
 from services.widgets.box_messages import MessageBox
 
-from PySide6.QtWidgets import QHeaderView, QProgressBar
+from PySide6.QtWidgets import QHeaderView
 
 from ui.main_window import Ui_MainWindow
 
@@ -86,7 +91,7 @@ class PerformanceStoragePage:
 
         if not current_page_widget == self.ui.performance_storage_page:
             return
-
+        
         incoming_timestamps = metrics.get("timestamps", [])
         if not incoming_timestamps:
             if not self.is_init_disk_selector:
@@ -323,52 +328,11 @@ class PerformanceStoragePage:
             update_or_create_row_item(table, row, 3, byte_converter(info["used"], "gb"))
             update_or_create_row_item(table, row, 4, byte_converter(info["free"], "gb"))
 
-            self._setup_table_progress_bar(table, row, percent)
-
-    def _setup_table_progress_bar(self, table, row: int, percent: int) -> None:
-        if percent < 60:
-            load_level = "low"
-        elif percent < 85:
-            load_level = "medium"
-        else:
-            load_level = "high"
-
-        progress_bar = table.cellWidget(row, 5)
-
-        if not isinstance(progress_bar, QProgressBar):
-            progress_bar = QProgressBar()
-            progress_bar.setRange(0, 100)
-
-            table.setRowHeight(row, 34)
-
-            table.setCellWidget(row, 5, progress_bar)
-
-        if progress_bar.value() != percent:
-            progress_bar.setValue(percent)
-            progress_bar.setFormat(f"{percent}%")
-
-            progress_bar.setProperty("load_level", load_level)
-
-            progress_bar.style().unpolish(progress_bar)
-            progress_bar.style().polish(progress_bar)
+            setup_table_progress_bar(table, row, 5, percent)
 
     def _setup_static_series(self) -> None:
         self.disk_io_graph.add_series("READ", "#60a5fa", suffix=" MB/s")
         self.disk_io_graph.add_series("WRITE", "#f59e0b", suffix=" MB/s")
-
-    def _set_gauges(self, r_speed: int, w_speed: int) -> None:
-        self.disk_write_gauge.set_value(r_speed)
-        self.disk_read_gauge.set_value(w_speed)
-
-        if self.current_unit:
-            self.disk_read_gauge.unit = self.current_unit
-            self.disk_write_gauge.unit = self.current_unit
-
-        if w_speed > self.disk_write_gauge.max_value:
-            self.disk_write_gauge.max_value = round(w_speed)
-
-        if r_speed > self.disk_read_gauge.max_value:
-            self.disk_read_gauge.max_value = round(r_speed)
 
     def _prepare_dynamic_data(self) -> None:
         if not self.delta_time:
@@ -402,7 +366,8 @@ class PerformanceStoragePage:
             w_bps, unit=current_unit, precision=2, as_float=True
         )
 
-        self._set_gauges(read_speed, write_speed)
+        set_gauge(self.disk_write_gauge, write_speed, self.current_unit)
+        set_gauge(self.disk_read_gauge, read_speed, self.current_unit)
 
         io_data = {
             "read_speed": read_speed,

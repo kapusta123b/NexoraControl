@@ -3,6 +3,8 @@ from datetime import datetime
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import QWidget
 
+from services.utils.widgets_utils import apply_style_property
+
 from ui.recent_command_widget import Ui_recent_command_widget
 
 
@@ -49,10 +51,5 @@ class CommandCardWidget(QWidget):
 
         self.ui.command_mark.setText(mark)
 
-        self._apply_style_property(self.ui.command_mark, "status", status_prop)
-        self._apply_style_property(self.ui.command_status, "status", status_prop)
-
-    def _apply_style_property(self, widget, prop_name: str, prop_value: str) -> None:
-        widget.setProperty(prop_name, prop_value)
-        widget.style().unpolish(widget)
-        widget.style().polish(widget)
+        apply_style_property(self.ui.command_mark, "status", status_prop)
+        apply_style_property(self.ui.command_status, "status", status_prop)

@@ -55,7 +55,6 @@ class MetricGraphHelper:
         self.series_data = {
             name: list(values) for name, values in (data_dict or {}).items()
         }
-
         if not self.timestamps:
             self.graph.setXRange(0, 60, padding=0)
             self.graph.getViewBox().setLimits(xMin=None, xMax=None)
@@ -65,7 +64,6 @@ class MetricGraphHelper:
         for name, values in self.series_data.items():
             if not values:
                 continue
-
             if name in self.curves:
                 curve = self.curves[name]
                 curve.opts["antialias"] = self.antialias

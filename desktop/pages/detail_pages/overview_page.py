@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QButtonGroup, QLayout
 
 from api.client import NexoraClient
 
+from services.utils.widgets_utils import apply_style_property
 from services.widgets.recent_command_card import CommandCardWidget
 from services.stores.agent_command_store import CommandsStore
 from services.pollers.overview_poller import DetailOverviewPoller
@@ -85,10 +86,13 @@ class DetailOverviewController(QObject):
         if clicked_button not in self.command_mapping:
             return
 
+        if not self.agent:
+            return
+
         command_type = self.command_mapping[clicked_button]
 
         self.overview_poller.on_clicked(
-            agent_id=self.agent.get("id"), command_type=command_type
+            agent_id=self.agent["id"], command_type=command_type
         )
 
     def _clear_layout(self, layout: QLayout) -> None:
@@ -110,6 +114,7 @@ class DetailOverviewController(QObject):
         self.ui.os_name_value_label.setText(agent.get("os", "Unknown"))
 
         last_seen = agent.get("last_seen")
+
         try:
             last_seen_text = (
                 datetime.fromisoformat(last_seen).strftime("%d %b %Y, %H:%M:%S")
@@ -125,8 +130,8 @@ class DetailOverviewController(QObject):
         cpu = str(agent.get("cpu_load", "---"))
         ram = str(agent.get("ram_load", "---"))
 
-        self.ui.cpu_load_label.setText(f"{cpu}%" if cpu != "---" else "---")
-        self.ui.ram_load_label.setText(f"{ram}%" if ram != "---" else "---")
+        self.ui.cpu_load_label.setText(f"{cpu}%")
+        self.ui.ram_load_label.setText(f"{ram}%")
         self.ui.disk_load_label.setText("---")
         self.ui.up_time_label.setText("---")
 
@@ -143,10 +148,10 @@ class DetailOverviewController(QObject):
             f"{'●' if is_online else '○'} {status_str}"
         )
 
-        self._apply_style_property(
+        apply_style_property(
             self.ui.agent_status_value_label, "agent_status", status_val
         )
-        self._apply_style_property(
+        apply_style_property(
             self.ui.detail_top_agent_status_label, "agent_status", status_val
         )
 
@@ -158,9 +163,4 @@ class DetailOverviewController(QObject):
         except (ValueError, TypeError):
             level = "low"
 
-        self._apply_style_property(widget, "load_level", level)
-
-    def _apply_style_property(self, widget, prop_name: str, prop_value: str) -> None:
-        widget.setProperty(prop_name, prop_value)
-        widget.style().unpolish(widget)
-        widget.style().polish(widget)
+        apply_style_property(widget, "load_level", level)

@@ -1,6 +1,6 @@
 import colorsys
 
-from services.utils import byte_converter
+from services.utils.string_utils import byte_converter
 
 from ui.main_window import Ui_MainWindow
 
@@ -53,8 +53,11 @@ class PerformanceComputePage:
         self.performance_store.metrics_appended.connect(self.on_latest_received)
 
     def on_history_received(self, metrics: dict):
-        timestamps = metrics.get("timestamps", [])
-        if not timestamps:
+        if not metrics:
+            return
+
+        incoming_timestamps = metrics.get("timestamps", [])
+        if not incoming_timestamps:
             return
 
         cpu_values = metrics.get("cpu_values", [])
@@ -67,13 +70,13 @@ class PerformanceComputePage:
             self._set_gauges(cpu_values[-1], ram_values[-1])
 
         self.cpu_ram_graph.update_data(
-            timestamps, {"CPU": cpu_values, "RAM": ram_values}
+            incoming_timestamps, {"CPU": cpu_values, "RAM": ram_values}
         )
 
         if load_average_values:
             m1, m5, m15 = zip(*load_average_values)
             self.load_average_graph.update_data(
-                timestamps, {"1m": list(m1), "5m": list(m5), "15m": list(m15)}
+                incoming_timestamps, {"1m": list(m1), "5m": list(m5), "15m": list(m15)}
             )
 
         if cpu_load_per_core_values:

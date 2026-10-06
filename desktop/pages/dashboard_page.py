@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QHeaderView
 
-from services.utils import update_or_create_row_item
+from services.utils.widgets_utils import update_or_create_row_item
 from services.pollers.agents_list_poller import AgentsListPoller
 from services.stores.agent_store import AgentsListStore
 
@@ -49,7 +49,7 @@ class DashboardController:
                 row = table.rowCount()
                 table.insertRow(row)
 
-            last_seen = agent.get("last_seen")
+            last_seen = agent["last_seen"]
 
             if last_seen:
                 dt = datetime.fromisoformat(last_seen)

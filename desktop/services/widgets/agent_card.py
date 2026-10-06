@@ -2,6 +2,7 @@ from PySide6.QtCore import Qt, Signal
 
 from PySide6.QtWidgets import QWidget
 
+from services.utils.widgets_utils import apply_style_property
 from ui.agent_card import Ui_card_form
 
 
@@ -40,12 +41,7 @@ class AgentCardWidget(QWidget):
         self.ui.online_dot.setText("●" if is_online else "○")
         self.ui.status_label.setText(status_str)
 
-        self._apply_style_property(self.ui.status_label, "agent_status", status_val)
-
-    def _apply_style_property(self, widget, prop_name: str, prop_value: str) -> None:
-        widget.setProperty(prop_name, prop_value)
-        widget.style().unpolish(widget)
-        widget.style().polish(widget)
+        apply_style_property(self.ui.status_label, "agent_status", status_val)
 
     def mousePressEvent(self, event) -> None:
         if event.button() == Qt.MouseButton.LeftButton:

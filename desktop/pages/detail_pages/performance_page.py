@@ -1,7 +1,7 @@
 from api.client import NexoraClient
 from services.workers.metric_worker import LiveMetricsWorker
 
-from .performance_pages.thermals_page import PerformanceThermalPage
+from .performance_pages.thermal_page import PerformanceThermalPage
 from .performance_pages.storage_page import PerformanceStoragePage
 from .performance_pages.compute_page import PerformanceComputePage
 
@@ -60,9 +60,9 @@ class DetailPerformanceController(QObject):
                 {"disks_names": "true"},
             ),
             self.ui.thermals_button: (
-                self.ui.performance_thermals_page,
+                self.ui.performance_thermal_page,
                 "thermal",
-                {},
+                {"hardware_names": "true"},
             ),
             self.ui.network_button: (self.ui.performance_network_page, "network", {}),
         }
