@@ -1,3 +1,4 @@
+import logging
 from typing import Any, Literal
 
 import httpx
@@ -15,22 +16,27 @@ class NexoraClient:
     async def _request(
         self, method: MethodType, path: str, params: dict = None, json_data: dict = None
     ) -> Any:
-        async with httpx.AsyncClient(
-            base_url=self.base_url,
-            headers={
-                "Authorization": f"Bearer {self.token}",
-                "Content-Type": "application/json",
-            },
-            timeout=10.0,
-        ) as client:
-            request_func = getattr(client, method.lower())
-            kwargs = {"url": path, "params": params}
-            if method in ("POST", "PUT", "PATCH") and json_data is not None:
-                kwargs["json"] = json_data
+        try:
+            async with httpx.AsyncClient(
+                base_url=self.base_url,
+                headers={
+                    "Authorization": f"Bearer {self.token}",
+                    "Content-Type": "application/json",
+                },
+                timeout=10.0,
+            ) as client:
+                request_func = getattr(client, method.lower())
+                kwargs = {"url": path, "params": params}
+                if method in ("POST", "PUT", "PATCH") and json_data is not None:
+                    kwargs["json"] = json_data
 
-            response = await request_func(**kwargs)
-            response.raise_for_status()
-            return response.json() if response.content else {}
+                response = await request_func(**kwargs)
+
+                response.raise_for_status()
+
+                return response.json() if response.content else {}
+        except Exception as e:
+            logging.critical(e)
 
     async def get_agents_list(self) -> list[dict]:
         return await self._request("GET", self.BASE_AGENT_URL)
@@ -62,7 +68,7 @@ class NexoraClient:
 
         metric_types = {
             "resource": f"{BASE_AGENT_METRIC_URL}resource/",
-            "thermal": f"{BASE_AGENT_METRIC_URL}thermals/",
+            "thermal": f"{BASE_AGENT_METRIC_URL}thermal/",
             "network": f"{BASE_AGENT_METRIC_URL}network/",
             "storage": f"{BASE_AGENT_METRIC_URL}storage/",
         }
