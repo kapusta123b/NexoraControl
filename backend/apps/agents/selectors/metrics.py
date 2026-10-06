@@ -147,6 +147,11 @@ def get_thermal_metrics(request: Any, pk: int) -> dict[str] | None:
 
     only_hardware_names = request.GET.get("hardware_names", "false").lower() == "true"
 
+    requested_sensors = request.GET.get("sensors", None)
+
+    if isinstance(requested_sensors, str):
+        requested_sensors = [s.lower().strip() for s in requested_sensors.split(",")]
+
     if only_hardware_names:
         hardware_with_sensors = {}
         last_metric = (
@@ -155,29 +160,52 @@ def get_thermal_metrics(request: Any, pk: int) -> dict[str] | None:
         for hardware, sensors in last_metric.thermal_metrics.items():
             hardware_with_sensors[hardware] = list(sensors.keys())
 
-        return hardware_with_sensors
+        return {"hardwares_names": hardware_with_sensors}
 
     now = timezone.now()
 
     raw_metrics = _get_metric_fields_by_time(
-        request, pk, now, fields=("created_at", "storage_metrics")
+        request, pk, now, fields=("created_at", "thermal_metrics")
     )
 
     timestamps = []
     thermal_data = {}
 
+    has_sensor_filter = bool(requested_sensors)
+
     for created_at, thermal_metrics in raw_metrics:
+        if not thermal_metrics:
+            continue
+
+        if target_hardware and target_hardware not in thermal_metrics:
+            continue
+
         timestamps.append(int(created_at.timestamp()))
 
-        if target_hardware:
-            if target_hardware in thermal_metrics:
-                sensors = thermal_metrics[target_hardware]
+        for hardware, sensors in thermal_metrics.items():
+            if target_hardware and hardware != target_hardware:
+                continue
 
-                if target_hardware not in thermal_data:
-                    thermal_data[target_hardware] = {
-                        k: [] for k in thermal_metrics[target_hardware].keys()
-                    }
-                for sensor, value in thermal_metrics[target_hardware].items():
-                    thermal_data[target_hardware][sensor].append(value)
+            if hardware not in thermal_data:
+                thermal_data[hardware] = {}
+
+            for sensor, value in sensors.items():
+                if has_sensor_filter:
+                    sensor_lower = sensor.lower().strip()
+
+                    if sensor_lower not in requested_sensors:
+                        continue
+
+                if sensor not in thermal_data[hardware]:
+                    thermal_data[hardware][sensor] = []
+
+                thermal_data[hardware][sensor].append(value)
+
+    if target_hardware and target_hardware not in thermal_data:
+        raise ValidationError(
+            {
+                "hardware": f"Hardware with that name does not exist or has no metrics: '{target_hardware}'"
+            }
+        )
 
     return {"timestamps": timestamps, "thermal_metrics": thermal_data}

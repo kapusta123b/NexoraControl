@@ -37,7 +37,7 @@ def _normalize_storage_data(metrics_data: dict):
         if "mount" not in device_info
     }
 
-    return metrics_data, {**storage_devices, **file_systems}
+    return metrics_data, {"devices": storage_devices, "filesystems": file_systems}
 
 
 def _normalize_thermal_data(metrics_data: dict):
@@ -81,8 +81,8 @@ def _normalize_heartbeat_data(metrics_data: dict):
     channel_layer_data = {**storage_data, **thermal_data}
 
     channel_layer_data = {
-        **storage_data,
-        **thermal_data,
+        "storage_metrics": storage_data,
+        "thermal_metrics": thermal_data,
         "cpu_metrics": metrics_data["cpu_metrics"],
         "memory_metrics": metrics_data["memory_metrics"],
     }
