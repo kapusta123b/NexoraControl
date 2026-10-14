@@ -22,18 +22,19 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFram
     QTableWidgetItem, QVBoxLayout, QWidget)
 
 from pyqtgraph import PlotWidget
+from qfluentwidgets import (Pivot, SegmentedWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1163, 803)
+        MainWindow.resize(1223, 803)
         icon = QIcon()
         iconThemeName = u"camera-photo"
         if QIcon.hasThemeIcon(iconThemeName):
             icon = QIcon.fromTheme(iconThemeName)
         else:
-            icon.addFile(u"../.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+            icon.addFile(u"../.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/.designer/backup", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"")
@@ -307,7 +308,87 @@ class Ui_MainWindow(object):
 "\n"
 "	font: 200 10pt \"JetBrainsMonoNL Nerd Font Propo\";\n"
 "}\n"
-"")
+"\n"
+"\n"
+"QComboBox {\n"
+"	color: #a5b4fc; \n"
+"    background-color: transparent;\n"
+"    border: 1px solid #242936;\n"
+"    border-radius: 5px;\n"
+"    padding: 5px 5px 6px 11px;\n"
+"    text-align: left;\n"
+"    outline: none;\n"
+"}\n"
+"\n"
+"QComboBox:hover, QComboBox:hover {\n"
+"    background-color: #1e2230;\n"
+"    border-color: #38bdf8;\n"
+"\n"
+"}\n"
+"\n"
+"QComboBox:pressed, QComboBox:pressed {\n"
+"    background-color: transparent; \n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QComboBox[isPlaceholderText=true], QComboBox[isPlaceholderText=true] {\n"
+"    color: rgba(0, 0, 0, 0.6063);\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView,\n"
+"QComboBox QListView {\n"
+"    background-color: #161920;\n"
+"    border: 1px solid #242936; \n"
+"    border-radius: 4px;\n"
+"    padding: 0px !important;\n"
+"    margin: 0px !important;\n"
+"    outline: 0px;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item {\n"
+"    min-height: 28px;\n"
+"    padding-left: 12px"
+                        ";\n"
+"    padding-right: 12px;\n"
+"    color: #a5b4fc;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView::item:hover,\n"
+"QComboBox QAbstractItemView::item:selected {\n"
+"    background-color: #1e2230 !important;\n"
+"    color: #ffffff !important;\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox QScrollBar:vertical {\n"
+"    background-color: #161920;\n"
+"    width: 8px;\n"
+"    margin: 0px;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QComboBox QScrollBar::handle:vertical {\n"
+"    background-color: #242936; \n"
+"    border-radius: 4px;\n"
+"    min-height: 20px;\n"
+"}\n"
+"\n"
+"QComboBox QScrollBar::handle:vertical:hover {\n"
+"    background-color: #38bdf8;\n"
+"}\n"
+"\n"
+"QComboBox QScrollBar::add-line:vertical,\n"
+"QComboBox QScrollBar::sub-line:vertical,\n"
+"QComboBox QScrollBar::up-arrow:vertical, \n"
+"QComboBox QScrollBar::down-arrow:vertical {\n"
+"    border: none;\n"
+"    background: none;\n"
+"    height: 0px;\n"
+"    width: 0px;\n"
+"}")
         self.dashboard_page = QWidget()
         self.dashboard_page.setObjectName(u"dashboard_page")
         self.dashboard_page.setStyleSheet(u"QPushButton {\n"
@@ -499,8 +580,8 @@ class Ui_MainWindow(object):
         self.agents_table.setEnabled(True)
         self.agents_table.setMaximumSize(QSize(16777215, 16777215))
         self.agents_table.setStyleSheet(u"")
-        self.agents_table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.agents_table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.agents_table.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.agents_table.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.agents_table.setAlternatingRowColors(False)
         self.agents_table.setVerticalScrollMode(QAbstractItemView.ScrollPerItem)
         self.agents_table.setSortingEnabled(True)
@@ -612,7 +693,7 @@ class Ui_MainWindow(object):
 
         self.page_description_line = QFrame(self.agents_page)
         self.page_description_line.setObjectName(u"page_description_line")
-        self.page_description_line.setFrameShape(QFrame.Shape.HLine)
+        self.page_description_line.setFrameShape(QFrame.Shape.VLine)
         self.page_description_line.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.agents_main_layout.addWidget(self.page_description_line)
@@ -630,7 +711,7 @@ class Ui_MainWindow(object):
 
         self.help_bar_layout.addWidget(self.search_input_line)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
         self.help_bar_layout.addItem(self.horizontalSpacer)
 
@@ -640,7 +721,7 @@ class Ui_MainWindow(object):
 
         self.help_bar_layout.addWidget(self.refresh_agents_button)
 
-        self.help_bar_right_spacer = QSpacerItem(19, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.help_bar_right_spacer = QSpacerItem(20, 19, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
         self.help_bar_layout.addItem(self.help_bar_right_spacer)
 
@@ -700,15 +781,13 @@ class Ui_MainWindow(object):
 "    background: none;\n"
 "}\n"
 "")
-        self.agent_list.setFrameShape(QFrame.Box)
-        self.agent_list.setFrameShadow(QFrame.Plain)
-        self.agent_list.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        self.agent_list.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.agent_list.setFrameShape(QFrame.NoFrame)
+        self.agent_list.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.agent_list.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.agent_list.setWidgetResizable(True)
-        self.agent_list.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.agent_scroll = QWidget()
         self.agent_scroll.setObjectName(u"agent_scroll")
-        self.agent_scroll.setGeometry(QRect(0, 0, 92, 600))
+        self.agent_scroll.setGeometry(QRect(0, 0, 100, 600))
         self.agent_scroll.setMaximumSize(QSize(16777215, 1000000))
         self.agent_scroll.setStyleSheet(u"")
         self.agent_scroll_layout = QVBoxLayout(self.agent_scroll)
@@ -772,7 +851,7 @@ class Ui_MainWindow(object):
         self.back_to_agents_button.setObjectName(u"back_to_agents_button")
         self.back_to_agents_button.setMinimumSize(QSize(180, 0))
         self.back_to_agents_button.setMaximumSize(QSize(185, 16777215))
-        self.back_to_agents_button.setLayoutDirection(Qt.RightToLeft)
+        self.back_to_agents_button.setLayoutDirection(Qt.LeftToRight)
         self.back_to_agents_button.setStyleSheet(u"QPushButton {\n"
 "	text-align: left;\n"
 "}")
@@ -781,7 +860,7 @@ class Ui_MainWindow(object):
 
         self.detail_top_layout.addWidget(self.back_to_agents_button)
 
-        self.detail_top_center_spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.detail_top_center_spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.detail_top_layout.addItem(self.detail_top_center_spacer)
 
@@ -792,7 +871,7 @@ class Ui_MainWindow(object):
 
         self.detail_top_layout.addWidget(self.detail_top_agent_name_label)
 
-        self.detail_top_info_spacer = QSpacerItem(28, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.detail_top_info_spacer = QSpacerItem(20, 28, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
         self.detail_top_layout.addItem(self.detail_top_info_spacer)
 
@@ -869,7 +948,6 @@ class Ui_MainWindow(object):
         self.overview_label.setStyleSheet(u"QLabel {\n"
 "	font: 600 17pt;\n"
 "}")
-        self.overview_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.overview_detail_page_layout.addWidget(self.overview_label)
 
@@ -934,7 +1012,7 @@ class Ui_MainWindow(object):
         self.overview_detail_scroll.setWidgetResizable(True)
         self.agent_detail_information = QWidget()
         self.agent_detail_information.setObjectName(u"agent_detail_information")
-        self.agent_detail_information.setGeometry(QRect(0, 0, 976, 700))
+        self.agent_detail_information.setGeometry(QRect(0, 0, 822, 700))
         self.agent_detail_information.setMinimumSize(QSize(0, 700))
         self.agent_detail_information_layout = QVBoxLayout(self.agent_detail_information)
         self.agent_detail_information_layout.setSpacing(5)
@@ -1136,35 +1214,30 @@ class Ui_MainWindow(object):
         self.system_status_rows_widget_layout.setContentsMargins(10, 0, 0, 0)
         self.agent_row_label = QLabel(self.system_status_rows_widget)
         self.agent_row_label.setObjectName(u"agent_row_label")
-        self.agent_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.agent_row_label.setMargin(0)
 
         self.system_status_rows_widget_layout.addWidget(self.agent_row_label)
 
         self.last_seen_row_label = QLabel(self.system_status_rows_widget)
         self.last_seen_row_label.setObjectName(u"last_seen_row_label")
-        self.last_seen_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.last_seen_row_label.setMargin(0)
 
         self.system_status_rows_widget_layout.addWidget(self.last_seen_row_label)
 
         self.ip_row_label = QLabel(self.system_status_rows_widget)
         self.ip_row_label.setObjectName(u"ip_row_label")
-        self.ip_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.ip_row_label.setMargin(0)
 
         self.system_status_rows_widget_layout.addWidget(self.ip_row_label)
 
         self.hostname_row_label = QLabel(self.system_status_rows_widget)
         self.hostname_row_label.setObjectName(u"hostname_row_label")
-        self.hostname_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.hostname_row_label.setMargin(0)
 
         self.system_status_rows_widget_layout.addWidget(self.hostname_row_label)
 
         self.os_name_row_label = QLabel(self.system_status_rows_widget)
         self.os_name_row_label.setObjectName(u"os_name_row_label")
-        self.os_name_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.os_name_row_label.setMargin(0)
 
         self.system_status_rows_widget_layout.addWidget(self.os_name_row_label)
@@ -1328,7 +1401,6 @@ class Ui_MainWindow(object):
 "	font: 600 17pt;\n"
 "\n"
 "}")
-        self.performance_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.performance_detail_page_layout.addWidget(self.performance_label)
 
@@ -1419,7 +1491,7 @@ class Ui_MainWindow(object):
         self.performance_detail_scroll.setWidgetResizable(True)
         self.agent_performance_information = QWidget()
         self.agent_performance_information.setObjectName(u"agent_performance_information")
-        self.agent_performance_information.setGeometry(QRect(0, -586, 976, 1178))
+        self.agent_performance_information.setGeometry(QRect(0, -560, 1036, 1226))
         self.agent_performance_information_layout = QVBoxLayout(self.agent_performance_information)
         self.agent_performance_information_layout.setSpacing(0)
         self.agent_performance_information_layout.setObjectName(u"agent_performance_information_layout")
@@ -1439,82 +1511,7 @@ class Ui_MainWindow(object):
 "	border-radius: 2px\n"
 "\n"
 "}\n"
-"\n"
-"QComboBox {\n"
-"    color: #a5b4fc; \n"
-"    background-color: transparent;\n"
-"    border: 1px solid #242936;\n"
-"    border-radius: 4px;\n"
-"    padding: 6px 0px 6px 15px;	\n"
-"    font-size: 12px;\n"
-"    min-width: 100px;\n"
-"}\n"
-"QComboBox:hover {\n"
-"    background-color: #1e2230;\n"
-"    border-color: #38bdf8;\n"
-"    color: #ffffff;\n"
-"}\n"
-"\n"
-"QComboBox:on { \n"
-"    background-color: #0f111a;\n"
-"    border-color: #58a6ff;\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"QComboBox QAbstractItemView,\n"
-"QComboBox QListView {\n"
-"    background-color: #161920;\n"
-"    border: 1px solid #242936; \n"
-"    border-radius: 4px;\n"
-"    padding: 0px !important;\n"
-"    margin: 0px !important;\n"
-"    outline: 0px;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView::item {\n"
-"    min-height: 28px;\n"
-"    padding-left: 12px;\n"
-"    padding-right: 12px;\n"
-"    color: #a5b4fc;\n"
-"   "
-                        " background-color: transparent;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView::item:hover,\n"
-"QComboBox QAbstractItemView::item:selected {\n"
-"    background-color: #1e2230 !important;\n"
-"    color: #ffffff !important;\n"
-"}\n"
-"\n"
-"\n"
-"QComboBox QScrollBar:vertical {\n"
-"    background-color: #161920;\n"
-"    width: 8px;\n"
-"    margin: 0px;\n"
-"    border: none;\n"
-"}\n"
-"\n"
-"QComboBox QScrollBar::handle:vertical {\n"
-"    background-color: #242936; \n"
-"    border-radius: 4px;\n"
-"    min-height: 20px;\n"
-"}\n"
-"\n"
-"QComboBox QScrollBar::handle:vertical:hover {\n"
-"    background-color: #38bdf8;\n"
-"}\n"
-"\n"
-"QComboBox QScrollBar::add-line:vertical,\n"
-"QComboBox QScrollBar::sub-line:vertical,\n"
-"QComboBox QScrollBar::up-arrow:vertical, \n"
-"QComboBox QScrollBar::down-arrow:vertical {\n"
-"    border: none;\n"
-"    background: none;\n"
-"    height: 0px;\n"
-"    width: 0px;\n"
-"}")
+"")
         self.performance_compute_page = QWidget()
         self.performance_compute_page.setObjectName(u"performance_compute_page")
         self.compute_page_layout = QVBoxLayout(self.performance_compute_page)
@@ -1557,6 +1554,13 @@ class Ui_MainWindow(object):
         self.compute_gauge_layout.setContentsMargins(-1, -1, -1, 1)
 
         self.compute_page_layout.addWidget(self.compute_gauge_widget)
+
+        self.line_2 = QFrame(self.performance_compute_page)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.compute_page_layout.addWidget(self.line_2)
 
         self.cpu_ram_metric_label = QLabel(self.performance_compute_page)
         self.cpu_ram_metric_label.setObjectName(u"cpu_ram_metric_label")
@@ -1608,6 +1612,13 @@ class Ui_MainWindow(object):
 
         self.ram_utilization_layout.addWidget(self.memory_label)
 
+        self.line_6 = QFrame(self.ram_utilization_widget)
+        self.line_6.setObjectName(u"line_6")
+        self.line_6.setFrameShape(QFrame.Shape.HLine)
+        self.line_6.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.ram_utilization_layout.addWidget(self.line_6)
+
         self.memory_information_layout = QVBoxLayout()
         self.memory_information_layout.setObjectName(u"memory_information_layout")
         self.used_memory_layout = QHBoxLayout()
@@ -1625,13 +1636,6 @@ class Ui_MainWindow(object):
 
         self.memory_information_layout.addLayout(self.used_memory_layout)
 
-        self.memory_layout_top_line = QFrame(self.ram_utilization_widget)
-        self.memory_layout_top_line.setObjectName(u"memory_layout_top_line")
-        self.memory_layout_top_line.setFrameShape(QFrame.Shape.HLine)
-        self.memory_layout_top_line.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.memory_information_layout.addWidget(self.memory_layout_top_line)
-
         self.available_memory_layout = QHBoxLayout()
         self.available_memory_layout.setObjectName(u"available_memory_layout")
         self.available_memory_label = QLabel(self.ram_utilization_widget)
@@ -1646,13 +1650,6 @@ class Ui_MainWindow(object):
 
 
         self.memory_information_layout.addLayout(self.available_memory_layout)
-
-        self.memory_layout_bottom_line = QFrame(self.ram_utilization_widget)
-        self.memory_layout_bottom_line.setObjectName(u"memory_layout_bottom_line")
-        self.memory_layout_bottom_line.setFrameShape(QFrame.Shape.HLine)
-        self.memory_layout_bottom_line.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.memory_information_layout.addWidget(self.memory_layout_bottom_line)
 
         self.swap_memory_layout = QHBoxLayout()
         self.swap_memory_layout.setObjectName(u"swap_memory_layout")
@@ -1700,6 +1697,13 @@ class Ui_MainWindow(object):
 
         self.compute_page_layout.addWidget(self.cpu_ram_utilization_widget)
 
+        self.line_3 = QFrame(self.performance_compute_page)
+        self.line_3.setObjectName(u"line_3")
+        self.line_3.setFrameShape(QFrame.Shape.HLine)
+        self.line_3.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.compute_page_layout.addWidget(self.line_3)
+
         self.compute_load_average_label = QLabel(self.performance_compute_page)
         self.compute_load_average_label.setObjectName(u"compute_load_average_label")
 
@@ -1719,6 +1723,13 @@ class Ui_MainWindow(object):
 "}")
 
         self.compute_page_layout.addWidget(self.load_average_metric_graph)
+
+        self.line_5 = QFrame(self.performance_compute_page)
+        self.line_5.setObjectName(u"line_5")
+        self.line_5.setFrameShape(QFrame.Shape.HLine)
+        self.line_5.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.compute_page_layout.addWidget(self.line_5)
 
         self.compute_cpu_cores_label = QLabel(self.performance_compute_page)
         self.compute_cpu_cores_label.setObjectName(u"compute_cpu_cores_label")
@@ -1804,13 +1815,13 @@ class Ui_MainWindow(object):
 
         self.disk_io_layout.addWidget(self.disk_io_label)
 
-        self.disk_io_spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.disk_io_spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.disk_io_layout.addItem(self.disk_io_spacer)
 
         self.disks_combo_box = QComboBox(self.performance_storage_page)
         self.disks_combo_box.setObjectName(u"disks_combo_box")
-        self.disks_combo_box.setMinimumSize(QSize(117, 0))
+        self.disks_combo_box.setMinimumSize(QSize(0, 0))
         self.disks_combo_box.setMaximumSize(QSize(120, 16777215))
         self.disks_combo_box.setEditable(False)
         self.disks_combo_box.setMaxVisibleItems(4)
@@ -1821,10 +1832,10 @@ class Ui_MainWindow(object):
 
         self.disk_data_unit_combo_box = QComboBox(self.performance_storage_page)
         self.disk_data_unit_combo_box.setObjectName(u"disk_data_unit_combo_box")
-        self.disk_data_unit_combo_box.setMinimumSize(QSize(117, 0))
+        self.disk_data_unit_combo_box.setMinimumSize(QSize(0, 0))
         self.disk_data_unit_combo_box.setMaximumSize(QSize(70, 16777215))
         self.disk_data_unit_combo_box.setEditable(False)
-        self.disk_data_unit_combo_box.setInsertPolicy(QComboBox.InsertAtCurrent)
+        self.disk_data_unit_combo_box.setInsertPolicy(QComboBox.NoInsert)
 
         self.disk_io_layout.addWidget(self.disk_data_unit_combo_box)
 
@@ -1900,7 +1911,6 @@ class Ui_MainWindow(object):
 
         self.disk_read_information_value = QLabel(self.disk_io_summary_widget)
         self.disk_read_information_value.setObjectName(u"disk_read_information_value")
-        self.disk_read_information_value.setAlignment(Qt.AlignCenter)
 
         self.disk_read_information_layout.addWidget(self.disk_read_information_value)
 
@@ -1916,7 +1926,6 @@ class Ui_MainWindow(object):
 
         self.disk_write_information_value = QLabel(self.disk_io_summary_widget)
         self.disk_write_information_value.setObjectName(u"disk_write_information_value")
-        self.disk_write_information_value.setAlignment(Qt.AlignCenter)
 
         self.disk_write_informatio_layout.addWidget(self.disk_write_information_value)
 
@@ -1932,7 +1941,6 @@ class Ui_MainWindow(object):
 
         self.disk_read_per_sec_information_value = QLabel(self.disk_io_summary_widget)
         self.disk_read_per_sec_information_value.setObjectName(u"disk_read_per_sec_information_value")
-        self.disk_read_per_sec_information_value.setAlignment(Qt.AlignCenter)
 
         self.disk_read_per_sec_information_layout.addWidget(self.disk_read_per_sec_information_value)
 
@@ -1948,7 +1956,6 @@ class Ui_MainWindow(object):
 
         self.disk_write_per_sec_information_value = QLabel(self.disk_io_summary_widget)
         self.disk_write_per_sec_information_value.setObjectName(u"disk_write_per_sec_information_value")
-        self.disk_write_per_sec_information_value.setAlignment(Qt.AlignCenter)
 
         self.disk_write_per_sec_information_layout.addWidget(self.disk_write_per_sec_information_value)
 
@@ -1970,7 +1977,6 @@ class Ui_MainWindow(object):
         self.disk_avg_latency_value = QLabel(self.disk_io_summary_widget)
         self.disk_avg_latency_value.setObjectName(u"disk_avg_latency_value")
         self.disk_avg_latency_value.setMaximumSize(QSize(16777215, 60))
-        self.disk_avg_latency_value.setAlignment(Qt.AlignCenter)
 
         self.disk_avg_latency_layout.addWidget(self.disk_avg_latency_value)
 
@@ -2062,7 +2068,6 @@ class Ui_MainWindow(object):
 "	font: 350 italic 15pt;\n"
 "	margin-left: 0px;\n"
 "}")
-        self.thermals_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.thermals_page_layout.addWidget(self.thermals_label)
 
@@ -2103,6 +2108,94 @@ class Ui_MainWindow(object):
 
         self.thermals_page_layout.addWidget(self.current_thermals_line)
 
+        self.SegmentedWidget = SegmentedWidget(self.performance_thermal_page)
+        self.SegmentedWidget.setObjectName(u"SegmentedWidget")
+        self.SegmentedWidget.setStyleSheet(u"PivotItem {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    outline: none;\n"
+"    margin: 0;\n"
+"}\n"
+"\n"
+"PivotItem[isSelected=true]:hover {\n"
+"    color: rgba(0, 0, 0, 0.63);\n"
+"}\n"
+"\n"
+"PivotItem[isSelected=true]:pressed {\n"
+"    color: rgba(0, 0, 0, 0.53);\n"
+"}\n"
+"\n"
+"PivotItem[isSelected=false]:pressed {\n"
+"    color: rgba(150, 0, 0, 0.75);\n"
+"}\n"
+"\n"
+"PivotItem[hasIcon=false] {\n"
+"    padding-left: 12px;\n"
+"    padding-right: 12px;\n"
+"}\n"
+"\n"
+"PivotItem[hasIcon=true] {\n"
+"    padding-left: 36px;\n"
+"    padding-right: 12px;\n"
+"}\n"
+"\n"
+"Pivot {\n"
+"    border: none;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"#view {\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"SegmentedToolItem {\n"
+"\n"
+"}\n"
+"\n"
+"SegmentedWidget, SegmentedToolWidget {\n"
+"    background-color: rgba(0, 0, 0, 0.0241);\n"
+"    border: 1px solid rgba(0, 0, 0, 0.0578);\n"
+"    border-radius: 6px;\n"
+"}\n"
+"\n"
+"SegmentedItem[isSelected=false],\n"
+"SegmentedToolItem[isSelected=f"
+                        "alse] {\n"
+"    padding-top: 3px;\n"
+"    padding-bottom: 3px;\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    border-radius: 6px;\n"
+"    margin: 3px 0px;\n"
+"}\n"
+"\n"
+"SegmentedItem[isSelected=false]:hover,\n"
+"SegmentedToolItem[isSelected=false]:hover {\n"
+"    background-color: rgba(0, 0, 0, 9);\n"
+"}\n"
+"\n"
+"SegmentedItem[isSelected=false]:pressed,\n"
+"SegmentedToolItem[isSelected=false]:pressed {\n"
+"    background-color: rgba(0, 0, 0, 6);\n"
+"}\n"
+"\n"
+"SegmentedItem[isSelected=true],\n"
+"SegmentedToolItem[isSelected=true] {\n"
+"    padding-top: 6px;\n"
+"    padding-bottom: 6px;\n"
+"    margin: 0px;\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"SegmentedItem[isSelected=true]:hover,\n"
+"SegmentedItem[isSelected=true]:pressed,\n"
+"SegmentedToolItem[isSelected=true]:hover,\n"
+"SegmentedToolItem[isSelected=true]:pressed {\n"
+"    color: black;\n"
+"}")
+
+        self.thermals_page_layout.addWidget(self.SegmentedWidget)
+
         self.thermals_combo_box_layout = QHBoxLayout()
         self.thermals_combo_box_layout.setObjectName(u"thermals_combo_box_layout")
         self.thermals_combo_box_layout.setContentsMargins(0, 0, -1, -1)
@@ -2113,7 +2206,7 @@ class Ui_MainWindow(object):
 
         self.thermals_combo_box_layout.addWidget(self.temperature_history_label)
 
-        self.thermals_combo_box_right_spacer = QSpacerItem(35, 50, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.thermals_combo_box_right_spacer = QSpacerItem(50, 35, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.thermals_combo_box_layout.addItem(self.thermals_combo_box_right_spacer)
 
@@ -2126,16 +2219,10 @@ class Ui_MainWindow(object):
 
         self.hardware_group_combo_box = QComboBox(self.performance_thermal_page)
         self.hardware_group_combo_box.setObjectName(u"hardware_group_combo_box")
-        self.hardware_group_combo_box.setMinimumSize(QSize(117, 0))
-        self.hardware_group_combo_box.setMaximumSize(QSize(120, 30))
-        self.hardware_group_combo_box.setEditable(False)
-        self.hardware_group_combo_box.setMaxVisibleItems(4)
-        self.hardware_group_combo_box.setIconSize(QSize(16, 16))
-        self.hardware_group_combo_box.setFrame(True)
 
         self.thermals_combo_box_layout.addWidget(self.hardware_group_combo_box)
 
-        self.thernals_combo_box_separate_spacer = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.thernals_combo_box_separate_spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
         self.thermals_combo_box_layout.addItem(self.thernals_combo_box_separate_spacer)
 
@@ -2147,10 +2234,10 @@ class Ui_MainWindow(object):
 
         self.thermal_sensor_name_combo_box = QComboBox(self.performance_thermal_page)
         self.thermal_sensor_name_combo_box.setObjectName(u"thermal_sensor_name_combo_box")
-        self.thermal_sensor_name_combo_box.setMinimumSize(QSize(117, 0))
+        self.thermal_sensor_name_combo_box.setMinimumSize(QSize(0, 0))
         self.thermal_sensor_name_combo_box.setMaximumSize(QSize(70, 30))
         self.thermal_sensor_name_combo_box.setEditable(False)
-        self.thermal_sensor_name_combo_box.setInsertPolicy(QComboBox.InsertAtCurrent)
+        self.thermal_sensor_name_combo_box.setInsertPolicy(QComboBox.NoInsert)
 
         self.thermals_combo_box_layout.addWidget(self.thermal_sensor_name_combo_box)
 
@@ -2208,6 +2295,502 @@ class Ui_MainWindow(object):
         self.network_page_layout.setSpacing(15)
         self.network_page_layout.setObjectName(u"network_page_layout")
         self.network_page_layout.setContentsMargins(0, 0, 0, 0)
+        self.network_label = QLabel(self.performance_network_page)
+        self.network_label.setObjectName(u"network_label")
+        self.network_label.setMaximumSize(QSize(16777215, 40))
+        self.network_label.setStyleSheet(u"QLabel {\n"
+"	font: 350 italic 15pt;\n"
+"	margin-left: 0px;\n"
+"}")
+
+        self.network_page_layout.addWidget(self.network_label)
+
+        self.network_legend_label = QLabel(self.performance_network_page)
+        self.network_legend_label.setObjectName(u"network_legend_label")
+        self.network_legend_label.setMaximumSize(QSize(16777215, 30))
+
+        self.network_page_layout.addWidget(self.network_legend_label)
+
+        self.network_legend_line = QFrame(self.performance_network_page)
+        self.network_legend_line.setObjectName(u"network_legend_line")
+        self.network_legend_line.setFrameShape(QFrame.Shape.HLine)
+        self.network_legend_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.network_page_layout.addWidget(self.network_legend_line)
+
+        self.network_gauges_combo_box_layout = QHBoxLayout()
+        self.network_gauges_combo_box_layout.setObjectName(u"network_gauges_combo_box_layout")
+        self.network_gauges_combo_box_label = QLabel(self.performance_network_page)
+        self.network_gauges_combo_box_label.setObjectName(u"network_gauges_combo_box_label")
+        self.network_gauges_combo_box_label.setMaximumSize(QSize(16777215, 30))
+
+        self.network_gauges_combo_box_layout.addWidget(self.network_gauges_combo_box_label)
+
+
+        self.network_page_layout.addLayout(self.network_gauges_combo_box_layout)
+
+        self.network_gauge_widget = QWidget(self.performance_network_page)
+        self.network_gauge_widget.setObjectName(u"network_gauge_widget")
+        self.network_gauge_widget.setStyleSheet(u"#network_gauge_widget {\n"
+"	border: 1px solid #1E2633;\n"
+"}")
+        self.network_gauge_layout = QHBoxLayout(self.network_gauge_widget)
+        self.network_gauge_layout.setObjectName(u"network_gauge_layout")
+        self.network_gauge_layout.setContentsMargins(-1, -1, -1, 1)
+
+        self.network_page_layout.addWidget(self.network_gauge_widget)
+
+        self.network_gauge_line = QFrame(self.performance_network_page)
+        self.network_gauge_line.setObjectName(u"network_gauge_line")
+        self.network_gauge_line.setFrameShape(QFrame.Shape.HLine)
+        self.network_gauge_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.network_page_layout.addWidget(self.network_gauge_line)
+
+        self.network_traffic_graph_combo_box_layout = QHBoxLayout()
+        self.network_traffic_graph_combo_box_layout.setObjectName(u"network_traffic_graph_combo_box_layout")
+        self.network_traffic_graph_combo_box_layout.setContentsMargins(0, 0, -1, -1)
+        self.rx_tx_throughput_label = QLabel(self.performance_network_page)
+        self.rx_tx_throughput_label.setObjectName(u"rx_tx_throughput_label")
+        self.rx_tx_throughput_label.setMinimumSize(QSize(0, 0))
+        self.rx_tx_throughput_label.setMaximumSize(QSize(16777215, 30))
+
+        self.network_traffic_graph_combo_box_layout.addWidget(self.rx_tx_throughput_label)
+
+        self.network_traffic_graph_combo_box_spacer = QSpacerItem(50, 35, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.network_traffic_graph_combo_box_layout.addItem(self.network_traffic_graph_combo_box_spacer)
+
+        self.network_group_combo_box_legend_label = QLabel(self.performance_network_page)
+        self.network_group_combo_box_legend_label.setObjectName(u"network_group_combo_box_legend_label")
+        self.network_group_combo_box_legend_label.setMaximumSize(QSize(16777215, 30))
+
+        self.network_traffic_graph_combo_box_layout.addWidget(self.network_group_combo_box_legend_label)
+
+        self.network_traffic_graph_combo_box = QComboBox(self.performance_network_page)
+        self.network_traffic_graph_combo_box.setObjectName(u"network_traffic_graph_combo_box")
+        self.network_traffic_graph_combo_box.setMaximumSize(QSize(16777215, 16777215))
+        self.network_traffic_graph_combo_box.setMaxVisibleItems(5)
+        self.network_traffic_graph_combo_box.setFrame(True)
+
+        self.network_traffic_graph_combo_box_layout.addWidget(self.network_traffic_graph_combo_box)
+
+        self.network_traffic_unit_combo_box = QComboBox(self.performance_network_page)
+        self.network_traffic_unit_combo_box.setObjectName(u"network_traffic_unit_combo_box")
+        self.network_traffic_unit_combo_box.setMaximumSize(QSize(70, 16777215))
+
+        self.network_traffic_graph_combo_box_layout.addWidget(self.network_traffic_unit_combo_box)
+
+
+        self.network_page_layout.addLayout(self.network_traffic_graph_combo_box_layout)
+
+        self.network_graph_toggle_buttons_widget = QWidget(self.performance_network_page)
+        self.network_graph_toggle_buttons_widget.setObjectName(u"network_graph_toggle_buttons_widget")
+        self.network_graph_toggle_buttons_widget.setStyleSheet(u"#network_graph_toggle_buttons_widget {\n"
+"	background-color: #0c0c0c; \n"
+"    border: 1px solid #30363d;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"#network_graph_toggle_buttons_widget QPushButton {\n"
+"	background-color: #0d1117;\n"
+"}")
+        self.network_graph_toggle_buttons_layout = QHBoxLayout(self.network_graph_toggle_buttons_widget)
+        self.network_graph_toggle_buttons_layout.setSpacing(10)
+        self.network_graph_toggle_buttons_layout.setObjectName(u"network_graph_toggle_buttons_layout")
+        self.network_graph_toggle_buttons_layout.setContentsMargins(5, 7, 5, 7)
+        self.network_traffic_toggle_button = QPushButton(self.network_graph_toggle_buttons_widget)
+        self.network_traffic_toggle_button.setObjectName(u"network_traffic_toggle_button")
+
+        self.network_graph_toggle_buttons_layout.addWidget(self.network_traffic_toggle_button)
+
+        self.network_packets_toggle_button = QPushButton(self.network_graph_toggle_buttons_widget)
+        self.network_packets_toggle_button.setObjectName(u"network_packets_toggle_button")
+
+        self.network_graph_toggle_buttons_layout.addWidget(self.network_packets_toggle_button)
+
+
+        self.network_page_layout.addWidget(self.network_graph_toggle_buttons_widget)
+
+        self.network_graph = PlotWidget(self.performance_network_page)
+        self.network_graph.setObjectName(u"network_graph")
+        self.network_graph.setMinimumSize(QSize(0, 300))
+        self.network_graph.setStyleSheet(u"QWidget {\n"
+"    background-color: transparent;\n"
+"    border: 1px solid #30363d;\n"
+"    border-radius: 8px;\n"
+"	border-bottom-left-radius: 0px; \n"
+"	border-bottom-right-radius: 0px;\n"
+"}")
+
+        self.network_page_layout.addWidget(self.network_graph)
+
+        self.network_packets_graph_line = QFrame(self.performance_network_page)
+        self.network_packets_graph_line.setObjectName(u"network_packets_graph_line")
+        self.network_packets_graph_line.setFrameShape(QFrame.Shape.HLine)
+        self.network_packets_graph_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.network_page_layout.addWidget(self.network_packets_graph_line)
+
+        self.network_health_label = QLabel(self.performance_network_page)
+        self.network_health_label.setObjectName(u"network_health_label")
+
+        self.network_page_layout.addWidget(self.network_health_label)
+
+        self.network_health_widget = QWidget(self.performance_network_page)
+        self.network_health_widget.setObjectName(u"network_health_widget")
+        self.network_health_widget.setStyleSheet(u"")
+        self.network_health_layout = QHBoxLayout(self.network_health_widget)
+        self.network_health_layout.setObjectName(u"network_health_layout")
+        self.network_health_layout.setContentsMargins(0, 0, 0, 0)
+        self.network_health_errors_widget = QWidget(self.network_health_widget)
+        self.network_health_errors_widget.setObjectName(u"network_health_errors_widget")
+        self.network_health_errors_widget.setMinimumSize(QSize(300, 200))
+        self.network_health_errors_widget.setMaximumSize(QSize(16777215, 200))
+        self.network_health_errors_widget.setStyleSheet(u"#network_health_errors_widget {\n"
+"	border: 1px solid #30363d;\n"
+"	border-radius: 2px;\n"
+"}\n"
+"\n"
+"#network_health_errors_widget QWidget {\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#network_health_errors_widget QFrame[frameShape=\"4\"] {\n"
+"    background-color: #1E2633;\n"
+"    border: none;\n"
+"    max-height: 1px;\n"
+"    min-height: 1px;\n"
+"}")
+        self.network_health_errors_layout = QVBoxLayout(self.network_health_errors_widget)
+        self.network_health_errors_layout.setObjectName(u"network_health_errors_layout")
+        self.network_health_errors_layout.setContentsMargins(5, 5, 5, 0)
+        self.network_health_errors_label = QLabel(self.network_health_errors_widget)
+        self.network_health_errors_label.setObjectName(u"network_health_errors_label")
+        self.network_health_errors_label.setMaximumSize(QSize(16777215, 30))
+        self.network_health_errors_label.setStyleSheet(u"font: 200 11pt;")
+
+        self.network_health_errors_layout.addWidget(self.network_health_errors_label)
+
+        self.network_health_errors_line = QFrame(self.network_health_errors_widget)
+        self.network_health_errors_line.setObjectName(u"network_health_errors_line")
+        self.network_health_errors_line.setFrameShape(QFrame.Shape.HLine)
+        self.network_health_errors_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.network_health_errors_layout.addWidget(self.network_health_errors_line)
+
+        self.network_health_errors_content_widget = QWidget(self.network_health_errors_widget)
+        self.network_health_errors_content_widget.setObjectName(u"network_health_errors_content_widget")
+        self.network_health_errors_content_widget.setMinimumSize(QSize(0, 120))
+        self.network_health_errors_content_widget.setMaximumSize(QSize(16777215, 120))
+        self.network_health_errors_content_layout = QVBoxLayout(self.network_health_errors_content_widget)
+        self.network_health_errors_content_layout.setObjectName(u"network_health_errors_content_layout")
+        self.network_health_errors_content_layout.setContentsMargins(0, 0, 0, 0)
+        self.network_health_errors_content_top_layout = QHBoxLayout()
+        self.network_health_errors_content_top_layout.setObjectName(u"network_health_errors_content_top_layout")
+        self.network_health_errors_content_top_layout.setContentsMargins(-1, -1, -1, 0)
+        self.network_health_errors_content_top_rx_errors_label = QLabel(self.network_health_errors_content_widget)
+        self.network_health_errors_content_top_rx_errors_label.setObjectName(u"network_health_errors_content_top_rx_errors_label")
+        self.network_health_errors_content_top_rx_errors_label.setStyleSheet(u"")
+
+        self.network_health_errors_content_top_layout.addWidget(self.network_health_errors_content_top_rx_errors_label)
+
+        self.network_health_errors_content_top_rx_errors_value_label = QLabel(self.network_health_errors_content_widget)
+        self.network_health_errors_content_top_rx_errors_value_label.setObjectName(u"network_health_errors_content_top_rx_errors_value_label")
+
+        self.network_health_errors_content_top_layout.addWidget(self.network_health_errors_content_top_rx_errors_value_label)
+
+
+        self.network_health_errors_content_layout.addLayout(self.network_health_errors_content_top_layout)
+
+        self.network_health_errors_content_bottom_layout = QHBoxLayout()
+        self.network_health_errors_content_bottom_layout.setObjectName(u"network_health_errors_content_bottom_layout")
+        self.network_health_errors_content_bottom_layout.setContentsMargins(-1, -1, -1, 0)
+        self.network_health_errors_content_bottom_tx_errors_label = QLabel(self.network_health_errors_content_widget)
+        self.network_health_errors_content_bottom_tx_errors_label.setObjectName(u"network_health_errors_content_bottom_tx_errors_label")
+        self.network_health_errors_content_bottom_tx_errors_label.setStyleSheet(u"")
+
+        self.network_health_errors_content_bottom_layout.addWidget(self.network_health_errors_content_bottom_tx_errors_label)
+
+        self.network_health_errors_content_bottom_tx_errors_value_label = QLabel(self.network_health_errors_content_widget)
+        self.network_health_errors_content_bottom_tx_errors_value_label.setObjectName(u"network_health_errors_content_bottom_tx_errors_value_label")
+
+        self.network_health_errors_content_bottom_layout.addWidget(self.network_health_errors_content_bottom_tx_errors_value_label)
+
+
+        self.network_health_errors_content_layout.addLayout(self.network_health_errors_content_bottom_layout)
+
+
+        self.network_health_errors_layout.addWidget(self.network_health_errors_content_widget)
+
+
+        self.network_health_layout.addWidget(self.network_health_errors_widget)
+
+        self.left_health_widget_spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.network_health_layout.addItem(self.left_health_widget_spacer)
+
+        self.network_health_drops_widget = QWidget(self.network_health_widget)
+        self.network_health_drops_widget.setObjectName(u"network_health_drops_widget")
+        self.network_health_drops_widget.setMinimumSize(QSize(300, 200))
+        self.network_health_drops_widget.setMaximumSize(QSize(16777215, 200))
+        self.network_health_drops_widget.setStyleSheet(u"#network_health_drops_widget {\n"
+"	border: 1px solid #30363d;\n"
+"	border-radius: 2px;\n"
+"}\n"
+"\n"
+"#network_health_drops_widget QWidget {\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#network_health_drops_widget QFrame[frameShape=\"4\"] {\n"
+"    background-color: #1E2633;\n"
+"    border: none;\n"
+"    max-height: 1px;\n"
+"    min-height: 1px;\n"
+"}")
+        self.network_health_drops_layout = QVBoxLayout(self.network_health_drops_widget)
+        self.network_health_drops_layout.setObjectName(u"network_health_drops_layout")
+        self.network_health_drops_layout.setContentsMargins(5, 5, 5, 0)
+        self.network_health_drops_label = QLabel(self.network_health_drops_widget)
+        self.network_health_drops_label.setObjectName(u"network_health_drops_label")
+        self.network_health_drops_label.setMaximumSize(QSize(16777215, 30))
+        self.network_health_drops_label.setStyleSheet(u"font: 200 11pt;")
+
+        self.network_health_drops_layout.addWidget(self.network_health_drops_label)
+
+        self.network_health_drops_line = QFrame(self.network_health_drops_widget)
+        self.network_health_drops_line.setObjectName(u"network_health_drops_line")
+        self.network_health_drops_line.setFrameShape(QFrame.Shape.HLine)
+        self.network_health_drops_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.network_health_drops_layout.addWidget(self.network_health_drops_line)
+
+        self.network_health_drops_content_widget = QWidget(self.network_health_drops_widget)
+        self.network_health_drops_content_widget.setObjectName(u"network_health_drops_content_widget")
+        self.network_health_drops_content_widget.setMinimumSize(QSize(0, 120))
+        self.network_health_drops_content_widget.setMaximumSize(QSize(16777215, 120))
+        self.network_health_drops_content_layout = QVBoxLayout(self.network_health_drops_content_widget)
+        self.network_health_drops_content_layout.setObjectName(u"network_health_drops_content_layout")
+        self.network_health_drops_content_layout.setContentsMargins(0, 0, 0, 0)
+        self.network_health_drops_content_top_layout = QHBoxLayout()
+        self.network_health_drops_content_top_layout.setObjectName(u"network_health_drops_content_top_layout")
+        self.network_health_drops_content_top_layout.setContentsMargins(-1, -1, -1, 0)
+        self.network_health_drops_content_top_rx_drops_label = QLabel(self.network_health_drops_content_widget)
+        self.network_health_drops_content_top_rx_drops_label.setObjectName(u"network_health_drops_content_top_rx_drops_label")
+        self.network_health_drops_content_top_rx_drops_label.setStyleSheet(u"")
+
+        self.network_health_drops_content_top_layout.addWidget(self.network_health_drops_content_top_rx_drops_label)
+
+        self.network_health_drops_content_top_rx_drops_value_label = QLabel(self.network_health_drops_content_widget)
+        self.network_health_drops_content_top_rx_drops_value_label.setObjectName(u"network_health_drops_content_top_rx_drops_value_label")
+
+        self.network_health_drops_content_top_layout.addWidget(self.network_health_drops_content_top_rx_drops_value_label)
+
+
+        self.network_health_drops_content_layout.addLayout(self.network_health_drops_content_top_layout)
+
+        self.network_health_drops_content_bottom_layout = QHBoxLayout()
+        self.network_health_drops_content_bottom_layout.setObjectName(u"network_health_drops_content_bottom_layout")
+        self.network_health_drops_content_bottom_layout.setContentsMargins(-1, -1, -1, 0)
+        self.network_health_drops_content_bottom_tx_drops_label = QLabel(self.network_health_drops_content_widget)
+        self.network_health_drops_content_bottom_tx_drops_label.setObjectName(u"network_health_drops_content_bottom_tx_drops_label")
+        self.network_health_drops_content_bottom_tx_drops_label.setStyleSheet(u"")
+
+        self.network_health_drops_content_bottom_layout.addWidget(self.network_health_drops_content_bottom_tx_drops_label)
+
+        self.network_health_drops_content_bottom_tx_drops_value_label = QLabel(self.network_health_drops_content_widget)
+        self.network_health_drops_content_bottom_tx_drops_value_label.setObjectName(u"network_health_drops_content_bottom_tx_drops_value_label")
+
+        self.network_health_drops_content_bottom_layout.addWidget(self.network_health_drops_content_bottom_tx_drops_value_label)
+
+
+        self.network_health_drops_content_layout.addLayout(self.network_health_drops_content_bottom_layout)
+
+
+        self.network_health_drops_layout.addWidget(self.network_health_drops_content_widget)
+
+
+        self.network_health_layout.addWidget(self.network_health_drops_widget)
+
+        self.right_health_widget_spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.network_health_layout.addItem(self.right_health_widget_spacer)
+
+        self.network_health_total_widget = QWidget(self.network_health_widget)
+        self.network_health_total_widget.setObjectName(u"network_health_total_widget")
+        self.network_health_total_widget.setMinimumSize(QSize(300, 200))
+        self.network_health_total_widget.setMaximumSize(QSize(16777215, 200))
+        self.network_health_total_widget.setStyleSheet(u"#network_health_total_widget {\n"
+"	border: 1px solid #30363d;\n"
+"	border-radius: 2px;\n"
+"}\n"
+"\n"
+"#network_health_total_widget QWidget {\n"
+"	background-color: transparent;\n"
+"}\n"
+"\n"
+"#network_health_total_widget QFrame[frameShape=\"4\"] {\n"
+"    background-color: #1E2633;\n"
+"    border: none;\n"
+"    max-height: 1px;\n"
+"    min-height: 1px;\n"
+"}")
+        self.network_health_total_layout = QVBoxLayout(self.network_health_total_widget)
+        self.network_health_total_layout.setObjectName(u"network_health_total_layout")
+        self.network_health_total_layout.setContentsMargins(5, 5, 5, 0)
+        self.network_health_total_label = QLabel(self.network_health_total_widget)
+        self.network_health_total_label.setObjectName(u"network_health_total_label")
+        self.network_health_total_label.setMaximumSize(QSize(16777215, 30))
+        self.network_health_total_label.setStyleSheet(u"font: 200 11pt;")
+
+        self.network_health_total_layout.addWidget(self.network_health_total_label)
+
+        self.network_health_total_line = QFrame(self.network_health_total_widget)
+        self.network_health_total_line.setObjectName(u"network_health_total_line")
+        self.network_health_total_line.setFrameShape(QFrame.Shape.HLine)
+        self.network_health_total_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.network_health_total_layout.addWidget(self.network_health_total_line)
+
+        self.network_health_total_content_widget = QWidget(self.network_health_total_widget)
+        self.network_health_total_content_widget.setObjectName(u"network_health_total_content_widget")
+        self.network_health_total_content_widget.setMinimumSize(QSize(0, 120))
+        self.network_health_total_content_widget.setMaximumSize(QSize(16777215, 120))
+        self.network_health_total_content_layout = QVBoxLayout(self.network_health_total_content_widget)
+        self.network_health_total_content_layout.setSpacing(0)
+        self.network_health_total_content_layout.setObjectName(u"network_health_total_content_layout")
+        self.network_health_total_content_layout.setContentsMargins(0, 0, 0, 0)
+        self.network_health_total_content_top_layout = QVBoxLayout()
+        self.network_health_total_content_top_layout.setSpacing(0)
+        self.network_health_total_content_top_layout.setObjectName(u"network_health_total_content_top_layout")
+        self.network_health_total_content_top_layout.setContentsMargins(-1, -1, -1, 0)
+        self.network_health_total_content_top_rx_packets_layout = QHBoxLayout()
+        self.network_health_total_content_top_rx_packets_layout.setObjectName(u"network_health_total_content_top_rx_packets_layout")
+        self.network_health_total_content_top_rx_packets_layout.setContentsMargins(-1, -1, -1, 0)
+        self.network_health_total_content_top_rx_packets_label = QLabel(self.network_health_total_content_widget)
+        self.network_health_total_content_top_rx_packets_label.setObjectName(u"network_health_total_content_top_rx_packets_label")
+        self.network_health_total_content_top_rx_packets_label.setStyleSheet(u"")
+
+        self.network_health_total_content_top_rx_packets_layout.addWidget(self.network_health_total_content_top_rx_packets_label)
+
+        self.network_health_total_content_top_rx_packets_value_label = QLabel(self.network_health_total_content_widget)
+        self.network_health_total_content_top_rx_packets_value_label.setObjectName(u"network_health_total_content_top_rx_packets_value_label")
+        self.network_health_total_content_top_rx_packets_value_label.setStyleSheet(u"QLabel {\n"
+"	font: 300;\n"
+"\n"
+"}")
+
+        self.network_health_total_content_top_rx_packets_layout.addWidget(self.network_health_total_content_top_rx_packets_value_label)
+
+
+        self.network_health_total_content_top_layout.addLayout(self.network_health_total_content_top_rx_packets_layout)
+
+        self.network_health_total_content_bottom_tx_packets_layout = QHBoxLayout()
+        self.network_health_total_content_bottom_tx_packets_layout.setObjectName(u"network_health_total_content_bottom_tx_packets_layout")
+        self.network_health_total_content_bottom_tx_packets_layout.setContentsMargins(-1, -1, -1, 0)
+        self.network_health_total_content_top_tx_packets_label = QLabel(self.network_health_total_content_widget)
+        self.network_health_total_content_top_tx_packets_label.setObjectName(u"network_health_total_content_top_tx_packets_label")
+        self.network_health_total_content_top_tx_packets_label.setStyleSheet(u"")
+
+        self.network_health_total_content_bottom_tx_packets_layout.addWidget(self.network_health_total_content_top_tx_packets_label)
+
+        self.network_health_total_content_top_tx_packets_value_label = QLabel(self.network_health_total_content_widget)
+        self.network_health_total_content_top_tx_packets_value_label.setObjectName(u"network_health_total_content_top_tx_packets_value_label")
+
+        self.network_health_total_content_bottom_tx_packets_layout.addWidget(self.network_health_total_content_top_tx_packets_value_label)
+
+
+        self.network_health_total_content_top_layout.addLayout(self.network_health_total_content_bottom_tx_packets_layout)
+
+
+        self.network_health_total_content_layout.addLayout(self.network_health_total_content_top_layout)
+
+        self.network_health_total_content_bottom_layout = QVBoxLayout()
+        self.network_health_total_content_bottom_layout.setSpacing(0)
+        self.network_health_total_content_bottom_layout.setObjectName(u"network_health_total_content_bottom_layout")
+        self.network_health_total_content_bottom_layout.setContentsMargins(-1, -1, -1, 0)
+        self.network_health_total_content_bottom_rx_data_layout = QHBoxLayout()
+        self.network_health_total_content_bottom_rx_data_layout.setObjectName(u"network_health_total_content_bottom_rx_data_layout")
+        self.network_health_total_content_bottom_rx_data_layout.setContentsMargins(-1, -1, -1, 0)
+        self.network_health_total_content_bottom_rx_data_label = QLabel(self.network_health_total_content_widget)
+        self.network_health_total_content_bottom_rx_data_label.setObjectName(u"network_health_total_content_bottom_rx_data_label")
+        self.network_health_total_content_bottom_rx_data_label.setStyleSheet(u"")
+
+        self.network_health_total_content_bottom_rx_data_layout.addWidget(self.network_health_total_content_bottom_rx_data_label)
+
+        self.network_health_total_content_bottom_rx_data_value_label = QLabel(self.network_health_total_content_widget)
+        self.network_health_total_content_bottom_rx_data_value_label.setObjectName(u"network_health_total_content_bottom_rx_data_value_label")
+
+        self.network_health_total_content_bottom_rx_data_layout.addWidget(self.network_health_total_content_bottom_rx_data_value_label)
+
+
+        self.network_health_total_content_bottom_layout.addLayout(self.network_health_total_content_bottom_rx_data_layout)
+
+        self.network_health_total_content_bottom_tx_data_layout = QHBoxLayout()
+        self.network_health_total_content_bottom_tx_data_layout.setObjectName(u"network_health_total_content_bottom_tx_data_layout")
+        self.network_health_total_content_bottom_tx_data_layout.setContentsMargins(-1, -1, -1, 0)
+        self.network_health_total_content_bottom_tx_data_label = QLabel(self.network_health_total_content_widget)
+        self.network_health_total_content_bottom_tx_data_label.setObjectName(u"network_health_total_content_bottom_tx_data_label")
+        self.network_health_total_content_bottom_tx_data_label.setStyleSheet(u"")
+
+        self.network_health_total_content_bottom_tx_data_layout.addWidget(self.network_health_total_content_bottom_tx_data_label)
+
+        self.network_health_total_content_bottom_tx_data_value_label = QLabel(self.network_health_total_content_widget)
+        self.network_health_total_content_bottom_tx_data_value_label.setObjectName(u"network_health_total_content_bottom_tx_data_value_label")
+
+        self.network_health_total_content_bottom_tx_data_layout.addWidget(self.network_health_total_content_bottom_tx_data_value_label)
+
+
+        self.network_health_total_content_bottom_layout.addLayout(self.network_health_total_content_bottom_tx_data_layout)
+
+
+        self.network_health_total_content_layout.addLayout(self.network_health_total_content_bottom_layout)
+
+
+        self.network_health_total_layout.addWidget(self.network_health_total_content_widget)
+
+
+        self.network_health_layout.addWidget(self.network_health_total_widget)
+
+
+        self.network_page_layout.addWidget(self.network_health_widget)
+
+        self.network_health_line = QFrame(self.performance_network_page)
+        self.network_health_line.setObjectName(u"network_health_line")
+        self.network_health_line.setFrameShape(QFrame.Shape.HLine)
+        self.network_health_line.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.network_page_layout.addWidget(self.network_health_line)
+
+        self.network_interfaces_label = QLabel(self.performance_network_page)
+        self.network_interfaces_label.setObjectName(u"network_interfaces_label")
+
+        self.network_page_layout.addWidget(self.network_interfaces_label)
+
+        self.network_interfaces_table = QTableWidget(self.performance_network_page)
+        if (self.network_interfaces_table.columnCount() < 7):
+            self.network_interfaces_table.setColumnCount(7)
+        __qtablewidgetitem22 = QTableWidgetItem()
+        self.network_interfaces_table.setHorizontalHeaderItem(0, __qtablewidgetitem22)
+        __qtablewidgetitem23 = QTableWidgetItem()
+        self.network_interfaces_table.setHorizontalHeaderItem(1, __qtablewidgetitem23)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        self.network_interfaces_table.setHorizontalHeaderItem(2, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        self.network_interfaces_table.setHorizontalHeaderItem(3, __qtablewidgetitem25)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        self.network_interfaces_table.setHorizontalHeaderItem(4, __qtablewidgetitem26)
+        __qtablewidgetitem27 = QTableWidgetItem()
+        self.network_interfaces_table.setHorizontalHeaderItem(5, __qtablewidgetitem27)
+        __qtablewidgetitem28 = QTableWidgetItem()
+        self.network_interfaces_table.setHorizontalHeaderItem(6, __qtablewidgetitem28)
+        self.network_interfaces_table.setObjectName(u"network_interfaces_table")
+        self.network_interfaces_table.setMinimumSize(QSize(0, 200))
+        self.network_interfaces_table.horizontalHeader().setCascadingSectionResizes(True)
+
+        self.network_page_layout.addWidget(self.network_interfaces_table)
+
         self.performance_stacked_content.addWidget(self.performance_network_page)
 
         self.performance_content_layout.addWidget(self.performance_stacked_content)
@@ -2233,7 +2816,6 @@ class Ui_MainWindow(object):
 "	font: 600 17pt;\n"
 "}\n"
 "")
-        self.hardware_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.hardware_detail_page_layout.addWidget(self.hardware_label)
 
@@ -2348,35 +2930,30 @@ class Ui_MainWindow(object):
         self.cpu_info_rows_widget_layout.setContentsMargins(10, 0, 0, 0)
         self.model_row_label = QLabel(self.cpu_info_rows_widget)
         self.model_row_label.setObjectName(u"model_row_label")
-        self.model_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.model_row_label.setMargin(0)
 
         self.cpu_info_rows_widget_layout.addWidget(self.model_row_label)
 
         self.cores_row_label = QLabel(self.cpu_info_rows_widget)
         self.cores_row_label.setObjectName(u"cores_row_label")
-        self.cores_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.cores_row_label.setMargin(0)
 
         self.cpu_info_rows_widget_layout.addWidget(self.cores_row_label)
 
         self.threads_row_label = QLabel(self.cpu_info_rows_widget)
         self.threads_row_label.setObjectName(u"threads_row_label")
-        self.threads_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.threads_row_label.setMargin(0)
 
         self.cpu_info_rows_widget_layout.addWidget(self.threads_row_label)
 
         self.frequency_row_label = QLabel(self.cpu_info_rows_widget)
         self.frequency_row_label.setObjectName(u"frequency_row_label")
-        self.frequency_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.frequency_row_label.setMargin(0)
 
         self.cpu_info_rows_widget_layout.addWidget(self.frequency_row_label)
 
         self.architecture_row_label = QLabel(self.cpu_info_rows_widget)
         self.architecture_row_label.setObjectName(u"architecture_row_label")
-        self.architecture_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.architecture_row_label.setMargin(0)
 
         self.cpu_info_rows_widget_layout.addWidget(self.architecture_row_label)
@@ -2472,21 +3049,18 @@ class Ui_MainWindow(object):
         self.memory_info_columns_widget_layout.setContentsMargins(10, 0, 0, 0)
         self.memory_total_row_label = QLabel(self.memory_info_columns_widget)
         self.memory_total_row_label.setObjectName(u"memory_total_row_label")
-        self.memory_total_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.memory_total_row_label.setMargin(0)
 
         self.memory_info_columns_widget_layout.addWidget(self.memory_total_row_label)
 
         self.memory_type_row_label = QLabel(self.memory_info_columns_widget)
         self.memory_type_row_label.setObjectName(u"memory_type_row_label")
-        self.memory_type_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.memory_type_row_label.setMargin(0)
 
         self.memory_info_columns_widget_layout.addWidget(self.memory_type_row_label)
 
         self.memory_speed_row_label = QLabel(self.memory_info_columns_widget)
         self.memory_speed_row_label.setObjectName(u"memory_speed_row_label")
-        self.memory_speed_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.memory_speed_row_label.setMargin(0)
 
         self.memory_info_columns_widget_layout.addWidget(self.memory_speed_row_label)
@@ -2572,21 +3146,18 @@ class Ui_MainWindow(object):
         self.gpu_info_columns_widget_layout.setContentsMargins(10, 0, 0, 0)
         self.gpu_model_type_row_label = QLabel(self.gpu_info_columns_widget)
         self.gpu_model_type_row_label.setObjectName(u"gpu_model_type_row_label")
-        self.gpu_model_type_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.gpu_model_type_row_label.setMargin(0)
 
         self.gpu_info_columns_widget_layout.addWidget(self.gpu_model_type_row_label)
 
         self.gpu_vram_row_label = QLabel(self.gpu_info_columns_widget)
         self.gpu_vram_row_label.setObjectName(u"gpu_vram_row_label")
-        self.gpu_vram_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.gpu_vram_row_label.setMargin(0)
 
         self.gpu_info_columns_widget_layout.addWidget(self.gpu_vram_row_label)
 
         self.gpu_memory_type_row_label = QLabel(self.gpu_info_columns_widget)
         self.gpu_memory_type_row_label.setObjectName(u"gpu_memory_type_row_label")
-        self.gpu_memory_type_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.gpu_memory_type_row_label.setMargin(0)
 
         self.gpu_info_columns_widget_layout.addWidget(self.gpu_memory_type_row_label)
@@ -2672,28 +3243,24 @@ class Ui_MainWindow(object):
         self.motherboard_info_columns_widget_layout.setContentsMargins(10, 0, 0, 0)
         self.motherboard_vendor_column_label = QLabel(self.motherboard_info_columns_widget)
         self.motherboard_vendor_column_label.setObjectName(u"motherboard_vendor_column_label")
-        self.motherboard_vendor_column_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.motherboard_vendor_column_label.setMargin(0)
 
         self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_vendor_column_label)
 
         self.motherboard_model_column_label = QLabel(self.motherboard_info_columns_widget)
         self.motherboard_model_column_label.setObjectName(u"motherboard_model_column_label")
-        self.motherboard_model_column_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.motherboard_model_column_label.setMargin(0)
 
         self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_model_column_label)
 
         self.motherboard_serial_column_label = QLabel(self.motherboard_info_columns_widget)
         self.motherboard_serial_column_label.setObjectName(u"motherboard_serial_column_label")
-        self.motherboard_serial_column_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.motherboard_serial_column_label.setMargin(0)
 
         self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_serial_column_label)
 
         self.motherboard_architecture_column_label = QLabel(self.motherboard_info_columns_widget)
         self.motherboard_architecture_column_label.setObjectName(u"motherboard_architecture_column_label")
-        self.motherboard_architecture_column_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.motherboard_architecture_column_label.setMargin(0)
 
         self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_architecture_column_label)
@@ -2784,21 +3351,18 @@ class Ui_MainWindow(object):
         self.bios_info_columns_widget_layout.setContentsMargins(10, 0, 0, 0)
         self.bios_vendor_row_label = QLabel(self.bios_info_columns_widget)
         self.bios_vendor_row_label.setObjectName(u"bios_vendor_row_label")
-        self.bios_vendor_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.bios_vendor_row_label.setMargin(0)
 
         self.bios_info_columns_widget_layout.addWidget(self.bios_vendor_row_label)
 
         self.bios_version_row_label = QLabel(self.bios_info_columns_widget)
         self.bios_version_row_label.setObjectName(u"bios_version_row_label")
-        self.bios_version_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.bios_version_row_label.setMargin(0)
 
         self.bios_info_columns_widget_layout.addWidget(self.bios_version_row_label)
 
         self.bios_date_row_label = QLabel(self.bios_info_columns_widget)
         self.bios_date_row_label.setObjectName(u"bios_date_row_label")
-        self.bios_date_row_label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.bios_date_row_label.setMargin(0)
 
         self.bios_info_columns_widget_layout.addWidget(self.bios_date_row_label)
@@ -2861,7 +3425,7 @@ class Ui_MainWindow(object):
 
         self.content_stack.setCurrentIndex(2)
         self.agent_detail_stacked_content.setCurrentIndex(1)
-        self.performance_stacked_content.setCurrentIndex(1)
+        self.performance_stacked_content.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -3016,6 +3580,50 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"CRITICAL", None))
         ___qtablewidgetitem21 = self.sensors_table.horizontalHeaderItem(4)
         ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"CURRENT", None))
+        self.network_label.setText(QCoreApplication.translate("MainWindow", u"NETWORK", None))
+        self.network_legend_label.setText(QCoreApplication.translate("MainWindow", u"Network traffic, packets and interface statistics", None))
+        self.network_gauges_combo_box_label.setText(QCoreApplication.translate("MainWindow", u"CURRENT NETWORK", None))
+        self.rx_tx_throughput_label.setText(QCoreApplication.translate("MainWindow", u"RX TX TRAFFIC / PACKETS", None))
+        self.network_group_combo_box_legend_label.setText(QCoreApplication.translate("MainWindow", u"NETWORK GROUP", None))
+        self.network_traffic_graph_combo_box.setPlaceholderText(QCoreApplication.translate("MainWindow", u"GROUP", None))
+        self.network_traffic_unit_combo_box.setPlaceholderText(QCoreApplication.translate("MainWindow", u"UNIT", None))
+        self.network_traffic_toggle_button.setText(QCoreApplication.translate("MainWindow", u"[ TRAFFIC ]", None))
+        self.network_packets_toggle_button.setText(QCoreApplication.translate("MainWindow", u"[ PACKETS ]", None))
+        self.network_health_label.setText(QCoreApplication.translate("MainWindow", u"NETWORK IO IN TOTAL", None))
+        self.network_health_errors_label.setText(QCoreApplication.translate("MainWindow", u"ERRORS", None))
+        self.network_health_errors_content_top_rx_errors_label.setText(QCoreApplication.translate("MainWindow", u"RX errors", None))
+        self.network_health_errors_content_top_rx_errors_value_label.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.network_health_errors_content_bottom_tx_errors_label.setText(QCoreApplication.translate("MainWindow", u"TX errors", None))
+        self.network_health_errors_content_bottom_tx_errors_value_label.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.network_health_drops_label.setText(QCoreApplication.translate("MainWindow", u"DROPS", None))
+        self.network_health_drops_content_top_rx_drops_label.setText(QCoreApplication.translate("MainWindow", u"RX drops", None))
+        self.network_health_drops_content_top_rx_drops_value_label.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.network_health_drops_content_bottom_tx_drops_label.setText(QCoreApplication.translate("MainWindow", u"TX drops", None))
+        self.network_health_drops_content_bottom_tx_drops_value_label.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.network_health_total_label.setText(QCoreApplication.translate("MainWindow", u"NETWORK DATA", None))
+        self.network_health_total_content_top_rx_packets_label.setText(QCoreApplication.translate("MainWindow", u"RX packets", None))
+        self.network_health_total_content_top_rx_packets_value_label.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.network_health_total_content_top_tx_packets_label.setText(QCoreApplication.translate("MainWindow", u"TX packets", None))
+        self.network_health_total_content_top_tx_packets_value_label.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.network_health_total_content_bottom_rx_data_label.setText(QCoreApplication.translate("MainWindow", u"RX data", None))
+        self.network_health_total_content_bottom_rx_data_value_label.setText(QCoreApplication.translate("MainWindow", u"0 MB", None))
+        self.network_health_total_content_bottom_tx_data_label.setText(QCoreApplication.translate("MainWindow", u"TX data", None))
+        self.network_health_total_content_bottom_tx_data_value_label.setText(QCoreApplication.translate("MainWindow", u"0 MB", None))
+        self.network_interfaces_label.setText(QCoreApplication.translate("MainWindow", u"NETWORK INTERFACES", None))
+        ___qtablewidgetitem22 = self.network_interfaces_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"INTERFACE", None))
+        ___qtablewidgetitem23 = self.network_interfaces_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"TRAFFIC RX", None))
+        ___qtablewidgetitem24 = self.network_interfaces_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"TRAFFIC TX", None))
+        ___qtablewidgetitem25 = self.network_interfaces_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"PACKETS RX", None))
+        ___qtablewidgetitem26 = self.network_interfaces_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"PACKETS TX", None))
+        ___qtablewidgetitem27 = self.network_interfaces_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"ERROR IN / ERROR OUT", None))
+        ___qtablewidgetitem28 = self.network_interfaces_table.horizontalHeaderItem(6)
+        ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindow", u"DROPS IN/ DROPS OUT", None))
         self.hardware_label.setText(QCoreApplication.translate("MainWindow", u"HARDWARE", None))
         self.hardware_legend_label.setText(QCoreApplication.translate("MainWindow", u"Component specifications, hardware model data and system architecture", None))
         self.cpu_info_label.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
