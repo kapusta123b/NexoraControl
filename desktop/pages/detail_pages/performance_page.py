@@ -1,6 +1,8 @@
 from api.client import NexoraClient
+
 from services.workers.metric_worker import LiveMetricsWorker
 
+from .performance_pages.network_page import PerformanceNetworkPage
 from .performance_pages.thermal_page import PerformanceThermalPage
 from .performance_pages.storage_page import PerformanceStoragePage
 from .performance_pages.compute_page import PerformanceComputePage
@@ -47,6 +49,9 @@ class DetailPerformanceController(QObject):
         self.thermal_page = PerformanceThermalPage(
             self.ui, self.performance_store, self.performance_poller
         )
+        self.network_page = PerformanceNetworkPage(
+            self.ui, self.performance_store, self.performance_poller
+        )
 
     def setup_connections(self) -> None:
         self.performance_nav_group = QButtonGroup(self)
@@ -64,7 +69,11 @@ class DetailPerformanceController(QObject):
                 "thermal",
                 {"hardware_names": "true"},
             ),
-            self.ui.network_button: (self.ui.performance_network_page, "network", {}),
+            self.ui.network_button: (
+                self.ui.performance_network_page,
+                "network",
+                {"network_names": "true"},
+            ),
         }
 
         for button in self.nav_mapping:
