@@ -78,7 +78,7 @@ def get_resource_metrics(request: Any, pk: int) -> dict[str, list] | None:
     }
 
 
-def get_storage_metrics(request: Any, pk: int) -> dict[str, dict] | None:
+def get_storage_metrics(request: Any, pk: int) -> dict[str, dict | list] | None:
     get_object_or_404(Agent, pk=pk)
 
     target_disk = request.GET.get("disk", None)
@@ -209,3 +209,77 @@ def get_thermal_metrics(request: Any, pk: int) -> dict[str] | None:
         )
 
     return {"timestamps": timestamps, "thermal_metrics": thermal_data}
+
+
+def get_network_metrics(request: Any, pk: int) -> dict[str, dict | list] | None:
+    get_object_or_404(Agent, pk=pk)
+
+    target_network = request.GET.get("network", None)
+    only_network_names = request.GET.get("network_names", "false").lower() == "true"
+    fields = request.GET.get("fields", None)
+
+    if isinstance(fields, str):
+        requested_fields = [s.lower().strip() for s in fields.split(",")]
+
+    if only_network_names:
+        last_metric = (
+            AgentMetric.objects.filter(agent_id=pk).order_by("-created_at").first()
+        )
+        network_names = list(last_metric.network_metrics.keys())
+
+        return {"network_names": network_names}
+
+    now = timezone.now()
+
+    raw_metrics = _get_metric_fields_by_time(
+        request, pk, now, fields=("created_at", "network_metrics")
+    )
+
+    timestamps = []
+    network_data = {}
+
+    for created_at, network_metrics in raw_metrics:
+        if not network_metrics:
+            continue
+
+        if target_network and target_network not in network_metrics:
+            continue
+
+        timestamps.append(int(created_at.timestamp()))
+
+        for network_name, network_info in network_metrics.items():
+            if target_network and network_name != target_network:
+                continue
+
+            if network_name not in network_data:
+                network_data[network_name] = {}
+
+            for key, value in network_info.items():
+                if requested_fields:
+                    key_lower = key.lower().strip()
+
+                    if key_lower not in requested_fields:
+                        continue
+
+                if "traffic" in key:
+                    type_of_data = "traffic"
+
+                if "packets" in key:
+                    type_of_data = "packets"
+
+                if type_of_data not in network_data[network_name]:
+                    network_data[network_name][type_of_data] = {}
+
+                if key not in network_data[network_name][type_of_data]:
+                    network_data[network_name][type_of_data][key] = []
+
+                network_data[network_name][type_of_data][key].append(value)
+
+    if target_network and target_network not in network_data:
+        raise ValidationError(
+            {
+                "network": f"Network name with that name does not exist or has no metrics: '{target_network}'"
+            }
+        )
+
+    return {"timestamps": timestamps, "network_metrics": network_data}

@@ -2,6 +2,7 @@ import asyncio
 
 from api.client import BasicClient
 
+from services.metrics.network import collect_network_data
 from services.metrics.thermals import collect_thermal_metrics
 from services.metrics.disk import collect_storage_data
 from services.metrics.cpu import collect_cpu_metrics
@@ -14,6 +15,7 @@ def collect_metrics() -> dict:
         "memory_metrics": {**collect_memory_metrics()},
         "storage_metrics": {**collect_storage_data()},
         "thermal_metrics": {**collect_thermal_metrics()},
+        "network_metrics": {**collect_network_data()},
     }
 
 

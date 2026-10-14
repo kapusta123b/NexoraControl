@@ -14,6 +14,7 @@ from apps.agents.api.views.metrics import (
     AgentResourceMetricHistoryView,
     AgentStorageMetricHistoryView,
     AgentThermalMetricHistoryView,
+    AgentNetworkMetricHistoryView,
 )
 
 app_name = "agents"
@@ -33,6 +34,11 @@ url_metrics = [
         "agents/<int:pk>/metrics/thermal/",
         AgentThermalMetricHistoryView.as_view(),
         name="agent-metrics-thermal-history",
+    ),
+    path(
+        "agents/<int:pk>/metrics/network/",
+        AgentNetworkMetricHistoryView.as_view(),
+        name="agent-metrics-network-history",
     ),
 ]
 

@@ -74,15 +74,31 @@ def _normalize_thermal_data(metrics_data: dict):
     return metrics_data, raw_thermal_metrics
 
 
+def _normalize_network_data(metrics_data: dict):
+    raw_network_metrics = metrics_data["network_metrics"]
+
+    metrics_data["network_metrics"] = {
+        network_name: {
+            "traffic_sent": network_data["traffic_sent"],
+            "traffic_recv": network_data["traffic_recv"],
+            "packets_sent": network_data["packets_sent"],
+            "packets_recv": network_data["packets_recv"],
+        }
+        for network_name, network_data in metrics_data["network_metrics"].items()
+    }
+
+    return metrics_data, raw_network_metrics
+
+
 def _normalize_heartbeat_data(metrics_data: dict):
     metrics_data, storage_data = _normalize_storage_data(metrics_data)
     metrics_data, thermal_data = _normalize_thermal_data(metrics_data)
-
-    channel_layer_data = {**storage_data, **thermal_data}
+    metrics_data, network_data = _normalize_network_data(metrics_data)
 
     channel_layer_data = {
         "storage_metrics": storage_data,
         "thermal_metrics": thermal_data,
+        "network_metrics": network_data,
         "cpu_metrics": metrics_data["cpu_metrics"],
         "memory_metrics": metrics_data["memory_metrics"],
     }
@@ -90,7 +106,9 @@ def _normalize_heartbeat_data(metrics_data: dict):
     return metrics_data, channel_layer_data
 
 
-def heartbeat_manager(metrics_data: dict, agent):
+def heartbeat_manager(metrics_data: dict | None, agent):
+    if not metrics_data or not agent:
+        return
 
     metrics_data, channel_layer_data = _normalize_heartbeat_data(metrics_data)
 
