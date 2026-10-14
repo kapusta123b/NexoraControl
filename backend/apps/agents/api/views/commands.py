@@ -28,19 +28,23 @@ from apps.agents.services.command import (
 class CommandListView(ListCreateAPIView):
     serializer_class = CommandListSerializer
 
-    def create(self, request, pk):
+    def create(self, request, *args, **kwargs):
+        pk = self.kwargs.get("pk")
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
+        serializer.save(agent_id=pk)
+
+        headers = self.get_success_headers(serializer.data)
         return Response(
-            status=status.HTTP_201_CREATED,
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
 
     def get_queryset(self):
-        pk = self.kwargs["pk"]
+        pk = self.kwargs.get("pk")
 
         queryset = get_command_queryset(self.request, pk)
-
         return queryset
 
 
