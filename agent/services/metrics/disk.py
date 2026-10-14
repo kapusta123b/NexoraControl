@@ -43,37 +43,39 @@ def _get_table_drives() -> list[dict]:
     return table_data
 
 
-def collect_storage_data() -> dict:
+def collect_storage_data() -> dict[str, dict] | dict:
     disks = {}
 
     disks_partitions = psutil.disk_partitions()
     disks_statistics = psutil.disk_io_counters(perdisk=True)
 
-    if disks_statistics:
-        for disk_name, disk_info in disks_statistics.items():
-            if "loop" in disk_name:
-                continue
+    if not disks_partitions or not disks_statistics:
+        return {}
 
-            if ("p" in disk_name and disk_name[-1].isdigit()) or (
-                disk_name.startswith("sd") and disk_name[-1].isdigit()
-            ):
-                continue
+    for disk_name, disk_info in disks_statistics.items():
+        if "loop" in disk_name:
+            continue
 
-            disks[disk_name] = {
-                "read_bytes": disk_info.read_bytes,
-                "write_bytes": disk_info.write_bytes,
-                "read_count": disk_info.read_count,
-                "write_count": disk_info.write_count,
-            }
+        if ("p" in disk_name and disk_name[-1].isdigit()) or (
+            disk_name.startswith("sd") and disk_name[-1].isdigit()
+        ):
+            continue
 
-        drives_info: list[dict] = _get_table_drives()
+        disks[disk_name] = {
+            "read_bytes": disk_info.read_bytes,
+            "write_bytes": disk_info.write_bytes,
+            "read_count": disk_info.read_count,
+            "write_count": disk_info.write_count,
+        }
 
-        for drive_info in drives_info:
-            device_name = drive_info["device"]
+    drives_info: list[dict] = _get_table_drives()
 
-            if device_name in disks:
-                drive_info.pop("device")
-                disks[device_name].update(drive_info)
+    for drive_info in drives_info:
+        device_name = drive_info["device"]
+
+        if device_name in disks:
+            drive_info.pop("device")
+            disks[device_name].update(drive_info)
 
     for disk_part in disks_partitions:
         if "loop" in disk_part.device:

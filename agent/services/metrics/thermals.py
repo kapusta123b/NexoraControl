@@ -1,7 +1,7 @@
 import psutil
 
 
-def collect_thermal_metrics():
+def collect_thermal_metrics() -> dict[str, list] | dict:
     thermals = {}
     thermals_sensors = psutil.sensors_temperatures()
 

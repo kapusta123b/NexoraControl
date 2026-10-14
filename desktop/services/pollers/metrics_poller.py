@@ -16,7 +16,10 @@ class AgentMetricPoller(BasePoller):
         self.query_params = {}
 
     def on_clicked(
-        self, agent_id: int = None, metric_type: str = None, query_params: dict = {}
+        self,
+        agent_id: int | None = None,
+        metric_type: str | None = None,
+        query_params: dict = {},
     ) -> None:
         if agent_id:
             self.agent_id = agent_id

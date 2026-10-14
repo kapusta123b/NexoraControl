@@ -53,7 +53,10 @@ def setup_table_progress_bar(
         progress_bar.style().polish(progress_bar)
 
 
-def set_gauge(gauge: SimpleNetdataGauge, value: int, unit: str | None = None) -> None:
+def set_gauge(
+    gauge: SimpleNetdataGauge, value: int | float, unit: str | None = None
+) -> None:
+
     if not isinstance(gauge, SimpleNetdataGauge):
         raise TypeError(f"gauge class must be SimpleNetdataGauge, got {gauge}")
 
