@@ -3,7 +3,12 @@ from services.utils.widgets_utils import (
     setup_table_progress_bar,
     update_or_create_row_item,
 )
-from services.utils.string_utils import UNIT_MAP, byte_converter
+from services.utils.string_utils import (
+    UNIT_MAP,
+    byte_converter,
+    calculate_bytes_per_second,
+    calculate_metric_rate,
+)
 
 from services.pollers.metrics_poller import AgentMetricPoller
 from services.stores.agent_metric_store import MetricStore
@@ -47,9 +52,12 @@ class PerformanceStoragePage:
             self.ui.disk_write_read_graph,
             antialias=True,
             y_label="Speed",
-            y_range=(0, 1000000),
+            y_range=(0, 10000000),
         )
         self.current_disk = None
+
+        self.read_speed = 0
+        self.write_speed = 0
 
         self.is_init_disk_selector = False
 
@@ -59,9 +67,6 @@ class PerformanceStoragePage:
 
         self.last_storage_metric = {}
         self.current_metric = {}
-
-        self.current_disk_info = {}
-        self.last_disk_info = {}
 
         self._setup_style_page()
         self._setup_static_series()
@@ -91,7 +96,7 @@ class PerformanceStoragePage:
 
         if not current_page_widget == self.ui.performance_storage_page:
             return
-        
+
         incoming_timestamps = metrics.get("timestamps", [])
         if not incoming_timestamps:
             if not self.is_init_disk_selector:
@@ -100,15 +105,14 @@ class PerformanceStoragePage:
             return
 
         storage_data = metrics.get("storage_metrics", {})
+        if storage_data:
+            for disk_name, disk_info in storage_data.items():
+                self.storage_io_counters[disk_name] = {
+                    "timestamps": incoming_timestamps,
+                    **disk_info,
+                }
 
-        for disk_name, disk_info in storage_data.items():
-            self.storage_io_counters[disk_name] = {
-                "timestamps": incoming_timestamps,
-                "read": disk_info.get("read", []),
-                "write": disk_info.get("write", []),
-            }
-
-        self._change_disk_on_graph(self.current_disk)
+            self._change_disk_on_graph(self.current_disk)
 
     def on_latest_received(self, metric: dict) -> None:
         timestamp = metric.get("timestamp")
@@ -136,36 +140,35 @@ class PerformanceStoragePage:
         self.current_filesystems = current_filesystems
 
         if self.delta_time > 0:
-            for disk_name in list(self.storage_io_counters.keys()):
+            for disk_name in self.storage_io_counters.keys():
                 if disk_name not in current_devices and disk_name not in last_devices:
                     return
 
-                read_bytes = self.current_disk_info.get("read_bytes", 0)
-                write_bytes = self.current_disk_info.get("write_bytes", 0)
+                read_bytes = current_devices[disk_name].get("read_bytes", 0)
+                write_bytes = current_devices[disk_name].get("write_bytes", 0)
 
                 self.storage_io_counters[disk_name]["timestamps"].append(timestamp)
 
                 if disk_name == self.current_disk:
                     self._prepare_dynamic_data()
                     self.disk_io_graph.append_point(
-                        timestamp, {"READ": read_bytes, "WRITE": write_bytes}
+                        timestamp, {"READ": self.read_speed, "WRITE": self.write_speed}
                     )
 
                 self.storage_io_counters[disk_name]["read"].append(read_bytes)
                 self.storage_io_counters[disk_name]["write"].append(write_bytes)
-
         self.last_storage_metric = current_storage
         self.last_timestamp = timestamp
 
         self._update_storage_tables(current_devices, current_filesystems)
 
-    def _change_disk_on_graph(self, disk_name) -> None:
+    def _change_disk_on_graph(self, disk_name: str | None) -> None:
         if not disk_name:
             return
 
         self.current_disk = disk_name
-
         self.current_unit = self.ui.disk_data_unit_combo_box.currentText()
+        self.formatted_current_unit = self.current_unit.split("/")[0].lower()
 
         if not disk_name in self.storage_io_counters:
             self.performance_poller.on_clicked(
@@ -180,11 +183,14 @@ class PerformanceStoragePage:
         disk_cache = self.storage_io_counters[disk_name]
         disk_timestamps = disk_cache["timestamps"]
 
-        read_speed = self._calculate_bytes_per_second(
-            disk_cache["read"], disk_timestamps
+        self.disk_io_graph.series_suffixes["READ"] = self.current_unit
+        self.disk_io_graph.series_suffixes["WRITE"] = self.current_unit
+
+        read_speed = calculate_bytes_per_second(
+            disk_cache["read"], disk_timestamps, self.formatted_current_unit
         )
-        write_speed = self._calculate_bytes_per_second(
-            disk_cache["write"], disk_timestamps
+        write_speed = calculate_bytes_per_second(
+            disk_cache["write"], disk_timestamps, self.formatted_current_unit
         )
 
         self.disk_io_graph.update_data(
@@ -237,47 +243,6 @@ class PerformanceStoragePage:
                     "Check the mount settings on the agent side."
                 ),
             )
-
-    def _calculate_bytes_per_second(
-        self, raw_bytes: list[int], disk_timestamps: list[int]
-    ) -> list[float]:
-        speed_in_bytes = []
-
-        self.disk_io_graph.series_suffixes["READ"] = self.current_unit
-        self.disk_io_graph.series_suffixes["WRITE"] = self.current_unit
-
-        formatted_current_unit = self.current_unit.split("/")[0].lower()
-
-        if raw_bytes and len(raw_bytes) == len(disk_timestamps):
-            for i in range(1, len(raw_bytes)):
-                delta_raw_bytes = raw_bytes[i] - raw_bytes[i - 1]
-                delta_time = disk_timestamps[i] - disk_timestamps[i - 1]
-
-                if delta_time > 0 and delta_raw_bytes >= 0:
-                    bytes_per_second = delta_raw_bytes / delta_time
-                else:
-                    bytes_per_second = 0
-
-                converted_speed = byte_converter(
-                    bytes_per_second,
-                    unit=formatted_current_unit,
-                    precision=4,
-                    as_float=True,
-                )
-                speed_in_bytes.append(converted_speed)
-
-        return speed_in_bytes
-
-    def _calculate_metric_rate(
-        self, current_data: dict, last_data: dict, key: str, delta_time: float
-    ) -> float:
-
-        if delta_time <= 0:
-            return 0.0
-
-        delta_value = current_data.get(key, 0) - last_data.get(key, 0)
-
-        return max(0.0, delta_value / delta_time)
 
     def _update_storage_tables(self, devices: dict, filesystems: dict) -> None:
         self._update_devices_table(devices)
@@ -343,35 +308,34 @@ class PerformanceStoragePage:
         current_device_disk = self.current_devices[self.current_disk]
         last_device_disk = self.last_devices[self.current_disk]
 
-        r_bps = self._calculate_metric_rate(
+        raw_r_bps = calculate_metric_rate(
             current_device_disk, last_device_disk, "read_bytes", delta_time
         )
-        w_bps = self._calculate_metric_rate(
+        raw_w_bps = calculate_metric_rate(
             current_device_disk, last_device_disk, "write_bytes", delta_time
         )
 
-        r_iops = self._calculate_metric_rate(
+        self.read_speed = byte_converter(
+            raw_r_bps, unit=self.formatted_current_unit, precision=2, as_float=True
+        )
+
+        self.write_speed = byte_converter(
+            raw_w_bps, unit=self.formatted_current_unit, precision=2, as_float=True
+        )
+
+        r_iops = calculate_metric_rate(
             current_device_disk, last_device_disk, "read_count", delta_time
         )
-        w_iops = self._calculate_metric_rate(
+        w_iops = calculate_metric_rate(
             current_device_disk, last_device_disk, "write_count", delta_time
         )
 
-        current_unit = self.current_unit.split("/")[0].lower()
-
-        read_speed = byte_converter(
-            r_bps, unit=current_unit, precision=2, as_float=True
-        )
-        write_speed = byte_converter(
-            w_bps, unit=current_unit, precision=2, as_float=True
-        )
-
-        set_gauge(self.disk_write_gauge, write_speed, self.current_unit)
-        set_gauge(self.disk_read_gauge, read_speed, self.current_unit)
+        set_gauge(self.disk_write_gauge, self.write_speed, self.current_unit)
+        set_gauge(self.disk_read_gauge, self.read_speed, self.current_unit)
 
         io_data = {
-            "read_speed": read_speed,
-            "write_speed": write_speed,
+            "read_speed": self.read_speed,
+            "write_speed": self.write_speed,
             "read_iops": int(r_iops),
             "write_iops": int(w_iops),
             # "avg_latency": current_device_disk["avg_latency"],
