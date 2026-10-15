@@ -27,6 +27,10 @@ class MetricGraphHelper:
         self.graph = graph
         self.antialias = antialias
 
+        self.PLOT_BACKGROUND = "#0D151E"
+        self.PLOT_FOREGROUND = "#96A9B8"
+        self.GRID_ALPHA = 0.12
+
         self.curves: dict[str, pg.PlotDataItem] = {}
 
         self.series_colors: dict[str, str] = {}
@@ -118,9 +122,10 @@ class MetricGraphHelper:
         self.series_data[name] = []
 
     def _setup_style(self, y_label: str) -> None:
-        self.graph.setBackground(None)
-        axis_pen = pg.mkPen(color="#475569", width=1)
-        text_pen = pg.mkPen(color="#adb3bb", width=1)
+
+        self.graph.setBackground(self.PLOT_BACKGROUND)
+        axis_pen = pg.mkPen(color=self.PLOT_FOREGROUND, width=1)
+        text_pen = pg.mkPen(color=self.PLOT_FOREGROUND, width=1)
         plot_item = self.graph.plotItem
 
         time_axis = TimeAxisItem(orientation="bottom")
@@ -133,7 +138,7 @@ class MetricGraphHelper:
             axis.setPen(axis_pen)
             axis.setTextPen(text_pen)
 
-        self.graph.showGrid(x=True, y=True, alpha=0.3)
+        self.graph.showGrid(x=True, y=True, alpha=self.GRID_ALPHA)
         self.graph.setLabel("bottom", "Time")
         self.graph.setLabel("left", y_label)
 

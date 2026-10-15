@@ -3,6 +3,8 @@ from services.utils.widgets_utils import (
     setup_table_progress_bar,
     update_or_create_row_item,
 )
+from styles.metric_colors import MetricColors as C
+
 from services.pollers.metrics_poller import AgentMetricPoller
 
 from services.stores.agent_metric_store import MetricStore
@@ -30,13 +32,13 @@ class PerformanceThermalPage:
         self.current_sensor_gauge = SimpleNetdataGauge(
             title="CURRENT SENSOR",
             unit="°C",
-            color="#fb923c",
+            color=C.THERMAL_CURRENT,
         )
 
         self.hottest_sensor_gauge = SimpleNetdataGauge(
             title="HOTTEST SENSOR",
             unit="°C",
-            color="#f43f5e",
+            color=C.THERMAL_HOTTEST,
         )
 
         self.ui.thermals_gauge_layout.addWidget(self.current_sensor_gauge)
@@ -269,4 +271,9 @@ class PerformanceThermalPage:
             )
 
     def _setup_static_series(self) -> None:
-        self.thermals_graph.add_series("TEMPERATURE", "#f97316", suffix="°C")
+        self.thermals_graph.add_series(
+            "TEMPERATURE",
+            C.THERMAL_CURRENT,
+            width=1.8,
+            suffix="°C",
+        )

@@ -10,6 +10,8 @@ from services.utils.string_utils import (
     calculate_metric_rate,
 )
 
+from styles.metric_colors import MetricColors as C
+
 from services.pollers.metrics_poller import AgentMetricPoller
 from services.stores.agent_metric_store import MetricStore
 
@@ -34,15 +36,10 @@ class PerformanceStoragePage:
         self.ui = ui
 
         self.disk_read_gauge = SimpleNetdataGauge(
-            title="READ",
-            unit="MB/s",
-            color="#60a5fa",
+            title="READ", unit="MB/s", color=C.DISK_READ
         )
-
         self.disk_write_gauge = SimpleNetdataGauge(
-            title="WRITE",
-            unit="MB/s",
-            color="#f59e0b",
+            title="WRITE", unit="MB/s", color=C.DISK_WRITE
         )
 
         self.ui.storage_gauge_layout.addWidget(self.disk_read_gauge)
@@ -296,8 +293,9 @@ class PerformanceStoragePage:
             setup_table_progress_bar(table, row, 5, percent)
 
     def _setup_static_series(self) -> None:
-        self.disk_io_graph.add_series("READ", "#60a5fa", suffix=" MB/s")
-        self.disk_io_graph.add_series("WRITE", "#f59e0b", suffix=" MB/s")
+        self.disk_io_graph.add_series("READ", C.DISK_READ, width=1.8, suffix=" MB/s")
+
+        self.disk_io_graph.add_series("WRITE", C.DISK_WRITE, width=1.8, suffix=" MB/s")
 
     def _prepare_dynamic_data(self) -> None:
         if not self.delta_time:

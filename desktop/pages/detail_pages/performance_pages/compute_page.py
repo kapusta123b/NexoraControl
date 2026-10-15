@@ -1,5 +1,7 @@
 import colorsys
 
+from styles.metric_colors import MetricColors as C
+
 from services.utils.string_utils import byte_converter
 
 from ui.main_window import Ui_MainWindow
@@ -14,11 +16,9 @@ class PerformanceComputePage:
         self.performance_store = store
         self.ui = ui
 
-        self.cpu_gauge = SimpleNetdataGauge(title="CPU", unit="%", color="#38bdf8")
-        self.ram_gauge = SimpleNetdataGauge(title="RAM", unit="%", color="#c084fc")
-        self.disk_gauge = SimpleNetdataGauge(
-            title="AVG DISK", unit="%", color="#34d399"
-        )
+        self.cpu_gauge = SimpleNetdataGauge(title="CPU", unit="%", color=C.CPU)
+        self.ram_gauge = SimpleNetdataGauge(title="RAM", unit="%", color=C.RAM)
+        self.disk_gauge = SimpleNetdataGauge(title="AVG DISK", unit="%", color=C.DISK)
 
         self.ui.compute_gauge_layout.addWidget(self.cpu_gauge)
         self.ui.compute_gauge_layout.addWidget(self.ram_gauge)
@@ -139,12 +139,12 @@ class PerformanceComputePage:
         self.cores_initialized = True
 
     def _setup_static_series(self):
-        self.cpu_ram_graph.add_series("CPU", "#38bdf8")
-        self.cpu_ram_graph.add_series("RAM", "#c084fc")
+        self.cpu_ram_graph.add_series("CPU", C.CPU, width=1.8)
+        self.cpu_ram_graph.add_series("RAM", C.RAM, width=1.8)
 
-        self.load_average_graph.add_series("1m", "#fb923c", width=1.5, suffix="")
-        self.load_average_graph.add_series("5m", "#818cf8", width=1.5, suffix="")
-        self.load_average_graph.add_series("15m", "#64748b", width=1.5, suffix="")
+        self.load_average_graph.add_series("1m", C.LOAD_1M, width=1.8, suffix="")
+        self.load_average_graph.add_series("5m", C.LOAD_5M, width=1.6, suffix="")
+        self.load_average_graph.add_series("15m", C.LOAD_15M, width=1.4, suffix="")
 
     def _get_core_color(self, index: int, total_cores: int) -> str:
         step = 0.30 / max(total_cores - 1, 1)

@@ -9,6 +9,8 @@ from services.utils.widgets_utils import (
     update_or_create_row_item,
 )
 
+from styles.metric_colors import MetricColors as C
+
 from services.pollers.metrics_poller import AgentMetricPoller
 
 from services.stores.agent_metric_store import MetricStore
@@ -37,21 +39,19 @@ class PerformanceNetworkPage(QObject):
         self.ui = ui
 
         self.traffic_rx_gauge = SimpleNetdataGauge(
-            "TRAFFIC RX",
-            unit="MB/s",
-            color="#22d3ee",
+            title="TRAFFIC RX", unit="MB/s", color=C.NETWORK_RX
         )
 
         self.traffic_tx_gauge = SimpleNetdataGauge(
-            "TRAFFIC TX",
-            unit="MB/s",
-            color="#34d399",
+            title="TRAFFIC TX", unit="MB/s", color=C.NETWORK_TX
         )
 
         self.packets_rx_gauge = SimpleNetdataGauge(
-            "PACKETS RX",
-            unit="MB/s",
-            color="#8e7ac8",
+            title="PACKETS RX", unit="pkt/s", color=C.PACKETS_RX
+        )
+
+        self.packets_tx_gauge = SimpleNetdataGauge(
+            title="PACKETS TX", unit="pkt/s", color=C.PACKETS_TX
         )
 
         self.packets_tx_gauge = SimpleNetdataGauge(
@@ -521,12 +521,5 @@ class PerformanceNetworkPage(QObject):
         )
 
     def _setup_static_series(self) -> None:
-        self.network_traffic_graph.add_series(
-            "RX",
-            "#22d3ee",
-        )
-
-        self.network_traffic_graph.add_series(
-            "TX",
-            "#34d399",
-        )
+        self.network_traffic_graph.add_series("RX", C.NETWORK_RX, width=1.8)
+        self.network_traffic_graph.add_series("TX", C.NETWORK_TX, width=1.8)

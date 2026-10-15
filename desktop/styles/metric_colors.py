@@ -1,0 +1,19 @@
+class MetricColors:
+    CPU = "#86BCD5"
+    RAM = "#91C5AD"
+    DISK = "#B7B7A3"
+
+    LOAD_1M = "#D9B387"
+    LOAD_5M = "#A0B4D2"
+    LOAD_15M = "#8999A8"
+
+    NETWORK_RX = "#86BCD5"
+    NETWORK_TX = "#91C5AD"
+    PACKETS_RX = "#B6B5CE"
+    PACKETS_TX = "#7FAFAE"
+
+    DISK_READ = "#86BCD5"
+    DISK_WRITE = "#D9B387"
+
+    THERMAL_CURRENT = "#D9B387"
+    THERMAL_HOTTEST = "#D78E92"
