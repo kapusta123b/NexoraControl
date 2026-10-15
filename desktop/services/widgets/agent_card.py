@@ -16,10 +16,6 @@ class AgentCardWidget(QWidget):
         self.ui.setupUi(self)
 
         self.setAttribute(Qt.WA_StyledBackground, True)
-        self.ui.agent_information_widget.setAttribute(
-            Qt.WA_TransparentForMouseEvents,
-            True,
-        )
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
     def set_agent(self, agent: dict) -> None:
