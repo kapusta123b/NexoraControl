@@ -120,6 +120,17 @@ def calculate_bytes_per_second(
 def calculate_metric_rate(
     current_data: dict, last_data: dict, key: str, delta_time: float
 ) -> float:
+    """Calculate the rate via two different bytes from metrics
+
+    Args:
+        current_data (dict): fresh bytes of the current metric
+        last_data (dict): the last bytes of the previous metric
+        key (str): key name which will be used in calculation
+        delta_time (float): delta of two unix time
+
+    Returns:
+        float: rate value (in bytes)
+    """
 
     if delta_time <= 0:
         return 0.0
