@@ -1,32 +1,31 @@
 from datetime import datetime
 
 from PySide6.QtWidgets import QButtonGroup, QLayout
+from PySide6.QtCore import QObject
 
 from api.client import NexoraClient
 
 from services.utils.widgets_utils import apply_style_property
+
 from services.widgets.recent_command_card import CommandCardWidget
-from services.stores.agent_command_store import CommandsStore
+
 from services.pollers.overview_poller import DetailOverviewPoller
+
+from services.stores.agent_command_store import CommandsStore
 from services.stores.agent_store import DetailAgentStore
 
 from ui.main_window import Ui_MainWindow
 
-from PySide6.QtCore import QObject
-
 
 class DetailOverviewController(QObject):
-    def __init__(
-        self,
-        ui: Ui_MainWindow,
-        client: NexoraClient,
-    ):
+    def __init__(self, ui: Ui_MainWindow, client: NexoraClient, store: CommandsStore):
         super().__init__()
         self.ui = ui
         self.agent = {}
 
         self.detail_agent_store = DetailAgentStore()
-        self.commands_store = CommandsStore()
+
+        self.commands_store = store
 
         self.overview_poller = DetailOverviewPoller(
             client, self.detail_agent_store, self.commands_store
