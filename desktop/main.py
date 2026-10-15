@@ -46,6 +46,10 @@ class MainWindow(QMainWindow):
         buttons = {
             self.ui.dashboard_button: self.ui.dashboard_page,
             self.ui.agents_button: self.ui.agents_page,
+            self.ui.commands_button: self.ui.fleet_commands_page,
+            self.ui.logs_button: self.ui.fleet_logs_page,
+            self.ui.settings_button: self.ui.preferences_page,
+            self.ui.about_button: self.ui.application_about_page,
         }
 
         for button, page in buttons.items():
@@ -76,9 +80,16 @@ class MainWindow(QMainWindow):
         )
 
 
-app = QApplication(sys.argv)
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MainWindow()
 
-window = MainWindow()
-window.show()
+    try:
+        with open("styles/theme.qss", "r") as f:
+            qss_rules = f.read()
+            app.setStyleSheet(qss_rules)
+    except FileNotFoundError:
+        print("Warning: theme.qss file not found. Running without custom styles.")
 
-sys.exit(app.exec())
+    window.show()
+    sys.exit(app.exec())

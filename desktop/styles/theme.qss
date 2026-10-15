@@ -1,0 +1,489 @@
+QWidget#central_content { background: #090E14; color: #D8E4ED;
+    font-family: "Segoe UI", "Inter", "Noto Sans", "DejaVu Sans", sans-serif;
+    font-size: 12px; }
+QWidget#left_panel { background: #0C131C; border-right: 1px solid #223340; }
+QWidget#dashboard_page, QWidget#agents_page, QWidget#agent_detail_page,
+QWidget#overview_detail_page, QWidget#performance_detail_page,
+QWidget#hardware_detail_page, QWidget#performance_compute_page,
+QWidget#performance_storage_page, QWidget#performance_thermal_page,
+QWidget#performance_network_page, QWidget#fleet_commands_page,
+QWidget#fleet_logs_page, QWidget#preferences_page,
+QWidget#application_about_page, QWidget#agent_commands_page {
+    background: #090E14; }
+QLabel { color: #D8E4ED; background: transparent; border: none; font-size: 12px; }
+
+/* hero | 1 labels */
+QLabel#nexora_logo {
+    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 16px; font-weight: 700; color: #ECF3F8;
+}
+
+/* sidebar_micro | 1 labels */
+QLabel#sidebar_product_subtitle {
+    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 9px; font-weight: 500; color: #718897;
+}
+
+/* page_title | 14 labels */
+QLabel#dashboard_label,
+QLabel#agents_headline_label,
+QLabel#overview_label,
+QLabel#performance_label,
+QLabel#compute_label,
+QLabel#storage_label,
+QLabel#thermals_label,
+QLabel#network_label,
+QLabel#hardware_label,
+QLabel#agent_cmd_title,
+QLabel#fleet_cmd_title,
+QLabel#fleet_logs_title,
+QLabel#prefs_title,
+QLabel#about_title {
+    font-size: 17px; font-weight: 600; color: #EFF4F8;
+}
+
+/* hero_value | 7 labels */
+QLabel#agents_count,
+QLabel#online_count,
+QLabel#offline_count {
+    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 18px; font-weight: 600; color: #E4EFF5;
+}
+
+QLabel#cpu_load_label,
+QLabel#ram_load_label,
+QLabel#disk_load_label,
+QLabel#up_time_label {
+    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 12px; font-weight: 600; color: #E4EFF5;
+}
+
+/* subject_value | 1 labels */
+QLabel#detail_top_agent_name_label {
+    font-size: 15px; font-weight: 600; color: #F0F5F8;
+}
+
+/* status | 2 labels */
+QLabel#detail_top_agent_status_label,
+QLabel#agent_status_value_label {
+    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 11px; font-weight: 600; color: #ADC1CD;
+}
+
+/* page_caption | 15 labels */
+QLabel#dashboard_legend_label,
+QLabel#agents_table_legend_label,
+QLabel#page_description_label,
+QLabel#overview_legend_label,
+QLabel#performance_legend_label,
+QLabel#compute_legend_label,
+QLabel#storage_legend_label,
+QLabel#thermals_legend_label,
+QLabel#network_legend_label,
+QLabel#hardware_legend_label,
+QLabel#agent_cmd_subtitle,
+QLabel#fleet_cmd_subtitle,
+QLabel#fleet_logs_subtitle,
+QLabel#prefs_subtitle,
+QLabel#about_subtitle {
+    font-size: 11px; font-weight: 400; color: #90A5B4;
+}
+
+/* section_title | 43 labels */
+QLabel#agents_label,
+QLabel#system_status_label,
+QLabel#quick_actions_label,
+QLabel#recent_commands_label,
+QLabel#compute_current_state_label,
+QLabel#cpu_ram_metric_label,
+QLabel#memory_label,
+QLabel#compute_load_average_label,
+QLabel#compute_cpu_cores_label,
+QLabel#current_storage_label,
+QLabel#disk_io_label,
+QLabel#disk_i_o_summary_label,
+QLabel#file_systems_label,
+QLabel#storage_devices_label,
+QLabel#current_thermals_label,
+QLabel#temperature_history_label,
+QLabel#sensors_label,
+QLabel#rx_tx_throughput_label,
+QLabel#network_health_label,
+QLabel#network_health_errors_label,
+QLabel#network_health_drops_label,
+QLabel#network_health_total_label,
+QLabel#network_interfaces_label,
+QLabel#cpu_info_label,
+QLabel#memory_info_label,
+QLabel#gpu_info_label,
+QLabel#motherboard_info_label,
+QLabel#bios_info_label,
+QLabel#hardware_storage_inventory_panel_header,
+QLabel#hardware_network_inventory_panel_header,
+QLabel#hardware_platform_heading,
+QLabel#agent_command_form_panel_header,
+QLabel#agent_command_output_panel_header,
+QLabel#agent_command_history_panel_header,
+QLabel#fleet_command_library_panel_header,
+QLabel#fleet_command_execution_panel_header,
+QLabel#fleet_command_history_panel_header,
+QLabel#fleet_command_result_panel_header,
+QLabel#fleet_logs_filters_panel_header,
+QLabel#fleet_logs_table_panel_header,
+QLabel#fleet_logs_details_panel_header,
+QLabel#preferences_connection_panel_header,
+QLabel#about_identity_panel_header {
+    font-size: 12px; font-weight: 600; color: #DDE9F0;
+}
+
+/* section_caption | 11 labels */
+QLabel#hardware_storage_inventory_panel_caption,
+QLabel#hardware_network_inventory_panel_caption,
+QLabel#agent_command_form_panel_caption,
+QLabel#agent_command_output_panel_caption,
+QLabel#fleet_command_library_panel_caption,
+QLabel#fleet_command_execution_panel_caption,
+QLabel#fleet_command_history_panel_caption,
+QLabel#fleet_command_result_panel_caption,
+QLabel#fleet_logs_table_panel_caption,
+QLabel#preferences_connection_panel_caption,
+QLabel#about_identity_panel_caption {
+    font-size: 11px; font-weight: 400; color: #879DAE;
+}
+
+/* helper | 3 labels */
+QLabel#agent_command_safety_label,
+QLabel#fleet_command_library_help,
+QLabel#fleet_command_warning {
+    font-size: 11px; font-weight: 400; color: #B1A78F;
+}
+
+/* empty | 3 labels */
+QLabel#agent_command_result_summary,
+QLabel#fleet_command_result_metadata,
+QLabel#fleet_logs_event_metadata {
+    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 11px; color: #B4C5D0;
+}
+
+/* body | 1 labels */
+QLabel#about_description {
+    font-size: 12px; font-weight: 400; color: #C9D6DF;
+}
+
+/* meta | 3 labels */
+QLabel#about_version_value,
+QLabel#about_backend_value,
+QLabel#about_client_value {
+    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 11px; font-weight: 400; color: #C7D7E1;
+}
+
+/* field_emphasis | 12 labels */
+QLabel#hardware_group_label,
+QLabel#sensor_name_label,
+QLabel#network_gauges_combo_box_label,
+QLabel#network_group_combo_box_legend_label,
+QLabel#agent_command_category_label,
+QLabel#agent_command_type_label,
+QLabel#agent_command_payload_label,
+QLabel#fleet_command_target_label,
+QLabel#fleet_command_selected_label,
+QLabel#fleet_command_payload_label,
+QLabel#preferences_endpoint_label,
+QLabel#preferences_interval_label {
+    font-size: 10px; font-weight: 600; color: #9BB4C5;
+}
+
+/* metric_label | 7 labels */
+QLabel#agent_label,
+QLabel#online_label,
+QLabel#offline_label,
+QLabel#cpu_label,
+QLabel#ram_label,
+QLabel#disk_label,
+QLabel#uptime_label {
+    font-size: 10px; font-weight: 600; color: #93A8B8;
+}
+
+/* data_value | 42 labels */
+QLabel#last_seen_value_label,
+QLabel#ip_value_label,
+QLabel#hostname_value_label,
+QLabel#os_name_value_label,
+QLabel#used_memory_value_label,
+QLabel#available_memory_value_label,
+QLabel#swap_memory_value_label,
+QLabel#disk_read_information_value,
+QLabel#disk_write_information_value,
+QLabel#disk_read_per_sec_information_value,
+QLabel#disk_write_per_sec_information_value,
+QLabel#disk_avg_latency_value,
+QLabel#network_health_errors_content_top_rx_errors_value_label,
+QLabel#network_health_errors_content_bottom_tx_errors_value_label,
+QLabel#network_health_drops_content_top_rx_drops_value_label,
+QLabel#network_health_drops_content_bottom_tx_drops_value_label,
+QLabel#network_health_total_content_top_rx_packets_value_label,
+QLabel#network_health_total_content_top_tx_packets_value_label,
+QLabel#network_health_total_content_bottom_rx_data_value_label,
+QLabel#network_health_total_content_bottom_tx_data_value_label,
+QLabel#model_value_label,
+QLabel#cores_value_label,
+QLabel#threads_value_label,
+QLabel#frequency_value_label,
+QLabel#architecture_value_label,
+QLabel#memory_total_value_label,
+QLabel#memory_type_value_label,
+QLabel#memory_speed_value_label,
+QLabel#gpu_model_type_value_label,
+QLabel#gpu_vram_value_label,
+QLabel#gpu_memory_type_value_label,
+QLabel#motherboard_vendor_value_label,
+QLabel#motherboard_model_value_label,
+QLabel#motherboard_serial_value_label,
+QLabel#motherboard_architecture_value_label,
+QLabel#bios_vendor_value_label,
+QLabel#bios_version_value_label,
+QLabel#bios_date_value_label,
+QLabel#hardware_chassis_vendor_value,
+QLabel#hardware_product_name_value,
+QLabel#hardware_chassis_type_value,
+QLabel#hardware_virtualization_value {
+    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 11px; font-weight: 500; color: #E0EAF1;
+}
+
+/* field | 43 labels */
+QLabel#agent_row_label,
+QLabel#last_seen_row_label,
+QLabel#ip_row_label,
+QLabel#hostname_row_label,
+QLabel#os_name_row_label,
+QLabel#used_memory_label,
+QLabel#available_memory_label,
+QLabel#swap_memory_label,
+QLabel#disk_read_information_label,
+QLabel#disk_write_information_label,
+QLabel#disk_read_per_sec_information_label,
+QLabel#disk_write_per_sec_information_label,
+QLabel#disk_avg_latency_label,
+QLabel#network_health_errors_content_top_rx_errors_label,
+QLabel#network_health_errors_content_bottom_tx_errors_label,
+QLabel#network_health_drops_content_top_rx_drops_label,
+QLabel#network_health_drops_content_bottom_tx_drops_label,
+QLabel#network_health_total_content_top_rx_packets_label,
+QLabel#network_health_total_content_top_tx_packets_label,
+QLabel#network_health_total_content_bottom_rx_data_label,
+QLabel#network_health_total_content_bottom_tx_data_label,
+QLabel#model_row_label,
+QLabel#cores_row_label,
+QLabel#threads_row_label,
+QLabel#frequency_row_label,
+QLabel#architecture_row_label,
+QLabel#memory_total_row_label,
+QLabel#memory_type_row_label,
+QLabel#memory_speed_row_label,
+QLabel#gpu_model_type_row_label,
+QLabel#gpu_vram_row_label,
+QLabel#gpu_memory_type_row_label,
+QLabel#motherboard_vendor_column_label,
+QLabel#motherboard_model_column_label,
+QLabel#motherboard_serial_column_label,
+QLabel#motherboard_architecture_column_label,
+QLabel#bios_vendor_row_label,
+QLabel#bios_version_row_label,
+QLabel#bios_date_row_label,
+QLabel#hardware_chassis_vendor_label,
+QLabel#hardware_product_name_label,
+QLabel#hardware_chassis_type_label,
+QLabel#hardware_virtualization_label {
+    font-size: 11px; font-weight: 400; color: #9AADB9;
+}
+
+
+/* Conditional state, driven by your existing Python dynamic properties. */
+QLabel[agent_status="online"] { color: #8AC9AF; }
+QLabel[agent_status="offline"] { color: #D5A1A7; }
+QLabel[load_level="low"] { color: #8AC9AF; }
+QLabel[load_level="medium"] { color: #D9BF91; }
+QLabel[load_level="high"] { color: #D5A1A7; }
+QLabel#online_count { color: #8AC9AF; }
+QLabel#offline_count { color: #D5A1A7; }
+QLabel#agent_command_safety_label, QLabel#fleet_command_warning {
+    color: #D7C29A; }
+
+/* Panels around commands, logs, preferences, and about: no new layout margins. */
+QFrame#fleet_command_library_panel, QFrame#fleet_command_execution_panel,
+QFrame#fleet_command_history_panel, QFrame#fleet_command_result_panel,
+QFrame#fleet_logs_filters_panel, QFrame#fleet_logs_table_panel,
+QFrame#fleet_logs_details_panel, QFrame#agent_command_form_panel,
+QFrame#agent_command_output_panel, QFrame#agent_command_history_panel,
+QFrame#preferences_connection_panel, QFrame#about_identity_panel {
+    background: #111B25; border: 1px solid #283A48; border-radius: 3px; }
+QFrame#fleet_command_execution_panel, QFrame#agent_command_form_panel {
+    border-top: 2px solid #698BA0; }
+QFrame#preferences_connection_panel, QFrame#about_identity_panel {
+    background: #101924; border-color: #2A3C4A; }
+
+/* Existing resource / inventory / overview panels. */
+QWidget#card_agents, QWidget#card_online, QWidget#card_offline,
+QWidget#cpu_widget, QWidget#ram_widget, QWidget#disk_widget,
+QWidget#uptime_widget, QWidget#system_status_box_widget,
+QWidget#quick_actions_widget,
+QWidget#cpu_info_widget, QWidget#memory_info_widget,
+QWidget#gpu_info_widget, QWidget#motherboard_info_widget,
+QWidget#bios_info_widget, QWidget#disk_io_summary_widget,
+QWidget#ram_utilization_widget, QWidget#network_health_errors_widget,
+QWidget#network_health_drops_widget, QWidget#network_health_total_widget,
+QWidget#hardware_storage_inventory_panel,
+QWidget#hardware_network_inventory_panel,
+QWidget#hardware_platform_panel {
+    background: #111B25; border: 1px solid #283A48; border-radius: 3px; }
+QWidget#cpu_info_box_widget, QWidget#memory_info_box_widget,
+QWidget#gpu_info_box_widget, QWidget#motherboard_info_box_widget,
+QWidget#bios_info_box_widget, QWidget#recent_command_box_widget { background: transparent; border: none; }
+QWidget#compute_gauge_widget, QWidget#storage_gauge_widget,
+QWidget#thermals_gauge_widget, QWidget#network_gauge_widget {
+    background: #111B25; border: 1px solid #283A48; border-radius: 3px; }
+PlotWidget#cpu_ram_metric_graph, PlotWidget#load_average_metric_graph,
+PlotWidget#cpu_cores_metric_graph, PlotWidget#disk_write_read_graph,
+PlotWidget#thermals_graph, PlotWidget#network_graph {
+    background: #0B151F; border: 1px solid #273B49; border-radius: 2px; }
+
+/* Buttons: action-first hierarchy. No pill shapes or oversized back navigation. */
+QPushButton { background: #192631; border: 1px solid #314653;
+    color: #D2E0E9; border-radius: 3px; padding: 4px 10px;
+    font-size: 11px; font-weight: 500; min-height: 26px; }
+QPushButton:hover { background: #223442; border-color: #5B7B8E; color: #F3F7FA; }
+QPushButton:pressed { background: #101B25; }
+QPushButton:disabled { color: #637787; background: #111923; border-color: #283742; }
+QPushButton#back_to_agents_button {
+    background: transparent; border: 1px solid transparent;
+    color: #9AB0BF; font-size: 11px; font-weight: 500; text-align: left;
+    padding: 2px 4px; min-height: 27px; }
+QPushButton#back_to_agents_button:hover { color: #EAF1F5; background: #14212C; border-color: #283E4D; }
+QPushButton#back_to_agents_button:pressed { background: #1D303F; }
+QPushButton#fleet_command_send_button, QPushButton#agent_command_execute_button,
+QPushButton#preferences_save_button {
+    color: #09121A; background: #95B7CA; border-color: #A4C5D5; font-weight: 600; }
+QPushButton#fleet_command_send_button:hover, QPushButton#agent_command_execute_button:hover,
+QPushButton#preferences_save_button:hover { background: #B0CBD9; border-color: #C4D9E4; }
+QPushButton#fleet_command_validate_button, QPushButton#agent_command_validate_button {
+    color: #C6DBE8; background: #142532; border-color: #38556A; }
+QPushButton#reboot_quick_button, QPushButton#stop_all_docker_cont_quick_button {
+    color: #DBB9B5; background: #261D23; border-color: #6B4348; }
+QPushButton#reboot_quick_button:hover, QPushButton#stop_all_docker_cont_quick_button:hover {
+    background: #34252B; border-color: #9A666D; }
+QPushButton#fleet_logs_clear_filters_button { background: transparent; color: #A3B5C1; }
+QPushButton#fleet_logs_export_button { background: #17232D; }
+
+/* Main navigation */
+QPushButton#dashboard_button, QPushButton#agents_button,
+QPushButton#commands_button, QPushButton#logs_button,
+QPushButton#settings_button, QPushButton#about_button {
+    background: transparent; border: 1px solid transparent;
+    border-radius: 2px; color: #9BAFBD; text-align: left;
+    font-size: 12px; font-weight: 500; min-height: 30px; padding: 4px 11px; }
+QPushButton#dashboard_button:hover, QPushButton#agents_button:hover,
+QPushButton#commands_button:hover, QPushButton#logs_button:hover,
+QPushButton#settings_button:hover, QPushButton#about_button:hover {
+    background: #172733; color: #E3EDF3; }
+QPushButton#dashboard_button:checked, QPushButton#agents_button:checked,
+QPushButton#commands_button:checked, QPushButton#logs_button:checked,
+QPushButton#settings_button:checked, QPushButton#about_button:checked {
+    background: #1B2B37; border-left: 2px solid #8BAFBE; color: #EDF3F7; }
+QPushButton#overview_nav_button, QPushButton#performance_nav_button,
+QPushButton#hardware_nav_button, QPushButton#commands_nav_button,
+QPushButton#compute_button, QPushButton#storage_button,
+QPushButton#thermals_button, QPushButton#network_button,
+QPushButton#network_traffic_toggle_button, QPushButton#network_packets_toggle_button {
+    background: transparent; color: #94AABB; border: 1px solid transparent;
+    border-radius: 1px; min-height: 27px; padding: 4px 9px; font-weight: 500; }
+QPushButton#overview_nav_button:hover, QPushButton#performance_nav_button:hover,
+QPushButton#hardware_nav_button:hover, QPushButton#commands_nav_button:hover,
+QPushButton#compute_button:hover, QPushButton#storage_button:hover,
+QPushButton#thermals_button:hover, QPushButton#network_button:hover,
+QPushButton#network_traffic_toggle_button:hover, QPushButton#network_packets_toggle_button:hover {
+    color: #E7F0F5; background: #172733; }
+QPushButton#overview_nav_button:checked, QPushButton#performance_nav_button:checked,
+QPushButton#hardware_nav_button:checked, QPushButton#commands_nav_button:checked,
+QPushButton#compute_button:checked, QPushButton#storage_button:checked,
+QPushButton#thermals_button:checked, QPushButton#network_button:checked,
+QPushButton#network_traffic_toggle_button:checked, QPushButton#network_packets_toggle_button:checked {
+    color: #EDF4F8; background: #1A2A35; border-bottom: 2px solid #8BAFBE; }
+
+/* Interactive controls */
+QLineEdit, QComboBox, QSpinBox {
+    background: #0C1720; border: 1px solid #304453; border-radius: 2px;
+    color: #E2EBF1; font-size: 11px; min-height: 26px;
+    padding: 3px 8px; selection-background-color: #345466; }
+QLineEdit:focus, QComboBox:focus, QSpinBox:focus { border: 1px solid #8EAFBF; background: #101F2A; }
+QLineEdit:disabled, QComboBox:disabled { color: #647A89; }
+QComboBox::drop-down { background: transparent; border: none; width: 23px; }
+QComboBox QAbstractItemView { background: #101E29; color: #E0EBF2;
+    border: 1px solid #385262; selection-background-color: #29485C;
+    selection-color: #F0F5F8; outline: 0; }
+QPlainTextEdit { background: #0A141D; color: #DAE6EE; border: 1px solid #304553;
+    border-radius: 2px; padding: 8px;
+    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 11px;
+    selection-background-color: #38576A; }
+QPlainTextEdit:focus { border: 1px solid #87A9BC; }
+QTableWidget { background: #0D1720; alternate-background-color: #101D27;
+    color: #D8E4ED; gridline-color: #263846;
+    border: 1px solid #304553; border-radius: 2px; outline: 0;
+    selection-background-color: #28475C; selection-color: #F2F7FA; }
+QTableWidget::item { padding: 4px 7px; border-bottom: 1px solid #233643; }
+QTableWidget::item:hover { background: #182936; }
+QHeaderView::section { background: #172632; color: #BED0DB; border: 0;
+    border-bottom: 1px solid #344A59; padding: 6px 8px;
+    font-size: 10px; font-weight: 600; }
+QTableCornerButton::section { background: #172632; border: none; }
+QProgressBar { border: 1px solid #2B4050; background: #0C1720;
+    border-radius: 2px; color: #E0EAF0; text-align: center; font-size: 10px; }
+QProgressBar::chunk { background: #82A7BC; border-radius: 1px; }
+QProgressBar[load_level="low"]::chunk { background: #8AC9AF; }
+QProgressBar[load_level="medium"]::chunk { background: #D9BF91; }
+QProgressBar[load_level="high"]::chunk { background: #D5A1A7; }
+QScrollArea { background: transparent; border: none; }
+QScrollArea > QWidget > QWidget { background: transparent; }
+QScrollBar:vertical { background: #0C1620; border: 0; width: 8px; margin: 0; }
+QScrollBar::handle:vertical { background: #354C5B; border-radius: 2px; min-height: 25px; }
+QScrollBar::handle:vertical:hover { background: #587488; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: none; }
+QScrollBar:horizontal { background: #0C1620; border: 0; height: 8px; margin: 0; }
+QScrollBar::handle:horizontal { background: #354C5B; border-radius: 2px; min-width: 25px; }
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0; }
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: none; }
+Line { color: #263A47; background: #263A47; border: 0; }
+
+
+
+/* agent_card form style */
+QWidget#card_form {
+    background-color: #151D27; border: 1px solid #2D3A47; border-radius: 2px;
+    font-family: "Noto Sans", "Segoe UI", sans-serif; font-size: 11px;
+}
+QWidget#agent_information_widget, QWidget#system_information_widget,
+QWidget#right_widget {background: transparent; border: 0;}
+QLabel {background: transparent; border: 0; color: #96A8B6; font-size: 11px;}
+QLabel#vps_name_label {color: #E0E7EE; font-size: 12px; font-weight: 600;}
+QLabel#ip_os_label {color: #A8B5C2; font-size: 11px;}
+QLabel#cpu_ram_label {color: #8C9EAD; font-family:"JetBrains Mono","Consolas",monospace;font-size:10px;}
+QLabel#online_dot {color: #90BCAD; font-size: 12px;}
+QLabel#online_dot[agent_status="offline"] {color: #D19B9E;}
+QLabel#status_label {font-family:"JetBrains Mono","Consolas",monospace; font-size:10px; font-weight:600;color:#90BCAD;}
+QLabel#status_label[agent_status="online"] {color:#90BCAD;}
+QLabel#status_label[agent_status="offline"] {color:#D19B9E;}
+QPushButton#agent_open_button {background:#202D3A;border:1px solid #3E5567;border-radius:2px;color:#C8DAE4;
+    min-height:27px;padding:3px 12px;font-size:11px;font-weight:600;}
+QPushButton#agent_open_button:hover {background:#293B4A;border-color:#98B0C2;color:#ECF3F7;}
+QPushButton#agent_open_button:pressed {background:#0F202B;}
+
+/* recent_command_widget form style */
+QWidget#recent_command_widget {background:#151D27;border-bottom:1px solid #2D3A47;
+    font-family:"Noto Sans","Segoe UI",sans-serif;font-size:11px;}
+QLabel {background:transparent;border:none;color:#BECBD5;font-size:11px;}
+QLabel#command_mark {font-size:12px;color:#90BCAD;}
+QLabel#command_mark[status="success"] {color:#90BCAD;}
+QLabel#command_mark[status="failed"] {color:#D19B9E;}
+QLabel#command_mark[status="pending"] {color:#D2B98F;}
+QLabel#command_name {color:#DAE4EA;font-family:"JetBrains Mono","Consolas",monospace;font-size:11px;}
+QLabel#command_status {color:#90BCAD;font-family:"JetBrains Mono","Consolas",monospace;font-size:10px;font-weight:600;}
+QLabel#command_status[status="success"] {color:#90BCAD;}
+QLabel#command_status[status="failed"] {color:#D19B9E;}
+QLabel#command_status[status="pending"] {color:#D2B98F;}
+QLabel#command_executed_time {color:#738897;font-size:10px;}
+
