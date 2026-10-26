@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.db import transaction
 
 from django.utils import timezone
@@ -110,9 +112,13 @@ def heartbeat_manager(metrics_data: dict | None, agent):
     if not metrics_data or not agent:
         return
 
-    metrics_data, channel_layer_data = _normalize_heartbeat_data(metrics_data)
+    uptime_seconds = metrics_data.pop("uptime", 0)
+
+    real_uptime = timedelta(seconds=uptime_seconds)
 
     now = timezone.now()
+
+    metrics_data, channel_layer_data = _normalize_heartbeat_data(metrics_data)
 
     with transaction.atomic():
         AgentMetric.objects.create(
@@ -121,7 +127,13 @@ def heartbeat_manager(metrics_data: dict | None, agent):
         )
         agent.status = Agent.Status.ONLINE
         agent.last_seen = now
-        agent.save(update_fields=["status", "last_seen"])
+        agent.cpu_load = metrics_data["cpu_metrics"]["cpu_load"]
+        agent.ram_load = metrics_data["memory_metrics"]["ram_load"]
+        agent.uptime = real_uptime
+
+        agent.save(
+            update_fields=["status", "last_seen", "cpu_load", "ram_load", "uptime"]
+        )
 
     channel_layer = get_channel_layer()
 

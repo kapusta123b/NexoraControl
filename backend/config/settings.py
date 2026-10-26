@@ -22,9 +22,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PATY_APPS = [
-    "rest_framework",
-]
+THIRD_PATY_APPS = ["rest_framework", "django_filters"]
 
 LOCAL_APPS = ["apps.agents"]
 

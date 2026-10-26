@@ -1,10 +1,10 @@
 from rest_framework import status
-
 from rest_framework.generics import ListCreateAPIView
-
 from rest_framework.response import Response
-
 from rest_framework.views import APIView
+from rest_framework.filters import OrderingFilter, SearchFilter
+
+from django_filters.rest_framework import DjangoFilterBackend
 
 from apps.agents.models.command import Command
 from apps.agents.api.serializers.command import (
@@ -12,6 +12,8 @@ from apps.agents.api.serializers.command import (
     CommandPatchSerializer,
     CommandPendingListSerializer,
 )
+
+from apps.agents.api.pagination import AgentPagination
 
 from apps.agents.selectors.commands import (
     get_command_queryset,
@@ -28,23 +30,26 @@ from apps.agents.services.command import (
 class CommandListView(ListCreateAPIView):
     serializer_class = CommandListSerializer
 
-    def create(self, request, *args, **kwargs):
-        pk = self.kwargs.get("pk")
+    pagination_class = AgentPagination
 
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+    filter_backends = [
+        DjangoFilterBackend,
+        SearchFilter,
+        OrderingFilter,
+    ]
 
-        serializer.save(agent_id=pk)
+    filterset_fields = ["status"]
+    search_fields = ["command_type", "status"]
+    ordering_fields = ["status", "created_at", "started_at", "finished_at"]
 
-        headers = self.get_success_headers(serializer.data)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED, headers=headers
-        )
+    def perform_create(self, serializer):
+        serializer.save(agent_id=self.kwargs["pk"])
 
     def get_queryset(self):
         pk = self.kwargs.get("pk")
 
         queryset = get_command_queryset(self.request, pk)
+
         return queryset
 
 

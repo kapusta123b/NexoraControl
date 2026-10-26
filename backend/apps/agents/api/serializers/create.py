@@ -15,6 +15,7 @@ class AgentListCreateSerializer(ModelSerializer):
             "os",
             "ram_load",
             "cpu_load",
+            "uptime",
             "status",
             "last_seen",
         ]

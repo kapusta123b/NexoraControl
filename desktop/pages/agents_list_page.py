@@ -11,12 +11,12 @@ class AgentsController:
     def __init__(
         self,
         ui: Ui_MainWindow,
-        store: AgentsListStore,
+        agents_store: AgentsListStore,
         poller: AgentsListPoller,
         detail_controller: AgentDetailController,
     ):
         self.ui = ui
-        self.store = store
+        self.agents_store = agents_store
         self.poller = poller
         self.detail_controller = detail_controller
 
@@ -34,7 +34,7 @@ class AgentsController:
             )
         )
 
-        self.store.agents_changed.connect(self.populate_agents)
+        self.agents_store.agents_changed.connect(self.populate_agents)
 
     def populate_agents(self, agents: list[dict]) -> None:
         self.clear_cards()

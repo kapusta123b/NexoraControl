@@ -4,6 +4,7 @@ from apps.agents.api.views.agent import (
     AgentDetailView,
     AgentHeartbeatView,
     AgentListView,
+    AgentSystemInformation,
 )
 from apps.agents.api.views.commands import (
     CommandBulkUpdateView,
@@ -63,6 +64,11 @@ urlpatterns = [
     path(
         "agents/<int:pk>/commands/results/",
         CommandBulkUpdateView.as_view(),
+        name="agent-commands-results",
+    ),
+    path(
+        "agents/<int:pk>/system-info/",
+        AgentSystemInformation.as_view(),
         name="agent-commands-results",
     ),
 ] + url_metrics

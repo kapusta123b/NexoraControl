@@ -69,10 +69,19 @@ class DetailOverviewController(QObject):
         self.quick_commands_nav_group.setExclusive(True)
 
         self.command_mapping = {
-            self.ui.docker_ps_quick_button: "docker_ps",
-            self.ui.reboot_quick_button: "system_reboot",
-            self.ui.stop_all_docker_cont_quick_button: "docker_stop_all_containers",
-            self.ui.restart_all_docker_cont_quick_button: "docker_restart_all_containers",
+            self.ui.docker_ps_quick_button: ("docker_ps", {}),
+            self.ui.reboot_quick_button: (
+                "system_reboot",
+                {"confirmation": "REBOOT"},
+            ),
+            self.ui.stop_all_docker_cont_quick_button: (
+                "docker_stop_all_containers",
+                {"confirmation": "STOP_ALL"},
+            ),
+            self.ui.restart_all_docker_cont_quick_button: (
+                "docker_restart_all_containers",
+                {"confirmation": "RESTART_ALL"},
+            ),
         }
 
         for button in self.command_mapping:
@@ -88,10 +97,12 @@ class DetailOverviewController(QObject):
         if not self.agent:
             return
 
-        command_type = self.command_mapping[clicked_button]
+        command_type, payload = self.command_mapping[clicked_button]
 
         self.overview_poller.on_clicked(
-            agent_id=self.agent["id"], command_type=command_type
+            agent_id=self.agent["id"],
+            command_type=command_type,
+            payload=payload,
         )
 
     def _clear_layout(self, layout: QLayout) -> None:

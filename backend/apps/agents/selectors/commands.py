@@ -29,7 +29,7 @@ def get_command_queryset(request, pk):
 
         except ValueError:
             raise ValidationError(
-                {"count": "Invalid 'status' parameter. Must be a positive integer."}
+                {"count": "Invalid 'count' parameter. Must be a positive integer."}
             )
 
     return queryset

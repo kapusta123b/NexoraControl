@@ -27,7 +27,7 @@ class AgentMetricWorker(BaseWorker):
     @Slot()
     def run(self) -> None:
         self._run_async(
-            self.client.get_agent_metrics,
+            self.client.metrics.get_agent_metrics,
             agent_id=self.agent_id,
             hours=self.hours,
             metric_type=self.metric_type,
@@ -39,7 +39,7 @@ class LiveMetricsWorker(BaseWorker):
     metrics_received = Signal(dict)
 
     def __init__(self, url: str) -> None:
-        super().__init__(None)
+        super().__init__()
         self.url = QUrl(url)
         self.socket = None
 

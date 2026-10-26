@@ -16,6 +16,8 @@ class Agent(models.Model):
     cpu_load = models.PositiveSmallIntegerField(default=0, null=True, blank=True)
     ram_load = models.PositiveSmallIntegerField(default=0, null=True, blank=True)
 
+    uptime = models.DurationField(null=True, blank=True)
+
     status = models.CharField(
         max_length=3, choices=Status.choices, default=Status.OFFLINE
     )

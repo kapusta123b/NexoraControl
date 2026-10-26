@@ -26,6 +26,7 @@ class BasePoller(QObject):
                 try:
                     worker.success.disconnect()
                     worker.error.disconnect()
+
                 except (RuntimeError, AttributeError):
                     pass
 
@@ -76,5 +77,5 @@ class BasePoller(QObject):
             MessageBox().show_message(
                 "critical",
                 "API error",
-                "API connection failed! Please check your settings.",
+                message or "API connection failed! Please check your settings.",
             )

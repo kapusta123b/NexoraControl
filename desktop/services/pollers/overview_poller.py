@@ -1,4 +1,4 @@
-from PySide6.QtCore import QThread, QTimer
+from PySide6.QtCore import QTimer
 
 from api.client import NexoraClient
 
@@ -7,13 +7,11 @@ from services.pollers.base_poller import BasePoller
 from services.stores.agent_command_store import CommandsStore
 from services.stores.agent_store import DetailAgentStore
 
-from services.widgets.box_messages import MessageBox
-
-from services.workers.overview_worker import OverviewWorker, RecentCommandsWorker
+from services.workers.command_worker import CommandsWorker
+from services.workers.overview_worker import OverviewWorker
 
 
 class DetailOverviewPoller(BasePoller):
-
     def __init__(
         self,
         client: NexoraClient,
@@ -32,7 +30,12 @@ class DetailOverviewPoller(BasePoller):
         self.timer.setInterval(5000)
         self.timer.timeout.connect(self.refresh_all)
 
-    def on_clicked(self, agent_id: int = None, command_type: str = None) -> None:
+    def on_clicked(
+        self,
+        agent_id: int | None = None,
+        command_type: str | None = None,
+        payload: dict = {},
+    ) -> None:
         if agent_id:
             if self.agent_id != agent_id:
                 self._cancel_all_requests()
@@ -40,7 +43,7 @@ class DetailOverviewPoller(BasePoller):
             self.agent_id = agent_id
 
         if command_type:
-            self._start_commands_worker(command_type)
+            self._start_commands_worker(command_type, payload)
 
             return
 
@@ -71,19 +74,21 @@ class DetailOverviewPoller(BasePoller):
             success_callback=self.detail_agent_store.set_agent,
         )
 
-    def _start_commands_worker(self, command_type: str = None) -> None:
-        worker = RecentCommandsWorker(self.client, self.agent_id)
+    def _start_commands_worker(
+        self, command_type: str | None = None, payload: dict = {}
+    ) -> None:
+        worker = CommandsWorker(self.client, self.agent_id)
 
         if command_type:
             self._start_worker(
                 worker=worker,
-                worker_slot=lambda: worker.create_agent_command(command_type),
+                worker_slot=lambda: worker.create_agent_command(command_type, payload),
                 success_callback=self._on_command_created,
             )
         else:
             self._start_worker(
                 worker=worker,
-                worker_slot=worker.get_agent_commands,
+                worker_slot=lambda: worker.get_agent_commands(count=5),
                 success_callback=self.commands_store.set_commands,
             )
 
