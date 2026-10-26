@@ -15,12 +15,12 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFrame,
-    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
-    QLineEdit, QMainWindow, QPlainTextEdit, QProgressBar,
-    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QStackedWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComboBox,
+    QFrame, QGridLayout, QHBoxLayout, QHeaderView,
+    QLabel, QLayout, QLineEdit, QMainWindow,
+    QPlainTextEdit, QProgressBar, QPushButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QStackedWidget, QTabWidget,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 
 from pyqtgraph import PlotWidget
 from qfluentwidgets import (Pivot, SegmentedWidget)
@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1230, 940)
+        MainWindow.resize(1267, 940)
         self.central_content = QWidget(MainWindow)
         self.central_content.setObjectName(u"central_content")
         self.central_content.setMinimumSize(QSize(1140, 680))
@@ -403,7 +403,7 @@ class Ui_MainWindow(object):
         self.agent_list.setWidgetResizable(True)
         self.agent_scroll = QWidget()
         self.agent_scroll.setObjectName(u"agent_scroll")
-        self.agent_scroll.setGeometry(QRect(0, 0, 1072, 731))
+        self.agent_scroll.setGeometry(QRect(0, 0, 100, 600))
         self.agent_scroll.setMaximumSize(QSize(16777215, 1000000))
         self.agent_scroll_layout = QVBoxLayout(self.agent_scroll)
         self.agent_scroll_layout.setSpacing(12)
@@ -551,7 +551,7 @@ class Ui_MainWindow(object):
         self.overview_detail_scroll.setWidgetResizable(True)
         self.agent_detail_information = QWidget()
         self.agent_detail_information.setObjectName(u"agent_detail_information")
-        self.agent_detail_information.setGeometry(QRect(0, -46, 1052, 800))
+        self.agent_detail_information.setGeometry(QRect(0, 0, 513, 800))
         self.agent_detail_information.setMinimumSize(QSize(0, 800))
         self.agent_detail_information_layout = QVBoxLayout(self.agent_detail_information)
         self.agent_detail_information_layout.setSpacing(10)
@@ -901,7 +901,7 @@ class Ui_MainWindow(object):
         self.performance_detail_scroll.setWidgetResizable(True)
         self.agent_performance_information = QWidget()
         self.agent_performance_information.setObjectName(u"agent_performance_information")
-        self.agent_performance_information.setGeometry(QRect(0, 0, 1054, 1207))
+        self.agent_performance_information.setGeometry(QRect(0, 0, 930, 1207))
         self.agent_performance_information_layout = QVBoxLayout(self.agent_performance_information)
         self.agent_performance_information_layout.setSpacing(0)
         self.agent_performance_information_layout.setObjectName(u"agent_performance_information_layout")
@@ -1994,462 +1994,13 @@ class Ui_MainWindow(object):
         self.hardware_info_scroll.setWidgetResizable(True)
         self.hardware_info_scroll_content = QWidget()
         self.hardware_info_scroll_content.setObjectName(u"hardware_info_scroll_content")
-        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 1050, 963))
+        self.hardware_info_scroll_content.setGeometry(QRect(0, 0, 129, 1228))
         self.hardware_info_scroll_content.setMinimumSize(QSize(0, 0))
         self.hardware_info_scroll_content_layout = QGridLayout(self.hardware_info_scroll_content)
         self.hardware_info_scroll_content_layout.setObjectName(u"hardware_info_scroll_content_layout")
         self.hardware_info_scroll_content_layout.setHorizontalSpacing(15)
         self.hardware_info_scroll_content_layout.setVerticalSpacing(20)
         self.hardware_info_scroll_content_layout.setContentsMargins(0, 0, 6, 0)
-        self.cpu_info_widget = QWidget(self.hardware_info_scroll_content)
-        self.cpu_info_widget.setObjectName(u"cpu_info_widget")
-        self.cpu_info_widget.setMinimumSize(QSize(200, 192))
-        self.cpu_info_widget.setMaximumSize(QSize(16777215, 16777215))
-        self.cpu_info_widget_layout = QVBoxLayout(self.cpu_info_widget)
-        self.cpu_info_widget_layout.setSpacing(9)
-        self.cpu_info_widget_layout.setObjectName(u"cpu_info_widget_layout")
-        self.cpu_info_widget_layout.setContentsMargins(10, 10, 0, 15)
-        self.cpu_info_label = QLabel(self.cpu_info_widget)
-        self.cpu_info_label.setObjectName(u"cpu_info_label")
-        self.cpu_info_label.setMaximumSize(QSize(16777215, 40))
-
-        self.cpu_info_widget_layout.addWidget(self.cpu_info_label)
-
-        self.cpu_info_box_widget = QWidget(self.cpu_info_widget)
-        self.cpu_info_box_widget.setObjectName(u"cpu_info_box_widget")
-        self.cpu_info_box_widget.setMaximumSize(QSize(500, 300))
-        self.cpu_info_box_widget_layout = QHBoxLayout(self.cpu_info_box_widget)
-        self.cpu_info_box_widget_layout.setSpacing(6)
-        self.cpu_info_box_widget_layout.setObjectName(u"cpu_info_box_widget_layout")
-        self.cpu_info_box_widget_layout.setContentsMargins(6, 6, 6, 6)
-        self.cpu_info_box_layout = QHBoxLayout()
-        self.cpu_info_box_layout.setObjectName(u"cpu_info_box_layout")
-        self.cpu_info_rows_widget = QWidget(self.cpu_info_box_widget)
-        self.cpu_info_rows_widget.setObjectName(u"cpu_info_rows_widget")
-        self.cpu_info_rows_widget_layout = QVBoxLayout(self.cpu_info_rows_widget)
-        self.cpu_info_rows_widget_layout.setSpacing(9)
-        self.cpu_info_rows_widget_layout.setObjectName(u"cpu_info_rows_widget_layout")
-        self.cpu_info_rows_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.model_row_label = QLabel(self.cpu_info_rows_widget)
-        self.model_row_label.setObjectName(u"model_row_label")
-        self.model_row_label.setMargin(0)
-
-        self.cpu_info_rows_widget_layout.addWidget(self.model_row_label)
-
-        self.cores_row_label = QLabel(self.cpu_info_rows_widget)
-        self.cores_row_label.setObjectName(u"cores_row_label")
-        self.cores_row_label.setMargin(0)
-
-        self.cpu_info_rows_widget_layout.addWidget(self.cores_row_label)
-
-        self.threads_row_label = QLabel(self.cpu_info_rows_widget)
-        self.threads_row_label.setObjectName(u"threads_row_label")
-        self.threads_row_label.setMargin(0)
-
-        self.cpu_info_rows_widget_layout.addWidget(self.threads_row_label)
-
-        self.frequency_row_label = QLabel(self.cpu_info_rows_widget)
-        self.frequency_row_label.setObjectName(u"frequency_row_label")
-        self.frequency_row_label.setMargin(0)
-
-        self.cpu_info_rows_widget_layout.addWidget(self.frequency_row_label)
-
-        self.architecture_row_label = QLabel(self.cpu_info_rows_widget)
-        self.architecture_row_label.setObjectName(u"architecture_row_label")
-        self.architecture_row_label.setMargin(0)
-
-        self.cpu_info_rows_widget_layout.addWidget(self.architecture_row_label)
-
-
-        self.cpu_info_box_layout.addWidget(self.cpu_info_rows_widget)
-
-        self.cpu_info_values_widget = QWidget(self.cpu_info_box_widget)
-        self.cpu_info_values_widget.setObjectName(u"cpu_info_values_widget")
-        self.cpu_info_values_widget_layout = QVBoxLayout(self.cpu_info_values_widget)
-        self.cpu_info_values_widget_layout.setSpacing(9)
-        self.cpu_info_values_widget_layout.setObjectName(u"cpu_info_values_widget_layout")
-        self.cpu_info_values_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.model_value_label = QLabel(self.cpu_info_values_widget)
-        self.model_value_label.setObjectName(u"model_value_label")
-
-        self.cpu_info_values_widget_layout.addWidget(self.model_value_label)
-
-        self.cores_value_label = QLabel(self.cpu_info_values_widget)
-        self.cores_value_label.setObjectName(u"cores_value_label")
-
-        self.cpu_info_values_widget_layout.addWidget(self.cores_value_label)
-
-        self.threads_value_label = QLabel(self.cpu_info_values_widget)
-        self.threads_value_label.setObjectName(u"threads_value_label")
-
-        self.cpu_info_values_widget_layout.addWidget(self.threads_value_label)
-
-        self.frequency_value_label = QLabel(self.cpu_info_values_widget)
-        self.frequency_value_label.setObjectName(u"frequency_value_label")
-
-        self.cpu_info_values_widget_layout.addWidget(self.frequency_value_label)
-
-        self.architecture_value_label = QLabel(self.cpu_info_values_widget)
-        self.architecture_value_label.setObjectName(u"architecture_value_label")
-
-        self.cpu_info_values_widget_layout.addWidget(self.architecture_value_label)
-
-
-        self.cpu_info_box_layout.addWidget(self.cpu_info_values_widget)
-
-
-        self.cpu_info_box_widget_layout.addLayout(self.cpu_info_box_layout)
-
-
-        self.cpu_info_widget_layout.addWidget(self.cpu_info_box_widget)
-
-
-        self.hardware_info_scroll_content_layout.addWidget(self.cpu_info_widget, 1, 0, 1, 1)
-
-        self.memory_info_widget = QWidget(self.hardware_info_scroll_content)
-        self.memory_info_widget.setObjectName(u"memory_info_widget")
-        self.memory_info_widget.setMinimumSize(QSize(0, 160))
-        self.memory_info_widget.setMaximumSize(QSize(16777215, 16777215))
-        self.memory_info_widget_layout = QVBoxLayout(self.memory_info_widget)
-        self.memory_info_widget_layout.setSpacing(9)
-        self.memory_info_widget_layout.setObjectName(u"memory_info_widget_layout")
-        self.memory_info_widget_layout.setContentsMargins(17, 13, 16, 15)
-        self.memory_info_label = QLabel(self.memory_info_widget)
-        self.memory_info_label.setObjectName(u"memory_info_label")
-        self.memory_info_label.setMaximumSize(QSize(16777215, 40))
-
-        self.memory_info_widget_layout.addWidget(self.memory_info_label)
-
-        self.memory_info_box_widget = QWidget(self.memory_info_widget)
-        self.memory_info_box_widget.setObjectName(u"memory_info_box_widget")
-        self.memory_info_box_widget.setMaximumSize(QSize(500, 100))
-        self.memory_info_box_widget_layout = QHBoxLayout(self.memory_info_box_widget)
-        self.memory_info_box_widget_layout.setSpacing(0)
-        self.memory_info_box_widget_layout.setObjectName(u"memory_info_box_widget_layout")
-        self.memory_info_box_widget_layout.setContentsMargins(6, 6, 6, 6)
-        self.memory_info_box_layout = QHBoxLayout()
-        self.memory_info_box_layout.setObjectName(u"memory_info_box_layout")
-        self.memory_info_columns_widget = QWidget(self.memory_info_box_widget)
-        self.memory_info_columns_widget.setObjectName(u"memory_info_columns_widget")
-        self.memory_info_columns_widget_layout = QVBoxLayout(self.memory_info_columns_widget)
-        self.memory_info_columns_widget_layout.setSpacing(9)
-        self.memory_info_columns_widget_layout.setObjectName(u"memory_info_columns_widget_layout")
-        self.memory_info_columns_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.memory_total_row_label = QLabel(self.memory_info_columns_widget)
-        self.memory_total_row_label.setObjectName(u"memory_total_row_label")
-        self.memory_total_row_label.setMargin(0)
-
-        self.memory_info_columns_widget_layout.addWidget(self.memory_total_row_label)
-
-        self.memory_type_row_label = QLabel(self.memory_info_columns_widget)
-        self.memory_type_row_label.setObjectName(u"memory_type_row_label")
-        self.memory_type_row_label.setMargin(0)
-
-        self.memory_info_columns_widget_layout.addWidget(self.memory_type_row_label)
-
-        self.memory_speed_row_label = QLabel(self.memory_info_columns_widget)
-        self.memory_speed_row_label.setObjectName(u"memory_speed_row_label")
-        self.memory_speed_row_label.setMargin(0)
-
-        self.memory_info_columns_widget_layout.addWidget(self.memory_speed_row_label)
-
-
-        self.memory_info_box_layout.addWidget(self.memory_info_columns_widget)
-
-        self.memory_info_values_widget = QWidget(self.memory_info_box_widget)
-        self.memory_info_values_widget.setObjectName(u"memory_info_values_widget")
-        self.memory_info_values_widget_layout = QVBoxLayout(self.memory_info_values_widget)
-        self.memory_info_values_widget_layout.setSpacing(9)
-        self.memory_info_values_widget_layout.setObjectName(u"memory_info_values_widget_layout")
-        self.memory_info_values_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.memory_total_value_label = QLabel(self.memory_info_values_widget)
-        self.memory_total_value_label.setObjectName(u"memory_total_value_label")
-
-        self.memory_info_values_widget_layout.addWidget(self.memory_total_value_label)
-
-        self.memory_type_value_label = QLabel(self.memory_info_values_widget)
-        self.memory_type_value_label.setObjectName(u"memory_type_value_label")
-
-        self.memory_info_values_widget_layout.addWidget(self.memory_type_value_label)
-
-        self.memory_speed_value_label = QLabel(self.memory_info_values_widget)
-        self.memory_speed_value_label.setObjectName(u"memory_speed_value_label")
-
-        self.memory_info_values_widget_layout.addWidget(self.memory_speed_value_label)
-
-
-        self.memory_info_box_layout.addWidget(self.memory_info_values_widget)
-
-
-        self.memory_info_box_widget_layout.addLayout(self.memory_info_box_layout)
-
-
-        self.memory_info_widget_layout.addWidget(self.memory_info_box_widget)
-
-
-        self.hardware_info_scroll_content_layout.addWidget(self.memory_info_widget, 1, 1, 1, 1)
-
-        self.gpu_info_widget = QWidget(self.hardware_info_scroll_content)
-        self.gpu_info_widget.setObjectName(u"gpu_info_widget")
-        self.gpu_info_widget.setMinimumSize(QSize(0, 160))
-        self.gpu_info_widget.setMaximumSize(QSize(16777215, 16777215))
-        self.gpu_info_widget_layout = QVBoxLayout(self.gpu_info_widget)
-        self.gpu_info_widget_layout.setSpacing(9)
-        self.gpu_info_widget_layout.setObjectName(u"gpu_info_widget_layout")
-        self.gpu_info_widget_layout.setContentsMargins(17, 13, 16, 15)
-        self.gpu_info_label = QLabel(self.gpu_info_widget)
-        self.gpu_info_label.setObjectName(u"gpu_info_label")
-        self.gpu_info_label.setMaximumSize(QSize(16777215, 40))
-
-        self.gpu_info_widget_layout.addWidget(self.gpu_info_label)
-
-        self.gpu_info_box_widget = QWidget(self.gpu_info_widget)
-        self.gpu_info_box_widget.setObjectName(u"gpu_info_box_widget")
-        self.gpu_info_box_widget.setMaximumSize(QSize(500, 100))
-        self.gpu_info_box_widget_layout = QHBoxLayout(self.gpu_info_box_widget)
-        self.gpu_info_box_widget_layout.setSpacing(12)
-        self.gpu_info_box_widget_layout.setObjectName(u"gpu_info_box_widget_layout")
-        self.gpu_info_box_widget_layout.setContentsMargins(6, 6, 6, 6)
-        self.gpu_info_box_layout = QHBoxLayout()
-        self.gpu_info_box_layout.setObjectName(u"gpu_info_box_layout")
-        self.gpu_info_columns_widget = QWidget(self.gpu_info_box_widget)
-        self.gpu_info_columns_widget.setObjectName(u"gpu_info_columns_widget")
-        self.gpu_info_columns_widget_layout = QVBoxLayout(self.gpu_info_columns_widget)
-        self.gpu_info_columns_widget_layout.setSpacing(9)
-        self.gpu_info_columns_widget_layout.setObjectName(u"gpu_info_columns_widget_layout")
-        self.gpu_info_columns_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.gpu_model_type_row_label = QLabel(self.gpu_info_columns_widget)
-        self.gpu_model_type_row_label.setObjectName(u"gpu_model_type_row_label")
-        self.gpu_model_type_row_label.setMargin(0)
-
-        self.gpu_info_columns_widget_layout.addWidget(self.gpu_model_type_row_label)
-
-        self.gpu_vram_row_label = QLabel(self.gpu_info_columns_widget)
-        self.gpu_vram_row_label.setObjectName(u"gpu_vram_row_label")
-        self.gpu_vram_row_label.setMargin(0)
-
-        self.gpu_info_columns_widget_layout.addWidget(self.gpu_vram_row_label)
-
-        self.gpu_memory_type_row_label = QLabel(self.gpu_info_columns_widget)
-        self.gpu_memory_type_row_label.setObjectName(u"gpu_memory_type_row_label")
-        self.gpu_memory_type_row_label.setMargin(0)
-
-        self.gpu_info_columns_widget_layout.addWidget(self.gpu_memory_type_row_label)
-
-
-        self.gpu_info_box_layout.addWidget(self.gpu_info_columns_widget)
-
-        self.gpu_info_values_widget = QWidget(self.gpu_info_box_widget)
-        self.gpu_info_values_widget.setObjectName(u"gpu_info_values_widget")
-        self.gpu_info_values_widget_layout = QVBoxLayout(self.gpu_info_values_widget)
-        self.gpu_info_values_widget_layout.setSpacing(9)
-        self.gpu_info_values_widget_layout.setObjectName(u"gpu_info_values_widget_layout")
-        self.gpu_info_values_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.gpu_model_type_value_label = QLabel(self.gpu_info_values_widget)
-        self.gpu_model_type_value_label.setObjectName(u"gpu_model_type_value_label")
-
-        self.gpu_info_values_widget_layout.addWidget(self.gpu_model_type_value_label)
-
-        self.gpu_vram_value_label = QLabel(self.gpu_info_values_widget)
-        self.gpu_vram_value_label.setObjectName(u"gpu_vram_value_label")
-
-        self.gpu_info_values_widget_layout.addWidget(self.gpu_vram_value_label)
-
-        self.gpu_memory_type_value_label = QLabel(self.gpu_info_values_widget)
-        self.gpu_memory_type_value_label.setObjectName(u"gpu_memory_type_value_label")
-
-        self.gpu_info_values_widget_layout.addWidget(self.gpu_memory_type_value_label)
-
-
-        self.gpu_info_box_layout.addWidget(self.gpu_info_values_widget)
-
-
-        self.gpu_info_box_widget_layout.addLayout(self.gpu_info_box_layout)
-
-
-        self.gpu_info_widget_layout.addWidget(self.gpu_info_box_widget)
-
-
-        self.hardware_info_scroll_content_layout.addWidget(self.gpu_info_widget, 2, 0, 1, 1)
-
-        self.motherboard_info_widget = QWidget(self.hardware_info_scroll_content)
-        self.motherboard_info_widget.setObjectName(u"motherboard_info_widget")
-        self.motherboard_info_widget.setMinimumSize(QSize(0, 160))
-        self.motherboard_info_widget.setMaximumSize(QSize(16777215, 16777215))
-        self.motherboard_info_widget_layout = QVBoxLayout(self.motherboard_info_widget)
-        self.motherboard_info_widget_layout.setSpacing(9)
-        self.motherboard_info_widget_layout.setObjectName(u"motherboard_info_widget_layout")
-        self.motherboard_info_widget_layout.setContentsMargins(17, 13, 16, 15)
-        self.motherboard_info_label = QLabel(self.motherboard_info_widget)
-        self.motherboard_info_label.setObjectName(u"motherboard_info_label")
-        self.motherboard_info_label.setMaximumSize(QSize(16777215, 40))
-
-        self.motherboard_info_widget_layout.addWidget(self.motherboard_info_label)
-
-        self.motherboard_info_box_widget = QWidget(self.motherboard_info_widget)
-        self.motherboard_info_box_widget.setObjectName(u"motherboard_info_box_widget")
-        self.motherboard_info_box_widget.setMaximumSize(QSize(500, 150))
-        self.motherboard_info_box_widget_layout = QHBoxLayout(self.motherboard_info_box_widget)
-        self.motherboard_info_box_widget_layout.setSpacing(0)
-        self.motherboard_info_box_widget_layout.setObjectName(u"motherboard_info_box_widget_layout")
-        self.motherboard_info_box_widget_layout.setContentsMargins(6, 6, 6, 6)
-        self.motherboard_info_box_layout = QHBoxLayout()
-        self.motherboard_info_box_layout.setSpacing(12)
-        self.motherboard_info_box_layout.setObjectName(u"motherboard_info_box_layout")
-        self.motherboard_info_columns_widget = QWidget(self.motherboard_info_box_widget)
-        self.motherboard_info_columns_widget.setObjectName(u"motherboard_info_columns_widget")
-        self.motherboard_info_columns_widget_layout = QVBoxLayout(self.motherboard_info_columns_widget)
-        self.motherboard_info_columns_widget_layout.setSpacing(6)
-        self.motherboard_info_columns_widget_layout.setObjectName(u"motherboard_info_columns_widget_layout")
-        self.motherboard_info_columns_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.motherboard_vendor_column_label = QLabel(self.motherboard_info_columns_widget)
-        self.motherboard_vendor_column_label.setObjectName(u"motherboard_vendor_column_label")
-        self.motherboard_vendor_column_label.setMargin(0)
-
-        self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_vendor_column_label)
-
-        self.motherboard_model_column_label = QLabel(self.motherboard_info_columns_widget)
-        self.motherboard_model_column_label.setObjectName(u"motherboard_model_column_label")
-        self.motherboard_model_column_label.setMargin(0)
-
-        self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_model_column_label)
-
-        self.motherboard_serial_column_label = QLabel(self.motherboard_info_columns_widget)
-        self.motherboard_serial_column_label.setObjectName(u"motherboard_serial_column_label")
-        self.motherboard_serial_column_label.setMargin(0)
-
-        self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_serial_column_label)
-
-        self.motherboard_architecture_column_label = QLabel(self.motherboard_info_columns_widget)
-        self.motherboard_architecture_column_label.setObjectName(u"motherboard_architecture_column_label")
-        self.motherboard_architecture_column_label.setMargin(0)
-
-        self.motherboard_info_columns_widget_layout.addWidget(self.motherboard_architecture_column_label)
-
-
-        self.motherboard_info_box_layout.addWidget(self.motherboard_info_columns_widget)
-
-        self.motherboard_info_values_widget = QWidget(self.motherboard_info_box_widget)
-        self.motherboard_info_values_widget.setObjectName(u"motherboard_info_values_widget")
-        self.motherboard_info_values_widget_layout = QVBoxLayout(self.motherboard_info_values_widget)
-        self.motherboard_info_values_widget_layout.setSpacing(9)
-        self.motherboard_info_values_widget_layout.setObjectName(u"motherboard_info_values_widget_layout")
-        self.motherboard_info_values_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.motherboard_vendor_value_label = QLabel(self.motherboard_info_values_widget)
-        self.motherboard_vendor_value_label.setObjectName(u"motherboard_vendor_value_label")
-
-        self.motherboard_info_values_widget_layout.addWidget(self.motherboard_vendor_value_label)
-
-        self.motherboard_model_value_label = QLabel(self.motherboard_info_values_widget)
-        self.motherboard_model_value_label.setObjectName(u"motherboard_model_value_label")
-
-        self.motherboard_info_values_widget_layout.addWidget(self.motherboard_model_value_label)
-
-        self.motherboard_serial_value_label = QLabel(self.motherboard_info_values_widget)
-        self.motherboard_serial_value_label.setObjectName(u"motherboard_serial_value_label")
-
-        self.motherboard_info_values_widget_layout.addWidget(self.motherboard_serial_value_label)
-
-        self.motherboard_architecture_value_label = QLabel(self.motherboard_info_values_widget)
-        self.motherboard_architecture_value_label.setObjectName(u"motherboard_architecture_value_label")
-
-        self.motherboard_info_values_widget_layout.addWidget(self.motherboard_architecture_value_label)
-
-
-        self.motherboard_info_box_layout.addWidget(self.motherboard_info_values_widget)
-
-
-        self.motherboard_info_box_widget_layout.addLayout(self.motherboard_info_box_layout)
-
-
-        self.motherboard_info_widget_layout.addWidget(self.motherboard_info_box_widget)
-
-
-        self.hardware_info_scroll_content_layout.addWidget(self.motherboard_info_widget, 2, 1, 1, 1)
-
-        self.bios_info_widget = QWidget(self.hardware_info_scroll_content)
-        self.bios_info_widget.setObjectName(u"bios_info_widget")
-        self.bios_info_widget.setMinimumSize(QSize(0, 160))
-        self.bios_info_widget.setMaximumSize(QSize(16777215, 16777215))
-        self.bios_info_widget_layout = QVBoxLayout(self.bios_info_widget)
-        self.bios_info_widget_layout.setSpacing(9)
-        self.bios_info_widget_layout.setObjectName(u"bios_info_widget_layout")
-        self.bios_info_widget_layout.setContentsMargins(17, 13, 16, 15)
-        self.bios_info_label = QLabel(self.bios_info_widget)
-        self.bios_info_label.setObjectName(u"bios_info_label")
-        self.bios_info_label.setMaximumSize(QSize(16777215, 40))
-
-        self.bios_info_widget_layout.addWidget(self.bios_info_label)
-
-        self.bios_info_box_widget = QWidget(self.bios_info_widget)
-        self.bios_info_box_widget.setObjectName(u"bios_info_box_widget")
-        self.bios_info_box_widget.setMaximumSize(QSize(500, 100))
-        self.bios_info_box_widget_layout = QHBoxLayout(self.bios_info_box_widget)
-        self.bios_info_box_widget_layout.setSpacing(6)
-        self.bios_info_box_widget_layout.setObjectName(u"bios_info_box_widget_layout")
-        self.bios_info_box_widget_layout.setContentsMargins(6, 6, 6, 6)
-        self.bios_info_box_layout = QHBoxLayout()
-        self.bios_info_box_layout.setObjectName(u"bios_info_box_layout")
-        self.bios_info_columns_widget = QWidget(self.bios_info_box_widget)
-        self.bios_info_columns_widget.setObjectName(u"bios_info_columns_widget")
-        self.bios_info_columns_widget_layout = QVBoxLayout(self.bios_info_columns_widget)
-        self.bios_info_columns_widget_layout.setSpacing(9)
-        self.bios_info_columns_widget_layout.setObjectName(u"bios_info_columns_widget_layout")
-        self.bios_info_columns_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.bios_vendor_row_label = QLabel(self.bios_info_columns_widget)
-        self.bios_vendor_row_label.setObjectName(u"bios_vendor_row_label")
-        self.bios_vendor_row_label.setMargin(0)
-
-        self.bios_info_columns_widget_layout.addWidget(self.bios_vendor_row_label)
-
-        self.bios_version_row_label = QLabel(self.bios_info_columns_widget)
-        self.bios_version_row_label.setObjectName(u"bios_version_row_label")
-        self.bios_version_row_label.setMargin(0)
-
-        self.bios_info_columns_widget_layout.addWidget(self.bios_version_row_label)
-
-        self.bios_date_row_label = QLabel(self.bios_info_columns_widget)
-        self.bios_date_row_label.setObjectName(u"bios_date_row_label")
-        self.bios_date_row_label.setMargin(0)
-
-        self.bios_info_columns_widget_layout.addWidget(self.bios_date_row_label)
-
-
-        self.bios_info_box_layout.addWidget(self.bios_info_columns_widget)
-
-        self.bios_info_values_widget = QWidget(self.bios_info_box_widget)
-        self.bios_info_values_widget.setObjectName(u"bios_info_values_widget")
-        self.bios_info_values_widget_layout = QVBoxLayout(self.bios_info_values_widget)
-        self.bios_info_values_widget_layout.setSpacing(9)
-        self.bios_info_values_widget_layout.setObjectName(u"bios_info_values_widget_layout")
-        self.bios_info_values_widget_layout.setContentsMargins(0, 0, 0, 0)
-        self.bios_vendor_value_label = QLabel(self.bios_info_values_widget)
-        self.bios_vendor_value_label.setObjectName(u"bios_vendor_value_label")
-
-        self.bios_info_values_widget_layout.addWidget(self.bios_vendor_value_label)
-
-        self.bios_version_value_label = QLabel(self.bios_info_values_widget)
-        self.bios_version_value_label.setObjectName(u"bios_version_value_label")
-
-        self.bios_info_values_widget_layout.addWidget(self.bios_version_value_label)
-
-        self.bios_date_value_label = QLabel(self.bios_info_values_widget)
-        self.bios_date_value_label.setObjectName(u"bios_date_value_label")
-
-        self.bios_info_values_widget_layout.addWidget(self.bios_date_value_label)
-
-
-        self.bios_info_box_layout.addWidget(self.bios_info_values_widget)
-
-
-        self.bios_info_box_widget_layout.addLayout(self.bios_info_box_layout)
-
-
-        self.bios_info_widget_layout.addWidget(self.bios_info_box_widget)
-
-
-        self.hardware_info_scroll_content_layout.addWidget(self.bios_info_widget, 3, 0, 1, 1)
-
         self.hardware_storage_inventory_panel_layout = QVBoxLayout()
         self.hardware_storage_inventory_panel_layout.setSpacing(12)
         self.hardware_storage_inventory_panel_layout.setObjectName(u"hardware_storage_inventory_panel_layout")
@@ -2459,14 +2010,9 @@ class Ui_MainWindow(object):
 
         self.hardware_storage_inventory_panel_layout.addWidget(self.hardware_storage_inventory_panel_header)
 
-        self.hardware_storage_inventory_panel_caption = QLabel(self.hardware_info_scroll_content)
-        self.hardware_storage_inventory_panel_caption.setObjectName(u"hardware_storage_inventory_panel_caption")
-
-        self.hardware_storage_inventory_panel_layout.addWidget(self.hardware_storage_inventory_panel_caption)
-
         self.hardware_storage_devices_table = QTableWidget(self.hardware_info_scroll_content)
-        if (self.hardware_storage_devices_table.columnCount() < 5):
-            self.hardware_storage_devices_table.setColumnCount(5)
+        if (self.hardware_storage_devices_table.columnCount() < 4):
+            self.hardware_storage_devices_table.setColumnCount(4)
         __qtablewidgetitem29 = QTableWidgetItem()
         self.hardware_storage_devices_table.setHorizontalHeaderItem(0, __qtablewidgetitem29)
         __qtablewidgetitem30 = QTableWidgetItem()
@@ -2475,8 +2021,6 @@ class Ui_MainWindow(object):
         self.hardware_storage_devices_table.setHorizontalHeaderItem(2, __qtablewidgetitem31)
         __qtablewidgetitem32 = QTableWidgetItem()
         self.hardware_storage_devices_table.setHorizontalHeaderItem(3, __qtablewidgetitem32)
-        __qtablewidgetitem33 = QTableWidgetItem()
-        self.hardware_storage_devices_table.setHorizontalHeaderItem(4, __qtablewidgetitem33)
         self.hardware_storage_devices_table.setObjectName(u"hardware_storage_devices_table")
         self.hardware_storage_devices_table.setMinimumSize(QSize(0, 155))
         self.hardware_storage_devices_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -2485,52 +2029,12 @@ class Ui_MainWindow(object):
         self.hardware_storage_devices_table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.hardware_storage_devices_table.setShowGrid(False)
         self.hardware_storage_devices_table.setRowCount(0)
-        self.hardware_storage_devices_table.setColumnCount(5)
+        self.hardware_storage_devices_table.setColumnCount(4)
 
         self.hardware_storage_inventory_panel_layout.addWidget(self.hardware_storage_devices_table)
 
 
-        self.hardware_info_scroll_content_layout.addLayout(self.hardware_storage_inventory_panel_layout, 3, 1, 1, 1)
-
-        self.hardware_network_inventory_panel_layout = QVBoxLayout()
-        self.hardware_network_inventory_panel_layout.setSpacing(12)
-        self.hardware_network_inventory_panel_layout.setObjectName(u"hardware_network_inventory_panel_layout")
-        self.hardware_network_inventory_panel_layout.setContentsMargins(0, 10, 0, 0)
-        self.hardware_network_inventory_panel_header = QLabel(self.hardware_info_scroll_content)
-        self.hardware_network_inventory_panel_header.setObjectName(u"hardware_network_inventory_panel_header")
-
-        self.hardware_network_inventory_panel_layout.addWidget(self.hardware_network_inventory_panel_header)
-
-        self.hardware_network_inventory_panel_caption = QLabel(self.hardware_info_scroll_content)
-        self.hardware_network_inventory_panel_caption.setObjectName(u"hardware_network_inventory_panel_caption")
-
-        self.hardware_network_inventory_panel_layout.addWidget(self.hardware_network_inventory_panel_caption)
-
-        self.hardware_network_adapters_table = QTableWidget(self.hardware_info_scroll_content)
-        if (self.hardware_network_adapters_table.columnCount() < 4):
-            self.hardware_network_adapters_table.setColumnCount(4)
-        __qtablewidgetitem34 = QTableWidgetItem()
-        self.hardware_network_adapters_table.setHorizontalHeaderItem(0, __qtablewidgetitem34)
-        __qtablewidgetitem35 = QTableWidgetItem()
-        self.hardware_network_adapters_table.setHorizontalHeaderItem(1, __qtablewidgetitem35)
-        __qtablewidgetitem36 = QTableWidgetItem()
-        self.hardware_network_adapters_table.setHorizontalHeaderItem(2, __qtablewidgetitem36)
-        __qtablewidgetitem37 = QTableWidgetItem()
-        self.hardware_network_adapters_table.setHorizontalHeaderItem(3, __qtablewidgetitem37)
-        self.hardware_network_adapters_table.setObjectName(u"hardware_network_adapters_table")
-        self.hardware_network_adapters_table.setMinimumSize(QSize(0, 125))
-        self.hardware_network_adapters_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.hardware_network_adapters_table.setAlternatingRowColors(True)
-        self.hardware_network_adapters_table.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.hardware_network_adapters_table.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.hardware_network_adapters_table.setShowGrid(False)
-        self.hardware_network_adapters_table.setRowCount(0)
-        self.hardware_network_adapters_table.setColumnCount(4)
-
-        self.hardware_network_inventory_panel_layout.addWidget(self.hardware_network_adapters_table)
-
-
-        self.hardware_info_scroll_content_layout.addLayout(self.hardware_network_inventory_panel_layout, 4, 0, 1, 2)
+        self.hardware_info_scroll_content_layout.addLayout(self.hardware_storage_inventory_panel_layout, 5, 0, 1, 2)
 
         self.hardware_inventory_action_row = QHBoxLayout()
         self.hardware_inventory_action_row.setSpacing(8)
@@ -2546,58 +2050,190 @@ class Ui_MainWindow(object):
 
         self.hardware_info_scroll_content_layout.addLayout(self.hardware_inventory_action_row, 0, 0, 1, 2)
 
-        self.hardware_platform_panel_layout = QGridLayout()
-        self.hardware_platform_panel_layout.setObjectName(u"hardware_platform_panel_layout")
-        self.hardware_platform_panel_layout.setHorizontalSpacing(14)
-        self.hardware_platform_panel_layout.setVerticalSpacing(10)
-        self.hardware_platform_panel_layout.setContentsMargins(0, 14, 0, 6)
-        self.hardware_platform_heading = QLabel(self.hardware_info_scroll_content)
-        self.hardware_platform_heading.setObjectName(u"hardware_platform_heading")
+        self.hardware_gpu_inventory_panel_layout = QVBoxLayout()
+        self.hardware_gpu_inventory_panel_layout.setSpacing(12)
+        self.hardware_gpu_inventory_panel_layout.setObjectName(u"hardware_gpu_inventory_panel_layout")
+        self.hardware_gpu_inventory_panel_layout.setContentsMargins(0, 0, 0, 0)
+        self.hardware_gpu_inventory_panel_header = QLabel(self.hardware_info_scroll_content)
+        self.hardware_gpu_inventory_panel_header.setObjectName(u"hardware_gpu_inventory_panel_header")
 
-        self.hardware_platform_panel_layout.addWidget(self.hardware_platform_heading, 0, 0, 1, 4)
+        self.hardware_gpu_inventory_panel_layout.addWidget(self.hardware_gpu_inventory_panel_header)
 
-        self.hardware_chassis_vendor_label = QLabel(self.hardware_info_scroll_content)
-        self.hardware_chassis_vendor_label.setObjectName(u"hardware_chassis_vendor_label")
+        self.hardware_gpu_inventory_table = QTableWidget(self.hardware_info_scroll_content)
+        if (self.hardware_gpu_inventory_table.columnCount() < 5):
+            self.hardware_gpu_inventory_table.setColumnCount(5)
+        __qtablewidgetitem33 = QTableWidgetItem()
+        self.hardware_gpu_inventory_table.setHorizontalHeaderItem(0, __qtablewidgetitem33)
+        __qtablewidgetitem34 = QTableWidgetItem()
+        self.hardware_gpu_inventory_table.setHorizontalHeaderItem(1, __qtablewidgetitem34)
+        __qtablewidgetitem35 = QTableWidgetItem()
+        self.hardware_gpu_inventory_table.setHorizontalHeaderItem(2, __qtablewidgetitem35)
+        __qtablewidgetitem36 = QTableWidgetItem()
+        self.hardware_gpu_inventory_table.setHorizontalHeaderItem(3, __qtablewidgetitem36)
+        __qtablewidgetitem37 = QTableWidgetItem()
+        self.hardware_gpu_inventory_table.setHorizontalHeaderItem(4, __qtablewidgetitem37)
+        self.hardware_gpu_inventory_table.setObjectName(u"hardware_gpu_inventory_table")
+        self.hardware_gpu_inventory_table.setMinimumSize(QSize(0, 155))
+        self.hardware_gpu_inventory_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.hardware_gpu_inventory_table.setAlternatingRowColors(True)
+        self.hardware_gpu_inventory_table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.hardware_gpu_inventory_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.hardware_gpu_inventory_table.setShowGrid(False)
+        self.hardware_gpu_inventory_table.setRowCount(0)
+        self.hardware_gpu_inventory_table.setColumnCount(5)
 
-        self.hardware_platform_panel_layout.addWidget(self.hardware_chassis_vendor_label, 1, 0, 1, 1)
-
-        self.hardware_chassis_vendor_value = QLabel(self.hardware_info_scroll_content)
-        self.hardware_chassis_vendor_value.setObjectName(u"hardware_chassis_vendor_value")
-
-        self.hardware_platform_panel_layout.addWidget(self.hardware_chassis_vendor_value, 1, 1, 1, 1)
-
-        self.hardware_product_name_label = QLabel(self.hardware_info_scroll_content)
-        self.hardware_product_name_label.setObjectName(u"hardware_product_name_label")
-
-        self.hardware_platform_panel_layout.addWidget(self.hardware_product_name_label, 1, 2, 1, 1)
-
-        self.hardware_product_name_value = QLabel(self.hardware_info_scroll_content)
-        self.hardware_product_name_value.setObjectName(u"hardware_product_name_value")
-
-        self.hardware_platform_panel_layout.addWidget(self.hardware_product_name_value, 1, 3, 1, 1)
-
-        self.hardware_chassis_type_label = QLabel(self.hardware_info_scroll_content)
-        self.hardware_chassis_type_label.setObjectName(u"hardware_chassis_type_label")
-
-        self.hardware_platform_panel_layout.addWidget(self.hardware_chassis_type_label, 2, 0, 1, 1)
-
-        self.hardware_chassis_type_value = QLabel(self.hardware_info_scroll_content)
-        self.hardware_chassis_type_value.setObjectName(u"hardware_chassis_type_value")
-
-        self.hardware_platform_panel_layout.addWidget(self.hardware_chassis_type_value, 2, 1, 1, 1)
-
-        self.hardware_virtualization_label = QLabel(self.hardware_info_scroll_content)
-        self.hardware_virtualization_label.setObjectName(u"hardware_virtualization_label")
-
-        self.hardware_platform_panel_layout.addWidget(self.hardware_virtualization_label, 2, 2, 1, 1)
-
-        self.hardware_virtualization_value = QLabel(self.hardware_info_scroll_content)
-        self.hardware_virtualization_value.setObjectName(u"hardware_virtualization_value")
-
-        self.hardware_platform_panel_layout.addWidget(self.hardware_virtualization_value, 2, 3, 1, 1)
+        self.hardware_gpu_inventory_panel_layout.addWidget(self.hardware_gpu_inventory_table)
 
 
-        self.hardware_info_scroll_content_layout.addLayout(self.hardware_platform_panel_layout, 5, 0, 1, 2)
+        self.hardware_info_scroll_content_layout.addLayout(self.hardware_gpu_inventory_panel_layout, 2, 0, 1, 2)
+
+        self.hardware_bios_motherboard_inventory_panel_layout = QVBoxLayout()
+        self.hardware_bios_motherboard_inventory_panel_layout.setSpacing(12)
+        self.hardware_bios_motherboard_inventory_panel_layout.setObjectName(u"hardware_bios_motherboard_inventory_panel_layout")
+        self.hardware_bios_motherboard_inventory_panel_layout.setContentsMargins(0, 0, 0, 0)
+        self.hardware_bios_motherboard_panel_header = QLabel(self.hardware_info_scroll_content)
+        self.hardware_bios_motherboard_panel_header.setObjectName(u"hardware_bios_motherboard_panel_header")
+
+        self.hardware_bios_motherboard_inventory_panel_layout.addWidget(self.hardware_bios_motherboard_panel_header)
+
+        self.hardware_bios_motherboard_table = QTableWidget(self.hardware_info_scroll_content)
+        if (self.hardware_bios_motherboard_table.columnCount() < 5):
+            self.hardware_bios_motherboard_table.setColumnCount(5)
+        __qtablewidgetitem38 = QTableWidgetItem()
+        self.hardware_bios_motherboard_table.setHorizontalHeaderItem(0, __qtablewidgetitem38)
+        __qtablewidgetitem39 = QTableWidgetItem()
+        self.hardware_bios_motherboard_table.setHorizontalHeaderItem(1, __qtablewidgetitem39)
+        __qtablewidgetitem40 = QTableWidgetItem()
+        self.hardware_bios_motherboard_table.setHorizontalHeaderItem(2, __qtablewidgetitem40)
+        __qtablewidgetitem41 = QTableWidgetItem()
+        self.hardware_bios_motherboard_table.setHorizontalHeaderItem(3, __qtablewidgetitem41)
+        __qtablewidgetitem42 = QTableWidgetItem()
+        self.hardware_bios_motherboard_table.setHorizontalHeaderItem(4, __qtablewidgetitem42)
+        self.hardware_bios_motherboard_table.setObjectName(u"hardware_bios_motherboard_table")
+        self.hardware_bios_motherboard_table.setMinimumSize(QSize(0, 155))
+        self.hardware_bios_motherboard_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.hardware_bios_motherboard_table.setAlternatingRowColors(True)
+        self.hardware_bios_motherboard_table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.hardware_bios_motherboard_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.hardware_bios_motherboard_table.setShowGrid(False)
+        self.hardware_bios_motherboard_table.setRowCount(0)
+        self.hardware_bios_motherboard_table.setColumnCount(5)
+
+        self.hardware_bios_motherboard_inventory_panel_layout.addWidget(self.hardware_bios_motherboard_table)
+
+
+        self.hardware_info_scroll_content_layout.addLayout(self.hardware_bios_motherboard_inventory_panel_layout, 4, 0, 1, 2)
+
+        self.hardware_memory_inventory_panel_layout = QVBoxLayout()
+        self.hardware_memory_inventory_panel_layout.setSpacing(12)
+        self.hardware_memory_inventory_panel_layout.setObjectName(u"hardware_memory_inventory_panel_layout")
+        self.hardware_memory_inventory_panel_layout.setContentsMargins(0, 0, 0, 0)
+        self.hardware_ram_modules_panel_header = QLabel(self.hardware_info_scroll_content)
+        self.hardware_ram_modules_panel_header.setObjectName(u"hardware_ram_modules_panel_header")
+
+        self.hardware_memory_inventory_panel_layout.addWidget(self.hardware_ram_modules_panel_header)
+
+        self.hardware_ram_modules_table = QTableWidget(self.hardware_info_scroll_content)
+        if (self.hardware_ram_modules_table.columnCount() < 2):
+            self.hardware_ram_modules_table.setColumnCount(2)
+        __qtablewidgetitem43 = QTableWidgetItem()
+        self.hardware_ram_modules_table.setHorizontalHeaderItem(0, __qtablewidgetitem43)
+        __qtablewidgetitem44 = QTableWidgetItem()
+        self.hardware_ram_modules_table.setHorizontalHeaderItem(1, __qtablewidgetitem44)
+        self.hardware_ram_modules_table.setObjectName(u"hardware_ram_modules_table")
+        self.hardware_ram_modules_table.setMinimumSize(QSize(0, 155))
+        self.hardware_ram_modules_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.hardware_ram_modules_table.setAlternatingRowColors(True)
+        self.hardware_ram_modules_table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.hardware_ram_modules_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.hardware_ram_modules_table.setShowGrid(False)
+        self.hardware_ram_modules_table.setRowCount(0)
+        self.hardware_ram_modules_table.setColumnCount(2)
+
+        self.hardware_memory_inventory_panel_layout.addWidget(self.hardware_ram_modules_table)
+
+
+        self.hardware_info_scroll_content_layout.addLayout(self.hardware_memory_inventory_panel_layout, 3, 0, 1, 2)
+
+        self.hardware_network_inventory_panel_layout = QVBoxLayout()
+        self.hardware_network_inventory_panel_layout.setSpacing(12)
+        self.hardware_network_inventory_panel_layout.setObjectName(u"hardware_network_inventory_panel_layout")
+        self.hardware_network_inventory_panel_layout.setContentsMargins(0, 10, 0, 0)
+        self.hardware_network_inventory_panel_header = QLabel(self.hardware_info_scroll_content)
+        self.hardware_network_inventory_panel_header.setObjectName(u"hardware_network_inventory_panel_header")
+
+        self.hardware_network_inventory_panel_layout.addWidget(self.hardware_network_inventory_panel_header)
+
+        self.hardware_network_adapters_table = QTableWidget(self.hardware_info_scroll_content)
+        if (self.hardware_network_adapters_table.columnCount() < 5):
+            self.hardware_network_adapters_table.setColumnCount(5)
+        __qtablewidgetitem45 = QTableWidgetItem()
+        self.hardware_network_adapters_table.setHorizontalHeaderItem(0, __qtablewidgetitem45)
+        __qtablewidgetitem46 = QTableWidgetItem()
+        self.hardware_network_adapters_table.setHorizontalHeaderItem(1, __qtablewidgetitem46)
+        __qtablewidgetitem47 = QTableWidgetItem()
+        self.hardware_network_adapters_table.setHorizontalHeaderItem(2, __qtablewidgetitem47)
+        __qtablewidgetitem48 = QTableWidgetItem()
+        self.hardware_network_adapters_table.setHorizontalHeaderItem(3, __qtablewidgetitem48)
+        __qtablewidgetitem49 = QTableWidgetItem()
+        self.hardware_network_adapters_table.setHorizontalHeaderItem(4, __qtablewidgetitem49)
+        self.hardware_network_adapters_table.setObjectName(u"hardware_network_adapters_table")
+        self.hardware_network_adapters_table.setMinimumSize(QSize(0, 125))
+        self.hardware_network_adapters_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.hardware_network_adapters_table.setAlternatingRowColors(True)
+        self.hardware_network_adapters_table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.hardware_network_adapters_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.hardware_network_adapters_table.setShowGrid(False)
+        self.hardware_network_adapters_table.setRowCount(0)
+        self.hardware_network_adapters_table.setColumnCount(5)
+
+        self.hardware_network_inventory_panel_layout.addWidget(self.hardware_network_adapters_table)
+
+
+        self.hardware_info_scroll_content_layout.addLayout(self.hardware_network_inventory_panel_layout, 6, 0, 1, 2)
+
+        self.hardware_cpu_inventory_panel_layout = QVBoxLayout()
+        self.hardware_cpu_inventory_panel_layout.setSpacing(12)
+        self.hardware_cpu_inventory_panel_layout.setObjectName(u"hardware_cpu_inventory_panel_layout")
+        self.hardware_cpu_inventory_panel_layout.setContentsMargins(0, 0, 0, 0)
+        self.hardware_cpu_inventory_panel_header = QLabel(self.hardware_info_scroll_content)
+        self.hardware_cpu_inventory_panel_header.setObjectName(u"hardware_cpu_inventory_panel_header")
+
+        self.hardware_cpu_inventory_panel_layout.addWidget(self.hardware_cpu_inventory_panel_header)
+
+        self.hardware_cpu_specifications_table = QTableWidget(self.hardware_info_scroll_content)
+        if (self.hardware_cpu_specifications_table.columnCount() < 8):
+            self.hardware_cpu_specifications_table.setColumnCount(8)
+        __qtablewidgetitem50 = QTableWidgetItem()
+        self.hardware_cpu_specifications_table.setHorizontalHeaderItem(0, __qtablewidgetitem50)
+        __qtablewidgetitem51 = QTableWidgetItem()
+        self.hardware_cpu_specifications_table.setHorizontalHeaderItem(1, __qtablewidgetitem51)
+        __qtablewidgetitem52 = QTableWidgetItem()
+        self.hardware_cpu_specifications_table.setHorizontalHeaderItem(2, __qtablewidgetitem52)
+        __qtablewidgetitem53 = QTableWidgetItem()
+        self.hardware_cpu_specifications_table.setHorizontalHeaderItem(3, __qtablewidgetitem53)
+        __qtablewidgetitem54 = QTableWidgetItem()
+        self.hardware_cpu_specifications_table.setHorizontalHeaderItem(4, __qtablewidgetitem54)
+        __qtablewidgetitem55 = QTableWidgetItem()
+        self.hardware_cpu_specifications_table.setHorizontalHeaderItem(5, __qtablewidgetitem55)
+        __qtablewidgetitem56 = QTableWidgetItem()
+        self.hardware_cpu_specifications_table.setHorizontalHeaderItem(6, __qtablewidgetitem56)
+        __qtablewidgetitem57 = QTableWidgetItem()
+        self.hardware_cpu_specifications_table.setHorizontalHeaderItem(7, __qtablewidgetitem57)
+        self.hardware_cpu_specifications_table.setObjectName(u"hardware_cpu_specifications_table")
+        self.hardware_cpu_specifications_table.setMinimumSize(QSize(0, 155))
+        self.hardware_cpu_specifications_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.hardware_cpu_specifications_table.setAlternatingRowColors(True)
+        self.hardware_cpu_specifications_table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.hardware_cpu_specifications_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.hardware_cpu_specifications_table.setShowGrid(False)
+        self.hardware_cpu_specifications_table.setRowCount(0)
+        self.hardware_cpu_specifications_table.setColumnCount(8)
+
+        self.hardware_cpu_inventory_panel_layout.addWidget(self.hardware_cpu_specifications_table)
+
+
+        self.hardware_info_scroll_content_layout.addLayout(self.hardware_cpu_inventory_panel_layout, 1, 0, 1, 2)
 
         self.hardware_info_scroll.setWidget(self.hardware_info_scroll_content)
 
@@ -2616,17 +2252,18 @@ class Ui_MainWindow(object):
         self.agent_commands_page_scroll.setWidgetResizable(True)
         self.agent_commands_page_scroll_content = QWidget()
         self.agent_commands_page_scroll_content.setObjectName(u"agent_commands_page_scroll_content")
-        self.agent_commands_page_scroll_content.setGeometry(QRect(0, 0, 1054, 855))
+        self.agent_commands_page_scroll_content.setGeometry(QRect(0, 0, 1091, 1393))
         self.agent_commands_page_layout = QVBoxLayout(self.agent_commands_page_scroll_content)
-        self.agent_commands_page_layout.setSpacing(10)
+        self.agent_commands_page_layout.setSpacing(16)
         self.agent_commands_page_layout.setObjectName(u"agent_commands_page_layout")
-        self.agent_commands_page_layout.setContentsMargins(0, 0, 6, 10)
+        self.agent_commands_page_layout.setSizeConstraint(QLayout.SetMinAndMaxSize)
+        self.agent_commands_page_layout.setContentsMargins(15, 15, 15, 18)
         self.agent_cmd_heading_row = QHBoxLayout()
         self.agent_cmd_heading_row.setSpacing(12)
         self.agent_cmd_heading_row.setObjectName(u"agent_cmd_heading_row")
         self.agent_cmd_heading_row.setContentsMargins(0, 0, 0, 0)
         self.agent_cmd_heading_text = QVBoxLayout()
-        self.agent_cmd_heading_text.setSpacing(4)
+        self.agent_cmd_heading_text.setSpacing(6)
         self.agent_cmd_heading_text.setObjectName(u"agent_cmd_heading_text")
         self.agent_cmd_heading_text.setContentsMargins(0, 0, 0, 0)
         self.agent_cmd_title = QLabel(self.agent_commands_page_scroll_content)
@@ -2643,10 +2280,17 @@ class Ui_MainWindow(object):
 
         self.agent_cmd_heading_row.addLayout(self.agent_cmd_heading_text)
 
-        self.agent_cmd_heading_spacer = QSpacerItem(30, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.spacer_auto_4 = QSpacerItem(5, 2, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.agent_cmd_heading_row.addItem(self.agent_cmd_heading_spacer)
+        self.agent_cmd_heading_row.addItem(self.spacer_auto_4)
 
+        self.agent_command_target_indicator = QLabel(self.agent_commands_page_scroll_content)
+        self.agent_command_target_indicator.setObjectName(u"agent_command_target_indicator")
+
+        self.agent_cmd_heading_row.addWidget(self.agent_command_target_indicator)
+
+        self.agent_cmd_heading_row.setStretch(0, 4)
+        self.agent_cmd_heading_row.setStretch(1, 1)
 
         self.agent_commands_page_layout.addLayout(self.agent_cmd_heading_row)
 
@@ -2657,95 +2301,172 @@ class Ui_MainWindow(object):
 
         self.agent_commands_page_layout.addWidget(self.line_14)
 
+        self.agent_command_process_strip = QFrame(self.agent_commands_page_scroll_content)
+        self.agent_command_process_strip.setObjectName(u"agent_command_process_strip")
+        self.agent_command_process_strip_layout = QVBoxLayout(self.agent_command_process_strip)
+        self.agent_command_process_strip_layout.setSpacing(0)
+        self.agent_command_process_strip_layout.setObjectName(u"agent_command_process_strip_layout")
+        self.agent_command_process_strip_layout.setContentsMargins(10, 10, 10, 10)
+        self.agent_command_process_steps = QLabel(self.agent_command_process_strip)
+        self.agent_command_process_steps.setObjectName(u"agent_command_process_steps")
+
+        self.agent_command_process_strip_layout.addWidget(self.agent_command_process_steps)
+
+
+        self.agent_commands_page_layout.addWidget(self.agent_command_process_strip)
+
         self.agent_cmd_top_layout = QHBoxLayout()
-        self.agent_cmd_top_layout.setSpacing(15)
+        self.agent_cmd_top_layout.setSpacing(12)
         self.agent_cmd_top_layout.setObjectName(u"agent_cmd_top_layout")
         self.agent_cmd_top_layout.setContentsMargins(0, 0, 0, 0)
         self.agent_command_form_panel = QFrame(self.agent_commands_page_scroll_content)
         self.agent_command_form_panel.setObjectName(u"agent_command_form_panel")
+        self.agent_command_form_panel.setMinimumSize(QSize(425, 0))
+        self.agent_command_form_panel.setMaximumSize(QSize(450, 2313123))
         self.agent_command_form_panel_host_layout = QVBoxLayout(self.agent_command_form_panel)
+        self.agent_command_form_panel_host_layout.setSpacing(0)
         self.agent_command_form_panel_host_layout.setObjectName(u"agent_command_form_panel_host_layout")
         self.agent_command_form_panel_host_layout.setContentsMargins(0, 0, 0, 0)
         self.agent_command_form_panel_layout = QVBoxLayout()
         self.agent_command_form_panel_layout.setSpacing(12)
         self.agent_command_form_panel_layout.setObjectName(u"agent_command_form_panel_layout")
-        self.agent_command_form_panel_layout.setContentsMargins(6, 6, 6, 6)
-        self.agent_command_form_panel_header = QLabel(self.agent_command_form_panel)
+        self.agent_command_form_panel_layout.setContentsMargins(16, 15, 16, 16)
+        self.widget = QWidget(self.agent_command_form_panel)
+        self.widget.setObjectName(u"widget")
+        self.widget.setMinimumSize(QSize(0, 400))
+        self.widget.setMaximumSize(QSize(16777215, 400))
+        self.verticalLayout = QVBoxLayout(self.widget)
+        self.verticalLayout.setSpacing(12)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.agent_command_form_panel_header = QLabel(self.widget)
         self.agent_command_form_panel_header.setObjectName(u"agent_command_form_panel_header")
 
-        self.agent_command_form_panel_layout.addWidget(self.agent_command_form_panel_header)
+        self.verticalLayout.addWidget(self.agent_command_form_panel_header)
 
-        self.agent_command_form_panel_caption = QLabel(self.agent_command_form_panel)
+        self.agent_command_form_panel_caption = QLabel(self.widget)
         self.agent_command_form_panel_caption.setObjectName(u"agent_command_form_panel_caption")
 
-        self.agent_command_form_panel_layout.addWidget(self.agent_command_form_panel_caption)
+        self.verticalLayout.addWidget(self.agent_command_form_panel_caption)
 
-        self.agent_command_category_label = QLabel(self.agent_command_form_panel)
+        self.agent_command_category_label = QLabel(self.widget)
         self.agent_command_category_label.setObjectName(u"agent_command_category_label")
 
-        self.agent_command_form_panel_layout.addWidget(self.agent_command_category_label)
+        self.verticalLayout.addWidget(self.agent_command_category_label)
 
-        self.agent_command_category_combo = QComboBox(self.agent_command_form_panel)
-        self.agent_command_category_combo.addItem("")
-        self.agent_command_category_combo.addItem("")
-        self.agent_command_category_combo.addItem("")
-        self.agent_command_category_combo.addItem("")
-        self.agent_command_category_combo.addItem("")
+        self.agent_command_category_combo = QComboBox(self.widget)
         self.agent_command_category_combo.setObjectName(u"agent_command_category_combo")
-        self.agent_command_category_combo.setMinimumSize(QSize(0, 0))
+        self.agent_command_category_combo.setMinimumSize(QSize(0, 43))
 
-        self.agent_command_form_panel_layout.addWidget(self.agent_command_category_combo)
+        self.verticalLayout.addWidget(self.agent_command_category_combo)
 
-        self.agent_command_type_label = QLabel(self.agent_command_form_panel)
+        self.agent_command_type_label = QLabel(self.widget)
         self.agent_command_type_label.setObjectName(u"agent_command_type_label")
 
-        self.agent_command_form_panel_layout.addWidget(self.agent_command_type_label)
+        self.verticalLayout.addWidget(self.agent_command_type_label)
 
-        self.agent_command_type_combo = QComboBox(self.agent_command_form_panel)
-        self.agent_command_type_combo.addItem("")
+        self.agent_command_type_combo = QComboBox(self.widget)
         self.agent_command_type_combo.setObjectName(u"agent_command_type_combo")
-        self.agent_command_type_combo.setMinimumSize(QSize(0, 0))
+        self.agent_command_type_combo.setMinimumSize(QSize(0, 43))
 
-        self.agent_command_form_panel_layout.addWidget(self.agent_command_type_combo)
+        self.verticalLayout.addWidget(self.agent_command_type_combo)
+
+        self.agent_command_identity_card = QFrame(self.widget)
+        self.agent_command_identity_card.setObjectName(u"agent_command_identity_card")
+        self.agent_command_identity_card_layout = QVBoxLayout(self.agent_command_identity_card)
+        self.agent_command_identity_card_layout.setSpacing(7)
+        self.agent_command_identity_card_layout.setObjectName(u"agent_command_identity_card_layout")
+        self.agent_command_identity_card_layout.setContentsMargins(12, 12, 12, 12)
+        self.agent_command_risk_row = QHBoxLayout()
+        self.agent_command_risk_row.setSpacing(8)
+        self.agent_command_risk_row.setObjectName(u"agent_command_risk_row")
+        self.agent_command_risk_row.setContentsMargins(0, 0, 0, 0)
+        self.agent_command_display_title = QLabel(self.agent_command_identity_card)
+        self.agent_command_display_title.setObjectName(u"agent_command_display_title")
+
+        self.agent_command_risk_row.addWidget(self.agent_command_display_title)
+
+        self.spacer_auto_5 = QSpacerItem(18, 1, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.agent_command_risk_row.addItem(self.spacer_auto_5)
+
+        self.agent_command_risk_badge = QLabel(self.agent_command_identity_card)
+        self.agent_command_risk_badge.setObjectName(u"agent_command_risk_badge")
+
+        self.agent_command_risk_row.addWidget(self.agent_command_risk_badge)
+
+
+        self.agent_command_identity_card_layout.addLayout(self.agent_command_risk_row)
+
+        self.agent_command_command_key = QLabel(self.agent_command_identity_card)
+        self.agent_command_command_key.setObjectName(u"agent_command_command_key")
+
+        self.agent_command_identity_card_layout.addWidget(self.agent_command_command_key)
+
+        self.agent_command_description = QLabel(self.agent_command_identity_card)
+        self.agent_command_description.setObjectName(u"agent_command_description")
+        self.agent_command_description.setWordWrap(True)
+
+        self.agent_command_identity_card_layout.addWidget(self.agent_command_description)
+
+
+        self.verticalLayout.addWidget(self.agent_command_identity_card)
+
+
+        self.agent_command_form_panel_layout.addWidget(self.widget)
+
+        self.agent_command_parameters_heading = QHBoxLayout()
+        self.agent_command_parameters_heading.setSpacing(8)
+        self.agent_command_parameters_heading.setObjectName(u"agent_command_parameters_heading")
+        self.agent_command_parameters_heading.setContentsMargins(0, 0, 0, 0)
+        self.agent_command_fields_label = QLabel(self.agent_command_form_panel)
+        self.agent_command_fields_label.setObjectName(u"agent_command_fields_label")
+
+        self.agent_command_parameters_heading.addWidget(self.agent_command_fields_label)
+
+        self.agent_command_fields_count = QLabel(self.agent_command_form_panel)
+        self.agent_command_fields_count.setObjectName(u"agent_command_fields_count")
+
+        self.agent_command_parameters_heading.addWidget(self.agent_command_fields_count)
+
+        self.agent_command_parameters_heading.setStretch(0, 4)
+
+        self.agent_command_form_panel_layout.addLayout(self.agent_command_parameters_heading)
+
+        self.agent_command_fields_container = QFrame(self.agent_command_form_panel)
+        self.agent_command_fields_container.setObjectName(u"agent_command_fields_container")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.agent_command_fields_container.sizePolicy().hasHeightForWidth())
+        self.agent_command_fields_container.setSizePolicy(sizePolicy2)
+        self.agent_command_fields_container.setMinimumSize(QSize(0, 0))
+        self.agent_command_fields_container.setFrameShape(QFrame.NoFrame)
+        self.agent_command_fields_layout = QVBoxLayout(self.agent_command_fields_container)
+        self.agent_command_fields_layout.setSpacing(9)
+        self.agent_command_fields_layout.setObjectName(u"agent_command_fields_layout")
+        self.agent_command_fields_layout.setContentsMargins(12, 12, 12, 12)
+
+        self.agent_command_form_panel_layout.addWidget(self.agent_command_fields_container)
 
         self.agent_command_payload_label = QLabel(self.agent_command_form_panel)
         self.agent_command_payload_label.setObjectName(u"agent_command_payload_label")
 
         self.agent_command_form_panel_layout.addWidget(self.agent_command_payload_label)
 
+        self.agent_command_raw_mode_checkbox = QCheckBox(self.agent_command_form_panel)
+        self.agent_command_raw_mode_checkbox.setObjectName(u"agent_command_raw_mode_checkbox")
+
+        self.agent_command_form_panel_layout.addWidget(self.agent_command_raw_mode_checkbox)
+
         self.agent_command_payload_editor = QPlainTextEdit(self.agent_command_form_panel)
         self.agent_command_payload_editor.setObjectName(u"agent_command_payload_editor")
-        self.agent_command_payload_editor.setMinimumSize(QSize(0, 105))
-        self.agent_command_payload_editor.setReadOnly(False)
+        self.agent_command_payload_editor.setMinimumSize(QSize(0, 120))
+        self.agent_command_payload_editor.setMaximumSize(QSize(16777215, 200))
+        self.agent_command_payload_editor.setFocusPolicy(Qt.ClickFocus)
+        self.agent_command_payload_editor.setReadOnly(True)
 
         self.agent_command_form_panel_layout.addWidget(self.agent_command_payload_editor)
-
-        self.agent_command_safety_label = QLabel(self.agent_command_form_panel)
-        self.agent_command_safety_label.setObjectName(u"agent_command_safety_label")
-        self.agent_command_safety_label.setWordWrap(True)
-
-        self.agent_command_form_panel_layout.addWidget(self.agent_command_safety_label)
-
-        self.agent_command_action_row = QHBoxLayout()
-        self.agent_command_action_row.setSpacing(8)
-        self.agent_command_action_row.setObjectName(u"agent_command_action_row")
-        self.agent_command_action_row.setContentsMargins(0, 0, 0, 0)
-        self.agent_command_validate_button = QPushButton(self.agent_command_form_panel)
-        self.agent_command_validate_button.setObjectName(u"agent_command_validate_button")
-        self.agent_command_validate_button.setMinimumSize(QSize(0, 0))
-        self.agent_command_validate_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.agent_command_action_row.addWidget(self.agent_command_validate_button)
-
-        self.agent_command_execute_button = QPushButton(self.agent_command_form_panel)
-        self.agent_command_execute_button.setObjectName(u"agent_command_execute_button")
-        self.agent_command_execute_button.setMinimumSize(QSize(0, 0))
-        self.agent_command_execute_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.agent_command_action_row.addWidget(self.agent_command_execute_button)
-
-
-        self.agent_command_form_panel_layout.addLayout(self.agent_command_action_row)
 
 
         self.agent_command_form_panel_host_layout.addLayout(self.agent_command_form_panel_layout)
@@ -2753,15 +2474,96 @@ class Ui_MainWindow(object):
 
         self.agent_cmd_top_layout.addWidget(self.agent_command_form_panel)
 
+        self.agent_command_inspection_stack_layout = QVBoxLayout()
+        self.agent_command_inspection_stack_layout.setSpacing(12)
+        self.agent_command_inspection_stack_layout.setObjectName(u"agent_command_inspection_stack_layout")
+        self.agent_command_inspection_stack_layout.setContentsMargins(0, 0, 0, 0)
+        self.agent_command_review_panel = QFrame(self.agent_commands_page_scroll_content)
+        self.agent_command_review_panel.setObjectName(u"agent_command_review_panel")
+        self.agent_command_review_panel_layout = QVBoxLayout(self.agent_command_review_panel)
+        self.agent_command_review_panel_layout.setSpacing(12)
+        self.agent_command_review_panel_layout.setObjectName(u"agent_command_review_panel_layout")
+        self.agent_command_review_panel_layout.setContentsMargins(16, 15, 16, 16)
+        self.agent_command_review_header = QLabel(self.agent_command_review_panel)
+        self.agent_command_review_header.setObjectName(u"agent_command_review_header")
+
+        self.agent_command_review_panel_layout.addWidget(self.agent_command_review_header)
+
+        self.agent_command_review_caption = QLabel(self.agent_command_review_panel)
+        self.agent_command_review_caption.setObjectName(u"agent_command_review_caption")
+        self.agent_command_review_caption.setWordWrap(True)
+
+        self.agent_command_review_panel_layout.addWidget(self.agent_command_review_caption)
+
+        self.agent_command_review_target = QLabel(self.agent_command_review_panel)
+        self.agent_command_review_target.setObjectName(u"agent_command_review_target")
+
+        self.agent_command_review_panel_layout.addWidget(self.agent_command_review_target)
+
+        self.agent_command_review_operation = QLabel(self.agent_command_review_panel)
+        self.agent_command_review_operation.setObjectName(u"agent_command_review_operation")
+
+        self.agent_command_review_panel_layout.addWidget(self.agent_command_review_operation)
+
+        self.agent_command_review_payload_label = QLabel(self.agent_command_review_panel)
+        self.agent_command_review_payload_label.setObjectName(u"agent_command_review_payload_label")
+
+        self.agent_command_review_panel_layout.addWidget(self.agent_command_review_payload_label)
+
+        self.agent_command_request_preview = QPlainTextEdit(self.agent_command_review_panel)
+        self.agent_command_request_preview.setObjectName(u"agent_command_request_preview")
+        self.agent_command_request_preview.setMinimumSize(QSize(0, 155))
+        self.agent_command_request_preview.setFocusPolicy(Qt.ClickFocus)
+        self.agent_command_request_preview.setReadOnly(True)
+
+        self.agent_command_review_panel_layout.addWidget(self.agent_command_request_preview)
+
+        self.agent_command_validation_status = QLabel(self.agent_command_review_panel)
+        self.agent_command_validation_status.setObjectName(u"agent_command_validation_status")
+        self.agent_command_validation_status.setWordWrap(True)
+
+        self.agent_command_review_panel_layout.addWidget(self.agent_command_validation_status)
+
+        self.agent_command_risk_confirmation_checkbox = QCheckBox(self.agent_command_review_panel)
+        self.agent_command_risk_confirmation_checkbox.setObjectName(u"agent_command_risk_confirmation_checkbox")
+        self.agent_command_risk_confirmation_checkbox.setVisible(False)
+
+        self.agent_command_review_panel_layout.addWidget(self.agent_command_risk_confirmation_checkbox)
+
+        self.agent_command_action_row = QHBoxLayout()
+        self.agent_command_action_row.setSpacing(8)
+        self.agent_command_action_row.setObjectName(u"agent_command_action_row")
+        self.agent_command_action_row.setContentsMargins(0, 0, 0, 0)
+        self.agent_command_validate_button = QPushButton(self.agent_command_review_panel)
+        self.agent_command_validate_button.setObjectName(u"agent_command_validate_button")
+        self.agent_command_validate_button.setMinimumSize(QSize(0, 39))
+        self.agent_command_validate_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.agent_command_action_row.addWidget(self.agent_command_validate_button)
+
+        self.agent_command_execute_button = QPushButton(self.agent_command_review_panel)
+        self.agent_command_execute_button.setObjectName(u"agent_command_execute_button")
+        self.agent_command_execute_button.setMinimumSize(QSize(0, 39))
+        self.agent_command_execute_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.agent_command_action_row.addWidget(self.agent_command_execute_button)
+
+
+        self.agent_command_review_panel_layout.addLayout(self.agent_command_action_row)
+
+
+        self.agent_command_inspection_stack_layout.addWidget(self.agent_command_review_panel)
+
         self.agent_command_output_panel = QFrame(self.agent_commands_page_scroll_content)
         self.agent_command_output_panel.setObjectName(u"agent_command_output_panel")
         self.agent_command_output_panel_host_layout = QVBoxLayout(self.agent_command_output_panel)
+        self.agent_command_output_panel_host_layout.setSpacing(0)
         self.agent_command_output_panel_host_layout.setObjectName(u"agent_command_output_panel_host_layout")
         self.agent_command_output_panel_host_layout.setContentsMargins(0, 0, 0, 0)
         self.agent_command_output_panel_layout = QVBoxLayout()
-        self.agent_command_output_panel_layout.setSpacing(12)
+        self.agent_command_output_panel_layout.setSpacing(10)
         self.agent_command_output_panel_layout.setObjectName(u"agent_command_output_panel_layout")
-        self.agent_command_output_panel_layout.setContentsMargins(6, 6, 6, 6)
+        self.agent_command_output_panel_layout.setContentsMargins(15, 14, 15, 15)
         self.agent_command_output_panel_header = QLabel(self.agent_command_output_panel)
         self.agent_command_output_panel_header.setObjectName(u"agent_command_output_panel_header")
 
@@ -2769,6 +2571,7 @@ class Ui_MainWindow(object):
 
         self.agent_command_output_panel_caption = QLabel(self.agent_command_output_panel)
         self.agent_command_output_panel_caption.setObjectName(u"agent_command_output_panel_caption")
+        self.agent_command_output_panel_caption.setWordWrap(True)
 
         self.agent_command_output_panel_layout.addWidget(self.agent_command_output_panel_caption)
 
@@ -2777,16 +2580,61 @@ class Ui_MainWindow(object):
 
         self.agent_command_output_panel_layout.addWidget(self.agent_command_result_summary)
 
-        self.agent_command_output_view = QPlainTextEdit(self.agent_command_output_panel)
+        self.agent_command_result_status_row = QHBoxLayout()
+        self.agent_command_result_status_row.setSpacing(8)
+        self.agent_command_result_status_row.setObjectName(u"agent_command_result_status_row")
+        self.agent_command_result_status_row.setContentsMargins(0, 0, 0, 0)
+        self.agent_command_result_status = QLabel(self.agent_command_output_panel)
+        self.agent_command_result_status.setObjectName(u"agent_command_result_status")
+
+        self.agent_command_result_status_row.addWidget(self.agent_command_result_status)
+
+        self.agent_command_result_duration = QLabel(self.agent_command_output_panel)
+        self.agent_command_result_duration.setObjectName(u"agent_command_result_duration")
+
+        self.agent_command_result_status_row.addWidget(self.agent_command_result_duration)
+
+
+        self.agent_command_output_panel_layout.addLayout(self.agent_command_result_status_row)
+
+        self.agent_command_result_tabs = QTabWidget(self.agent_command_output_panel)
+        self.agent_command_result_tabs.setObjectName(u"agent_command_result_tabs")
+        self.agent_command_result_tabs.setMinimumSize(QSize(0, 210))
+        self.agent_command_stdout_tab = QWidget()
+        self.agent_command_stdout_tab.setObjectName(u"agent_command_stdout_tab")
+        self.agent_command_stdout_tab_layout = QVBoxLayout(self.agent_command_stdout_tab)
+        self.agent_command_stdout_tab_layout.setSpacing(0)
+        self.agent_command_stdout_tab_layout.setObjectName(u"agent_command_stdout_tab_layout")
+        self.agent_command_stdout_tab_layout.setContentsMargins(6, 6, 6, 6)
+        self.agent_command_output_view = QPlainTextEdit(self.agent_command_stdout_tab)
         self.agent_command_output_view.setObjectName(u"agent_command_output_view")
         self.agent_command_output_view.setMinimumSize(QSize(0, 105))
         self.agent_command_output_view.setReadOnly(True)
 
-        self.agent_command_output_panel_layout.addWidget(self.agent_command_output_view)
+        self.agent_command_stdout_tab_layout.addWidget(self.agent_command_output_view)
+
+        self.agent_command_result_tabs.addTab(self.agent_command_stdout_tab, "")
+        self.agent_command_stderr_tab = QWidget()
+        self.agent_command_stderr_tab.setObjectName(u"agent_command_stderr_tab")
+        self.agent_command_stderr_tab_layout = QVBoxLayout(self.agent_command_stderr_tab)
+        self.agent_command_stderr_tab_layout.setSpacing(0)
+        self.agent_command_stderr_tab_layout.setObjectName(u"agent_command_stderr_tab_layout")
+        self.agent_command_stderr_tab_layout.setContentsMargins(6, 6, 6, 6)
+        self.agent_command_stderr_view = QPlainTextEdit(self.agent_command_stderr_tab)
+        self.agent_command_stderr_view.setObjectName(u"agent_command_stderr_view")
+        self.agent_command_stderr_view.setMinimumSize(QSize(0, 150))
+        self.agent_command_stderr_view.setFocusPolicy(Qt.ClickFocus)
+        self.agent_command_stderr_view.setReadOnly(True)
+
+        self.agent_command_stderr_tab_layout.addWidget(self.agent_command_stderr_view)
+
+        self.agent_command_result_tabs.addTab(self.agent_command_stderr_tab, "")
+
+        self.agent_command_output_panel_layout.addWidget(self.agent_command_result_tabs)
 
         self.agent_command_copy_output_button = QPushButton(self.agent_command_output_panel)
         self.agent_command_copy_output_button.setObjectName(u"agent_command_copy_output_button")
-        self.agent_command_copy_output_button.setMinimumSize(QSize(0, 0))
+        self.agent_command_copy_output_button.setMinimumSize(QSize(0, 39))
         self.agent_command_copy_output_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.agent_command_output_panel_layout.addWidget(self.agent_command_copy_output_button)
@@ -2795,29 +2643,46 @@ class Ui_MainWindow(object):
         self.agent_command_output_panel_host_layout.addLayout(self.agent_command_output_panel_layout)
 
 
-        self.agent_cmd_top_layout.addWidget(self.agent_command_output_panel)
+        self.agent_command_inspection_stack_layout.addWidget(self.agent_command_output_panel)
 
+
+        self.agent_cmd_top_layout.addLayout(self.agent_command_inspection_stack_layout)
+
+        self.agent_cmd_top_layout.setStretch(0, 6)
+        self.agent_cmd_top_layout.setStretch(1, 5)
 
         self.agent_commands_page_layout.addLayout(self.agent_cmd_top_layout)
+
+        self.agent_command_recent_section_label = QLabel(self.agent_commands_page_scroll_content)
+        self.agent_command_recent_section_label.setObjectName(u"agent_command_recent_section_label")
+
+        self.agent_commands_page_layout.addWidget(self.agent_command_recent_section_label)
 
         self.agent_command_history_panel = QFrame(self.agent_commands_page_scroll_content)
         self.agent_command_history_panel.setObjectName(u"agent_command_history_panel")
         self.agent_command_history_panel_host_layout = QVBoxLayout(self.agent_command_history_panel)
+        self.agent_command_history_panel_host_layout.setSpacing(0)
         self.agent_command_history_panel_host_layout.setObjectName(u"agent_command_history_panel_host_layout")
         self.agent_command_history_panel_host_layout.setContentsMargins(0, 0, 0, 0)
         self.agent_command_history_panel_layout = QVBoxLayout()
-        self.agent_command_history_panel_layout.setSpacing(12)
+        self.agent_command_history_panel_layout.setSpacing(10)
         self.agent_command_history_panel_layout.setObjectName(u"agent_command_history_panel_layout")
-        self.agent_command_history_panel_layout.setContentsMargins(6, 6, 6, 6)
+        self.agent_command_history_panel_layout.setContentsMargins(15, 14, 15, 15)
         self.agent_command_history_panel_header = QLabel(self.agent_command_history_panel)
         self.agent_command_history_panel_header.setObjectName(u"agent_command_history_panel_header")
 
         self.agent_command_history_panel_layout.addWidget(self.agent_command_history_panel_header)
 
         self.agent_cmd_history_toolbar_layout = QHBoxLayout()
-        self.agent_cmd_history_toolbar_layout.setSpacing(9)
+        self.agent_cmd_history_toolbar_layout.setSpacing(8)
         self.agent_cmd_history_toolbar_layout.setObjectName(u"agent_cmd_history_toolbar_layout")
         self.agent_cmd_history_toolbar_layout.setContentsMargins(0, 0, 0, 0)
+        self.agent_command_history_search = QLineEdit(self.agent_command_history_panel)
+        self.agent_command_history_search.setObjectName(u"agent_command_history_search")
+        self.agent_command_history_search.setClearButtonEnabled(True)
+
+        self.agent_cmd_history_toolbar_layout.addWidget(self.agent_command_history_search)
+
         self.agent_command_status_filter_combo = QComboBox(self.agent_command_history_panel)
         self.agent_command_status_filter_combo.addItem("")
         self.agent_command_status_filter_combo.addItem("")
@@ -2825,35 +2690,39 @@ class Ui_MainWindow(object):
         self.agent_command_status_filter_combo.addItem("")
         self.agent_command_status_filter_combo.addItem("")
         self.agent_command_status_filter_combo.setObjectName(u"agent_command_status_filter_combo")
-        self.agent_command_status_filter_combo.setMinimumSize(QSize(0, 0))
+        self.agent_command_status_filter_combo.setMinimumSize(QSize(0, 43))
 
         self.agent_cmd_history_toolbar_layout.addWidget(self.agent_command_status_filter_combo)
 
         self.agent_command_history_refresh_button = QPushButton(self.agent_command_history_panel)
         self.agent_command_history_refresh_button.setObjectName(u"agent_command_history_refresh_button")
-        self.agent_command_history_refresh_button.setMinimumSize(QSize(0, 0))
+        self.agent_command_history_refresh_button.setMinimumSize(QSize(0, 39))
         self.agent_command_history_refresh_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.agent_cmd_history_toolbar_layout.addWidget(self.agent_command_history_refresh_button)
 
+        self.agent_cmd_history_toolbar_layout.setStretch(0, 3)
+        self.agent_cmd_history_toolbar_layout.setStretch(1, 1)
 
         self.agent_command_history_panel_layout.addLayout(self.agent_cmd_history_toolbar_layout)
 
         self.agent_command_history_table = QTableWidget(self.agent_command_history_panel)
-        if (self.agent_command_history_table.columnCount() < 5):
-            self.agent_command_history_table.setColumnCount(5)
-        __qtablewidgetitem38 = QTableWidgetItem()
-        self.agent_command_history_table.setHorizontalHeaderItem(0, __qtablewidgetitem38)
-        __qtablewidgetitem39 = QTableWidgetItem()
-        self.agent_command_history_table.setHorizontalHeaderItem(1, __qtablewidgetitem39)
-        __qtablewidgetitem40 = QTableWidgetItem()
-        self.agent_command_history_table.setHorizontalHeaderItem(2, __qtablewidgetitem40)
-        __qtablewidgetitem41 = QTableWidgetItem()
-        self.agent_command_history_table.setHorizontalHeaderItem(3, __qtablewidgetitem41)
-        __qtablewidgetitem42 = QTableWidgetItem()
-        self.agent_command_history_table.setHorizontalHeaderItem(4, __qtablewidgetitem42)
+        if (self.agent_command_history_table.columnCount() < 6):
+            self.agent_command_history_table.setColumnCount(6)
+        __qtablewidgetitem58 = QTableWidgetItem()
+        self.agent_command_history_table.setHorizontalHeaderItem(0, __qtablewidgetitem58)
+        __qtablewidgetitem59 = QTableWidgetItem()
+        self.agent_command_history_table.setHorizontalHeaderItem(1, __qtablewidgetitem59)
+        __qtablewidgetitem60 = QTableWidgetItem()
+        self.agent_command_history_table.setHorizontalHeaderItem(2, __qtablewidgetitem60)
+        __qtablewidgetitem61 = QTableWidgetItem()
+        self.agent_command_history_table.setHorizontalHeaderItem(3, __qtablewidgetitem61)
+        __qtablewidgetitem62 = QTableWidgetItem()
+        self.agent_command_history_table.setHorizontalHeaderItem(4, __qtablewidgetitem62)
+        __qtablewidgetitem63 = QTableWidgetItem()
+        self.agent_command_history_table.setHorizontalHeaderItem(5, __qtablewidgetitem63)
         self.agent_command_history_table.setObjectName(u"agent_command_history_table")
-        self.agent_command_history_table.setMinimumSize(QSize(0, 160))
+        self.agent_command_history_table.setMinimumSize(QSize(0, 175))
         self.agent_command_history_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.agent_command_history_table.setAlternatingRowColors(True)
         self.agent_command_history_table.setSelectionMode(QAbstractItemView.SingleSelection)
@@ -2861,7 +2730,14 @@ class Ui_MainWindow(object):
         self.agent_command_history_table.setShowGrid(False)
         self.agent_command_history_table.setWordWrap(False)
         self.agent_command_history_table.setRowCount(0)
-        self.agent_command_history_table.setColumnCount(5)
+        self.agent_command_history_table.setColumnCount(6)
+        self.agent_command_history_table.horizontalHeader().setVisible(True)
+        self.agent_command_history_table.horizontalHeader().setCascadingSectionResizes(False)
+        self.agent_command_history_table.horizontalHeader().setProperty(u"showSortIndicator", False)
+        self.agent_command_history_table.horizontalHeader().setStretchLastSection(False)
+        self.agent_command_history_table.verticalHeader().setCascadingSectionResizes(True)
+        self.agent_command_history_table.verticalHeader().setProperty(u"showSortIndicator", False)
+        self.agent_command_history_table.verticalHeader().setStretchLastSection(False)
 
         self.agent_command_history_panel_layout.addWidget(self.agent_command_history_table)
 
@@ -2870,6 +2746,10 @@ class Ui_MainWindow(object):
 
 
         self.agent_commands_page_layout.addWidget(self.agent_command_history_panel)
+
+        self.spacer_auto_6 = QSpacerItem(5, 2, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.agent_commands_page_layout.addItem(self.spacer_auto_6)
 
         self.agent_commands_page_scroll.setWidget(self.agent_commands_page_scroll_content)
 
@@ -2895,17 +2775,18 @@ class Ui_MainWindow(object):
         self.fleet_commands_page_scroll.setWidgetResizable(True)
         self.fleet_commands_page_scroll_content = QWidget()
         self.fleet_commands_page_scroll_content.setObjectName(u"fleet_commands_page_scroll_content")
-        self.fleet_commands_page_scroll_content.setGeometry(QRect(0, 0, 1066, 980))
+        self.fleet_commands_page_scroll_content.setGeometry(QRect(0, -434, 1103, 1374))
         self.fleet_commands_page_layout = QVBoxLayout(self.fleet_commands_page_scroll_content)
-        self.fleet_commands_page_layout.setSpacing(17)
+        self.fleet_commands_page_layout.setSpacing(16)
         self.fleet_commands_page_layout.setObjectName(u"fleet_commands_page_layout")
-        self.fleet_commands_page_layout.setContentsMargins(6, 6, 6, 6)
+        self.fleet_commands_page_layout.setSizeConstraint(QLayout.SetMinAndMaxSize)
+        self.fleet_commands_page_layout.setContentsMargins(15, 15, 15, 18)
         self.fleet_cmd_heading_row = QHBoxLayout()
         self.fleet_cmd_heading_row.setSpacing(12)
         self.fleet_cmd_heading_row.setObjectName(u"fleet_cmd_heading_row")
         self.fleet_cmd_heading_row.setContentsMargins(0, 0, 0, 0)
         self.fleet_cmd_heading_text = QVBoxLayout()
-        self.fleet_cmd_heading_text.setSpacing(4)
+        self.fleet_cmd_heading_text.setSpacing(6)
         self.fleet_cmd_heading_text.setObjectName(u"fleet_cmd_heading_text")
         self.fleet_cmd_heading_text.setContentsMargins(0, 0, 0, 0)
         self.fleet_cmd_title = QLabel(self.fleet_commands_page_scroll_content)
@@ -2922,17 +2803,24 @@ class Ui_MainWindow(object):
 
         self.fleet_cmd_heading_row.addLayout(self.fleet_cmd_heading_text)
 
-        self.fleet_cmd_heading_spacer = QSpacerItem(30, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.spacer_auto_1 = QSpacerItem(5, 2, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.fleet_cmd_heading_row.addItem(self.fleet_cmd_heading_spacer)
+        self.fleet_cmd_heading_row.addItem(self.spacer_auto_1)
+
+        self.fleet_command_workspace_status = QLabel(self.fleet_commands_page_scroll_content)
+        self.fleet_command_workspace_status.setObjectName(u"fleet_command_workspace_status")
+
+        self.fleet_cmd_heading_row.addWidget(self.fleet_command_workspace_status)
 
         self.fleet_cmd_refresh_button = QPushButton(self.fleet_commands_page_scroll_content)
         self.fleet_cmd_refresh_button.setObjectName(u"fleet_cmd_refresh_button")
-        self.fleet_cmd_refresh_button.setMinimumSize(QSize(0, 0))
+        self.fleet_cmd_refresh_button.setMinimumSize(QSize(0, 39))
         self.fleet_cmd_refresh_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.fleet_cmd_heading_row.addWidget(self.fleet_cmd_refresh_button)
 
+        self.fleet_cmd_heading_row.setStretch(0, 4)
+        self.fleet_cmd_heading_row.setStretch(1, 1)
 
         self.fleet_commands_page_layout.addLayout(self.fleet_cmd_heading_row)
 
@@ -2943,19 +2831,36 @@ class Ui_MainWindow(object):
 
         self.fleet_commands_page_layout.addWidget(self.line_7)
 
+        self.fleet_command_process_strip = QFrame(self.fleet_commands_page_scroll_content)
+        self.fleet_command_process_strip.setObjectName(u"fleet_command_process_strip")
+        self.fleet_command_process_strip_layout = QVBoxLayout(self.fleet_command_process_strip)
+        self.fleet_command_process_strip_layout.setSpacing(0)
+        self.fleet_command_process_strip_layout.setObjectName(u"fleet_command_process_strip_layout")
+        self.fleet_command_process_strip_layout.setContentsMargins(10, 10, 10, 10)
+        self.fleet_command_process_steps = QLabel(self.fleet_command_process_strip)
+        self.fleet_command_process_steps.setObjectName(u"fleet_command_process_steps")
+
+        self.fleet_command_process_strip_layout.addWidget(self.fleet_command_process_steps)
+
+
+        self.fleet_commands_page_layout.addWidget(self.fleet_command_process_strip)
+
         self.fleet_cmd_upper_layout = QHBoxLayout()
-        self.fleet_cmd_upper_layout.setSpacing(16)
+        self.fleet_cmd_upper_layout.setSpacing(6)
         self.fleet_cmd_upper_layout.setObjectName(u"fleet_cmd_upper_layout")
         self.fleet_cmd_upper_layout.setContentsMargins(0, 0, 0, 0)
         self.fleet_command_library_panel = QFrame(self.fleet_commands_page_scroll_content)
         self.fleet_command_library_panel.setObjectName(u"fleet_command_library_panel")
+        self.fleet_command_library_panel.setMinimumSize(QSize(230, 0))
+        self.fleet_command_library_panel.setMaximumSize(QSize(340, 16777215))
         self.fleet_command_library_panel_host_layout = QVBoxLayout(self.fleet_command_library_panel)
+        self.fleet_command_library_panel_host_layout.setSpacing(0)
         self.fleet_command_library_panel_host_layout.setObjectName(u"fleet_command_library_panel_host_layout")
         self.fleet_command_library_panel_host_layout.setContentsMargins(0, 0, 0, 0)
         self.fleet_command_library_panel_layout = QVBoxLayout()
-        self.fleet_command_library_panel_layout.setSpacing(12)
+        self.fleet_command_library_panel_layout.setSpacing(11)
         self.fleet_command_library_panel_layout.setObjectName(u"fleet_command_library_panel_layout")
-        self.fleet_command_library_panel_layout.setContentsMargins(20, 18, 20, 18)
+        self.fleet_command_library_panel_layout.setContentsMargins(6, 15, 6, 15)
         self.fleet_command_library_panel_header = QLabel(self.fleet_command_library_panel)
         self.fleet_command_library_panel_header.setObjectName(u"fleet_command_library_panel_header")
 
@@ -2963,37 +2868,34 @@ class Ui_MainWindow(object):
 
         self.fleet_command_library_panel_caption = QLabel(self.fleet_command_library_panel)
         self.fleet_command_library_panel_caption.setObjectName(u"fleet_command_library_panel_caption")
+        self.fleet_command_library_panel_caption.setWordWrap(True)
 
         self.fleet_command_library_panel_layout.addWidget(self.fleet_command_library_panel_caption)
 
         self.fleet_command_search = QLineEdit(self.fleet_command_library_panel)
         self.fleet_command_search.setObjectName(u"fleet_command_search")
-        self.fleet_command_search.setMinimumSize(QSize(0, 0))
+        self.fleet_command_search.setMinimumSize(QSize(0, 43))
 
         self.fleet_command_library_panel_layout.addWidget(self.fleet_command_search)
 
         self.fleet_command_category = QComboBox(self.fleet_command_library_panel)
         self.fleet_command_category.addItem("")
-        self.fleet_command_category.addItem("")
-        self.fleet_command_category.addItem("")
-        self.fleet_command_category.addItem("")
-        self.fleet_command_category.addItem("")
         self.fleet_command_category.setObjectName(u"fleet_command_category")
-        self.fleet_command_category.setMinimumSize(QSize(0, 0))
+        self.fleet_command_category.setMinimumSize(QSize(0, 43))
 
         self.fleet_command_library_panel_layout.addWidget(self.fleet_command_category)
 
         self.fleet_command_catalog_table = QTableWidget(self.fleet_command_library_panel)
         if (self.fleet_command_catalog_table.columnCount() < 3):
             self.fleet_command_catalog_table.setColumnCount(3)
-        __qtablewidgetitem43 = QTableWidgetItem()
-        self.fleet_command_catalog_table.setHorizontalHeaderItem(0, __qtablewidgetitem43)
-        __qtablewidgetitem44 = QTableWidgetItem()
-        self.fleet_command_catalog_table.setHorizontalHeaderItem(1, __qtablewidgetitem44)
-        __qtablewidgetitem45 = QTableWidgetItem()
-        self.fleet_command_catalog_table.setHorizontalHeaderItem(2, __qtablewidgetitem45)
+        __qtablewidgetitem64 = QTableWidgetItem()
+        self.fleet_command_catalog_table.setHorizontalHeaderItem(0, __qtablewidgetitem64)
+        __qtablewidgetitem65 = QTableWidgetItem()
+        self.fleet_command_catalog_table.setHorizontalHeaderItem(1, __qtablewidgetitem65)
+        __qtablewidgetitem66 = QTableWidgetItem()
+        self.fleet_command_catalog_table.setHorizontalHeaderItem(2, __qtablewidgetitem66)
         self.fleet_command_catalog_table.setObjectName(u"fleet_command_catalog_table")
-        self.fleet_command_catalog_table.setMinimumSize(QSize(0, 200))
+        self.fleet_command_catalog_table.setMinimumSize(QSize(0, 0))
         self.fleet_command_catalog_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.fleet_command_catalog_table.setAlternatingRowColors(True)
         self.fleet_command_catalog_table.setSelectionMode(QAbstractItemView.SingleSelection)
@@ -3019,13 +2921,15 @@ class Ui_MainWindow(object):
 
         self.fleet_command_execution_panel = QFrame(self.fleet_commands_page_scroll_content)
         self.fleet_command_execution_panel.setObjectName(u"fleet_command_execution_panel")
+        self.fleet_command_execution_panel.setMinimumSize(QSize(355, 0))
         self.fleet_command_execution_panel_host_layout = QVBoxLayout(self.fleet_command_execution_panel)
+        self.fleet_command_execution_panel_host_layout.setSpacing(0)
         self.fleet_command_execution_panel_host_layout.setObjectName(u"fleet_command_execution_panel_host_layout")
         self.fleet_command_execution_panel_host_layout.setContentsMargins(0, 0, 0, 0)
         self.fleet_command_execution_panel_layout = QVBoxLayout()
         self.fleet_command_execution_panel_layout.setSpacing(12)
         self.fleet_command_execution_panel_layout.setObjectName(u"fleet_command_execution_panel_layout")
-        self.fleet_command_execution_panel_layout.setContentsMargins(20, 18, 20, 18)
+        self.fleet_command_execution_panel_layout.setContentsMargins(16, 15, 16, 16)
         self.fleet_command_execution_panel_header = QLabel(self.fleet_command_execution_panel)
         self.fleet_command_execution_panel_header.setObjectName(u"fleet_command_execution_panel_header")
 
@@ -3042,62 +2946,123 @@ class Ui_MainWindow(object):
         self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_target_label)
 
         self.fleet_command_target_combo = QComboBox(self.fleet_command_execution_panel)
-        self.fleet_command_target_combo.addItem("")
         self.fleet_command_target_combo.setObjectName(u"fleet_command_target_combo")
-        self.fleet_command_target_combo.setMinimumSize(QSize(0, 0))
+        self.fleet_command_target_combo.setMinimumSize(QSize(0, 43))
 
         self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_target_combo)
+
+        self.fleet_command_category_label = QLabel(self.fleet_command_execution_panel)
+        self.fleet_command_category_label.setObjectName(u"fleet_command_category_label")
+
+        self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_category_label)
+
+        self.fleet_command_category_combo = QComboBox(self.fleet_command_execution_panel)
+        self.fleet_command_category_combo.setObjectName(u"fleet_command_category_combo")
+        self.fleet_command_category_combo.setMinimumSize(QSize(0, 43))
+
+        self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_category_combo)
 
         self.fleet_command_selected_label = QLabel(self.fleet_command_execution_panel)
         self.fleet_command_selected_label.setObjectName(u"fleet_command_selected_label")
 
         self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_selected_label)
 
-        self.fleet_command_selected_combo = QComboBox(self.fleet_command_execution_panel)
-        self.fleet_command_selected_combo.addItem("")
-        self.fleet_command_selected_combo.setObjectName(u"fleet_command_selected_combo")
-        self.fleet_command_selected_combo.setMinimumSize(QSize(0, 0))
+        self.fleet_command_type_combo = QComboBox(self.fleet_command_execution_panel)
+        self.fleet_command_type_combo.setObjectName(u"fleet_command_type_combo")
+        self.fleet_command_type_combo.setMinimumSize(QSize(0, 43))
 
-        self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_selected_combo)
+        self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_type_combo)
+
+        self.fleet_command_identity_card = QFrame(self.fleet_command_execution_panel)
+        self.fleet_command_identity_card.setObjectName(u"fleet_command_identity_card")
+        self.fleet_command_identity_card_layout = QVBoxLayout(self.fleet_command_identity_card)
+        self.fleet_command_identity_card_layout.setSpacing(7)
+        self.fleet_command_identity_card_layout.setObjectName(u"fleet_command_identity_card_layout")
+        self.fleet_command_identity_card_layout.setContentsMargins(12, 12, 12, 12)
+        self.fleet_command_risk_row = QHBoxLayout()
+        self.fleet_command_risk_row.setSpacing(8)
+        self.fleet_command_risk_row.setObjectName(u"fleet_command_risk_row")
+        self.fleet_command_risk_row.setContentsMargins(0, 0, 0, 0)
+        self.fleet_command_display_title = QLabel(self.fleet_command_identity_card)
+        self.fleet_command_display_title.setObjectName(u"fleet_command_display_title")
+
+        self.fleet_command_risk_row.addWidget(self.fleet_command_display_title)
+
+        self.spacer_auto_2 = QSpacerItem(18, 1, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.fleet_command_risk_row.addItem(self.spacer_auto_2)
+
+        self.fleet_command_risk_badge = QLabel(self.fleet_command_identity_card)
+        self.fleet_command_risk_badge.setObjectName(u"fleet_command_risk_badge")
+
+        self.fleet_command_risk_row.addWidget(self.fleet_command_risk_badge)
+
+
+        self.fleet_command_identity_card_layout.addLayout(self.fleet_command_risk_row)
+
+        self.fleet_command_command_key = QLabel(self.fleet_command_identity_card)
+        self.fleet_command_command_key.setObjectName(u"fleet_command_command_key")
+
+        self.fleet_command_identity_card_layout.addWidget(self.fleet_command_command_key)
+
+        self.fleet_command_description = QLabel(self.fleet_command_identity_card)
+        self.fleet_command_description.setObjectName(u"fleet_command_description")
+        self.fleet_command_description.setWordWrap(True)
+
+        self.fleet_command_identity_card_layout.addWidget(self.fleet_command_description)
+
+
+        self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_identity_card)
+
+        self.fleet_command_parameters_heading = QHBoxLayout()
+        self.fleet_command_parameters_heading.setSpacing(8)
+        self.fleet_command_parameters_heading.setObjectName(u"fleet_command_parameters_heading")
+        self.fleet_command_parameters_heading.setContentsMargins(0, 0, 0, 0)
+        self.fleet_command_fields_label = QLabel(self.fleet_command_execution_panel)
+        self.fleet_command_fields_label.setObjectName(u"fleet_command_fields_label")
+
+        self.fleet_command_parameters_heading.addWidget(self.fleet_command_fields_label)
+
+        self.fleet_command_fields_count = QLabel(self.fleet_command_execution_panel)
+        self.fleet_command_fields_count.setObjectName(u"fleet_command_fields_count")
+
+        self.fleet_command_parameters_heading.addWidget(self.fleet_command_fields_count)
+
+        self.fleet_command_parameters_heading.setStretch(0, 4)
+        self.fleet_command_parameters_heading.setStretch(1, 2)
+
+        self.fleet_command_execution_panel_layout.addLayout(self.fleet_command_parameters_heading)
+
+        self.fleet_command_fields_container = QFrame(self.fleet_command_execution_panel)
+        self.fleet_command_fields_container.setObjectName(u"fleet_command_fields_container")
+        sizePolicy2.setHeightForWidth(self.fleet_command_fields_container.sizePolicy().hasHeightForWidth())
+        self.fleet_command_fields_container.setSizePolicy(sizePolicy2)
+        self.fleet_command_fields_container.setMinimumSize(QSize(0, 64))
+        self.fleet_command_fields_container.setFrameShape(QFrame.NoFrame)
+        self.fleet_command_fields_layout = QVBoxLayout(self.fleet_command_fields_container)
+        self.fleet_command_fields_layout.setSpacing(9)
+        self.fleet_command_fields_layout.setObjectName(u"fleet_command_fields_layout")
+        self.fleet_command_fields_layout.setContentsMargins(12, 12, 12, 12)
+
+        self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_fields_container)
 
         self.fleet_command_payload_label = QLabel(self.fleet_command_execution_panel)
         self.fleet_command_payload_label.setObjectName(u"fleet_command_payload_label")
 
         self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_payload_label)
 
+        self.fleet_command_raw_mode_checkbox = QCheckBox(self.fleet_command_execution_panel)
+        self.fleet_command_raw_mode_checkbox.setObjectName(u"fleet_command_raw_mode_checkbox")
+
+        self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_raw_mode_checkbox)
+
         self.fleet_command_payload_editor = QPlainTextEdit(self.fleet_command_execution_panel)
         self.fleet_command_payload_editor.setObjectName(u"fleet_command_payload_editor")
-        self.fleet_command_payload_editor.setMinimumSize(QSize(0, 105))
-        self.fleet_command_payload_editor.setReadOnly(False)
+        self.fleet_command_payload_editor.setMinimumSize(QSize(0, 96))
+        self.fleet_command_payload_editor.setMaximumSize(QSize(16777215, 138))
+        self.fleet_command_payload_editor.setReadOnly(True)
 
         self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_payload_editor)
-
-        self.fleet_command_warning = QLabel(self.fleet_command_execution_panel)
-        self.fleet_command_warning.setObjectName(u"fleet_command_warning")
-        self.fleet_command_warning.setWordWrap(True)
-
-        self.fleet_command_execution_panel_layout.addWidget(self.fleet_command_warning)
-
-        self.fleet_cmd_action_layout = QHBoxLayout()
-        self.fleet_cmd_action_layout.setSpacing(10)
-        self.fleet_cmd_action_layout.setObjectName(u"fleet_cmd_action_layout")
-        self.fleet_cmd_action_layout.setContentsMargins(0, 0, 0, 0)
-        self.fleet_command_validate_button = QPushButton(self.fleet_command_execution_panel)
-        self.fleet_command_validate_button.setObjectName(u"fleet_command_validate_button")
-        self.fleet_command_validate_button.setMinimumSize(QSize(0, 0))
-        self.fleet_command_validate_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.fleet_cmd_action_layout.addWidget(self.fleet_command_validate_button)
-
-        self.fleet_command_send_button = QPushButton(self.fleet_command_execution_panel)
-        self.fleet_command_send_button.setObjectName(u"fleet_command_send_button")
-        self.fleet_command_send_button.setMinimumSize(QSize(0, 0))
-        self.fleet_command_send_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.fleet_cmd_action_layout.addWidget(self.fleet_command_send_button)
-
-
-        self.fleet_command_execution_panel_layout.addLayout(self.fleet_cmd_action_layout)
 
 
         self.fleet_command_execution_panel_host_layout.addLayout(self.fleet_command_execution_panel_layout)
@@ -3105,22 +3070,108 @@ class Ui_MainWindow(object):
 
         self.fleet_cmd_upper_layout.addWidget(self.fleet_command_execution_panel)
 
+        self.fleet_command_review_panel = QFrame(self.fleet_commands_page_scroll_content)
+        self.fleet_command_review_panel.setObjectName(u"fleet_command_review_panel")
+        self.fleet_command_review_panel.setMinimumSize(QSize(268, 0))
+        self.fleet_command_review_panel_layout = QVBoxLayout(self.fleet_command_review_panel)
+        self.fleet_command_review_panel_layout.setSpacing(12)
+        self.fleet_command_review_panel_layout.setObjectName(u"fleet_command_review_panel_layout")
+        self.fleet_command_review_panel_layout.setContentsMargins(16, 15, 16, 16)
+        self.fleet_command_review_header = QLabel(self.fleet_command_review_panel)
+        self.fleet_command_review_header.setObjectName(u"fleet_command_review_header")
+
+        self.fleet_command_review_panel_layout.addWidget(self.fleet_command_review_header)
+
+        self.fleet_command_review_caption = QLabel(self.fleet_command_review_panel)
+        self.fleet_command_review_caption.setObjectName(u"fleet_command_review_caption")
+        self.fleet_command_review_caption.setWordWrap(True)
+
+        self.fleet_command_review_panel_layout.addWidget(self.fleet_command_review_caption)
+
+        self.fleet_command_review_target = QLabel(self.fleet_command_review_panel)
+        self.fleet_command_review_target.setObjectName(u"fleet_command_review_target")
+
+        self.fleet_command_review_panel_layout.addWidget(self.fleet_command_review_target)
+
+        self.fleet_command_review_operation = QLabel(self.fleet_command_review_panel)
+        self.fleet_command_review_operation.setObjectName(u"fleet_command_review_operation")
+
+        self.fleet_command_review_panel_layout.addWidget(self.fleet_command_review_operation)
+
+        self.fleet_command_review_payload_label = QLabel(self.fleet_command_review_panel)
+        self.fleet_command_review_payload_label.setObjectName(u"fleet_command_review_payload_label")
+
+        self.fleet_command_review_panel_layout.addWidget(self.fleet_command_review_payload_label)
+
+        self.fleet_command_request_preview = QPlainTextEdit(self.fleet_command_review_panel)
+        self.fleet_command_request_preview.setObjectName(u"fleet_command_request_preview")
+        self.fleet_command_request_preview.setMinimumSize(QSize(0, 155))
+        self.fleet_command_request_preview.setReadOnly(True)
+
+        self.fleet_command_review_panel_layout.addWidget(self.fleet_command_request_preview)
+
+        self.fleet_command_validation_status = QLabel(self.fleet_command_review_panel)
+        self.fleet_command_validation_status.setObjectName(u"fleet_command_validation_status")
+        self.fleet_command_validation_status.setWordWrap(True)
+
+        self.fleet_command_review_panel_layout.addWidget(self.fleet_command_validation_status)
+
+        self.fleet_command_risk_confirmation_checkbox = QCheckBox(self.fleet_command_review_panel)
+        self.fleet_command_risk_confirmation_checkbox.setObjectName(u"fleet_command_risk_confirmation_checkbox")
+        self.fleet_command_risk_confirmation_checkbox.setVisible(False)
+
+        self.fleet_command_review_panel_layout.addWidget(self.fleet_command_risk_confirmation_checkbox)
+
+        self.fleet_cmd_action_layout = QHBoxLayout()
+        self.fleet_cmd_action_layout.setSpacing(8)
+        self.fleet_cmd_action_layout.setObjectName(u"fleet_cmd_action_layout")
+        self.fleet_cmd_action_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_command_validate_button = QPushButton(self.fleet_command_review_panel)
+        self.fleet_command_validate_button.setObjectName(u"fleet_command_validate_button")
+        self.fleet_command_validate_button.setMinimumSize(QSize(0, 39))
+        self.fleet_command_validate_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.fleet_cmd_action_layout.addWidget(self.fleet_command_validate_button)
+
+        self.fleet_command_execute_button = QPushButton(self.fleet_command_review_panel)
+        self.fleet_command_execute_button.setObjectName(u"fleet_command_execute_button")
+        self.fleet_command_execute_button.setMinimumSize(QSize(0, 39))
+        self.fleet_command_execute_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.fleet_cmd_action_layout.addWidget(self.fleet_command_execute_button)
+
+
+        self.fleet_command_review_panel_layout.addLayout(self.fleet_cmd_action_layout)
+
+
+        self.fleet_cmd_upper_layout.addWidget(self.fleet_command_review_panel)
+
+        self.fleet_cmd_upper_layout.setStretch(0, 3)
+        self.fleet_cmd_upper_layout.setStretch(1, 5)
+        self.fleet_cmd_upper_layout.setStretch(2, 4)
 
         self.fleet_commands_page_layout.addLayout(self.fleet_cmd_upper_layout)
 
+        self.fleet_command_recent_section_label = QLabel(self.fleet_commands_page_scroll_content)
+        self.fleet_command_recent_section_label.setObjectName(u"fleet_command_recent_section_label")
+
+        self.fleet_commands_page_layout.addWidget(self.fleet_command_recent_section_label)
+
         self.fleet_cmd_bottom_layout = QHBoxLayout()
-        self.fleet_cmd_bottom_layout.setSpacing(16)
+        self.fleet_cmd_bottom_layout.setSpacing(12)
         self.fleet_cmd_bottom_layout.setObjectName(u"fleet_cmd_bottom_layout")
         self.fleet_cmd_bottom_layout.setContentsMargins(0, 0, 0, 0)
         self.fleet_command_history_panel = QFrame(self.fleet_commands_page_scroll_content)
         self.fleet_command_history_panel.setObjectName(u"fleet_command_history_panel")
+        self.fleet_command_history_panel.setMaximumSize(QSize(620, 16777215))
         self.fleet_command_history_panel_host_layout = QVBoxLayout(self.fleet_command_history_panel)
+        self.fleet_command_history_panel_host_layout.setSpacing(0)
         self.fleet_command_history_panel_host_layout.setObjectName(u"fleet_command_history_panel_host_layout")
         self.fleet_command_history_panel_host_layout.setContentsMargins(0, 0, 0, 0)
         self.fleet_command_history_panel_layout = QVBoxLayout()
-        self.fleet_command_history_panel_layout.setSpacing(12)
+        self.fleet_command_history_panel_layout.setSpacing(10)
         self.fleet_command_history_panel_layout.setObjectName(u"fleet_command_history_panel_layout")
-        self.fleet_command_history_panel_layout.setContentsMargins(20, 18, 20, 18)
+        self.fleet_command_history_panel_layout.setContentsMargins(15, 14, 15, 15)
         self.fleet_command_history_panel_header = QLabel(self.fleet_command_history_panel)
         self.fleet_command_history_panel_header.setObjectName(u"fleet_command_history_panel_header")
 
@@ -3128,13 +3179,20 @@ class Ui_MainWindow(object):
 
         self.fleet_command_history_panel_caption = QLabel(self.fleet_command_history_panel)
         self.fleet_command_history_panel_caption.setObjectName(u"fleet_command_history_panel_caption")
+        self.fleet_command_history_panel_caption.setWordWrap(True)
 
         self.fleet_command_history_panel_layout.addWidget(self.fleet_command_history_panel_caption)
 
         self.fleet_cmd_hist_toolbar_layout = QHBoxLayout()
-        self.fleet_cmd_hist_toolbar_layout.setSpacing(9)
+        self.fleet_cmd_hist_toolbar_layout.setSpacing(8)
         self.fleet_cmd_hist_toolbar_layout.setObjectName(u"fleet_cmd_hist_toolbar_layout")
         self.fleet_cmd_hist_toolbar_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_command_history_search = QLineEdit(self.fleet_command_history_panel)
+        self.fleet_command_history_search.setObjectName(u"fleet_command_history_search")
+        self.fleet_command_history_search.setClearButtonEnabled(True)
+
+        self.fleet_cmd_hist_toolbar_layout.addWidget(self.fleet_command_history_search)
+
         self.fleet_command_history_status_combo = QComboBox(self.fleet_command_history_panel)
         self.fleet_command_history_status_combo.addItem("")
         self.fleet_command_history_status_combo.addItem("")
@@ -3143,35 +3201,40 @@ class Ui_MainWindow(object):
         self.fleet_command_history_status_combo.addItem("")
         self.fleet_command_history_status_combo.addItem("")
         self.fleet_command_history_status_combo.setObjectName(u"fleet_command_history_status_combo")
-        self.fleet_command_history_status_combo.setMinimumSize(QSize(0, 0))
+        self.fleet_command_history_status_combo.setMinimumSize(QSize(0, 43))
 
         self.fleet_cmd_hist_toolbar_layout.addWidget(self.fleet_command_history_status_combo)
 
         self.fleet_command_history_refresh_button = QPushButton(self.fleet_command_history_panel)
         self.fleet_command_history_refresh_button.setObjectName(u"fleet_command_history_refresh_button")
-        self.fleet_command_history_refresh_button.setMinimumSize(QSize(0, 0))
+        self.fleet_command_history_refresh_button.setMinimumSize(QSize(0, 39))
         self.fleet_command_history_refresh_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.fleet_cmd_hist_toolbar_layout.addWidget(self.fleet_command_history_refresh_button)
 
+        self.fleet_cmd_hist_toolbar_layout.setStretch(0, 3)
+        self.fleet_cmd_hist_toolbar_layout.setStretch(1, 1)
 
         self.fleet_command_history_panel_layout.addLayout(self.fleet_cmd_hist_toolbar_layout)
 
         self.fleet_command_history_table = QTableWidget(self.fleet_command_history_panel)
-        if (self.fleet_command_history_table.columnCount() < 5):
-            self.fleet_command_history_table.setColumnCount(5)
-        __qtablewidgetitem46 = QTableWidgetItem()
-        self.fleet_command_history_table.setHorizontalHeaderItem(0, __qtablewidgetitem46)
-        __qtablewidgetitem47 = QTableWidgetItem()
-        self.fleet_command_history_table.setHorizontalHeaderItem(1, __qtablewidgetitem47)
-        __qtablewidgetitem48 = QTableWidgetItem()
-        self.fleet_command_history_table.setHorizontalHeaderItem(2, __qtablewidgetitem48)
-        __qtablewidgetitem49 = QTableWidgetItem()
-        self.fleet_command_history_table.setHorizontalHeaderItem(3, __qtablewidgetitem49)
-        __qtablewidgetitem50 = QTableWidgetItem()
-        self.fleet_command_history_table.setHorizontalHeaderItem(4, __qtablewidgetitem50)
+        if (self.fleet_command_history_table.columnCount() < 6):
+            self.fleet_command_history_table.setColumnCount(6)
+        __qtablewidgetitem67 = QTableWidgetItem()
+        self.fleet_command_history_table.setHorizontalHeaderItem(0, __qtablewidgetitem67)
+        __qtablewidgetitem68 = QTableWidgetItem()
+        self.fleet_command_history_table.setHorizontalHeaderItem(1, __qtablewidgetitem68)
+        __qtablewidgetitem69 = QTableWidgetItem()
+        self.fleet_command_history_table.setHorizontalHeaderItem(2, __qtablewidgetitem69)
+        __qtablewidgetitem70 = QTableWidgetItem()
+        self.fleet_command_history_table.setHorizontalHeaderItem(3, __qtablewidgetitem70)
+        __qtablewidgetitem71 = QTableWidgetItem()
+        self.fleet_command_history_table.setHorizontalHeaderItem(4, __qtablewidgetitem71)
+        __qtablewidgetitem72 = QTableWidgetItem()
+        self.fleet_command_history_table.setHorizontalHeaderItem(5, __qtablewidgetitem72)
         self.fleet_command_history_table.setObjectName(u"fleet_command_history_table")
-        self.fleet_command_history_table.setMinimumSize(QSize(0, 185))
+        self.fleet_command_history_table.setMinimumSize(QSize(0, 175))
+        self.fleet_command_history_table.setMaximumSize(QSize(650, 16777215))
         self.fleet_command_history_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.fleet_command_history_table.setAlternatingRowColors(True)
         self.fleet_command_history_table.setSelectionMode(QAbstractItemView.SingleSelection)
@@ -3179,7 +3242,7 @@ class Ui_MainWindow(object):
         self.fleet_command_history_table.setShowGrid(False)
         self.fleet_command_history_table.setWordWrap(False)
         self.fleet_command_history_table.setRowCount(0)
-        self.fleet_command_history_table.setColumnCount(5)
+        self.fleet_command_history_table.setColumnCount(6)
 
         self.fleet_command_history_panel_layout.addWidget(self.fleet_command_history_table)
 
@@ -3191,13 +3254,15 @@ class Ui_MainWindow(object):
 
         self.fleet_command_result_panel = QFrame(self.fleet_commands_page_scroll_content)
         self.fleet_command_result_panel.setObjectName(u"fleet_command_result_panel")
+        self.fleet_command_result_panel.setMinimumSize(QSize(320, 0))
         self.fleet_command_result_panel_host_layout = QVBoxLayout(self.fleet_command_result_panel)
+        self.fleet_command_result_panel_host_layout.setSpacing(0)
         self.fleet_command_result_panel_host_layout.setObjectName(u"fleet_command_result_panel_host_layout")
         self.fleet_command_result_panel_host_layout.setContentsMargins(0, 0, 0, 0)
         self.fleet_command_result_panel_layout = QVBoxLayout()
-        self.fleet_command_result_panel_layout.setSpacing(12)
+        self.fleet_command_result_panel_layout.setSpacing(10)
         self.fleet_command_result_panel_layout.setObjectName(u"fleet_command_result_panel_layout")
-        self.fleet_command_result_panel_layout.setContentsMargins(20, 18, 20, 18)
+        self.fleet_command_result_panel_layout.setContentsMargins(15, 14, 15, 15)
         self.fleet_command_result_panel_header = QLabel(self.fleet_command_result_panel)
         self.fleet_command_result_panel_header.setObjectName(u"fleet_command_result_panel_header")
 
@@ -3205,6 +3270,7 @@ class Ui_MainWindow(object):
 
         self.fleet_command_result_panel_caption = QLabel(self.fleet_command_result_panel)
         self.fleet_command_result_panel_caption.setObjectName(u"fleet_command_result_panel_caption")
+        self.fleet_command_result_panel_caption.setWordWrap(True)
 
         self.fleet_command_result_panel_layout.addWidget(self.fleet_command_result_panel_caption)
 
@@ -3213,16 +3279,60 @@ class Ui_MainWindow(object):
 
         self.fleet_command_result_panel_layout.addWidget(self.fleet_command_result_metadata)
 
-        self.fleet_command_output_view = QPlainTextEdit(self.fleet_command_result_panel)
+        self.fleet_command_result_status_row = QHBoxLayout()
+        self.fleet_command_result_status_row.setSpacing(8)
+        self.fleet_command_result_status_row.setObjectName(u"fleet_command_result_status_row")
+        self.fleet_command_result_status_row.setContentsMargins(0, 0, 0, 0)
+        self.fleet_command_result_status = QLabel(self.fleet_command_result_panel)
+        self.fleet_command_result_status.setObjectName(u"fleet_command_result_status")
+
+        self.fleet_command_result_status_row.addWidget(self.fleet_command_result_status)
+
+        self.fleet_command_result_duration = QLabel(self.fleet_command_result_panel)
+        self.fleet_command_result_duration.setObjectName(u"fleet_command_result_duration")
+
+        self.fleet_command_result_status_row.addWidget(self.fleet_command_result_duration)
+
+
+        self.fleet_command_result_panel_layout.addLayout(self.fleet_command_result_status_row)
+
+        self.fleet_command_result_tabs = QTabWidget(self.fleet_command_result_panel)
+        self.fleet_command_result_tabs.setObjectName(u"fleet_command_result_tabs")
+        self.fleet_command_result_tabs.setMinimumSize(QSize(0, 210))
+        self.fleet_command_stdout_tab = QWidget()
+        self.fleet_command_stdout_tab.setObjectName(u"fleet_command_stdout_tab")
+        self.fleet_command_stdout_tab_layout = QVBoxLayout(self.fleet_command_stdout_tab)
+        self.fleet_command_stdout_tab_layout.setSpacing(0)
+        self.fleet_command_stdout_tab_layout.setObjectName(u"fleet_command_stdout_tab_layout")
+        self.fleet_command_stdout_tab_layout.setContentsMargins(6, 6, 6, 6)
+        self.fleet_command_output_view = QPlainTextEdit(self.fleet_command_stdout_tab)
         self.fleet_command_output_view.setObjectName(u"fleet_command_output_view")
         self.fleet_command_output_view.setMinimumSize(QSize(0, 105))
         self.fleet_command_output_view.setReadOnly(True)
 
-        self.fleet_command_result_panel_layout.addWidget(self.fleet_command_output_view)
+        self.fleet_command_stdout_tab_layout.addWidget(self.fleet_command_output_view)
+
+        self.fleet_command_result_tabs.addTab(self.fleet_command_stdout_tab, "")
+        self.fleet_command_stderr_tab = QWidget()
+        self.fleet_command_stderr_tab.setObjectName(u"fleet_command_stderr_tab")
+        self.fleet_command_stderr_tab_layout = QVBoxLayout(self.fleet_command_stderr_tab)
+        self.fleet_command_stderr_tab_layout.setSpacing(0)
+        self.fleet_command_stderr_tab_layout.setObjectName(u"fleet_command_stderr_tab_layout")
+        self.fleet_command_stderr_tab_layout.setContentsMargins(6, 6, 6, 6)
+        self.fleet_command_stderr_view = QPlainTextEdit(self.fleet_command_stderr_tab)
+        self.fleet_command_stderr_view.setObjectName(u"fleet_command_stderr_view")
+        self.fleet_command_stderr_view.setMinimumSize(QSize(0, 150))
+        self.fleet_command_stderr_view.setReadOnly(True)
+
+        self.fleet_command_stderr_tab_layout.addWidget(self.fleet_command_stderr_view)
+
+        self.fleet_command_result_tabs.addTab(self.fleet_command_stderr_tab, "")
+
+        self.fleet_command_result_panel_layout.addWidget(self.fleet_command_result_tabs)
 
         self.fleet_command_copy_output_button = QPushButton(self.fleet_command_result_panel)
         self.fleet_command_copy_output_button.setObjectName(u"fleet_command_copy_output_button")
-        self.fleet_command_copy_output_button.setMinimumSize(QSize(0, 0))
+        self.fleet_command_copy_output_button.setMinimumSize(QSize(0, 39))
         self.fleet_command_copy_output_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.fleet_command_result_panel_layout.addWidget(self.fleet_command_copy_output_button)
@@ -3233,8 +3343,14 @@ class Ui_MainWindow(object):
 
         self.fleet_cmd_bottom_layout.addWidget(self.fleet_command_result_panel)
 
+        self.fleet_cmd_bottom_layout.setStretch(0, 7)
+        self.fleet_cmd_bottom_layout.setStretch(1, 5)
 
         self.fleet_commands_page_layout.addLayout(self.fleet_cmd_bottom_layout)
+
+        self.spacer_auto_3 = QSpacerItem(5, 2, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.fleet_commands_page_layout.addItem(self.spacer_auto_3)
 
         self.fleet_commands_page_scroll.setWidget(self.fleet_commands_page_scroll_content)
 
@@ -3253,7 +3369,7 @@ class Ui_MainWindow(object):
         self.fleet_logs_page_scroll.setWidgetResizable(True)
         self.fleet_logs_page_scroll_content = QWidget()
         self.fleet_logs_page_scroll_content.setObjectName(u"fleet_logs_page_scroll_content")
-        self.fleet_logs_page_scroll_content.setGeometry(QRect(0, 0, 1080, 940))
+        self.fleet_logs_page_scroll_content.setGeometry(QRect(0, 0, 387, 828))
         self.fleet_logs_page_layout = QVBoxLayout(self.fleet_logs_page_scroll_content)
         self.fleet_logs_page_layout.setSpacing(10)
         self.fleet_logs_page_layout.setObjectName(u"fleet_logs_page_layout")
@@ -3398,16 +3514,16 @@ class Ui_MainWindow(object):
         self.fleet_logs_table = QTableWidget(self.fleet_logs_table_panel)
         if (self.fleet_logs_table.columnCount() < 5):
             self.fleet_logs_table.setColumnCount(5)
-        __qtablewidgetitem51 = QTableWidgetItem()
-        self.fleet_logs_table.setHorizontalHeaderItem(0, __qtablewidgetitem51)
-        __qtablewidgetitem52 = QTableWidgetItem()
-        self.fleet_logs_table.setHorizontalHeaderItem(1, __qtablewidgetitem52)
-        __qtablewidgetitem53 = QTableWidgetItem()
-        self.fleet_logs_table.setHorizontalHeaderItem(2, __qtablewidgetitem53)
-        __qtablewidgetitem54 = QTableWidgetItem()
-        self.fleet_logs_table.setHorizontalHeaderItem(3, __qtablewidgetitem54)
-        __qtablewidgetitem55 = QTableWidgetItem()
-        self.fleet_logs_table.setHorizontalHeaderItem(4, __qtablewidgetitem55)
+        __qtablewidgetitem73 = QTableWidgetItem()
+        self.fleet_logs_table.setHorizontalHeaderItem(0, __qtablewidgetitem73)
+        __qtablewidgetitem74 = QTableWidgetItem()
+        self.fleet_logs_table.setHorizontalHeaderItem(1, __qtablewidgetitem74)
+        __qtablewidgetitem75 = QTableWidgetItem()
+        self.fleet_logs_table.setHorizontalHeaderItem(2, __qtablewidgetitem75)
+        __qtablewidgetitem76 = QTableWidgetItem()
+        self.fleet_logs_table.setHorizontalHeaderItem(3, __qtablewidgetitem76)
+        __qtablewidgetitem77 = QTableWidgetItem()
+        self.fleet_logs_table.setHorizontalHeaderItem(4, __qtablewidgetitem77)
         self.fleet_logs_table.setObjectName(u"fleet_logs_table")
         self.fleet_logs_table.setMinimumSize(QSize(0, 260))
         self.fleet_logs_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
@@ -3504,7 +3620,7 @@ class Ui_MainWindow(object):
         self.preferences_page_scroll.setWidgetResizable(True)
         self.preferences_page_scroll_content = QWidget()
         self.preferences_page_scroll_content.setObjectName(u"preferences_page_scroll_content")
-        self.preferences_page_scroll_content.setGeometry(QRect(0, 0, 1080, 940))
+        self.preferences_page_scroll_content.setGeometry(QRect(0, 0, 391, 382))
         self.preferences_page_layout = QVBoxLayout(self.preferences_page_scroll_content)
         self.preferences_page_layout.setSpacing(17)
         self.preferences_page_layout.setObjectName(u"preferences_page_layout")
@@ -3554,7 +3670,7 @@ class Ui_MainWindow(object):
         self.preferences_connection_panel_layout = QVBoxLayout()
         self.preferences_connection_panel_layout.setSpacing(12)
         self.preferences_connection_panel_layout.setObjectName(u"preferences_connection_panel_layout")
-        self.preferences_connection_panel_layout.setContentsMargins(6, 20, 0, 0)
+        self.preferences_connection_panel_layout.setContentsMargins(12, 12, 12, 12)
         self.preferences_connection_panel_header = QLabel(self.preferences_connection_panel)
         self.preferences_connection_panel_header.setObjectName(u"preferences_connection_panel_header")
 
@@ -3626,7 +3742,7 @@ class Ui_MainWindow(object):
         self.application_about_page_scroll.setWidgetResizable(True)
         self.application_about_page_scroll_content = QWidget()
         self.application_about_page_scroll_content.setObjectName(u"application_about_page_scroll_content")
-        self.application_about_page_scroll_content.setGeometry(QRect(0, 0, 1080, 940))
+        self.application_about_page_scroll_content.setGeometry(QRect(0, 0, 303, 323))
         self.application_about_page_layout = QVBoxLayout(self.application_about_page_scroll_content)
         self.application_about_page_layout.setSpacing(6)
         self.application_about_page_layout.setObjectName(u"application_about_page_layout")
@@ -3732,9 +3848,11 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.content_stack.setCurrentIndex(2)
-        self.agent_detail_stacked_content.setCurrentIndex(1)
+        self.content_stack.setCurrentIndex(3)
+        self.agent_detail_stacked_content.setCurrentIndex(3)
         self.performance_stacked_content.setCurrentIndex(2)
+        self.agent_command_result_tabs.setCurrentIndex(0)
+        self.fleet_command_result_tabs.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -3937,49 +4055,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindow", u"DROPS IN/ DROPS OUT", None))
         self.hardware_label.setText(QCoreApplication.translate("MainWindow", u"Hardware", None))
         self.hardware_legend_label.setText(QCoreApplication.translate("MainWindow", u"Static component specifications and system identification", None))
-        self.cpu_info_label.setText(QCoreApplication.translate("MainWindow", u"CPU", None))
-        self.model_row_label.setText(QCoreApplication.translate("MainWindow", u"Model", None))
-        self.cores_row_label.setText(QCoreApplication.translate("MainWindow", u"Cores", None))
-        self.threads_row_label.setText(QCoreApplication.translate("MainWindow", u"Threads", None))
-        self.frequency_row_label.setText(QCoreApplication.translate("MainWindow", u"Frequency", None))
-        self.architecture_row_label.setText(QCoreApplication.translate("MainWindow", u"Architecture", None))
-        self.model_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.cores_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.threads_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.frequency_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.architecture_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.memory_info_label.setText(QCoreApplication.translate("MainWindow", u"MEMORY", None))
-        self.memory_total_row_label.setText(QCoreApplication.translate("MainWindow", u"Total", None))
-        self.memory_type_row_label.setText(QCoreApplication.translate("MainWindow", u"Type", None))
-        self.memory_speed_row_label.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
-        self.memory_total_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.memory_type_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.memory_speed_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.gpu_info_label.setText(QCoreApplication.translate("MainWindow", u"GPU", None))
-        self.gpu_model_type_row_label.setText(QCoreApplication.translate("MainWindow", u"Model", None))
-        self.gpu_vram_row_label.setText(QCoreApplication.translate("MainWindow", u"VRAM", None))
-        self.gpu_memory_type_row_label.setText(QCoreApplication.translate("MainWindow", u"Memory Type", None))
-        self.gpu_model_type_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.gpu_vram_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.gpu_memory_type_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.motherboard_info_label.setText(QCoreApplication.translate("MainWindow", u"MOTHERBOARD", None))
-        self.motherboard_vendor_column_label.setText(QCoreApplication.translate("MainWindow", u"Vendor", None))
-        self.motherboard_model_column_label.setText(QCoreApplication.translate("MainWindow", u"Model", None))
-        self.motherboard_serial_column_label.setText(QCoreApplication.translate("MainWindow", u"Serial", None))
-        self.motherboard_architecture_column_label.setText(QCoreApplication.translate("MainWindow", u"Architecture", None))
-        self.motherboard_vendor_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.motherboard_model_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.motherboard_serial_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.motherboard_architecture_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.bios_info_label.setText(QCoreApplication.translate("MainWindow", u"BIOS", None))
-        self.bios_vendor_row_label.setText(QCoreApplication.translate("MainWindow", u"Vendor", None))
-        self.bios_version_row_label.setText(QCoreApplication.translate("MainWindow", u"Version", None))
-        self.bios_date_row_label.setText(QCoreApplication.translate("MainWindow", u"Date", None))
-        self.bios_vendor_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.bios_version_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
-        self.bios_date_value_label.setText(QCoreApplication.translate("MainWindow", u"---", None))
         self.hardware_storage_inventory_panel_header.setText(QCoreApplication.translate("MainWindow", u"Storage devices", None))
-        self.hardware_storage_inventory_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Manufacturer, model, capacity, bus type and serial numbers.", None))
         ___qtablewidgetitem29 = self.hardware_storage_devices_table.horizontalHeaderItem(0)
         ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
         ___qtablewidgetitem30 = self.hardware_storage_devices_table.horizontalHeaderItem(1)
@@ -3988,53 +4064,109 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"CAPACITY", None))
         ___qtablewidgetitem32 = self.hardware_storage_devices_table.horizontalHeaderItem(3)
         ___qtablewidgetitem32.setText(QCoreApplication.translate("MainWindow", u"INTERFACE", None))
-        ___qtablewidgetitem33 = self.hardware_storage_devices_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindow", u"SERIAL", None))
-        self.hardware_network_inventory_panel_header.setText(QCoreApplication.translate("MainWindow", u"Network adapters", None))
-        self.hardware_network_inventory_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Physical network interfaces and associated hardware identifiers.", None))
-        ___qtablewidgetitem34 = self.hardware_network_adapters_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"ADAPTER", None))
-        ___qtablewidgetitem35 = self.hardware_network_adapters_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"MODEL", None))
-        ___qtablewidgetitem36 = self.hardware_network_adapters_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem36.setText(QCoreApplication.translate("MainWindow", u"MAC ADDRESS", None))
-        ___qtablewidgetitem37 = self.hardware_network_adapters_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindow", u"LINK TYPE", None))
         self.hardware_refresh_inventory_button.setText(QCoreApplication.translate("MainWindow", u"Refresh inventory", None))
-        self.hardware_platform_heading.setText(QCoreApplication.translate("MainWindow", u"SYSTEM IDENTIFICATION", None))
-        self.hardware_chassis_vendor_label.setText(QCoreApplication.translate("MainWindow", u"Manufacturer", None))
-        self.hardware_chassis_vendor_value.setText(QCoreApplication.translate("MainWindow", u"Not available", None))
-        self.hardware_product_name_label.setText(QCoreApplication.translate("MainWindow", u"System model", None))
-        self.hardware_product_name_value.setText(QCoreApplication.translate("MainWindow", u"Not available", None))
-        self.hardware_chassis_type_label.setText(QCoreApplication.translate("MainWindow", u"Chassis type", None))
-        self.hardware_chassis_type_value.setText(QCoreApplication.translate("MainWindow", u"Not available", None))
-        self.hardware_virtualization_label.setText(QCoreApplication.translate("MainWindow", u"Virtualization", None))
-        self.hardware_virtualization_value.setText(QCoreApplication.translate("MainWindow", u"Not available", None))
-        self.agent_cmd_title.setText(QCoreApplication.translate("MainWindow", u"Commands", None))
-        self.agent_cmd_subtitle.setText(QCoreApplication.translate("MainWindow", u"Execute an operation against the selected agent and inspect its history.", None))
-        self.agent_command_form_panel_header.setText(QCoreApplication.translate("MainWindow", u"New command", None))
-        self.agent_command_form_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Target is the current agent; the selection and submit action require wiring.", None))
+        self.hardware_gpu_inventory_panel_header.setText(QCoreApplication.translate("MainWindow", u"GPU Inventory", None))
+        ___qtablewidgetitem33 = self.hardware_gpu_inventory_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindow", u"DEVICE", None))
+        ___qtablewidgetitem34 = self.hardware_gpu_inventory_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"MODEL", None))
+        ___qtablewidgetitem35 = self.hardware_gpu_inventory_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"VRAM", None))
+        ___qtablewidgetitem36 = self.hardware_gpu_inventory_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem36.setText(QCoreApplication.translate("MainWindow", u"DRIVER VERSION", None))
+        ___qtablewidgetitem37 = self.hardware_gpu_inventory_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindow", u"INTERFACE", None))
+        self.hardware_bios_motherboard_panel_header.setText(QCoreApplication.translate("MainWindow", u"Motherboard & BIOS", None))
+        ___qtablewidgetitem38 = self.hardware_bios_motherboard_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"BOARD VENDOR", None))
+        ___qtablewidgetitem39 = self.hardware_bios_motherboard_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem39.setText(QCoreApplication.translate("MainWindow", u"BOARD MODEL", None))
+        ___qtablewidgetitem40 = self.hardware_bios_motherboard_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem40.setText(QCoreApplication.translate("MainWindow", u"BIOS VENDOR", None))
+        ___qtablewidgetitem41 = self.hardware_bios_motherboard_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem41.setText(QCoreApplication.translate("MainWindow", u"BIOS VERSION", None))
+        ___qtablewidgetitem42 = self.hardware_bios_motherboard_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem42.setText(QCoreApplication.translate("MainWindow", u"RELEASE DATE", None))
+        self.hardware_ram_modules_panel_header.setText(QCoreApplication.translate("MainWindow", u"Memory Section", None))
+        ___qtablewidgetitem43 = self.hardware_ram_modules_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem43.setText(QCoreApplication.translate("MainWindow", u"SLOT", None))
+        ___qtablewidgetitem44 = self.hardware_ram_modules_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem44.setText(QCoreApplication.translate("MainWindow", u"CAPACITY", None))
+        self.hardware_network_inventory_panel_header.setText(QCoreApplication.translate("MainWindow", u"Network adapters", None))
+        ___qtablewidgetitem45 = self.hardware_network_adapters_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem45.setText(QCoreApplication.translate("MainWindow", u"INTERFACE", None))
+        ___qtablewidgetitem46 = self.hardware_network_adapters_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem46.setText(QCoreApplication.translate("MainWindow", u"MODEL", None))
+        ___qtablewidgetitem47 = self.hardware_network_adapters_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem47.setText(QCoreApplication.translate("MainWindow", u"MAC ADDRESS", None))
+        ___qtablewidgetitem48 = self.hardware_network_adapters_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem48.setText(QCoreApplication.translate("MainWindow", u"LINK TYPE", None))
+        ___qtablewidgetitem49 = self.hardware_network_adapters_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem49.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
+        self.hardware_cpu_inventory_panel_header.setText(QCoreApplication.translate("MainWindow", u"CPU Inventory", None))
+        ___qtablewidgetitem50 = self.hardware_cpu_specifications_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem50.setText(QCoreApplication.translate("MainWindow", u"MODEL", None))
+        ___qtablewidgetitem51 = self.hardware_cpu_specifications_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem51.setText(QCoreApplication.translate("MainWindow", u"ARCHITECTURE", None))
+        ___qtablewidgetitem52 = self.hardware_cpu_specifications_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem52.setText(QCoreApplication.translate("MainWindow", u"PHYSICAL CORES", None))
+        ___qtablewidgetitem53 = self.hardware_cpu_specifications_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem53.setText(QCoreApplication.translate("MainWindow", u"LOGICAL THREADS", None))
+        ___qtablewidgetitem54 = self.hardware_cpu_specifications_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem54.setText(QCoreApplication.translate("MainWindow", u"FREQUENCY", None))
+        ___qtablewidgetitem55 = self.hardware_cpu_specifications_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem55.setText(QCoreApplication.translate("MainWindow", u"L1 CACHE", None))
+        ___qtablewidgetitem56 = self.hardware_cpu_specifications_table.horizontalHeaderItem(6)
+        ___qtablewidgetitem56.setText(QCoreApplication.translate("MainWindow", u"L2 CACHE", None))
+        ___qtablewidgetitem57 = self.hardware_cpu_specifications_table.horizontalHeaderItem(7)
+        ___qtablewidgetitem57.setText(QCoreApplication.translate("MainWindow", u"L3 CACHE", None))
+        self.agent_cmd_title.setText(QCoreApplication.translate("MainWindow", u"Agent Commands", None))
+        self.agent_cmd_subtitle.setText(QCoreApplication.translate("MainWindow", u"One target. Typed parameters. Controlled execution.", None))
+        self.agent_command_target_indicator.setText(QCoreApplication.translate("MainWindow", u"TARGET  /  Select an agent from the Agents page", None))
+        self.agent_command_process_steps.setText(QCoreApplication.translate("MainWindow", u"01  SELECT OPERATION     /     02  CONFIGURE FIELDS     /     03  VALIDATE & QUEUE     /     04  INSPECT RESULT", None))
+        self.agent_command_form_panel_header.setText(QCoreApplication.translate("MainWindow", u"01  /  COMMAND BUILDER", None))
+        self.agent_command_form_panel_caption.setText(QCoreApplication.translate("MainWindow", u"The target is the currently opened agent. Parameters are local.", None))
         self.agent_command_category_label.setText(QCoreApplication.translate("MainWindow", u"CATEGORY", None))
-        self.agent_command_category_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"All categories", None))
-        self.agent_command_category_combo.setItemText(1, QCoreApplication.translate("MainWindow", u"Docker", None))
-        self.agent_command_category_combo.setItemText(2, QCoreApplication.translate("MainWindow", u"System", None))
-        self.agent_command_category_combo.setItemText(3, QCoreApplication.translate("MainWindow", u"Diagnostics", None))
-        self.agent_command_category_combo.setItemText(4, QCoreApplication.translate("MainWindow", u"Custom", None))
-
-        self.agent_command_type_label.setText(QCoreApplication.translate("MainWindow", u"COMMAND", None))
-        self.agent_command_type_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"Select command\u2026", None))
-
-        self.agent_command_payload_label.setText(QCoreApplication.translate("MainWindow", u"PARAMETERS  \u00b7  JSON", None))
+        self.agent_command_category_combo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"All categories", None))
+        self.agent_command_type_label.setText(QCoreApplication.translate("MainWindow", u"OPERATION", None))
+        self.agent_command_type_combo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select command\u2026", None))
+        self.agent_command_display_title.setText(QCoreApplication.translate("MainWindow", u"No given command", None))
+        self.agent_command_risk_badge.setText("")
+        self.agent_command_command_key.setText(QCoreApplication.translate("MainWindow", u"Please select a command above", None))
+        self.agent_command_description.setText("")
+        self.agent_command_fields_label.setText(QCoreApplication.translate("MainWindow", u"PARAMETERS", None))
+        self.agent_command_fields_count.setText("")
+#if QT_CONFIG(tooltip)
+        self.agent_command_fields_container.setToolTip(QCoreApplication.translate("MainWindow", u"Dynamic command parameter area.", None))
+#endif // QT_CONFIG(tooltip)
+        self.agent_command_payload_label.setText(QCoreApplication.translate("MainWindow", u"ADVANCED  /  RAW JSON PAYLOAD", None))
+        self.agent_command_raw_mode_checkbox.setText(QCoreApplication.translate("MainWindow", u"Edit raw JSON instead of generated fields", None))
+        self.agent_command_payload_editor.setPlainText("")
         self.agent_command_payload_editor.setPlaceholderText(QCoreApplication.translate("MainWindow", u"{}", None))
-        self.agent_command_safety_label.setText(QCoreApplication.translate("MainWindow", u"Check the command parameters before execution. Elevated operations should require confirmation.", None))
-        self.agent_command_validate_button.setText(QCoreApplication.translate("MainWindow", u"Validate", None))
-        self.agent_command_execute_button.setText(QCoreApplication.translate("MainWindow", u"Queue command \u2192", None))
-        self.agent_command_output_panel_header.setText(QCoreApplication.translate("MainWindow", u"Selected output", None))
-        self.agent_command_output_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Select a record from history to inspect its output.", None))
-        self.agent_command_result_summary.setText(QCoreApplication.translate("MainWindow", u"No command selected", None))
-        self.agent_command_output_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Command output will appear here.", None))
+        self.agent_command_review_header.setText(QCoreApplication.translate("MainWindow", u"02  /  EXECUTION REVIEW", None))
+        self.agent_command_review_caption.setText(QCoreApplication.translate("MainWindow", u"Validate the exact request before it enters the agent queue.", None))
+        self.agent_command_review_target.setText(QCoreApplication.translate("MainWindow", u"TARGET  /  Current agent", None))
+        self.agent_command_review_operation.setText(QCoreApplication.translate("MainWindow", u"COMMAND  /  docker_logs", None))
+        self.agent_command_review_payload_label.setText(QCoreApplication.translate("MainWindow", u"HTTP REQUEST PREVIEW", None))
+        self.agent_command_request_preview.setPlainText("")
+        self.agent_command_request_preview.setPlaceholderText(QCoreApplication.translate("MainWindow", u"{}", None))
+        self.agent_command_validation_status.setText(QCoreApplication.translate("MainWindow", u"NOT VALIDATED   \u00b7   Complete parameters first.", None))
+        self.agent_command_risk_confirmation_checkbox.setText(QCoreApplication.translate("MainWindow", u"I understand this operation may disrupt the target.", None))
+        self.agent_command_validate_button.setText(QCoreApplication.translate("MainWindow", u"Validate inputs", None))
+        self.agent_command_execute_button.setText(QCoreApplication.translate("MainWindow", u"Queue command  \u2192", None))
+        self.agent_command_output_panel_header.setText(QCoreApplication.translate("MainWindow", u"EXECUTION INSPECTOR", None))
+        self.agent_command_output_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Select an execution from history to inspect its response.", None))
+        self.agent_command_result_summary.setText(QCoreApplication.translate("MainWindow", u"No execution selected", None))
+        self.agent_command_result_status.setText(QCoreApplication.translate("MainWindow", u"STATUS  /  \u2014", None))
+        self.agent_command_result_duration.setText(QCoreApplication.translate("MainWindow", u"DURATION  /  \u2014", None))
+        self.agent_command_output_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"No stdout captured for the selected execution.", None))
+        self.agent_command_result_tabs.setTabText(self.agent_command_result_tabs.indexOf(self.agent_command_stdout_tab), QCoreApplication.translate("MainWindow", u"STDOUT", None))
+        self.agent_command_stderr_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"No stderr captured for the selected execution.", None))
+        self.agent_command_result_tabs.setTabText(self.agent_command_result_tabs.indexOf(self.agent_command_stderr_tab), QCoreApplication.translate("MainWindow", u"STDERR", None))
         self.agent_command_copy_output_button.setText(QCoreApplication.translate("MainWindow", u"Copy output", None))
-        self.agent_command_history_panel_header.setText(QCoreApplication.translate("MainWindow", u"Execution history", None))
+        self.agent_command_recent_section_label.setText(QCoreApplication.translate("MainWindow", u"03  /  AGENT COMMAND HISTORY", None))
+        self.agent_command_history_panel_header.setText(QCoreApplication.translate("MainWindow", u"EXECUTION HISTORY", None))
+        self.agent_command_history_search.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search command ID, operation or target\u2026", None))
         self.agent_command_status_filter_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"All statuses", None))
         self.agent_command_status_filter_combo.setItemText(1, QCoreApplication.translate("MainWindow", u"Pending", None))
         self.agent_command_status_filter_combo.setItemText(2, QCoreApplication.translate("MainWindow", u"Running", None))
@@ -4042,50 +4174,72 @@ class Ui_MainWindow(object):
         self.agent_command_status_filter_combo.setItemText(4, QCoreApplication.translate("MainWindow", u"Failed", None))
 
         self.agent_command_history_refresh_button.setText(QCoreApplication.translate("MainWindow", u"Refresh", None))
-        ___qtablewidgetitem38 = self.agent_command_history_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem38.setText(QCoreApplication.translate("MainWindow", u"ID", None))
-        ___qtablewidgetitem39 = self.agent_command_history_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem39.setText(QCoreApplication.translate("MainWindow", u"COMMAND", None))
-        ___qtablewidgetitem40 = self.agent_command_history_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem40.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
-        ___qtablewidgetitem41 = self.agent_command_history_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem41.setText(QCoreApplication.translate("MainWindow", u"STARTED", None))
-        ___qtablewidgetitem42 = self.agent_command_history_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem42.setText(QCoreApplication.translate("MainWindow", u"DURATION", None))
-        self.fleet_cmd_title.setText(QCoreApplication.translate("MainWindow", u"Command center", None))
-        self.fleet_cmd_subtitle.setText(QCoreApplication.translate("MainWindow", u"Select an operation, choose a target, review parameters and inspect execution results.", None))
-        self.fleet_cmd_refresh_button.setText(QCoreApplication.translate("MainWindow", u"Refresh", None))
-        self.fleet_command_library_panel_header.setText(QCoreApplication.translate("MainWindow", u"Command catalog", None))
-        self.fleet_command_library_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Browse supported operations. Search and categories are UI-ready.", None))
-        self.fleet_command_search.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search commands, categories or identifiers", None))
+        ___qtablewidgetitem58 = self.agent_command_history_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem58.setText(QCoreApplication.translate("MainWindow", u"ID", None))
+        ___qtablewidgetitem59 = self.agent_command_history_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem59.setText(QCoreApplication.translate("MainWindow", u"COMMAND", None))
+        ___qtablewidgetitem60 = self.agent_command_history_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem60.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
+        ___qtablewidgetitem61 = self.agent_command_history_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem61.setText(QCoreApplication.translate("MainWindow", u"CREATED", None))
+        ___qtablewidgetitem62 = self.agent_command_history_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem62.setText(QCoreApplication.translate("MainWindow", u"STARTED", None))
+        ___qtablewidgetitem63 = self.agent_command_history_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem63.setText(QCoreApplication.translate("MainWindow", u"FINISHED", None))
+        self.fleet_cmd_title.setText(QCoreApplication.translate("MainWindow", u"Command Center", None))
+        self.fleet_cmd_subtitle.setText(QCoreApplication.translate("MainWindow", u"Find an operation, build a valid request, verify, then queue.", None))
+        self.fleet_command_workspace_status.setText(QCoreApplication.translate("MainWindow", u"LOCAL COMMAND REGISTRY  /  SINGLE TARGET", None))
+        self.fleet_cmd_refresh_button.setText(QCoreApplication.translate("MainWindow", u"Refresh agents", None))
+        self.fleet_command_process_steps.setText(QCoreApplication.translate("MainWindow", u"01  SELECT OPERATION     /     02  CONFIGURE FIELDS     /     03  VALIDATE & QUEUE     /     04  INSPECT RESULT", None))
+        self.fleet_command_library_panel_header.setText(QCoreApplication.translate("MainWindow", u"01  /  COMMAND LIBRARY", None))
+        self.fleet_command_library_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Operations defined inside your desktop application.", None))
+        self.fleet_command_search.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search operations or descriptions\u2026", None))
         self.fleet_command_category.setItemText(0, QCoreApplication.translate("MainWindow", u"All categories", None))
-        self.fleet_command_category.setItemText(1, QCoreApplication.translate("MainWindow", u"Docker", None))
-        self.fleet_command_category.setItemText(2, QCoreApplication.translate("MainWindow", u"System", None))
-        self.fleet_command_category.setItemText(3, QCoreApplication.translate("MainWindow", u"Diagnostics", None))
-        self.fleet_command_category.setItemText(4, QCoreApplication.translate("MainWindow", u"Custom", None))
 
-        ___qtablewidgetitem43 = self.fleet_command_catalog_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem43.setText(QCoreApplication.translate("MainWindow", u"OPERATION", None))
-        ___qtablewidgetitem44 = self.fleet_command_catalog_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem44.setText(QCoreApplication.translate("MainWindow", u"CATEGORY", None))
-        ___qtablewidgetitem45 = self.fleet_command_catalog_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem45.setText(QCoreApplication.translate("MainWindow", u"RISK", None))
-        self.fleet_command_library_help.setText(QCoreApplication.translate("MainWindow", u"Choose a command to see its parameters and required permissions.", None))
-        self.fleet_command_execution_panel_header.setText(QCoreApplication.translate("MainWindow", u"Execution request", None))
-        self.fleet_command_execution_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Review the request before submitting it to the backend.", None))
-        self.fleet_command_target_label.setText(QCoreApplication.translate("MainWindow", u"TARGET AGENT", None))
-        self.fleet_command_target_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"Select an agent\u2026", None))
-
-        self.fleet_command_selected_label.setText(QCoreApplication.translate("MainWindow", u"COMMAND", None))
-        self.fleet_command_selected_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"Select an operation\u2026", None))
-
-        self.fleet_command_payload_label.setText(QCoreApplication.translate("MainWindow", u"PARAMETERS  \u00b7  JSON", None))
+        self.fleet_command_category.setPlaceholderText("")
+        ___qtablewidgetitem64 = self.fleet_command_catalog_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem64.setText(QCoreApplication.translate("MainWindow", u"OPERATION", None))
+        ___qtablewidgetitem65 = self.fleet_command_catalog_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem65.setText(QCoreApplication.translate("MainWindow", u"CATEGORY", None))
+        ___qtablewidgetitem66 = self.fleet_command_catalog_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem66.setText(QCoreApplication.translate("MainWindow", u"RISK", None))
+        self.fleet_command_library_help.setText(QCoreApplication.translate("MainWindow", u"Choose a command to view its title, description, settings, and risks..", None))
+        self.fleet_command_execution_panel_header.setText(QCoreApplication.translate("MainWindow", u"02  /  COMMAND BUILDER", None))
+        self.fleet_command_execution_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Choose a target, inspect the command, then configure its inputs.", None))
+        self.fleet_command_target_label.setText(QCoreApplication.translate("MainWindow", u"TARGET AGENT   *", None))
+        self.fleet_command_target_combo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select a managed agent\u2026", None))
+        self.fleet_command_category_label.setText(QCoreApplication.translate("MainWindow", u"CATEGORY", None))
+        self.fleet_command_category_combo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"All categories", None))
+        self.fleet_command_selected_label.setText(QCoreApplication.translate("MainWindow", u"OPERATION", None))
+        self.fleet_command_type_combo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select command\u2026", None))
+        self.fleet_command_display_title.setText(QCoreApplication.translate("MainWindow", u"No given command", None))
+        self.fleet_command_risk_badge.setText("")
+        self.fleet_command_command_key.setText(QCoreApplication.translate("MainWindow", u"Please select a command above", None))
+        self.fleet_command_description.setText("")
+        self.fleet_command_fields_label.setText(QCoreApplication.translate("MainWindow", u"PARAMETERS", None))
+        self.fleet_command_fields_count.setText(QCoreApplication.translate("MainWindow", u"2 FIELDS   \u00b7   1 REQUIRED", None))
+#if QT_CONFIG(tooltip)
+        self.fleet_command_fields_container.setToolTip(QCoreApplication.translate("MainWindow", u"Dynamic command parameter area. Add fields to the existing fleet_command_fields_layout at runtime; no fixed schema widgets are included.", None))
+#endif // QT_CONFIG(tooltip)
+        self.fleet_command_payload_label.setText(QCoreApplication.translate("MainWindow", u"ADVANCED  /  RAW JSON PAYLOAD", None))
+        self.fleet_command_raw_mode_checkbox.setText(QCoreApplication.translate("MainWindow", u"Edit raw JSON instead of generated fields", None))
+        self.fleet_command_payload_editor.setPlainText("")
         self.fleet_command_payload_editor.setPlaceholderText(QCoreApplication.translate("MainWindow", u"{}", None))
-        self.fleet_command_warning.setText(QCoreApplication.translate("MainWindow", u"Remote commands can modify infrastructure. Confirm the selected host and arguments.", None))
-        self.fleet_command_validate_button.setText(QCoreApplication.translate("MainWindow", u"Validate", None))
-        self.fleet_command_send_button.setText(QCoreApplication.translate("MainWindow", u"Queue command \u2192", None))
-        self.fleet_command_history_panel_header.setText(QCoreApplication.translate("MainWindow", u"Execution history", None))
-        self.fleet_command_history_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Latest submitted requests; click a row to inspect the result.", None))
+        self.fleet_command_review_header.setText(QCoreApplication.translate("MainWindow", u"03  /  EXECUTION REVIEW", None))
+        self.fleet_command_review_caption.setText(QCoreApplication.translate("MainWindow", u"Validate the exact request before it enters the agent queue.", None))
+        self.fleet_command_review_target.setText(QCoreApplication.translate("MainWindow", u"TARGET  /  Not selected", None))
+        self.fleet_command_review_operation.setText(QCoreApplication.translate("MainWindow", u"COMMAND  /  docker_logs", None))
+        self.fleet_command_review_payload_label.setText(QCoreApplication.translate("MainWindow", u"HTTP REQUEST PREVIEW", None))
+        self.fleet_command_request_preview.setPlainText("")
+        self.fleet_command_request_preview.setPlaceholderText(QCoreApplication.translate("MainWindow", u"{}", None))
+        self.fleet_command_validation_status.setText(QCoreApplication.translate("MainWindow", u"NOT VALIDATED   \u00b7   Complete parameters first.", None))
+        self.fleet_command_risk_confirmation_checkbox.setText(QCoreApplication.translate("MainWindow", u"I understand this operation may disrupt the target.", None))
+        self.fleet_command_validate_button.setText(QCoreApplication.translate("MainWindow", u"Validate inputs", None))
+        self.fleet_command_execute_button.setText(QCoreApplication.translate("MainWindow", u"Queue command  \u2192", None))
+        self.fleet_command_recent_section_label.setText(QCoreApplication.translate("MainWindow", u"04  /  RECENT OPERATIONS", None))
+        self.fleet_command_history_panel_header.setText(QCoreApplication.translate("MainWindow", u"EXECUTION HISTORY", None))
+        self.fleet_command_history_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Commands submitted across selected targets. Inspect any execution on the right.", None))
+        self.fleet_command_history_search.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search command ID, operation or target\u2026", None))
         self.fleet_command_history_status_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"All statuses", None))
         self.fleet_command_history_status_combo.setItemText(1, QCoreApplication.translate("MainWindow", u"Pending", None))
         self.fleet_command_history_status_combo.setItemText(2, QCoreApplication.translate("MainWindow", u"Running", None))
@@ -4094,20 +4248,27 @@ class Ui_MainWindow(object):
         self.fleet_command_history_status_combo.setItemText(5, QCoreApplication.translate("MainWindow", u"Cancelled", None))
 
         self.fleet_command_history_refresh_button.setText(QCoreApplication.translate("MainWindow", u"Refresh", None))
-        ___qtablewidgetitem46 = self.fleet_command_history_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem46.setText(QCoreApplication.translate("MainWindow", u"ID", None))
-        ___qtablewidgetitem47 = self.fleet_command_history_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem47.setText(QCoreApplication.translate("MainWindow", u"TARGET", None))
-        ___qtablewidgetitem48 = self.fleet_command_history_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem48.setText(QCoreApplication.translate("MainWindow", u"COMMAND", None))
-        ___qtablewidgetitem49 = self.fleet_command_history_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem49.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
-        ___qtablewidgetitem50 = self.fleet_command_history_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem50.setText(QCoreApplication.translate("MainWindow", u"CREATED", None))
-        self.fleet_command_result_panel_header.setText(QCoreApplication.translate("MainWindow", u"Selected output", None))
-        self.fleet_command_result_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Stdout, stderr and error details for the selected execution.", None))
+        ___qtablewidgetitem67 = self.fleet_command_history_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem67.setText(QCoreApplication.translate("MainWindow", u"ID", None))
+        ___qtablewidgetitem68 = self.fleet_command_history_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem68.setText(QCoreApplication.translate("MainWindow", u"COMMAND", None))
+        ___qtablewidgetitem69 = self.fleet_command_history_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem69.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
+        ___qtablewidgetitem70 = self.fleet_command_history_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem70.setText(QCoreApplication.translate("MainWindow", u"CREATED", None))
+        ___qtablewidgetitem71 = self.fleet_command_history_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem71.setText(QCoreApplication.translate("MainWindow", u"STARTED", None))
+        ___qtablewidgetitem72 = self.fleet_command_history_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem72.setText(QCoreApplication.translate("MainWindow", u"FINISHED", None))
+        self.fleet_command_result_panel_header.setText(QCoreApplication.translate("MainWindow", u"EXECUTION INSPECTOR", None))
+        self.fleet_command_result_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Select an execution from history to inspect its response.", None))
         self.fleet_command_result_metadata.setText(QCoreApplication.translate("MainWindow", u"No execution selected", None))
-        self.fleet_command_output_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select an execution to inspect its output.", None))
+        self.fleet_command_result_status.setText(QCoreApplication.translate("MainWindow", u"STATUS  /  \u2014", None))
+        self.fleet_command_result_duration.setText(QCoreApplication.translate("MainWindow", u"DURATION  /  \u2014", None))
+        self.fleet_command_output_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"No stdout captured for the selected execution.", None))
+        self.fleet_command_result_tabs.setTabText(self.fleet_command_result_tabs.indexOf(self.fleet_command_stdout_tab), QCoreApplication.translate("MainWindow", u"STDOUT", None))
+        self.fleet_command_stderr_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"No stderr captured for the selected execution.", None))
+        self.fleet_command_result_tabs.setTabText(self.fleet_command_result_tabs.indexOf(self.fleet_command_stderr_tab), QCoreApplication.translate("MainWindow", u"STDERR", None))
         self.fleet_command_copy_output_button.setText(QCoreApplication.translate("MainWindow", u"Copy output", None))
         self.fleet_logs_title.setText(QCoreApplication.translate("MainWindow", u"Activity & logs", None))
         self.fleet_logs_subtitle.setText(QCoreApplication.translate("MainWindow", u"Explore machine events, command execution records and operational history.", None))
@@ -4130,16 +4291,16 @@ class Ui_MainWindow(object):
 
         self.fleet_logs_table_panel_header.setText(QCoreApplication.translate("MainWindow", u"Event log", None))
         self.fleet_logs_table_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Newest records appear first. Select an event to inspect details.", None))
-        ___qtablewidgetitem51 = self.fleet_logs_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem51.setText(QCoreApplication.translate("MainWindow", u"TIMESTAMP", None))
-        ___qtablewidgetitem52 = self.fleet_logs_table.horizontalHeaderItem(1)
-        ___qtablewidgetitem52.setText(QCoreApplication.translate("MainWindow", u"AGENT", None))
-        ___qtablewidgetitem53 = self.fleet_logs_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem53.setText(QCoreApplication.translate("MainWindow", u"SOURCE", None))
-        ___qtablewidgetitem54 = self.fleet_logs_table.horizontalHeaderItem(3)
-        ___qtablewidgetitem54.setText(QCoreApplication.translate("MainWindow", u"LEVEL", None))
-        ___qtablewidgetitem55 = self.fleet_logs_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem55.setText(QCoreApplication.translate("MainWindow", u"EVENT / MESSAGE", None))
+        ___qtablewidgetitem73 = self.fleet_logs_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem73.setText(QCoreApplication.translate("MainWindow", u"TIMESTAMP", None))
+        ___qtablewidgetitem74 = self.fleet_logs_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem74.setText(QCoreApplication.translate("MainWindow", u"AGENT", None))
+        ___qtablewidgetitem75 = self.fleet_logs_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem75.setText(QCoreApplication.translate("MainWindow", u"SOURCE", None))
+        ___qtablewidgetitem76 = self.fleet_logs_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem76.setText(QCoreApplication.translate("MainWindow", u"LEVEL", None))
+        ___qtablewidgetitem77 = self.fleet_logs_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem77.setText(QCoreApplication.translate("MainWindow", u"EVENT / MESSAGE", None))
         self.fleet_logs_details_panel_header.setText(QCoreApplication.translate("MainWindow", u"Event details", None))
         self.fleet_logs_event_metadata.setText(QCoreApplication.translate("MainWindow", u"No event selected", None))
         self.fleet_logs_details_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select a row to inspect full details.", None))

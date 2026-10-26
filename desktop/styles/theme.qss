@@ -108,11 +108,11 @@ QLabel#network_health_errors_label,
 QLabel#network_health_drops_label,
 QLabel#network_health_total_label,
 QLabel#network_interfaces_label,
-QLabel#cpu_info_label,
-QLabel#memory_info_label,
-QLabel#gpu_info_label,
-QLabel#motherboard_info_label,
-QLabel#bios_info_label,
+
+QLabel#hardware_cpu_inventory_panel_header,
+QLabel#hardware_gpu_inventory_panel_header,
+QLabel#hardware_ram_modules_panel_header,
+QLabel#hardware_bios_motherboard_panel_header,
 QLabel#hardware_storage_inventory_panel_header,
 QLabel#hardware_network_inventory_panel_header,
 QLabel#hardware_platform_heading,
@@ -487,3 +487,768 @@ QLabel#command_status[status="failed"] {color:#D19B9E;}
 QLabel#command_status[status="pending"] {color:#D2B98F;}
 QLabel#command_executed_time {color:#738897;font-size:10px;}
 
+
+#fleet_commands_page, #agent_commands_page,
+#fleet_commands_page_scroll, #agent_commands_page_scroll,
+#fleet_commands_page_scroll_content, #agent_commands_page_scroll_content {
+  background: #0C141D; color: #DCE5EC; font: 11px "Noto Sans", "Inter", "DejaVu Sans";
+}
+#fleet_commands_page QLabel, #agent_commands_page QLabel {
+  background: transparent; border: none; color: #CEDAE2;
+}
+#fleet_cmd_title, #agent_cmd_title { font-size: 20px; font-weight: 650; color: #F2F5F7; }
+#fleet_cmd_subtitle, #agent_cmd_subtitle { color: #92A6B6; font-size: 11px; }
+#fleet_command_workspace_status, #agent_command_target_indicator {
+  color: #93BDCA; background: #152733; border: 1px solid #315064;
+  padding: 7px 10px; border-radius: 4px; font-size: 10px; font-weight: 600;
+}
+#fleet_command_process_strip, #agent_command_process_strip {
+  background: #10232E; border: 1px solid #234353; border-radius: 3px;
+}
+#fleet_command_process_steps, #agent_command_process_steps {
+  color: #91B4C8; font-size: 10px; font-weight: 600;
+}
+#fleet_command_library_panel, #fleet_command_execution_panel,
+#fleet_command_review_panel, #fleet_command_history_panel, #fleet_command_result_panel,
+#agent_command_form_panel, #agent_command_review_panel,
+#agent_command_output_panel, #agent_command_history_panel {
+  background: #141E29; border: 1px solid #2C3E4D; border-radius: 5px;
+}
+#fleet_command_library_panel_header, #fleet_command_execution_panel_header,
+#fleet_command_review_header, #fleet_command_history_panel_header,
+#fleet_command_result_panel_header, #agent_command_form_panel_header,
+#agent_command_review_header, #agent_command_output_panel_header,
+#agent_command_history_panel_header {
+  color: #F0F4F7; font-size: 12px; font-weight: 700;
+}
+#fleet_command_library_panel_caption, #fleet_command_execution_panel_caption,
+#fleet_command_review_caption, #fleet_command_history_panel_caption,
+#fleet_command_result_panel_caption, #agent_command_form_panel_caption,
+#agent_command_review_caption, #agent_command_output_panel_caption,
+#fleet_command_library_help, #fleet_command_catalog_summary,
+#fleet_command_target_hint, #fleet_command_raw_hint, #agent_command_raw_hint,
+#fleet_command_review_footer, #agent_command_review_footer {
+  color: #8EA4B4; font-size: 10px;
+}
+#fleet_command_fields_label, #agent_command_fields_label,
+#fleet_command_payload_label, #agent_command_payload_label,
+#fleet_command_target_label, #fleet_command_selected_label,
+#agent_command_category_label, #agent_command_type_label,
+#fleet_command_review_payload_label, #agent_command_review_payload_label,
+#fleet_command_recent_section_label, #agent_command_recent_section_label {
+  color: #A8BAC6; font-size: 10px; font-weight: 700;
+}
+#fleet_command_fields_count, #agent_command_fields_count {
+  color: #7FB8C7; font-size: 10px;
+}
+#fleet_command_identity_card, #agent_command_identity_card {
+  background: #182A36; border: 1px solid #355365; border-radius: 4px;
+}
+#fleet_command_display_title, #agent_command_display_title {
+  color: #F1F5F7; font-size: 15px; font-weight: 700;
+}
+#fleet_command_command_key, #agent_command_command_key {
+  color: #89A9BB; font-family: "JetBrains Mono", "DejaVu Sans Mono"; font-size: 10px;
+}
+#fleet_command_description, #agent_command_description {
+  color: #C0D0DB; font-size: 11px;
+}
+#fleet_command_risk_badge, #agent_command_risk_badge,
+#fleet_command_review_risk, #agent_command_review_risk {
+  color: #9ED5BD; background: #17372F; border: 1px solid #315B4B;
+  border-radius: 3px; padding: 4px 8px; font-size: 10px; font-weight: 700;
+}
+#fleet_command_risk_badge[risk="moderate"], #agent_command_risk_badge[risk="moderate"],
+#fleet_command_review_risk[risk="moderate"], #agent_command_review_risk[risk="moderate"] {
+  color: #E9C48D; background: #3A2C21; border-color: #70563A;
+}
+#fleet_command_risk_badge[risk="dangerous"], #agent_command_risk_badge[risk="dangerous"],
+#fleet_command_review_risk[risk="dangerous"], #agent_command_review_risk[risk="dangerous"] {
+  color: #EBA6A6; background: #3D252B; border-color: #754650;
+}
+#fleet_command_fields_container, #agent_command_fields_container {
+  background: #0F1A24; border: 1px solid #34495B; border-radius: 4px;
+}
+#fleet_commands_page QLineEdit, #agent_commands_page QLineEdit,
+#fleet_commands_page QComboBox, #agent_commands_page QComboBox,
+#fleet_commands_page QPlainTextEdit, #agent_commands_page QPlainTextEdit,
+#fleet_commands_page QSpinBox, #agent_commands_page QSpinBox {
+  background: #0D1721; color: #DCE7EE; border: 1px solid #395061;
+  border-radius: 4px; selection-background-color: #395669;
+  padding: 6px 9px; font-size: 11px;
+}
+#fleet_commands_page QLineEdit:focus, #agent_commands_page QLineEdit:focus,
+#fleet_commands_page QComboBox:focus, #agent_commands_page QComboBox:focus,
+#fleet_commands_page QSpinBox:focus, #agent_commands_page QSpinBox:focus,
+#fleet_commands_page QPlainTextEdit:focus, #agent_commands_page QPlainTextEdit:focus {
+  border: 1px solid #90B9CC;
+}
+#fleet_commands_page QLineEdit[invalid="true"], #agent_commands_page QLineEdit[invalid="true"] {
+  border-color: #CA7F80;
+}
+#fleet_commands_page QComboBox, #agent_commands_page QComboBox,
+#fleet_commands_page QLineEdit, #agent_commands_page QLineEdit,
+#fleet_commands_page QSpinBox, #agent_commands_page QSpinBox { min-height: 29px; }
+#fleet_commands_page QComboBox::drop-down, #agent_commands_page QComboBox::drop-down {
+  border: none; width: 22px;
+}
+#fleet_commands_page QPlainTextEdit, #agent_commands_page QPlainTextEdit {
+  font-family: "JetBrains Mono", "DejaVu Sans Mono"; font-size: 10px;
+}
+#fleet_command_request_preview, #agent_command_request_preview {
+  background: #09151E; border: 1px solid #264454; color: #B5D9E5;
+}
+#fleet_command_review_target, #agent_command_review_target,
+#fleet_command_review_operation, #agent_command_review_operation,
+#fleet_command_review_fields, #agent_command_review_fields {
+  font-family: "JetBrains Mono", "DejaVu Sans Mono"; color: #B4C7D3; font-size: 10px;
+}
+#fleet_command_validation_status, #agent_command_validation_status {
+  color: #B1C6D2; background: #172936; border-left: 3px solid #7EADC3;
+  padding: 9px 11px; font-weight: 600; font-size: 10px;
+}
+#fleet_command_validation_status[state="valid"], #agent_command_validation_status[state="valid"] {
+  color: #B0DBC7; border-left-color: #73B596; background: #173126;
+}
+#fleet_command_validation_status[state="invalid"], #agent_command_validation_status[state="invalid"] {
+  color: #E9B6B6; border-left-color: #D4888A; background: #34252A;
+}
+#fleet_command_warning, #agent_command_safety_label {
+  color: #AFC4D2; background: #1B2B37; border-left: 2px solid #537B91;
+  padding: 9px 11px; font-size: 10px;
+}
+#fleet_commands_page QTableWidget, #agent_commands_page QTableWidget {
+  background: #101C26; alternate-background-color: #17232E;
+  color: #DBE5EC; border: 1px solid #2E4353;
+  selection-background-color: #314F62; selection-color: #FAFCFD;
+  gridline-color: #273846; font-size: 10px;
+}
+#fleet_commands_page QHeaderView::section, #agent_commands_page QHeaderView::section {
+  background: #20313E; color: #A9BECF;
+  border: none; border-bottom: 1px solid #3B5364;
+  padding: 7px 8px; font-size: 10px; font-weight: 600;
+}
+#fleet_commands_page QPushButton, #agent_commands_page QPushButton {
+  background: #20313D; border: 1px solid #3A5364; border-radius: 4px;
+  color: #D7E6ED; padding: 6px 11px; font-size: 11px;
+  min-height: 25px;
+}
+#fleet_commands_page QPushButton:hover, #agent_commands_page QPushButton:hover {
+  background: #2A4251; border-color: #799BAF;
+}
+#fleet_commands_page QPushButton:disabled, #agent_commands_page QPushButton:disabled {
+  background: #1A2630; color: #748896; border-color: #2D4050;
+}
+#fleet_command_send_button, #agent_command_execute_button {
+  background: #92BCCD; color: #0D1922; border: 1px solid #ADCFDC; font-weight: 700;
+}
+#fleet_command_send_button:hover, #agent_command_execute_button:hover {
+  background: #B3D8E5; color: #0B1921;
+}
+#fleet_commands_page QCheckBox, #agent_commands_page QCheckBox {
+  color: #BFD0DC; font-size: 10px; spacing: 7px;
+}
+#fleet_commands_page QCheckBox::indicator, #agent_commands_page QCheckBox::indicator {
+  width: 14px; height: 14px;
+}
+#fleet_commands_page QTabWidget::pane, #agent_commands_page QTabWidget::pane {
+  background: #101A24; border: 1px solid #2C4150;
+}
+#fleet_commands_page QTabBar::tab, #agent_commands_page QTabBar::tab {
+  background: #192A36; border: 1px solid #2D4352; border-bottom: 0;
+  color: #8EA4B2; padding: 6px 16px;
+}
+#fleet_commands_page QTabBar::tab:selected, #agent_commands_page QTabBar::tab:selected {
+  background: #263C4A; color: #EDF5F8; border-top: 2px solid #8EB7CB;
+}
+#fleet_commands_page QScrollBar:vertical, #agent_commands_page QScrollBar:vertical {
+  background: #111E28; width: 8px;
+}
+#fleet_commands_page QScrollBar::handle:vertical, #agent_commands_page QScrollBar::handle:vertical {
+  background: #3A5363; border-radius: 3px; min-height: 25px;
+}
+#fleet_commands_page QScrollBar::add-line:vertical, #agent_commands_page QScrollBar::add-line:vertical,
+#fleet_commands_page QScrollBar::sub-line:vertical, #agent_commands_page QScrollBar::sub-line:vertical {
+  height: 0px;
+}
+
+QFrame#agent_command_fields_container,
+QFrame#fleet_command_fields_container {
+    background-color: #0E1B26;
+    border: 1px solid #34495B;
+    border-radius: 5px;
+}
+
+QFrame#agent_command_fields_container QWidget,
+QFrame#agent_command_fields_container QFrame,
+QFrame#fleet_command_fields_container QWidget,
+QFrame#fleet_command_fields_container QFrame {
+    color: #D8E4EC; background-color: transparent;
+}
+
+QFrame#agent_command_fields_container QFrame[commandField="true"],
+QFrame#agent_command_fields_container QWidget[commandField="true"],
+QFrame#fleet_command_fields_container QFrame[commandField="true"],
+QFrame#fleet_command_fields_container QWidget[commandField="true"] {
+    background-color: #13232E;
+    border: 1px solid #2D4657;
+    border-radius: 4px;
+}
+
+/* Generated rows should flow vertically without extra boxed borders.
+   Supports both row.setObjectName("command_field_row") and
+   row.setProperty("fieldRole", "row"). */
+QFrame#agent_command_fields_container QFrame#command_field_row,
+QFrame#fleet_command_fields_container QFrame#command_field_row,
+QFrame#agent_command_fields_container QFrame[fieldRole="row"],
+QFrame#fleet_command_fields_container QFrame[fieldRole="row"] {
+    background: transparent;
+    border: none;
+    border-radius: 0px;
+}
+
+QFrame#agent_command_fields_container QGroupBox,
+QFrame#fleet_command_fields_container QGroupBox {
+    background-color: #12232F;
+    color: #D9E6EE;
+    border: 1px solid #344D5E;
+    border-radius: 4px;
+    margin-top: 14px;
+    padding: 12px 10px 8px 10px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+QFrame#agent_command_fields_container QGroupBox::title,
+QFrame#fleet_command_fields_container QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 10px;
+    padding: 0 6px;
+    color: #AFC8D7;
+}
+
+QFrame#agent_command_fields_container QLabel,
+QFrame#fleet_command_fields_container QLabel {
+    background: transparent;
+    border: none;
+    color: #C5D5DF;
+    font-size: 11px;
+}
+
+/* Dynamic field headings: match the original Qt Designer example. */
+QFrame#agent_command_fields_container QLabel[fieldRole="label"],
+QFrame#agent_command_fields_container QLabel[fieldRole="section"],
+QFrame#fleet_command_fields_container QLabel[fieldRole="label"],
+QFrame#fleet_command_fields_container QLabel[fieldRole="section"] {
+    background: transparent;
+    border: none;
+    color: #C0D3E0;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+QFrame#agent_command_fields_container QLabel[fieldRole="hint"],
+QFrame#fleet_command_fields_container QLabel[fieldRole="hint"] {
+    background: transparent;
+    border: none;
+    color: #829CAC;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+QFrame#agent_command_fields_container QLabel[fieldRole="error"],
+QFrame#fleet_command_fields_container QLabel[fieldRole="error"] {
+    color: #DEA3A6; font-size: 10px;
+}
+
+QFrame#agent_command_fields_container QLabel[fieldRole="required"],
+QFrame#fleet_command_fields_container QLabel[fieldRole="required"] {
+    color: #D9B387; font-size: 10px; font-weight: 600;
+}
+
+QFrame#agent_command_fields_container QLineEdit,
+QFrame#agent_command_fields_container QSpinBox,
+QFrame#agent_command_fields_container QDoubleSpinBox,
+QFrame#agent_command_fields_container QComboBox,
+QFrame#agent_command_fields_container QFontComboBox,
+QFrame#agent_command_fields_container QDateEdit,
+QFrame#agent_command_fields_container QTimeEdit,
+QFrame#agent_command_fields_container QDateTimeEdit,
+QFrame#agent_command_fields_container QTextEdit,
+QFrame#agent_command_fields_container QPlainTextEdit,
+QFrame#agent_command_fields_container QKeySequenceEdit,
+QFrame#fleet_command_fields_container QLineEdit,
+QFrame#fleet_command_fields_container QSpinBox,
+QFrame#fleet_command_fields_container QDoubleSpinBox,
+QFrame#fleet_command_fields_container QComboBox,
+QFrame#fleet_command_fields_container QFontComboBox,
+QFrame#fleet_command_fields_container QDateEdit,
+QFrame#fleet_command_fields_container QTimeEdit,
+QFrame#fleet_command_fields_container QDateTimeEdit,
+QFrame#fleet_command_fields_container QTextEdit,
+QFrame#fleet_command_fields_container QPlainTextEdit,
+QFrame#fleet_command_fields_container QKeySequenceEdit {
+    background-color: #101F2B;
+    color: #DCE7EF;
+    border: 1px solid #385163;
+    border-radius: 4px;
+    padding: 6px 9px;
+    selection-background-color: #34566A;
+    selection-color: #F4F8FA;
+    font-size: 11px;
+}
+
+QFrame#agent_command_fields_container QLineEdit:hover,
+QFrame#agent_command_fields_container QSpinBox:hover,
+QFrame#agent_command_fields_container QDoubleSpinBox:hover,
+QFrame#agent_command_fields_container QComboBox:hover,
+QFrame#agent_command_fields_container QFontComboBox:hover,
+QFrame#agent_command_fields_container QDateEdit:hover,
+QFrame#agent_command_fields_container QTimeEdit:hover,
+QFrame#agent_command_fields_container QDateTimeEdit:hover,
+QFrame#agent_command_fields_container QTextEdit:hover,
+QFrame#agent_command_fields_container QPlainTextEdit:hover,
+QFrame#agent_command_fields_container QKeySequenceEdit:hover,
+QFrame#fleet_command_fields_container QLineEdit:hover,
+QFrame#fleet_command_fields_container QSpinBox:hover,
+QFrame#fleet_command_fields_container QDoubleSpinBox:hover,
+QFrame#fleet_command_fields_container QComboBox:hover,
+QFrame#fleet_command_fields_container QFontComboBox:hover,
+QFrame#fleet_command_fields_container QDateEdit:hover,
+QFrame#fleet_command_fields_container QTimeEdit:hover,
+QFrame#fleet_command_fields_container QDateTimeEdit:hover,
+QFrame#fleet_command_fields_container QTextEdit:hover,
+QFrame#fleet_command_fields_container QPlainTextEdit:hover,
+QFrame#fleet_command_fields_container QKeySequenceEdit:hover {
+    border-color: #597A8E;
+}
+
+QFrame#agent_command_fields_container QLineEdit:focus,
+QFrame#agent_command_fields_container QSpinBox:focus,
+QFrame#agent_command_fields_container QDoubleSpinBox:focus,
+QFrame#agent_command_fields_container QComboBox:focus,
+QFrame#agent_command_fields_container QFontComboBox:focus,
+QFrame#agent_command_fields_container QDateEdit:focus,
+QFrame#agent_command_fields_container QTimeEdit:focus,
+QFrame#agent_command_fields_container QDateTimeEdit:focus,
+QFrame#agent_command_fields_container QTextEdit:focus,
+QFrame#agent_command_fields_container QPlainTextEdit:focus,
+QFrame#agent_command_fields_container QKeySequenceEdit:focus,
+QFrame#fleet_command_fields_container QLineEdit:focus,
+QFrame#fleet_command_fields_container QSpinBox:focus,
+QFrame#fleet_command_fields_container QDoubleSpinBox:focus,
+QFrame#fleet_command_fields_container QComboBox:focus,
+QFrame#fleet_command_fields_container QFontComboBox:focus,
+QFrame#fleet_command_fields_container QDateEdit:focus,
+QFrame#fleet_command_fields_container QTimeEdit:focus,
+QFrame#fleet_command_fields_container QDateTimeEdit:focus,
+QFrame#fleet_command_fields_container QTextEdit:focus,
+QFrame#fleet_command_fields_container QPlainTextEdit:focus,
+QFrame#fleet_command_fields_container QKeySequenceEdit:focus {
+    border-color: #91BCCE; background-color: #142838;
+}
+
+QFrame#agent_command_fields_container QLineEdit:disabled,
+QFrame#agent_command_fields_container QSpinBox:disabled,
+QFrame#agent_command_fields_container QDoubleSpinBox:disabled,
+QFrame#agent_command_fields_container QComboBox:disabled,
+QFrame#agent_command_fields_container QFontComboBox:disabled,
+QFrame#agent_command_fields_container QDateEdit:disabled,
+QFrame#agent_command_fields_container QTimeEdit:disabled,
+QFrame#agent_command_fields_container QDateTimeEdit:disabled,
+QFrame#agent_command_fields_container QTextEdit:disabled,
+QFrame#agent_command_fields_container QPlainTextEdit:disabled,
+QFrame#agent_command_fields_container QKeySequenceEdit:disabled,
+QFrame#fleet_command_fields_container QLineEdit:disabled,
+QFrame#fleet_command_fields_container QSpinBox:disabled,
+QFrame#fleet_command_fields_container QDoubleSpinBox:disabled,
+QFrame#fleet_command_fields_container QComboBox:disabled,
+QFrame#fleet_command_fields_container QFontComboBox:disabled,
+QFrame#fleet_command_fields_container QDateEdit:disabled,
+QFrame#fleet_command_fields_container QTimeEdit:disabled,
+QFrame#fleet_command_fields_container QDateTimeEdit:disabled,
+QFrame#fleet_command_fields_container QTextEdit:disabled,
+QFrame#fleet_command_fields_container QPlainTextEdit:disabled,
+QFrame#fleet_command_fields_container QKeySequenceEdit:disabled {
+    background-color: #13202B;
+    color: #6F8798;
+    border-color: #2A4050;
+}
+
+QFrame#agent_command_fields_container QLineEdit[invalid="true"],
+QFrame#agent_command_fields_container QSpinBox[invalid="true"],
+QFrame#agent_command_fields_container QDoubleSpinBox[invalid="true"],
+QFrame#agent_command_fields_container QComboBox[invalid="true"],
+QFrame#agent_command_fields_container QFontComboBox[invalid="true"],
+QFrame#agent_command_fields_container QDateEdit[invalid="true"],
+QFrame#agent_command_fields_container QTimeEdit[invalid="true"],
+QFrame#agent_command_fields_container QDateTimeEdit[invalid="true"],
+QFrame#agent_command_fields_container QTextEdit[invalid="true"],
+QFrame#agent_command_fields_container QPlainTextEdit[invalid="true"],
+QFrame#agent_command_fields_container QKeySequenceEdit[invalid="true"],
+QFrame#fleet_command_fields_container QLineEdit[invalid="true"],
+QFrame#fleet_command_fields_container QSpinBox[invalid="true"],
+QFrame#fleet_command_fields_container QDoubleSpinBox[invalid="true"],
+QFrame#fleet_command_fields_container QComboBox[invalid="true"],
+QFrame#fleet_command_fields_container QFontComboBox[invalid="true"],
+QFrame#fleet_command_fields_container QDateEdit[invalid="true"],
+QFrame#fleet_command_fields_container QTimeEdit[invalid="true"],
+QFrame#fleet_command_fields_container QDateTimeEdit[invalid="true"],
+QFrame#fleet_command_fields_container QTextEdit[invalid="true"],
+QFrame#fleet_command_fields_container QPlainTextEdit[invalid="true"],
+QFrame#fleet_command_fields_container QKeySequenceEdit[invalid="true"] {
+    border: 1px solid #C8797C; background-color: #271C24;
+}
+
+QFrame#agent_command_fields_container QLineEdit,
+QFrame#agent_command_fields_container QSpinBox,
+QFrame#agent_command_fields_container QDoubleSpinBox,
+QFrame#agent_command_fields_container QComboBox,
+QFrame#agent_command_fields_container QFontComboBox,
+QFrame#agent_command_fields_container QDateEdit,
+QFrame#agent_command_fields_container QTimeEdit,
+QFrame#agent_command_fields_container QDateTimeEdit,
+QFrame#agent_command_fields_container QKeySequenceEdit,
+QFrame#fleet_command_fields_container QLineEdit,
+QFrame#fleet_command_fields_container QSpinBox,
+QFrame#fleet_command_fields_container QDoubleSpinBox,
+QFrame#fleet_command_fields_container QComboBox,
+QFrame#fleet_command_fields_container QFontComboBox,
+QFrame#fleet_command_fields_container QDateEdit,
+QFrame#fleet_command_fields_container QTimeEdit,
+QFrame#fleet_command_fields_container QDateTimeEdit,
+QFrame#fleet_command_fields_container QKeySequenceEdit {
+    min-height: 28px;
+}
+
+QFrame#agent_command_fields_container QPlainTextEdit,
+QFrame#agent_command_fields_container QTextEdit,
+QFrame#fleet_command_fields_container QPlainTextEdit,
+QFrame#fleet_command_fields_container QTextEdit {
+    min-height: 75px; font-family: "JetBrains Mono", "DejaVu Sans Mono", monospace;
+}
+
+QFrame#agent_command_fields_container QComboBox::drop-down,
+QFrame#agent_command_fields_container QFontComboBox::drop-down,
+QFrame#fleet_command_fields_container QComboBox::drop-down,
+QFrame#fleet_command_fields_container QFontComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 24px;
+    border: none;
+    border-left: 1px solid #30495A;
+    background: #192D3B;
+}
+
+QFrame#agent_command_fields_container QComboBox QAbstractItemView,
+QFrame#agent_command_fields_container QFontComboBox QAbstractItemView,
+QFrame#fleet_command_fields_container QComboBox QAbstractItemView,
+QFrame#fleet_command_fields_container QFontComboBox QAbstractItemView {
+    background-color: #142431;
+    color: #D9E5EE;
+    border: 1px solid #466477;
+    selection-background-color: #31546A;
+    selection-color: #F3F7F9;
+    outline: 0;
+}
+
+/* Numeric values look like ordinary clean inputs: no spin-button chrome.
+   In Python also use QAbstractSpinBox.ButtonSymbols.NoButtons to remove
+   the reserved sub-control area completely. */
+QFrame#agent_command_fields_container QSpinBox::up-button,
+QFrame#agent_command_fields_container QSpinBox::down-button,
+QFrame#agent_command_fields_container QDoubleSpinBox::up-button,
+QFrame#agent_command_fields_container QDoubleSpinBox::down-button,
+QFrame#fleet_command_fields_container QSpinBox::up-button,
+QFrame#fleet_command_fields_container QSpinBox::down-button,
+QFrame#fleet_command_fields_container QDoubleSpinBox::up-button,
+QFrame#fleet_command_fields_container QDoubleSpinBox::down-button {
+    width: 0px;
+    height: 0px;
+    border: none;
+    background: transparent;
+}
+
+/* Date/time inputs may retain their native step controls. */
+QFrame#agent_command_fields_container QDateEdit::up-button,
+QFrame#agent_command_fields_container QDateTimeEdit::up-button,
+QFrame#agent_command_fields_container QTimeEdit::up-button,
+QFrame#fleet_command_fields_container QDateEdit::up-button,
+QFrame#fleet_command_fields_container QDateTimeEdit::up-button,
+QFrame#fleet_command_fields_container QTimeEdit::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #30495A;
+    background-color: #1A303E;
+}
+
+QFrame#agent_command_fields_container QDateEdit::down-button,
+QFrame#agent_command_fields_container QDateTimeEdit::down-button,
+QFrame#agent_command_fields_container QTimeEdit::down-button,
+QFrame#fleet_command_fields_container QDateEdit::down-button,
+QFrame#fleet_command_fields_container QDateTimeEdit::down-button,
+QFrame#fleet_command_fields_container QTimeEdit::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 20px;
+    border-left: 1px solid #30495A;
+    background-color: #1A303E;
+}
+
+QFrame#agent_command_fields_container QDateEdit::drop-down,
+QFrame#agent_command_fields_container QDateTimeEdit::drop-down,
+QFrame#agent_command_fields_container QTimeEdit::drop-down,
+QFrame#fleet_command_fields_container QDateEdit::drop-down,
+QFrame#fleet_command_fields_container QDateTimeEdit::drop-down,
+QFrame#fleet_command_fields_container QTimeEdit::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 22px;
+    border-left: 1px solid #30495A;
+    background-color: #1A303E;
+}
+
+QFrame#agent_command_fields_container QCheckBox,
+QFrame#agent_command_fields_container QRadioButton,
+QFrame#fleet_command_fields_container QCheckBox,
+QFrame#fleet_command_fields_container QRadioButton {
+    color: #C0D3E0;
+    spacing: 9px;
+    font-size: 11px;
+    font-weight: 600;
+    background: transparent;
+    border: none;
+}
+
+QFrame#agent_command_fields_container QCheckBox::indicator,
+QFrame#agent_command_fields_container QRadioButton::indicator,
+QFrame#fleet_command_fields_container QCheckBox::indicator,
+QFrame#fleet_command_fields_container QRadioButton::indicator {
+    width: 16px; height: 16px;
+}
+
+/* Dynamic command parameter checkboxes: visible on dark surfaces.
+   Scoped to the two command builders; no icons or extra files needed. */
+QFrame#agent_command_fields_container QCheckBox::indicator:unchecked,
+QFrame#fleet_command_fields_container QCheckBox::indicator:unchecked {
+    width: 16px;
+    height: 16px;
+    background-color: #101F2A;
+    border: 1px solid #7893A5;
+    border-radius: 4px;
+}
+
+QFrame#agent_command_fields_container QCheckBox::indicator:unchecked:hover,
+QFrame#fleet_command_fields_container QCheckBox::indicator:unchecked:hover {
+    background-color: #1D3646;
+    border: 1px solid #A4C9DD;
+}
+
+QFrame#agent_command_fields_container QCheckBox::indicator:checked,
+QFrame#fleet_command_fields_container QCheckBox::indicator:checked {
+    width: 16px;
+    height: 16px;
+    background-color: #91C3D7;
+    border: 1px solid #B5DEEB;
+    border-radius: 4px;
+}
+
+QFrame#agent_command_fields_container QCheckBox::indicator:checked:hover,
+QFrame#fleet_command_fields_container QCheckBox::indicator:checked:hover {
+    background-color: #AAD7E8;
+    border: 1px solid #D2ECF5;
+}
+
+QFrame#agent_command_fields_container QCheckBox::indicator:unchecked:disabled,
+QFrame#fleet_command_fields_container QCheckBox::indicator:unchecked:disabled {
+    background-color: #172530;
+    border: 1px solid #425968;
+}
+
+QFrame#agent_command_fields_container QCheckBox::indicator:checked:disabled,
+QFrame#fleet_command_fields_container QCheckBox::indicator:checked:disabled {
+    background-color: #567887;
+    border: 1px solid #6D8E9D;
+}
+
+QFrame#agent_command_fields_container QCheckBox:disabled,
+QFrame#agent_command_fields_container QRadioButton:disabled,
+QFrame#fleet_command_fields_container QCheckBox:disabled,
+QFrame#fleet_command_fields_container QRadioButton:disabled {
+    color: #728A9C;
+}
+
+QFrame#agent_command_fields_container QPushButton,
+QFrame#agent_command_fields_container QToolButton,
+QFrame#fleet_command_fields_container QPushButton,
+QFrame#fleet_command_fields_container QToolButton {
+    background-color: #1B3140;
+    border: 1px solid #3E5C6F;
+    border-radius: 4px;
+    color: #D8E8F0;
+    min-height: 27px;
+    padding: 5px 11px;
+    font-size: 11px;
+}
+
+QFrame#agent_command_fields_container QPushButton:hover,
+QFrame#agent_command_fields_container QToolButton:hover,
+QFrame#fleet_command_fields_container QPushButton:hover,
+QFrame#fleet_command_fields_container QToolButton:hover {
+    background-color: #294658; border-color: #799EB1;
+}
+
+QFrame#agent_command_fields_container QPushButton:pressed,
+QFrame#agent_command_fields_container QToolButton:pressed,
+QFrame#fleet_command_fields_container QPushButton:pressed,
+QFrame#fleet_command_fields_container QToolButton:pressed {
+    background-color: #122633;
+}
+
+QFrame#agent_command_fields_container QPushButton:disabled,
+QFrame#agent_command_fields_container QToolButton:disabled,
+QFrame#fleet_command_fields_container QPushButton:disabled,
+QFrame#fleet_command_fields_container QToolButton:disabled {
+    background-color: #182733; border-color: #2B4252; color: #718999;
+}
+
+QFrame#agent_command_fields_container QSlider::groove:horizontal,
+QFrame#fleet_command_fields_container QSlider::groove:horizontal {
+    height: 5px;
+    border-radius: 2px;
+    background-color: #314959;
+}
+
+QFrame#agent_command_fields_container QSlider::handle:horizontal,
+QFrame#fleet_command_fields_container QSlider::handle:horizontal {
+    background-color: #9BBCCE;
+    border: 1px solid #B5D2E0;
+    border-radius: 7px;
+    width: 14px;
+    margin: -5px 0;
+}
+
+QFrame#agent_command_fields_container QSlider::groove:vertical,
+QFrame#fleet_command_fields_container QSlider::groove:vertical {
+    width: 5px;
+    border-radius: 2px;
+    background-color: #314959;
+}
+
+QFrame#agent_command_fields_container QSlider::handle:vertical,
+QFrame#fleet_command_fields_container QSlider::handle:vertical {
+    background-color: #9BBCCE;
+    border: 1px solid #B5D2E0;
+    border-radius: 7px;
+    height: 14px;
+    margin: 0 -5px;
+}
+
+QFrame#agent_command_fields_container QProgressBar,
+QFrame#fleet_command_fields_container QProgressBar {
+    background-color: #162936;
+    color: #DCE8EE;
+    border: 1px solid #345063;
+    border-radius: 4px;
+    text-align: center;
+    min-height: 16px;
+}
+
+QFrame#agent_command_fields_container QProgressBar::chunk,
+QFrame#fleet_command_fields_container QProgressBar::chunk {
+    background-color: #83B1C7; border-radius: 3px;
+}
+
+QFrame#agent_command_fields_container QListWidget,
+QFrame#agent_command_fields_container QTreeWidget,
+QFrame#agent_command_fields_container QTableWidget,
+QFrame#fleet_command_fields_container QListWidget,
+QFrame#fleet_command_fields_container QTreeWidget,
+QFrame#fleet_command_fields_container QTableWidget {
+    background-color: #0E1D28;
+    alternate-background-color: #142735;
+    color: #CBDDE8;
+    border: 1px solid #365163;
+    border-radius: 4px;
+    selection-background-color: #2A4B60;
+    selection-color: #F1F7FA;
+    outline: none;
+}
+
+QFrame#agent_command_fields_container QListWidget::item,
+QFrame#agent_command_fields_container QTreeWidget::item,
+QFrame#fleet_command_fields_container QListWidget::item,
+QFrame#fleet_command_fields_container QTreeWidget::item {
+    padding: 5px 7px;
+}
+
+QFrame#agent_command_fields_container QHeaderView::section,
+QFrame#fleet_command_fields_container QHeaderView::section {
+    background-color: #203847;
+    color: #AFC6D5;
+    border: none;
+    border-bottom: 1px solid #355366;
+    padding: 6px;
+    font-size: 10px;
+}
+
+QFrame#agent_command_fields_container QScrollArea,
+QFrame#fleet_command_fields_container QScrollArea {
+    background: transparent; border: none;
+}
+
+QFrame#agent_command_fields_container QScrollBar:vertical,
+QFrame#fleet_command_fields_container QScrollBar:vertical {
+    background-color: #142633; border: 0; width: 9px; margin: 0;
+}
+
+QFrame#agent_command_fields_container QScrollBar::handle:vertical,
+QFrame#fleet_command_fields_container QScrollBar::handle:vertical {
+    background-color: #476476; border-radius: 4px; min-height: 20px;
+}
+
+QFrame#agent_command_fields_container QScrollBar::add-line:vertical,
+QFrame#agent_command_fields_container QScrollBar::sub-line:vertical,
+QFrame#fleet_command_fields_container QScrollBar::add-line:vertical,
+QFrame#fleet_command_fields_container QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QFrame#agent_command_fields_container QScrollBar:horizontal,
+QFrame#fleet_command_fields_container QScrollBar:horizontal {
+    background-color: #142633; border: 0; height: 9px; margin: 0;
+}
+
+QFrame#agent_command_fields_container QScrollBar::handle:horizontal,
+QFrame#fleet_command_fields_container QScrollBar::handle:horizontal {
+    background-color: #476476; border-radius: 4px; min-width: 20px;
+}
+
+QFrame#agent_command_fields_container QScrollBar::add-line:horizontal,
+QFrame#agent_command_fields_container QScrollBar::sub-line:horizontal,
+QFrame#fleet_command_fields_container QScrollBar::add-line:horizontal,
+QFrame#fleet_command_fields_container QScrollBar::sub-line:horizontal {
+    width: 0px;
+}
+
+QFrame#agent_command_fields_container QTabWidget::pane,
+QFrame#fleet_command_fields_container QTabWidget::pane {
+    background-color: #10212C; border: 1px solid #344D5C;
+}
+
+QFrame#agent_command_fields_container QTabBar::tab,
+QFrame#fleet_command_fields_container QTabBar::tab {
+    background-color: #1A303E;
+    color: #9CB3C1;
+    border: 1px solid #304B5D;
+    padding: 6px 13px;
+}
+
+QFrame#agent_command_fields_container QTabBar::tab:selected,
+QFrame#fleet_command_fields_container QTabBar::tab:selected {
+    background-color: #294658; color: #F1F7FA; border-top: 2px solid #91BCCE;
+}
+
+/* Unhandled/custom Qt widgets keep their native rendering in this area. */
