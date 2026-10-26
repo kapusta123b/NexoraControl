@@ -1,3 +1,7 @@
+import time
+
+import psutil
+
 import asyncio
 
 from api.client import BasicClient
@@ -10,12 +14,15 @@ from services.metrics.memory import collect_memory_metrics
 
 
 def collect_metrics() -> dict:
+    current_uptime = time.time() - psutil.boot_time()
+
     return {
         "cpu_metrics": {**collect_cpu_metrics()},
         "memory_metrics": {**collect_memory_metrics()},
         "storage_metrics": {**collect_storage_data()},
         "thermal_metrics": {**collect_thermal_metrics()},
         "network_metrics": {**collect_network_data()},
+        "uptime": current_uptime,
     }
 
 

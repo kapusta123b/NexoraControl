@@ -27,11 +27,14 @@ class BasicClient:
     def __init__(self, settings: Settings | None = None, base_url: str | None = None):
         self.settings = settings or load_settings()
 
-        token_header = (
-            self.settings.token
-            if self.settings.token.startswith("Bearer ")
-            else f"Bearer {self.settings.token}"
-        )
+        token_header = ""
+
+        if self.settings.token:
+            token_header = (
+                self.settings.token
+                if self.settings.token.startswith("Bearer ")
+                else f"Bearer {self.settings.token}"
+            )
 
         self.client = httpx.AsyncClient(
             base_url=base_url or self.settings.api_url,
@@ -113,4 +116,12 @@ class BasicClient:
             "patch",
             f"{self.BASE_AGENT_URL}{self.settings.agent_id}/commands/results/",
             json_data=commands,
+        )
+
+    async def send_system_info(self, system_info: dict[str, dict]) -> dict | None:
+        return await self._request(
+            "post",
+            f"{self.BASE_AGENT_URL}{self.settings.agent_id}/system-info/",
+            json_data=system_info,
+            return_status=True,
         )

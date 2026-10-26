@@ -31,7 +31,7 @@ async def run():
 
 
 async def setup():
-    await setup_agent()
+    await setup_agent(force=True)
 
 
 async def main():
@@ -45,15 +45,11 @@ async def main():
         await run()
         return
 
-    console.print(
-        "[bold red]Unknown command.[/bold red]"
-    )
+    console.print("[bold red]Unknown command.[/bold red]")
 
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        console.print(
-            "\n[bold yellow]Agent stopped by user.[/bold yellow]"
-        )
+        console.print("\n[bold yellow]Agent stopped by user.[/bold yellow]")

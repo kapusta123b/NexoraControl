@@ -1,6 +1,9 @@
 import subprocess
+
 import platform
+
 import urllib.request
+
 
 def get_system_hostname() -> str:
     name = subprocess.run("hostname", capture_output=True, text=True).stdout.strip()
@@ -10,14 +13,15 @@ def get_system_hostname() -> str:
 
 def get_public_ip_native() -> str:
     try:
-        with urllib.request.urlopen('https://ifconfig.me', timeout=5) as response:
-            return response.read().decode('utf-8').strip()
+        with urllib.request.urlopen("https://ifconfig.me", timeout=5) as response:
+            return response.read().decode("utf-8").strip()
     except Exception:
         return "Unknown"
-    
+
+
 def get_os_info() -> str:
     system = platform.system()
-    
+
     if system == "Linux":
         if hasattr(platform, "freedesktop_os_release"):
             try:
@@ -28,13 +32,11 @@ def get_os_info() -> str:
             except OSError:
                 pass
         return f"Linux {platform.release()}"
-        
+
     elif system == "Windows":
         return f"Windows {platform.release()}"
-        
+
     elif system == "Darwin":
         return f"macOS {platform.mac_ver()[0]}"
-        
+
     return system
-
-

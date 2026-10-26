@@ -1,17 +1,25 @@
 from pathlib import Path
+
 from urllib.parse import urlparse
 
 import httpx
+
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
 from rich.status import Status
 from rich.table import Table
+from rich.live import Live
+from rich.spinner import Spinner
 
 from decouple import config
 
 from api.client import BasicClient
+
 from config.config import Settings, load_settings
+
+from services.hardware_parser import ProductionParser
+
 from services.utils import get_os_info, get_public_ip_native, get_system_hostname
 
 console = Console()
@@ -21,6 +29,10 @@ ENV_FILE = BASE_DIR / ".env"
 
 
 def render_header() -> None:
+    """
+    Print the entrance header.
+    """
+
     console.print(
         Panel.fit(
             "\n"
@@ -39,6 +51,16 @@ def render_step(
     title: str,
     description: str = "",
 ) -> None:
+    """
+    Print information about the step, including its description, title, number of step and total step value.
+
+    Args:
+        number (int): number of step.
+        total (int): the total number of steps.
+        title (str): title of step.
+        description (str, optional): description of step. Defaults to "".
+    """
+
     console.print(
         f"\n[bold cyan]Step {number} of {total}[/bold cyan] "
         f"[dim]—[/dim] [bold]{title}[/bold]\n"
@@ -49,11 +71,26 @@ def render_step(
 
 
 def clear_and_render() -> None:
+    """
+    Clear the terminal screen and render the application header.
+
+    This function acts as equivalent of the 'cls' on Windows or 'clear' on Linux, then displays the header.
+    """
+
     console.clear()
     render_header()
 
 
 def is_valid_api_url(url: str) -> bool:
+    """
+    Check if the URL is valid and return True if it is correct.
+
+    Args:
+        url (str): The URL string to validate.
+
+    Returns:
+        bool: True if the URL has a valid scheme and network location, False otherwise.
+    """
     try:
         parsed = urlparse(url)
 
@@ -69,6 +106,16 @@ def save_config(
     heartbeat_interval: int,
     command_interval: int,
 ) -> None:
+    """
+    Save the passed arguments into the .env file.
+
+    Args:
+        api_url (str): The backend API URL.
+        agent_id (int): The agent ID.
+        token (str): The secret UUID token.
+        heartbeat_interval (int): The interval in seconds between heartbeat requests.
+        command_interval (int): The interval in seconds between command requests.
+    """
     ENV_FILE.write_text(
         "\n".join(
             [
@@ -86,20 +133,34 @@ def save_config(
     ENV_FILE.chmod(0o600)
 
 
-def show_error(title: str, message: str) -> None:
+def show_error(title: str, description: str) -> None:
+    """
+    Print an error message with title and description.
+
+    Args:
+        title (str): The title of error.
+        description (str): The description of error.
+    """
     console.print(
         Panel(
-            f"[bold red]✗ {title}[/bold red]\n\n" f"[dim]{message}[/dim]",
+            f"[bold red]✗ {title}[/bold red]\n\n" f"[dim]{description}[/dim]",
             border_style="red",
             padding=(1, 2),
         )
     )
 
 
-def show_success(title: str, message: str) -> None:
+def show_success(title: str, description: str) -> None:
+    """
+    Print a success message with title and description.
+
+    Args:
+        title (str): The title of message.
+        description (str): The description of message.
+    """
     console.print(
         Panel(
-            f"[bold green]✓ {title}[/bold green]\n\n" f"{message}",
+            f"[bold green]✓ {title}[/bold green]\n\n" f"{description}",
             border_style="green",
             padding=(1, 2),
         )
@@ -112,6 +173,15 @@ def show_configuration(
     hostname: str,
     name: str,
 ) -> None:
+    """
+    Print the configuration styled like table with passed arguments.
+
+    Args:
+        api_url (str): The backend API URL.
+        agent_id (int): The agent ID.
+        hostname (str): The agent hostname.
+        name (str): The agent name.
+    """
     table = Table(
         title="Agent configuration",
         border_style="green",
@@ -129,11 +199,77 @@ def show_configuration(
     console.print(table)
 
 
-async def setup_agent():
+async def request_with_live_spinner(
+    client: BasicClient, method: str, payload: dict
+) -> dict | None:
+    spinner = Spinner("dots", text="[cyan]Connecting to NexoraControl API...[/cyan]")
+
+    with Live(spinner, console=console, refresh_per_second=10, transient=True):
+        try:
+            client_func = getattr(client, method)
+
+            response, status_code = await client_func(payload)
+
+            if status_code != 201:
+                detail = "The server rejected the request."
+
+                if response:
+                    detail = response.get(
+                        "detail",
+                        "The server rejected the request.",
+                    )
+
+                show_error(
+                    "Registration failed",
+                    f"HTTP status: {status_code}\n" f"Reason: {detail}",
+                )
+                return None
+
+            return response, status_code
+
+        except httpx.ConnectError:
+            show_error(
+                "Connection failed",
+                "Unable to connect to the NexoraControl API.\n\n"
+                "Check the API URL and make sure the server is reachable.",
+            )
+            return None
+
+        except httpx.TimeoutException:
+            show_error(
+                "Request timed out",
+                "The NexoraControl API did not respond in time.",
+            )
+            return None
+
+        except httpx.HTTPError as exc:
+            show_error(
+                "HTTP error",
+                str(exc),
+            )
+            return None
+
+        except Exception as exc:
+            show_error(
+                "Unexpected error",
+                f"{type(exc).__name__}: {exc}",
+            )
+            return None
+
+
+async def setup_agent(force: bool = False) -> Settings | None:
+    """
+    The main function to set up the agent.
+
+    Returns:
+        Settings | None: The Settings object if the configuration already exists,
+        None otherwise.
+    """
     settings = load_settings()
 
-    if settings.agent_id and settings.token:
-        return settings
+    if not force:
+        if settings.agent_id and settings.token:
+            return settings
 
     # ============================================================
     # STEP 1 — API
@@ -188,9 +324,7 @@ async def setup_agent():
     )
 
     hostname = get_system_hostname()
-
     ip = get_public_ip_native()
-
     os = get_os_info()
 
     console.print(f"Detected hostname: [cyan]{hostname}[/cyan]\n")
@@ -234,53 +368,12 @@ async def setup_agent():
     console.print()
 
     payload = {"name": name, "hostname": hostname, "ip": ip, "os": os}
+    client = BasicClient(base_url=api_url)
 
+    response, status = await request_with_live_spinner(client, "create_agent", payload)
 
-    try:
-        with Status("[cyan]Connecting to NexoraControl API...[/cyan]", console=console):
-            client = BasicClient(base_url=api_url)
-            response, status_code = await client.create_agent(payload)
-
-    except httpx.ConnectError:
-        show_error(
-            "Connection failed",
-            "Unable to connect to the NexoraControl API.\n\n"
-            "Check the API URL and make sure the server is reachable.",
-        )
-        return None
-
-    except httpx.TimeoutException:
-        show_error(
-            "Request timed out",
-            "The NexoraControl API did not respond in time.",
-        )
-        return None
-
-    except httpx.HTTPError as exc:
-        show_error(
-            "HTTP error",
-            str(exc),
-        )
-        return None
-
-    except Exception as exc:
-        show_error(
-            "Unexpected error",
-            f"{type(exc).__name__}: {exc}",
-        )
-        return None
-
-    if status_code != 201:
-        detail = response.get(
-            "detail",
-            "The server rejected the registration request.",
-        )
-
-        show_error(
-            "Registration failed",
-            f"HTTP status: {status_code}\n" f"Reason: {detail}",
-        )
-        return None
+    if not response:
+        return
 
     agent_id = response.get("id")
     token = response.get("token")
@@ -323,6 +416,17 @@ async def setup_agent():
         token=token,
         heartbeat_interval=settings.heartbeat_interval,
         command_interval=settings.command_interval,
+    )
+
+    # init new BasicClient with updated config
+    client = BasicClient(settings)
+
+    # collect the agent system information
+    system_agent_info = ProductionParser.collect()
+
+    # send a request with the system information after save the config
+    response = await request_with_live_spinner(
+        client, "send_system_info", system_agent_info
     )
 
     clear_and_render()
