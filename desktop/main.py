@@ -1,17 +1,17 @@
-import asyncio
 import sys
 
 from PySide6.QtWidgets import QApplication, QButtonGroup, QMainWindow
 
 from api.client import NexoraClient
 
-from services.pollers.agents_list_poller import AgentsListPoller
-
 from services.stores.agent_store import AgentsListStore
+
+from services.pollers.agents_list_poller import AgentsListPoller
 
 from pages.agent_detail_page import AgentDetailController
 from pages.agents_list_page import AgentsController
 from pages.dashboard_page import DashboardController
+from pages.fleet_command_page import FleetCommandController
 
 from ui.main_window import Ui_MainWindow
 
@@ -30,11 +30,6 @@ class MainWindow(QMainWindow):
 
         self.setup_pages()
         self.setup_navigation()
-
-        if sys.platform == "win32":
-            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-        else:
-            asyncio.get_event_loop_policy().get_event_loop = asyncio.new_event_loop
 
         self.ui.content_stack.setCurrentWidget(self.ui.dashboard_page)
         self.ui.dashboard_button.setChecked(True)
@@ -65,7 +60,7 @@ class MainWindow(QMainWindow):
         self.agent_poller = AgentsListPoller(client=self.client, store=self.agent_store)
 
         self.dashboard_controller = DashboardController(
-            ui=self.ui, store=self.agent_store, poller=self.agent_poller
+            ui=self.ui, dashboard_store=self.agent_store, poller=self.agent_poller
         )
 
         self.agent_detail_controller = AgentDetailController(
@@ -74,9 +69,15 @@ class MainWindow(QMainWindow):
 
         self.agents_controller = AgentsController(
             ui=self.ui,
-            store=self.agent_store,
+            agents_store=self.agent_store,
             poller=self.agent_poller,
             detail_controller=self.agent_detail_controller,
+        )
+
+        self.fleet_commands_controller = FleetCommandController(
+            ui=self.ui,
+            client=self.client,
+            agent_store=self.agent_store,
         )
 
 
@@ -88,8 +89,10 @@ if __name__ == "__main__":
         with open("styles/theme.qss", "r") as f:
             qss_rules = f.read()
             app.setStyleSheet(qss_rules)
+
     except FileNotFoundError:
         print("Warning: theme.qss file not found. Running without custom styles.")
 
     window.show()
+
     sys.exit(app.exec())
