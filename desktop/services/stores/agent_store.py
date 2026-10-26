@@ -13,19 +13,19 @@ class AgentsListStore(QObject):
         self.agents_changed.emit(agents)
 
     @property
-    def agents(self) -> list[dict | None]:
+    def agents(self) -> list[dict]:
         return self._agents
 
 
-class AgentSystemInfoStore(QObject):
+class AgentHardwareInfoStore(QObject):
     system_info_changed = Signal(dict)
 
     def __init__(self):
         super().__init__()
 
-        self._agent_system_info = {}
+        self._agent_system_info: dict[str, dict | list[dict] | str] = {}
 
-    def set_system_info(self, system_info: dict | None) -> None:
+    def set_system_info(self, system_info: dict[str, dict | list[dict] | str]) -> None:
         self._agent_system_info = system_info
         self.system_info_changed.emit(system_info)
 

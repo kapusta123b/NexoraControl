@@ -76,6 +76,8 @@ class AgentDetailController(QObject):
 
         self.overview_controller.agent = agent
         self.performance_controller.agent = agent
+        self.hardware_controller.agent = agent
+        self.commands_controller.agent = agent
 
         if (
             self.ui.agent_detail_stacked_content.currentWidget()
