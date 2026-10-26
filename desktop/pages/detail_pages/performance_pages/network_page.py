@@ -5,6 +5,7 @@ from services.utils.string_utils import (
     calculate_metric_rate,
 )
 from services.utils.widgets_utils import (
+    apply_style_for_tables,
     set_gauge,
     update_or_create_row_item,
 )
@@ -94,7 +95,7 @@ class PerformanceNetworkPage(QObject):
 
         self.network_counters = {}
 
-        self._setup_style_page()
+        self._setup_style()
         self._setup_static_series()
         self.setup_connections()
         self._init_data_unit_selector()
@@ -117,14 +118,8 @@ class PerformanceNetworkPage(QObject):
                 lambda checked=False, mode=mode: self.on_toggle_button_clicked(mode)
             )
 
-    def _setup_style_page(self):
-        self.ui.network_interfaces_table.horizontalHeader().setSectionResizeMode(
-            QHeaderView.ResizeMode.Stretch
-        )
-        self.ui.network_interfaces_table.verticalHeader().setVisible(False)
-        self.ui.network_interfaces_table.horizontalHeader().setHighlightSections(False)
-
-        self.ui.network_traffic_unit_combo_box.setEnabled(False)
+    def _setup_style(self):
+        apply_style_for_tables(self.ui.network_interfaces_table)
 
     def on_history_received(self, metrics: dict):
         current_page_widget = self.ui.performance_stacked_content.currentWidget()

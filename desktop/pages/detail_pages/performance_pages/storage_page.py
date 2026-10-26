@@ -1,4 +1,5 @@
 from services.utils.widgets_utils import (
+    apply_style_for_tables,
     set_gauge,
     setup_table_progress_bar,
     update_or_create_row_item,
@@ -19,8 +20,6 @@ from services.graph_helper import MetricGraphHelper
 
 from services.widgets.gauge import SimpleNetdataGauge
 from services.widgets.box_messages import MessageBox
-
-from PySide6.QtWidgets import QHeaderView
 
 from ui.main_window import Ui_MainWindow
 
@@ -73,18 +72,8 @@ class PerformanceStoragePage:
         self.performance_store.metrics_appended.connect(self.on_latest_received)
 
     def _setup_style_page(self) -> None:
-        self.ui.file_systems_table.horizontalHeader().setSectionResizeMode(
-            QHeaderView.ResizeMode.Stretch
-        )
-        self.ui.storage_devices_table.horizontalHeader().setSectionResizeMode(
-            QHeaderView.ResizeMode.Stretch
-        )
-
-        self.ui.file_systems_table.verticalHeader().setVisible(False)
-        self.ui.storage_devices_table.verticalHeader().setVisible(False)
-
-        self.ui.file_systems_table.horizontalHeader().setHighlightSections(False)
-        self.ui.storage_devices_table.horizontalHeader().setHighlightSections(False)
+        tables = (self.ui.file_systems_table, self.ui.storage_devices_table)
+        apply_style_for_tables(tables)
 
         self.ui.disk_data_unit_combo_box.setEnabled(False)
 
@@ -261,10 +250,10 @@ class PerformanceStoragePage:
                 table.insertRow(row)
 
             update_or_create_row_item(table, row, 0, disk_name)
-            update_or_create_row_item(table, row, 1, info.get("model", "Unknown"))
-            update_or_create_row_item(table, row, 2, info.get("type", "N/A"))
-            update_or_create_row_item(table, row, 3, info.get("capacity", "N/A"))
-            update_or_create_row_item(table, row, 4, info.get("status", "UNKNOWN"))
+            update_or_create_row_item(table, row, 1, info["model"])
+            update_or_create_row_item(table, row, 2, info["type"])
+            update_or_create_row_item(table, row, 3, info["capacity"])
+            update_or_create_row_item(table, row, 4, info["status"])
 
     def _update_filesystems_table(self, filesystems: dict) -> None:
         table = self.ui.file_systems_table

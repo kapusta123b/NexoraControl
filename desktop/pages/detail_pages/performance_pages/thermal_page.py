@@ -1,4 +1,5 @@
 from services.utils.widgets_utils import (
+    apply_style_for_tables,
     set_gauge,
     setup_table_progress_bar,
     update_or_create_row_item,
@@ -58,18 +59,14 @@ class PerformanceThermalPage:
 
         self.thermal_sensors_counters = {}
 
-        self._setup_style_page()
+        self._setup_style()
         self._setup_static_series()
 
         self.performance_store.metrics_loaded.connect(self.on_history_received)
         self.performance_store.metrics_appended.connect(self.on_latest_received)
 
-    def _setup_style_page(self):
-        self.ui.sensors_table.horizontalHeader().setSectionResizeMode(
-            QHeaderView.ResizeMode.Stretch
-        )
-        self.ui.sensors_table.verticalHeader().setVisible(False)
-        self.ui.sensors_table.horizontalHeader().setHighlightSections(False)
+    def _setup_style(self):
+        apply_style_for_tables(self.ui.sensors_table)
 
         self.ui.thermal_sensor_name_combo_box.setEnabled(False)
 
