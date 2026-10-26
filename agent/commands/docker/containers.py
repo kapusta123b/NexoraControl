@@ -1,26 +1,43 @@
 import subprocess
 
 
+def docker_container_start(payload: dict) -> list[str]:
+    return ["docker", "start", payload["container"]]
+
+
+def docker_container_stop(payload: dict) -> list[str]:
+    return ["docker", "stop", payload["container"]]
+
+
+def docker_container_restart(payload: dict) -> list[str]:
+    return ["docker", "restart", payload["container"]]
+
+
+def docker_container_pause(payload: dict) -> list[str]:
+    return ["docker", "pause", payload["container"]]
+
+
+def docker_container_unpause(payload: dict) -> list[str]:
+    return ["docker", "unpause", payload["container"]]
+
+
 def _get_all_containers() -> list[str]:
-    try:
-        res = subprocess.check_output(["docker", "ps", "-a", "-q"], text=True)
-        container_ids = [cid.strip() for cid in res.splitlines() if cid.strip()]
-        return container_ids
-    except subprocess.CalledProcessError:
-        return []
+    """Resolve running container IDs on the agent, not the desktop."""
+    result = subprocess.run(
+        ["docker", "ps", "-q"],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=15,
+    )
+    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
 
 
-def docker_stop_all_containers(payload: dict) -> list:
-    container_ids = _get_all_containers()
-    if not container_ids:
-        return []
-
-    return ["docker", "stop"] + container_ids
+def docker_stop_all_containers(payload: dict) -> list[str]:
+    ids = _get_all_containers()
+    return ["docker", "stop", *ids] if ids else ["docker", "ps", "-q"]
 
 
-def docker_restart_all_containers(payload: dict) -> list:
-    container_ids = _get_all_containers()
-    if not container_ids:
-        return []
-
-    return ["docker", "restart"] + container_ids
+def docker_restart_all_containers(payload: dict) -> list[str]:
+    ids = _get_all_containers()
+    return ["docker", "restart", *ids] if ids else ["docker", "ps", "-q"]

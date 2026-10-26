@@ -1,49 +1,55 @@
 import subprocess
 
+MAX_OUTPUT_CHARS = 9_200
+
+
+def _limit(text: str) -> str:
+    if len(text) <= MAX_OUTPUT_CHARS:
+        return text
+
+    return text[:MAX_OUTPUT_CHARS] + "\n[Output truncated by NexoraControl]"
+
 
 def subprocess_executor(command: list[str], timeout: int) -> dict:
+    if (
+        not isinstance(command, list)
+        or not command
+        or not all(isinstance(arg, str) for arg in command)
+    ):
+        return {
+            "status": "FAILED",
+            "errors": {"command": "Invalid command arguments."},
+            "output": "",
+        }
     try:
         result = subprocess.run(
             command,
-            check=True,
+            check=False,
             text=True,
             capture_output=True,
             timeout=timeout,
+            shell=False,
         )
 
-        if not result.stderr and not result.stdout:
-            return {
-                "status": "FAILED",
-                "errors": {"Executor": "Command return None!"},
-            }
-
-        return {
-            "status": "SUCCESS",
-            "output": result.stdout.strip() or result.stderr.strip(),
-        }
-
-    except subprocess.CalledProcessError as e:
-        error = (e.stderr or e.stdout or "").strip()
+        stdout = (result.stdout or "").strip()
+        stderr = (result.stderr or "").strip()
+        if result.returncode == 0:
+            return {"status": "SUCCESS", "output": _limit(stdout or stderr)}
 
         return {
             "status": "FAILED",
-            "output": error or f"Command finished with code {e.returncode}",
+            "output": _limit(
+                stderr or stdout or f"Command exited with code {result.returncode}"
+            ),
+            "errors": {"exit_code": result.returncode},
         }
-
     except subprocess.TimeoutExpired:
         return {
             "status": "FAILED",
             "output": f"Command timed out after {timeout} seconds",
         }
+    except FileNotFoundError as error:
+        return {"status": "FAILED", "output": f"Utility unavailable: {error.filename}"}
 
-    except FileNotFoundError as e:
-        return {
-            "status": "FAILED",
-            "output": str(e),
-        }
-
-    except Exception as e:
-        return {
-            "status": "FAILED",
-            "output": str(e),
-        }
+    except OSError as error:
+        return {"status": "FAILED", "output": f"Unable to start command: {error}"}

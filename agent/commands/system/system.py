@@ -1,32 +1,14 @@
-def system_uptime(payload: dict) -> list:
-    return ["uptime", "-p"]
+"""Linux system information and explicit host reboot."""
 
-
-def system_os_info(payload: dict) -> list:
-    return ["cat", "/etc/os-release"]
-
-
-def system_cpu_info(payload: dict) -> list:
-    return ["lscpu"]
-
-
-def system_ram_info(payload: dict) -> list:
-    return ["free", "-h"]
-
-
-def system_disk_info(payload: dict) -> list:
-    return ["lsblk"]
-
-
-def system_processes(payload: dict) -> list:
-    limit = payload.get("limit", 5)
-
-    bash_script = (
-        f"ps -eo comm,%cpu,%mem,state --no-headers --sort=-%cpu | head -n {limit}"
-    )
-
-    return ["bash", "-c", bash_script]
-
-
-def system_reboot(payload: dict) -> list:
-    return ["systemctl", "reboot"]
+def system_uptime(payload: dict) -> list[str]: return ['uptime', '-p']
+def system_os_info(payload: dict) -> list[str]: return ['cat', '/etc/os-release']
+def system_cpu_info(payload: dict) -> list[str]: return ['lscpu']
+def system_ram_info(payload: dict) -> list[str]: return ['free', '-h']
+def system_disk_info(payload: dict) -> list[str]: return ['lsblk']
+def system_hostname(payload: dict) -> list[str]: return ['hostname']
+def system_kernel(payload: dict) -> list[str]: return ['uname', '-r']
+def system_date(payload: dict) -> list[str]: return ['date', '--iso-8601=seconds']
+def system_load(payload: dict) -> list[str]: return ['uptime']
+def system_users(payload: dict) -> list[str]: return ['who']
+def system_last_boot(payload: dict) -> list[str]: return ['who', '-b']
+def system_reboot(payload: dict) -> list[str]: return ['systemctl', 'reboot']

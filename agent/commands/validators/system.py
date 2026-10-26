@@ -1,15 +1,29 @@
+from .common import validator_for
 
-def system_processes_validator(payload: dict) -> dict:
-    errors = {}
+system_processes_validator = validator_for("system_processes")
 
-    lines = payload.get("lines")
+_FORBIDDEN_NON_SERVICE_SUFFIXES = (
+    ".target",
+    ".socket",
+    ".slice",
+    ".timer",
+    ".mount",
+    ".path",
+    ".automount",
+)
 
-    if not lines:
-        errors["lines"] = "This field is required."
 
+def service_validator_for(command_id: str):
+    base = validator_for(command_id)
+
+    def validator(payload: dict) -> dict:
+        errors = base(payload)
+        if errors or not isinstance(payload, dict):
+            return errors
+        name = payload.get("service", "")
+        if name.endswith(_FORBIDDEN_NON_SERVICE_SUFFIXES):
+            errors["service"] = "Only service units may be managed."
         return errors
 
-    if not 0 < int(lines) < 100:
-        errors["lines"] = "This field must be in the range of 0 to 100."
-
-    return errors
+    validator.__name__ = f"validate_service_{command_id}"
+    return validator

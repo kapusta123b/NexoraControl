@@ -1,28 +1,51 @@
-def docker_logs_validator(payload: dict) -> dict:
-    errors = {}
+"""Docker-specific checks layered over the shared schema validator."""
 
-    container, lines = payload.get("container"), payload.get("lines")
+from .common import validator_for
 
-    if not container:
-        errors["container"] = "This field is required."
+_docker_ps_schema = validator_for("docker_ps")
+_docker_images_schema = validator_for("docker_images")
 
-    if not lines:
-        errors["lines"] = "This field is required."
+_CONTAINER_FILTERS = {
+    "id",
+    "name",
+    "label",
+    "exited",
+    "status",
+    "ancestor",
+    "before",
+    "since",
+    "volume",
+    "network",
+    "publish",
+    "expose",
+    "health",
+}
+_IMAGE_FILTERS = {"dangling", "label", "before", "since", "reference", "until"}
 
+
+def _filter_errors(payload: dict, schema_validator, keys: set[str]) -> dict:
+    errors = schema_validator(payload)
+
+    if errors or not isinstance(payload, dict):
         return errors
-    
-    if not 0 < int(lines) < 500:
-        errors["lines"] = "This field must be in the range of 0 to 500."
+
+    value = payload.get("--filter")
+
+    if value:
+        filter_key = value.partition("=")[0]
+        if filter_key not in keys:
+            errors["--filter"] = "Unsupported Docker filter key."
 
     return errors
 
 
-def docker_inspect_validator(payload: dict) -> dict:
-    errors = {}
+def docker_ps_validator(payload: dict) -> dict:
+    return _filter_errors(payload, _docker_ps_schema, _CONTAINER_FILTERS)
 
-    container = payload.get("container")
 
-    if not container:
-        errors["container"] = "This field is required."
+def docker_images_validator(payload: dict) -> dict:
+    return _filter_errors(payload, _docker_images_schema, _IMAGE_FILTERS)
 
-    return errors
+
+docker_logs_validator = validator_for("docker_logs")
+docker_inspect_validator = validator_for("docker_inspect")
