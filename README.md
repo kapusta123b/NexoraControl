@@ -23,6 +23,20 @@
 
 The full agent feature set currently targets **Linux**. Several inspection and control actions depend on `systemd`, `journalctl`, `iproute2`, or Docker being installed on the monitored host.
 
+## Demonstrations
+
+### Command Builder
+
+Demonstration of agent selection, dynamic command parameters, and command execution.
+
+![Command Builder Demo](./docs/assets/command-builder.gif)
+
+### Logs Inspector
+
+Demonstration of request history inspection, output and error viewing.
+
+![Logs Inspector Demo](./docs/assets/logs-inspector.gif)
+
 ## Features
 
 ### Monitoring and historical telemetry
