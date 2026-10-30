@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QProgressBar, QHeaderView
 
 from services.widgets.gauge import SimpleNetdataGauge
@@ -130,6 +132,19 @@ def setup_table(table: QTableWidget, table_data: dict | list, info_keys: tuple):
 
         for col, info_key in enumerate(info_keys):
             val = data.get(info_key, "")
+
+            if val:
+                try:
+                    dt = datetime.fromisoformat(str(val))
+
+                    if dt.tzinfo is None:
+                        dt = dt.replace(tzinfo=timezone.utc)
+
+                    local_dt = dt.astimezone()
+
+                    val = local_dt.strftime("%d %b %Y, %H:%M:%S")
+                except (ValueError, TypeError):
+                    pass
 
             update_or_create_row_item(table, row, col, str(val))
 

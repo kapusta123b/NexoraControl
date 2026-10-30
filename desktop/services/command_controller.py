@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (
     QLabel,
     QLineEdit,
     QPlainTextEdit,
+    QMessageBox,
     QSpinBox,
     QTabWidget,
     QTableWidget,
@@ -72,6 +73,12 @@ class CommandController(QObject):
         self.command_store = store
         self.command_poller = CommandPoller(self.client, self.command_store)
         self.command_builder = CommandFieldBuilder(self.widgets.layout)
+
+        self.widgets.payload_editor.textChanged.connect(
+            lambda: self.widgets.request_preview.setPlainText(
+                self.widgets.payload_editor.toPlainText()
+            )
+        )
 
     def _change_command_list_by_category(
         self, command_list_combo: QComboBox, category: str
@@ -187,10 +194,41 @@ class CommandController(QObject):
 
             return
 
-        current_command_type_json = COMMANDS_REGISTRY[self.current_command_category][
-            self.current_command_type
-        ]["json_title"]
+        if not self.agent:
+            MessageBox().show_message(
+                "warning",
+                "No chosen agent!",
+                "An agent must be selected before sending the request.",
+            )
 
+            return
+
+        command_definition = COMMANDS_REGISTRY[self.current_command_category][
+            self.current_command_type
+        ]
+        risk = str(command_definition.get("risk", "safe")).lower()
+
+        if risk == "dangerous" and getattr(
+            self.client, "confirm_dangerous_commands", True
+        ):
+            target_name = (
+                self.agent.get("name") or f"agent #{self.agent.get('id', '?')}"
+            )
+            answer = QMessageBox.question(
+                QApplication.activeWindow(),
+                "Confirm dangerous command",
+                (
+                    f"'{command_definition.get('title', self.current_command_type)}' "
+                    f"is marked as dangerous.\n\nTarget: {target_name}\n\n"
+                    "This operation may disrupt the target system. Continue?"
+                ),
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Cancel,
+                QMessageBox.StandardButton.Cancel,
+            )
+            if answer != QMessageBox.StandardButton.Yes:
+                return
+
+        current_command_type_json = command_definition["json_title"]
         self.command_poller._start_commands_worker(
             current_command_type_json, payload=self.payload_editor_data
         )
@@ -208,27 +246,23 @@ class CommandController(QObject):
             self.clear_command_output()
             return
 
-        output = command.get("output") or ""
+        output = command["output"]
 
-        self.widgets.output_view.setPlainText(str(output))
+        errors = command["errors"]
 
-        errors = command.get("errors") or {}
-
-        if isinstance(errors, (dict, list)):
-            errors_text = (
-                json.dumps(
-                    errors,
-                    indent=4,
-                    ensure_ascii=False,
-                )
-                if errors
-                else ""
+        errors_text = (
+            json.dumps(
+                errors,
+                indent=4,
+                ensure_ascii=False,
             )
-        else:
-            errors_text = str(errors)
+            if errors
+            else ""
+        )
 
         result_status.setText(f'STATUS / {command["status"]}')
 
+        self.widgets.output_view.setPlainText(output)
         self.widgets.stderr_view.setPlainText(errors_text)
 
     def _get_selected_command_id(self, table: QTableWidget):
@@ -263,6 +297,14 @@ class CommandController(QObject):
             QApplication.clipboard().setText(self.widgets.output_view.toPlainText())
         else:
             QApplication.clipboard().setText(self.widgets.stderr_view.toPlainText())
+
+    def activate_raw_mode_for_payload_editor(
+        self,
+        state: int,
+    ):
+        is_read_only = False if state else True
+
+        self.widgets.payload_editor.setReadOnly(is_read_only)
 
     def activate(self) -> None:
         if self.agent:

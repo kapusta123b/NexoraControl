@@ -26,10 +26,10 @@ class DetailHardwareController(QObject):
 
         self.agent = {}
 
-        self.setup_connections()
+        self._connect_signals()
         self._setup_style()
 
-    def setup_connections(self):
+    def _connect_signals(self):
         self.hardware_store.system_info_changed.connect(self.table_manager)
 
         self.ui.hardware_refresh_inventory_button.clicked.connect(

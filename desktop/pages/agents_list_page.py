@@ -24,9 +24,9 @@ class AgentsController:
 
         self.ui.search_input_line.textChanged.connect(self.filter_agents)
 
-        self.setup_connections()
+        self._connect_signals()
 
-    def setup_connections(self) -> None:
+    def _connect_signals(self) -> None:
         self.ui.refresh_agents_button.clicked.connect(self.poller.refresh)
         self.ui.agents_button.clicked.connect(
             lambda checked=False: self.ui.content_stack.setCurrentWidget(

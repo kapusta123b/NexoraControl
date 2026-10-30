@@ -6,161 +6,223 @@
 [![PySide6](https://img.shields.io/badge/Desktop-PySide6-41CD52?logo=qt&logoColor=white)](https://doc.qt.io/qtforpython-6/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18.4-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)
-[![License](https://img.shields.io/badge/License-MIT-64748B)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-64748B)](LICENSE)
 
-**NexoraControl** is a distributed infrastructure monitoring and remote-control system consisting of a Django REST API, a Python host agent, and a PySide6 desktop application. It is designed to collect host telemetry, retain historical measurements, and provide a central interface for inspecting and managing connected machines.
+**NexoraControl** is a distributed infrastructure monitoring and remote-management system for Linux hosts. It combines a Django REST API, lightweight Python agents, and a PySide6 desktop console to collect telemetry, inspect hardware, review historical measurements, and dispatch predefined administrative commands.
 
 > [!IMPORTANT]
-> **Development status: active development / experimental.** The repository contains working building blocks as well as incomplete integration paths. It is not currently suitable for an untrusted network or production infrastructure. The sections below distinguish implemented components from unfinished functionality.
+> **Status: experimental / under active development.** Core monitoring, hardware-inventory, and command-management flows are implemented in the source, but installation, authentication, failure recovery, and deployment still require hardening. **Do not expose this project to the public Internet or use it to administer production infrastructure in its current state.**
 
 ## Overview
 
-NexoraControl is organized into three independently running components:
-
-| Component | Responsibilities | Core technologies |
+| Component | Responsibility | Technologies |
 | --- | --- | --- |
-| **Backend** | Agent registry, REST endpoints, telemetry persistence, command-state models, metrics queries | Django, DRF, PostgreSQL, Channels |
-| **Agent** | Host registration workflow, periodic heartbeats, system telemetry, command polling and execution | Python, `asyncio`, HTTPX, psutil, systemd |
-| **Desktop** | Agent overview, resource history, hardware information, command activity, and plotting | PySide6, Qt workers/signals, pyqtgraph, HTTPX |
+| **Backend** | Agent registration, REST API, telemetry persistence, hardware inventory, command records and lifecycle | Django, Django REST Framework, PostgreSQL, Django Channels |
+| **Host agent** | Registration, hardware discovery, scheduled heartbeats, command polling, validation and execution | Python, `asyncio`, HTTPX, psutil, Linux utilities, Docker CLI |
+| **Desktop** | Agent overview, hardware and performance pages, Fleet/Detail command workflows, execution history | PySide6, Qt workers and signals, HTTPX, pyqtgraph |
 
-The application currently targets **Linux hosts** for full agent functionality. Several system-information and control commands rely on Linux utilities and systemd.
+The full agent feature set currently targets **Linux**. Several inspection and control actions depend on `systemd`, `journalctl`, `iproute2`, or Docker being installed on the monitored host.
 
 ## Features
 
-### Backend
+### Monitoring and historical telemetry
 
-- REST endpoints for agent registration, listing, details, and heartbeat ingestion.
-- Individual agent identifiers and UUID-based bearer tokens for authenticated heartbeats.
-- Historical CPU, memory, storage I/O, and thermal telemetry stored in PostgreSQL.
-- Time-window queries and optional filters for metrics history.
-- Command records with `PENDING`, `RUNNING`, `SUCCESS`, and `FAILED` states, output, errors, and timestamps.
-- A service/selector structure separating persistence and query logic from API views.
-- Django Channels consumer and event publication for live metric delivery **at the application-code level** (see [Current limitations](#current-limitations)).
+- Agent registration, online/offline state, last-seen timestamps, and host uptime.
+- Periodic CPU, memory, swap, storage, network, and thermal measurements (where the host exposes the relevant sensors).
+- Per-agent historical measurements retrieved using time-window and resource filters.
+- Dashboard, agent listing, detail pages, and time-series graphs in the desktop client.
+- Background HTTP operations using Qt workers, signals, pollers, and state stores to avoid blocking the interface.
 
-### Host agent
+### Hardware inventory
 
-- Interactive registration workflow and a Linux `systemd` installation script.
-- Configurable heartbeat and command-polling intervals (defaults: **5 seconds** and **2 seconds**).
-- CPU utilization, per-core utilization, load averages, RAM and swap usage.
-- Block-device statistics, filesystem capacity, and available thermal sensors.
-- Registry-driven command handlers with payload validation and execution timeouts.
-- Linux system-information commands and selected Docker inspection/control commands.
+- Host discovery of CPU specifications, GPUs, memory modules, motherboard/BIOS information, storage devices, and network interfaces.
+- Hardware data collection during agent registration, followed by submission to the API.
+- A dedicated backend `AgentSystemInfo` model with JSON fields for individual hardware categories.
+- A desktop hardware page with separate inventory tables and a refresh action.
 
-### Desktop application
+Hardware discovery is best-effort: fields depend on the operating system, installed utilities, permissions, and available devices.
 
-- Dashboard and agent overview screens.
-- Agent details, historical performance graphs, and hardware/thermal views.
-- Background HTTP requests implemented with Qt workers and signals.
-- Reusable metric graphs and custom UI widgets.
-- An experimental live-metrics WebSocket client.
+### Command execution and management
+
+- **81 predefined commands** described in a registry shared in structure between agent and desktop; **11 populated categories** plus an empty `Custom` category.
+- Docker inspection and control, Compose inspection, host information, processes, services, networking, storage, and diagnostics.
+- Schema-based payload validation, command-specific checks, per-command timeouts, and explicit confirmation values for selected disruptive operations.
+- Command lifecycle persisted as `PENDING → RUNNING → SUCCESS / FAILED`, including payloads, output, structured errors, and timestamps.
+- **Detail Commands:** configure and run commands for the currently selected agent, then inspect execution history and results.
+- **Fleet Commands:** browse the command catalog, filter by category, select a target agent, and inspect that agent's command history. **Fleet currently means central selection of individual agents, not broadcast execution.**
+- Shared `CommandController` logic and `CommandWidgets` bindings, with reusable field construction and specialized Detail/Fleet page controllers.
+- Dynamically generated text, numeric, boolean, and choice inputs, with a JSON payload preview.
+
+Commands are constructed as argument lists and executed using `subprocess` without `shell=True`. This reduces shell-parsing risks, but **does not** make the remote-execution feature safe without authorization, least-privilege execution, and operational limits.
+
+### Desktop interface
+
+- A custom dark Qt interface (Steel Console styling) with dashboard, agent, hardware, performance, and command views.
+- Common table helpers, reusable widgets, and dedicated API clients for agents, metrics, commands, and hardware data.
+- A navigation entry and UI scaffolding for Fleet Logs; **log browsing is not yet a completed feature**.
+- Experimental WebSocket client code for live metrics; deployment support remains incomplete (see [Limitations](#current-limitations)).
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    subgraph Hosts[Monitored Linux hosts]
-        A[Python Agent]
+    subgraph Hosts[Linux hosts]
+        Agent[Python agent]
+        CLI[Linux and Docker tools]
     end
 
     subgraph Server[Control server]
         API[Django REST API]
         DB[(PostgreSQL)]
-        CH[Django Channels\nASGI path - experimental]
+        Channels[Django Channels]
     end
 
-    subgraph Client[Operator workstation]
-        GUI[PySide6 Desktop]
+    subgraph Workstation[Operator workstation]
+        GUI[PySide6 desktop]
     end
 
-    A -->|Registration, heartbeat, command polling| API
-    API -->|Agent state, commands, metric history| DB
-    GUI -->|REST requests| API
-    API -.->|Metric events| CH
-    CH -.->|WebSocket - requires ASGI deployment| GUI
+    Agent -->|Registration, hardware, heartbeat, command polling/results| API
+    API <--> DB
+    Agent -->|Validated command arguments| CLI
+    GUI <-->|REST: agents, metrics, commands, inventory| API
+    API -.->|Metric events| Channels
+    Channels -.->|WebSocket: experimental| GUI
 ```
 
-### Data flow
+### Monitoring and hardware data flow
 
-1. An agent registers with the API and receives an agent ID and UUID token.
-2. The agent periodically collects telemetry and submits it to `POST /api/v1/agents/{id}/heartbeat/`.
-3. The backend normalizes the payload, stores a metric snapshot, and updates `last_seen` and agent status.
-4. The desktop queries registered agents and historical data through REST endpoints.
-5. The backend also publishes metric events to a Channels group; consuming those events over WebSocket requires an ASGI server and a compatible reverse-proxy configuration, which are **not yet provided by the current Docker Compose deployment**.
+1. The agent registers using the REST API and receives its ID and token.
+2. During setup, it collects available hardware metadata and sends it to the agent-specific `system-info` endpoint.
+3. Its heartbeat loop periodically sends measurements and uptime; the backend stores metric snapshots and updates agent state.
+4. The desktop reads agent metadata, hardware inventory, and historical measurements through API clients running in background workers.
+5. Django Channels publishes metric events at the application level. The current Compose stack does **not** provide the ASGI/WebSocket deployment path.
 
-A command lifecycle is modeled as `PENDING → RUNNING → SUCCESS / FAILED`. Agent polling, command handlers, and result-update code are present, but end-to-end command creation is still incomplete; see [Current limitations](#current-limitations).
+### Command lifecycle
 
-### Repository layout
+1. The desktop selects a command schema (`command_type`) and prepares a JSON `payload`.
+2. The API persists a new command record with `PENDING` status.
+3. The agent polls the pending-command endpoint; commands are marked `RUNNING` when retrieved.
+4. The agent resolves the command ID in its registry and validates the payload against its schema and any specialized validator.
+5. The handler constructs the executable and argument list. The executor runs the process with a timeout and captures the result.
+6. The agent reports status, output, errors, and timestamps to the backend. The desktop displays results from stored command history.
+
+> Validation happens **on the agent**, not only in the Qt form. Risk labels and explicit confirmation strings help prevent accidental operations, but they are **not authentication or authorization controls**.
+
+## Command catalog
+
+The current registry contains 81 commands grouped as follows:
+
+| Category | Commands | Examples |
+| --- | ---: | --- |
+| Docker | 18 | Container list, logs, stats, inspect, start/stop/restart |
+| Docker Images | 4 | List, inspect, history, pull |
+| Docker Networks | 2 | List, inspect |
+| Docker Volumes | 2 | List, inspect |
+| Docker Compose | 3 | List services, containers, logs |
+| System | 12 | Uptime, OS, CPU/RAM/disk information, kernel, reboot |
+| Processes | 4 | Process list, details, threads, tree |
+| Services | 9 | Service status, logs, failed units, start/stop/restart |
+| Network | 11 | Interfaces, links, routes, sockets, DNS, ping |
+| Storage | 7 | Filesystems, block devices, mounts, swap, disk usage |
+| Diagnostics | 9 | Journal errors, boot status, failed units, time synchronization |
+| Custom | 0 | Reserved for future extensions |
+| **Total** | **81** | **11 populated categories** |
+
+For example, a Docker logs command submitted to the command endpoint uses a machine-readable ID rather than the desktop display label:
+
+```json
+{
+  "command_type": "docker_logs",
+  "payload": {
+    "container": "nginx",
+    "lines": 100,
+    "timestamps": true
+  }
+}
+```
+
+The registry defines accepted field types (`string`, `integer`, `float`, `boolean`, and `choice`), required fields, ranges, defaults, patterns, risk metadata, and timeouts. Specialized validators further restrict some Docker filter expressions and `systemd` service targets.
+
+The command catalogs live in `agent/commands/catalog.py` and `desktop/services/commands_map.py`; changes to one should be reflected in the other. The agent's handler registries remain the source for **what the agent can actually execute**.
+
+## Repository structure
 
 ```text
 NexoraControl/
 ├── agent/
-│   ├── api/                 # Backend HTTP client
-│   ├── bootstrap/           # Interactive agent setup
-│   ├── commands/            # Registry, validators, executor, system/Docker handlers
-│   ├── config/              # Agent configuration
-│   ├── loops/               # Heartbeat and command polling
-│   ├── services/metrics/    # CPU, memory, storage and thermal collectors
-│   └── install.sh           # Linux/systemd installation
+│   ├── api/                      # Agent HTTP client
+│   ├── bootstrap/                # Interactive registration/setup
+│   ├── commands/
+│   │   ├── catalog.py            # Command schemas and metadata
+│   │   ├── docker/               # Container, image, network, volume, Compose handlers
+│   │   ├── system/               # System, process, service, network, storage, diagnostics
+│   │   ├── validators/           # Shared and specialized payload validation
+│   │   ├── parser.py             # Command dispatch and result reporting
+│   │   └── executor.py           # Process execution and output collection
+│   ├── config/                   # Agent configuration
+│   ├── loops/                    # Heartbeat and command polling
+│   ├── services/                 # Metrics and hardware collection
+│   └── install.sh                # Linux/systemd installer
 ├── backend/
 │   ├── apps/agents/
-│   │   ├── api/             # Authentication, serializers and views
-│   │   ├── models/          # Agent, command and metric models
-│   │   ├── selectors/       # Database query logic
-│   │   ├── services/        # Heartbeat and command operations
-│   │   ├── consumer.py      # Channels WebSocket consumer
-│   │   └── management/      # Monitoring/recovery experiments
-│   └── config/              # Django settings and ASGI/WSGI entry points
+│   │   ├── api/                  # Serializers, views, authentication, pagination
+│   │   ├── models/               # Agents, hardware inventory, metrics, commands
+│   │   ├── selectors/            # Database query operations
+│   │   ├── services/             # Heartbeat and command state updates
+│   │   └── consumer.py           # Experimental Channels consumer
+│   └── config/                   # Django settings and ASGI/WSGI
 ├── desktop/
-│   ├── api/                 # REST client
-│   ├── pages/               # Page controllers
-│   ├── services/            # Stores, workers, pollers, graphs and widgets
-│   └── ui/                  # Generated Qt UI code
+│   ├── api/client.py             # Agent/command/metric/hardware API clients
+│   ├── pages/                   # Dashboard, Detail, Fleet and hardware controllers
+│   ├── services/                # Field builder, shared controller, stores, workers
+│   ├── styles/theme.qss          # Desktop stylesheet
+│   └── ui/                      # Generated Qt UI code
 ├── conf.d/nginx.conf
 ├── docker-compose.yml
-└── requirements.txt        # Backend dependencies
+└── requirements.txt             # Backend dependencies
 ```
 
 ## Technology stack
 
-| Layer | Technology in the inspected source |
+| Layer | Technologies in the inspected project snapshot |
 | --- | --- |
-| Backend | Python 3.12+, Django 6.0.7, Django REST Framework 3.18.0 |
-| Database | PostgreSQL 18.4 in Docker Compose; Psycopg 3 |
-| Real-time foundation | Django Channels; in-memory channel layer in current settings |
-| Agent | Python, HTTPX, psutil, `asyncio`, Rich |
-| Desktop | PySide6, Qt WebSockets, HTTPX, pyqtgraph, NumPy |
-| Deployment | Docker Compose, Gunicorn (WSGI), Nginx, Linux systemd for the agent |
+| Backend | Python 3.12+, Django 6.0.7, Django REST Framework 3.18.0, Psycopg 3 |
+| Persistence | PostgreSQL 18.4 (Compose image) |
+| Live event foundation | Django Channels, currently configured with an in-memory channel layer |
+| Host agent | Python, `asyncio`, HTTPX, psutil, Rich, Linux/Docker CLIs |
+| Desktop | PySide6, HTTPX, pyqtgraph, NumPy, Qt signals and workers |
+| Deployment | Docker Compose, Gunicorn (WSGI), Nginx, `systemd` for agents |
 
-**Version note:** these values describe the inspected repository snapshot, not a continuously updated list of upstream releases. Django 6.0 requires Python 3.12 or newer; the old Python 3.10+ badge was incorrect for the pinned Django version.
+Version badges describe the dependency versions found in the available project snapshot; they are not automatically updated when dependencies change.
 
-## Installation and development
+## Installation and local development
 
-The following instructions describe the current repository layout. **The setup has not been verified as a clean, end-to-end installation**; review the limitations before deploying or executing remote commands.
+> **Installation is not yet verified from a clean checkout.** The notes below describe the source's intended setup; see [Current limitations](#current-limitations) before relying on it. Use an isolated development environment.
 
-### 1. Backend with Docker Compose
+### 1. Backend
 
-Prerequisites: Docker Engine with the Compose plugin, and a host capable of running the provided images.
+**Prerequisites:** Docker Engine and the Docker Compose plugin.
 
 ```bash
 git clone https://github.com/kapusta123b/NexoraControl.git
 cd NexoraControl
 ```
 
-Edit the root `.env` file before starting services. Configure at least:
+Configure the root `.env` for your local deployment (use non-production values only for local testing):
 
 ```dotenv
-SECRET_KEY=replace-with-a-new-long-random-secret
+SECRET_KEY=replace-with-a-long-random-secret
 DEBUG=False
 ALLOWED_HOSTS=localhost,127.0.0.1
 CSRF_TRUSTED_ORIGINS=http://localhost
 DB_NAME=nexora_control
 DB_USER=nexora_control_user
-DB_PASS=replace-with-a-strong-database-password
+DB_PASS=replace-with-a-strong-password
 DB_HOST=db
 DB_PORT=5432
 ```
 
-Generate a random secret, for example with `openssl rand -hex 32`. Do not reuse example secrets or passwords. Set `ALLOWED_HOSTS`, trusted origins and Nginx `server_name` to match your environment. **The provided reverse proxy listens on HTTP port 80; configure HTTPS before any non-local deployment.**
+Check the container configuration and, once dependencies are complete, build the services:
 
 ```bash
 docker compose config
@@ -169,21 +231,21 @@ docker compose ps
 docker compose logs -f api
 ```
 
-To apply migrations manually, if required:
+Run migrations, if necessary:
 
 ```bash
 docker compose exec api python manage.py migrate
 ```
 
-The backend entrypoint also contains migration and static-file collection steps; whether these execute automatically depends on the image entrypoint configuration. The API is mounted under `/api/v1/`, with Django admin under `/admin/`.
+The REST API is mounted at `/api/v1/`; Django admin uses `/admin/`. Nginx currently listens on HTTP port 80.
 
-> **Deployment caveat:** Compose currently starts `gunicorn config.wsgi:application`, and Nginx does not expose `/ws/`. Consequently, the present container configuration serves HTTP but **does not provide the documented Channels WebSocket route**. For WebSocket deployment, an ASGI server, `/ws/` proxying, and appropriate channel-layer configuration are required. The Django settings also reference `daphne`, which must be installed as a backend dependency when running ASGI development tooling.
+**Known dependency issue:** `backend/config/settings.py` and the API views import `daphne` and `django_filters`, but the provided root `requirements.txt` does not declare `daphne` or `django-filter`. Fix the dependency list before expecting a clean backend startup. The project also contains a rewritten Django migration history in the reviewed changes; **do not apply squashed/replaced initial migrations to an existing database without a migration plan and backup**.
 
-### 2. Agent on a Linux host
+### 2. Linux agent
 
-The repository includes an installer that copies the `agent/` directory to `/opt/nexora-agent`, creates a dedicated service account and Python virtual environment, and configures `nexora-agent.service`.
+The repository includes an installation script that installs agent files under `/opt/nexora-agent`, creates a Python virtual environment, and configures the `nexora-agent` service under a dedicated system account.
 
-Inspect the script before running it with elevated privileges:
+**Review the script before using sudo:**
 
 ```bash
 curl -fsSL \
@@ -193,11 +255,9 @@ less nexora-agent-install.sh
 sudo bash nexora-agent-install.sh
 ```
 
-The installer expects `git`, `python3`, Python `venv`, and administrative privileges. It asks for an API URL ending in `/api/v1/` and a machine name. The agent must be able to reach that URL from the monitored host.
+The installer requires `git`, `python3`, Python `venv`, `systemd`, and administrative access. During setup, specify the backend API URL ending in `/api/v1/` and a machine name. The agent's default intervals are **5 seconds** for heartbeat submission and **2 seconds** for command polling.
 
-**Known setup issue:** the initial agent configuration contains an empty token, while `load_settings()` currently rejects empty tokens before registration begins. First-time interactive setup therefore needs a code correction before this installer can be considered reliable.
-
-Once configured, useful service commands are:
+Useful commands after installation:
 
 ```bash
 sudo systemctl status nexora-agent
@@ -205,11 +265,11 @@ sudo journalctl -u nexora-agent -f
 sudo systemctl restart nexora-agent
 ```
 
-For local development, agent dependencies are listed in `agent/requirements.txt`. The agent entry point is `agent/main.py` (`setup` for registration and `run` by default). Docker-related commands additionally require the Docker CLI and appropriate Docker daemon permissions on the monitored host.
+The agent dependencies are listed in `agent/requirements.txt`; the entry point is `agent/main.py`. Docker operations additionally require Docker to be installed and the agent process to have appropriate access to the Docker daemon. Registration and service installation have not been independently verified end to end.
 
-### 3. Desktop client
+### 3. Desktop application
 
-The inspected snapshot does not contain a separate `desktop/requirements.txt`. Install the packages imported by the current desktop source into a virtual environment:
+The snapshot does not include a dedicated `desktop/requirements.txt`. To try the desktop locally, install the libraries imported by its current source:
 
 ```bash
 cd desktop
@@ -219,66 +279,35 @@ python -m pip install PySide6 httpx pyqtgraph numpy
 python main.py
 ```
 
-The desktop client currently contains a **development-only API URL and placeholder token** in `desktop/main.py`. Configure these for your local environment before testing. User sign-in and general desktop credential management are not yet implemented.
+The desktop currently uses a **development-time API URL and placeholder token in `desktop/main.py`**. Update the connection details for your own local environment before testing; user login and credential management are not implemented.
 
-## REST API reference
+## REST API overview
 
-All paths below are relative to `/api/v1/`. They reflect the Django URL configuration and should not be interpreted as a fully validated, publicly secured API contract.
+Paths below are relative to `/api/v1/` and reflect the current Django URL definitions. They should not be treated as a stable or fully secured public API.
 
 | Method | Endpoint | Purpose |
 | --- | --- | --- |
-| `GET`, `POST` | `/agents/` | List or register agents |
-| `GET`, `PUT`, `PATCH`, `DELETE` | `/agents/{id}/` | Read or modify an agent |
-| `POST` | `/agents/{id}/heartbeat/` | Receive and store an authenticated heartbeat |
-| `GET`, `POST` | `/agents/{id}/commands/` | List commands; creation endpoint is incomplete |
-| `GET` | `/agents/{id}/commands/pending/` | Retrieve pending commands; marks returned commands as running |
-| `PATCH` | `/agents/{id}/commands/results/` | Submit command results as a JSON array |
-| `GET` | `/agents/{id}/metrics/resource/` | Historical CPU and memory measurements |
-| `GET` | `/agents/{id}/metrics/storage/` | Historical storage measurements |
-| `GET` | `/agents/{id}/metrics/thermal/` | Historical thermal measurements |
+| `GET`, `POST` | `/agents/` | List/register agents; listing supports pagination and query filters |
+| `GET`, `PUT`, `PATCH`, `DELETE` | `/agents/{id}/` | Read or modify agent details |
+| `POST` | `/agents/{id}/heartbeat/` | Receive authenticated telemetry and uptime |
+| `GET`, `POST` | `/agents/{id}/system-info/` | Read or submit structured hardware inventory |
+| `PUT`, `PATCH`, `DELETE` | `/agents/{id}/system-info/` | Update or remove the inventory record |
+| `GET`, `POST` | `/agents/{id}/commands/` | List and create command records |
+| `GET` | `/agents/{id}/commands/pending/` | Retrieve pending commands and mark them running |
+| `PATCH` | `/agents/{id}/commands/results/` | Submit an array of command results |
+| `GET` | `/agents/{id}/metrics/resource/` | CPU and memory history |
+| `GET` | `/agents/{id}/metrics/storage/` | Storage history |
+| `GET` | `/agents/{id}/metrics/network/` | Network history |
+| `GET` | `/agents/{id}/metrics/thermal/` | Thermal history |
 
-**Supported query parameters in the inspected selectors:**
+Selected query parameters:
 
-- `hours`: positive integer time window for historical metrics (default `1`).
-- `status`, `count`: filter and limit command listings.
-- `disk`, `disks_names`: storage-metric filtering or device-name discovery.
-- `hardware`, `hardware_names`, `sensors`: thermal-metric filtering or sensor discovery.
+- Agent listing: `status`, `hostname`, `search`, `ordering`, `page`, `page_size` (page size defaults to 10, maximum 100).
+- Command listing: `status`, `count`, `search`, `ordering` (with pagination configured).
+- Metric history: `hours` and type-specific selectors such as `disk`, `disks_names`, `hardware`, `hardware_names`, and `sensors`.
+- Hardware inventory: `target_info` can select a hardware category in the serializer's GET response.
 
-The experimental ASGI route is `ws/monitor/{agent_id}/` (relative to the server root, not `/api/v1/`). It is not available through the current WSGI-only Compose stack.
-
-### Supported agent command types
-
-System commands:
-
-`system_uptime`, `system_os_info`, `system_cpu_info`, `system_ram_info`, `system_disk_info`, `system_processes`, `system_reboot`
-
-Docker commands:
-
-`docker_ps`, `docker_ps_all`, `docker_logs`, `docker_images`, `docker_stats`, `docker_inspect`, `docker_stop_all_containers`, `docker_restart_all_containers`
-
-Commands are dispatched from a registry and passed to `subprocess` as argument lists. Command payloads and results are represented as JSON. Some commands are disruptive; do **not** expose command endpoints on public networks until authorization and execution safeguards are complete.
-
-## Planned development
-
-The following are **planned improvements**, not currently delivered features:
-
-- Role-aware user authentication and permissions (including JWT-based user sessions).
-- Agent identity checks and secure enrollment/token management.
-- Reliable command dispatch, retries, acknowledgments, and recovery after disconnects.
-- An ASGI-based deployment with authenticated live telemetry over WebSockets.
-- Redis-backed infrastructure where it provides a measurable benefit; Celery for background jobs.
-- Automated tests for API permissions, command transitions, telemetry ingestion, and failure handling.
-- Configuration cleanup, reproducible dependency installation, observability, and deployment hardening.
-
-## Security considerations
-
-NexoraControl includes remote administration capabilities. Treat its server and agents as privileged infrastructure components.
-
-- Run only in isolated development or trusted environments until authentication and authorization are complete.
-- Never commit real `.env` files, agent tokens, database passwords, or production secrets. Rotate any credentials accidentally committed to version control.
-- Prefer TLS for server-to-agent and desktop-to-server communication.
-- Restrict agent operating-system permissions and Docker access; Docker daemon access can be highly privileged.
-- Avoid exposing the Django admin, agent registration, command endpoints, or unauthenticated WebSockets to the public Internet.
+The experimental WebSocket route is `ws/monitor/{agent_id}/` relative to the server root, **not** `/api/v1/`. It requires a separately configured ASGI deployment.
 
 ## License
 

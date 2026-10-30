@@ -38,7 +38,11 @@ class CommandListView(ListCreateAPIView):
         OrderingFilter,
     ]
 
-    filterset_fields = ["status"]
+    filterset_fields = {
+        "status": ["exact"],
+        "command_type": ["exact", "in"],
+    }
+
     search_fields = ["command_type", "status"]
     ordering_fields = ["status", "created_at", "started_at", "finished_at"]
 

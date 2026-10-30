@@ -31,7 +31,7 @@ class DetailOverviewController(QObject):
             client, self.detail_agent_store, self.commands_store
         )
 
-        self.setup_connections()
+        self._connect_signals()
 
         self.detail_agent_store.agent_changed.connect(self.set_overview_information)
         self.commands_store.commands_changed.connect(self.populate_recent_commands)
@@ -64,7 +64,7 @@ class DetailOverviewController(QObject):
 
         layout.addStretch(1)
 
-    def setup_connections(self) -> None:
+    def _connect_signals(self) -> None:
         self.quick_commands_nav_group = QButtonGroup(self)
         self.quick_commands_nav_group.setExclusive(True)
 

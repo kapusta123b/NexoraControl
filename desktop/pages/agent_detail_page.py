@@ -37,9 +37,9 @@ class AgentDetailController(QObject):
             ui=self.ui, client=self.client, store=self.commands_store
         )
 
-        self.setup_connections()
+        self._connect_signals()
 
-    def setup_connections(self) -> None:
+    def _connect_signals(self) -> None:
         self.ui.back_to_agents_button.clicked.connect(self.on_back_to_agents)
 
         self.ui.overview_nav_button.setChecked(True)

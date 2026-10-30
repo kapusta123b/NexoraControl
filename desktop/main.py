@@ -1,9 +1,15 @@
 import sys
 
+import PySide6.QtOpenGL
+
 from PySide6.QtWidgets import QApplication, QButtonGroup, QMainWindow
 
 from api.client import NexoraClient
 
+from pages.settings_page import SettingsController
+from pages.logs_page import LogsController
+
+from services.stores.settings_store import DesktopSettingsStore
 from services.stores.agent_store import AgentsListStore
 
 from services.pollers.agents_list_poller import AgentsListPoller
@@ -20,10 +26,19 @@ class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
 
+        self.settings_store = DesktopSettingsStore()
+        self.startup_preferences = self.settings_store.load()
+        startup_preferences = self.startup_preferences
+
         self.client = NexoraClient(
-            "http://127.0.0.1:8000/api/v1/",
+            startup_preferences.api_base_url,
             "TOKEN",
+            timeout_seconds=startup_preferences.request_timeout_seconds,
         )
+        self.client.confirm_dangerous_commands = (
+            startup_preferences.confirm_dangerous_commands
+        )
+        self.client.notify_failures = startup_preferences.notify_failures
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -59,6 +74,14 @@ class MainWindow(QMainWindow):
         self.agent_store = AgentsListStore()
         self.agent_poller = AgentsListPoller(client=self.client, store=self.agent_store)
 
+        timer = getattr(self.agent_poller, "timer", None)
+        if timer is not None:
+            timer.setInterval(self.startup_preferences.refresh_interval_seconds * 1000)
+            if self.startup_preferences.auto_refresh_enabled:
+                timer.start()
+            else:
+                timer.stop()
+
         self.dashboard_controller = DashboardController(
             ui=self.ui, dashboard_store=self.agent_store, poller=self.agent_poller
         )
@@ -78,6 +101,17 @@ class MainWindow(QMainWindow):
             ui=self.ui,
             client=self.client,
             agent_store=self.agent_store,
+        )
+
+        self.logs_controller = LogsController(
+            ui=self.ui, client=self.client, agent_store=self.agent_store
+        )
+
+        self.settings_controller = SettingsController(
+            ui=self.ui,
+            client=self.client,
+            agents_poller=self.agent_poller,
+            settings_store=self.settings_store,
         )
 
 

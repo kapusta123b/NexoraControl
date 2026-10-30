@@ -97,13 +97,13 @@ class PerformanceNetworkPage(QObject):
 
         self._setup_style()
         self._setup_static_series()
-        self.setup_connections()
+        self._connect_signals()
         self._init_data_unit_selector()
 
         self.performance_store.metrics_loaded.connect(self.on_history_received)
         self.performance_store.metrics_appended.connect(self.on_latest_received)
 
-    def setup_connections(self):
+    def _connect_signals(self):
         self.network_graph_nav_group = QButtonGroup(self)
         self.network_graph_nav_group.setExclusive(True)
 

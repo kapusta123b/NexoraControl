@@ -40,7 +40,7 @@ class CommandPoller(BasePoller):
         self._start_commands_worker()
 
     def _start_commands_worker(
-        self, command_type: str | None = None, payload: dict = {}
+        self, command_type: str | None = None, payload: dict = {}, params: dict = {}
     ) -> None:
         worker = CommandsWorker(self.client, self.agent_id)
 
@@ -53,7 +53,7 @@ class CommandPoller(BasePoller):
         else:
             self._start_worker(
                 worker=worker,
-                worker_slot=lambda: worker.get_agent_commands(count=10),
+                worker_slot=lambda: worker.get_agent_commands(params),
                 success_callback=self.commands_store.set_commands,
             )
 

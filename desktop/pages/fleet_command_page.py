@@ -38,10 +38,10 @@ class FleetCommandController(CommandController):
 
         self.commands_catalog = []
 
-        self.setup_connections()
+        self._connect_signals()
         self.setup_style()
 
-    def setup_connections(self) -> None:
+    def _connect_signals(self) -> None:
         self.command_store.commands_changed.connect(self.setup_command_history_table)
 
         self.agent_store.agents_changed.connect(self.on_agents_changed)
@@ -61,15 +61,7 @@ class FleetCommandController(CommandController):
         )
 
         self.ui.fleet_command_raw_mode_checkbox.stateChanged.connect(
-            lambda value: self.ui.fleet_command_payload_editor.setReadOnly(
-                (False if value else True)
-            )
-        )
-
-        self.ui.fleet_command_payload_editor.textChanged.connect(
-            lambda: self.ui.fleet_command_request_preview.setPlainText(
-                self.ui.fleet_command_payload_editor.toPlainText()
-            )
+            self.activate_raw_mode_for_payload_editor
         )
 
         self.ui.fleet_command_history_table.itemSelectionChanged.connect(

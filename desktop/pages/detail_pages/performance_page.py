@@ -33,7 +33,7 @@ class DetailPerformanceController(QObject):
         self.performance_store = MetricStore()
         self.performance_poller = AgentMetricPoller(self.client, self.performance_store)
 
-        self.setup_connections()
+        self._connect_signals()
         self.setup_pages()
 
     def setup_pages(self):
@@ -53,7 +53,7 @@ class DetailPerformanceController(QObject):
             self.ui, self.performance_store, self.performance_poller
         )
 
-    def setup_connections(self) -> None:
+    def _connect_signals(self) -> None:
         self.performance_nav_group = QButtonGroup(self)
         self.performance_nav_group.setExclusive(True)
 

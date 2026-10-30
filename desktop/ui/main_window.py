@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'NexoraControl.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.11.2
+## Created by: Qt User Interface Compiler version 6.12.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -19,17 +19,17 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComb
     QFrame, QGridLayout, QHBoxLayout, QHeaderView,
     QLabel, QLayout, QLineEdit, QMainWindow,
     QPlainTextEdit, QProgressBar, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QStackedWidget, QTabWidget,
-    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
+    QSizePolicy, QSpacerItem, QSpinBox, QStackedWidget,
+    QTabWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
+    QWidget)
 
 from pyqtgraph import PlotWidget
-from qfluentwidgets import (Pivot, SegmentedWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1267, 940)
+        MainWindow.resize(1266, 940)
         self.central_content = QWidget(MainWindow)
         self.central_content.setObjectName(u"central_content")
         self.central_content.setMinimumSize(QSize(1140, 680))
@@ -403,7 +403,7 @@ class Ui_MainWindow(object):
         self.agent_list.setWidgetResizable(True)
         self.agent_scroll = QWidget()
         self.agent_scroll.setObjectName(u"agent_scroll")
-        self.agent_scroll.setGeometry(QRect(0, 0, 100, 600))
+        self.agent_scroll.setGeometry(QRect(0, 0, 1109, 731))
         self.agent_scroll.setMaximumSize(QSize(16777215, 1000000))
         self.agent_scroll_layout = QVBoxLayout(self.agent_scroll)
         self.agent_scroll_layout.setSpacing(12)
@@ -1429,13 +1429,6 @@ class Ui_MainWindow(object):
 
         self.thermals_page_layout.addWidget(self.current_thermals_line)
 
-        self.SegmentedWidget = SegmentedWidget(self.performance_thermal_page)
-        self.SegmentedWidget.setObjectName(u"SegmentedWidget")
-        self.SegmentedWidget.setStyleSheet(u"SegmentedWidget { background: #111B25; border: 1px solid #304452; border-radius: 2px; }\n"
-"SegmentedWidget QPushButton { color: #BCD0DD; background: transparent; border: 0; }")
-
-        self.thermals_page_layout.addWidget(self.SegmentedWidget)
-
         self.thermals_combo_box_layout = QHBoxLayout()
         self.thermals_combo_box_layout.setObjectName(u"thermals_combo_box_layout")
         self.thermals_combo_box_layout.setContentsMargins(0, 0, -1, -1)
@@ -2252,7 +2245,7 @@ class Ui_MainWindow(object):
         self.agent_commands_page_scroll.setWidgetResizable(True)
         self.agent_commands_page_scroll_content = QWidget()
         self.agent_commands_page_scroll_content.setObjectName(u"agent_commands_page_scroll_content")
-        self.agent_commands_page_scroll_content.setGeometry(QRect(0, 0, 1091, 1393))
+        self.agent_commands_page_scroll_content.setGeometry(QRect(0, 0, 734, 1438))
         self.agent_commands_page_layout = QVBoxLayout(self.agent_commands_page_scroll_content)
         self.agent_commands_page_layout.setSpacing(16)
         self.agent_commands_page_layout.setObjectName(u"agent_commands_page_layout")
@@ -2775,7 +2768,11 @@ class Ui_MainWindow(object):
         self.fleet_commands_page_scroll.setWidgetResizable(True)
         self.fleet_commands_page_scroll_content = QWidget()
         self.fleet_commands_page_scroll_content.setObjectName(u"fleet_commands_page_scroll_content")
-        self.fleet_commands_page_scroll_content.setGeometry(QRect(0, -434, 1103, 1374))
+<<<<<<< HEAD
+        self.fleet_commands_page_scroll_content.setGeometry(QRect(0, -75, 1102, 1373))
+=======
+        self.fleet_commands_page_scroll_content.setGeometry(QRect(0, -101, 1103, 1373))
+>>>>>>> refs/remotes/origin/main
         self.fleet_commands_page_layout = QVBoxLayout(self.fleet_commands_page_scroll_content)
         self.fleet_commands_page_layout.setSpacing(16)
         self.fleet_commands_page_layout.setObjectName(u"fleet_commands_page_layout")
@@ -3359,6 +3356,99 @@ class Ui_MainWindow(object):
         self.content_stack.addWidget(self.fleet_commands_page)
         self.fleet_logs_page = QWidget()
         self.fleet_logs_page.setObjectName(u"fleet_logs_page")
+        self.fleet_logs_legacy_controls = QWidget(self.fleet_logs_page)
+        self.fleet_logs_legacy_controls.setObjectName(u"fleet_logs_legacy_controls")
+        self.fleet_logs_legacy_controls.setGeometry(QRect(0, 0, 0, 0))
+        self.fleet_logs_legacy_controls.setVisible(False)
+        self.fleet_logs_legacy_controls_layout = QVBoxLayout(self.fleet_logs_legacy_controls)
+        self.fleet_logs_legacy_controls_layout.setObjectName(u"fleet_logs_legacy_controls_layout")
+        self.fleet_logs_legacy_controls_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_details_panel = QFrame(self.fleet_logs_legacy_controls)
+        self.fleet_logs_details_panel.setObjectName(u"fleet_logs_details_panel")
+        self.fleet_logs_details_panel.setMinimumSize(QSize(0, 175))
+        self.fleet_logs_details_panel.setMaximumSize(QSize(16777215, 270))
+        self.fleet_logs_details_panel_host_layout = QVBoxLayout(self.fleet_logs_details_panel)
+        self.fleet_logs_details_panel_host_layout.setObjectName(u"fleet_logs_details_panel_host_layout")
+        self.fleet_logs_details_panel_host_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_details_panel_layout = QVBoxLayout()
+        self.fleet_logs_details_panel_layout.setSpacing(10)
+        self.fleet_logs_details_panel_layout.setObjectName(u"fleet_logs_details_panel_layout")
+        self.fleet_logs_details_panel_layout.setContentsMargins(16, 13, 16, 14)
+        self.fleet_logs_details_heading_row = QHBoxLayout()
+        self.fleet_logs_details_heading_row.setSpacing(10)
+        self.fleet_logs_details_heading_row.setObjectName(u"fleet_logs_details_heading_row")
+        self.fleet_logs_details_heading_row.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_details_panel_header = QLabel(self.fleet_logs_details_panel)
+        self.fleet_logs_details_panel_header.setObjectName(u"fleet_logs_details_panel_header")
+
+        self.fleet_logs_details_heading_row.addWidget(self.fleet_logs_details_panel_header)
+
+        self.fleet_logs_details_heading_spacer = QSpacerItem(20, 12, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.fleet_logs_details_heading_row.addItem(self.fleet_logs_details_heading_spacer)
+
+        self.fleet_logs_copy_button = QPushButton(self.fleet_logs_details_panel)
+        self.fleet_logs_copy_button.setObjectName(u"fleet_logs_copy_button")
+
+        self.fleet_logs_details_heading_row.addWidget(self.fleet_logs_copy_button)
+
+
+        self.fleet_logs_details_panel_layout.addLayout(self.fleet_logs_details_heading_row)
+
+        self.fleet_logs_event_metadata = QLabel(self.fleet_logs_details_panel)
+        self.fleet_logs_event_metadata.setObjectName(u"fleet_logs_event_metadata")
+        self.fleet_logs_event_metadata.setWordWrap(True)
+
+        self.fleet_logs_details_panel_layout.addWidget(self.fleet_logs_event_metadata)
+
+        self.fleet_logs_details_view = QPlainTextEdit(self.fleet_logs_details_panel)
+        self.fleet_logs_details_view.setObjectName(u"fleet_logs_details_view")
+        self.fleet_logs_details_view.setMinimumSize(QSize(0, 100))
+        self.fleet_logs_details_view.setLineWrapMode(QPlainTextEdit.NoWrap)
+        self.fleet_logs_details_view.setReadOnly(True)
+
+        self.fleet_logs_details_panel_layout.addWidget(self.fleet_logs_details_view)
+
+
+        self.fleet_logs_details_panel_host_layout.addLayout(self.fleet_logs_details_panel_layout)
+
+
+        self.fleet_logs_legacy_controls_layout.addWidget(self.fleet_logs_details_panel)
+
+        self.fleet_logs_entries_layout = QVBoxLayout()
+        self.fleet_logs_entries_layout.setSpacing(0)
+        self.fleet_logs_entries_layout.setObjectName(u"fleet_logs_entries_layout")
+        self.fleet_logs_entries_layout.setContentsMargins(0, 9, 0, 0)
+        self.fleet_logs_table = QTableWidget(self.fleet_logs_legacy_controls)
+        if (self.fleet_logs_table.columnCount() < 5):
+            self.fleet_logs_table.setColumnCount(5)
+        __qtablewidgetitem73 = QTableWidgetItem()
+        self.fleet_logs_table.setHorizontalHeaderItem(0, __qtablewidgetitem73)
+        __qtablewidgetitem74 = QTableWidgetItem()
+        self.fleet_logs_table.setHorizontalHeaderItem(1, __qtablewidgetitem74)
+        __qtablewidgetitem75 = QTableWidgetItem()
+        self.fleet_logs_table.setHorizontalHeaderItem(2, __qtablewidgetitem75)
+        __qtablewidgetitem76 = QTableWidgetItem()
+        self.fleet_logs_table.setHorizontalHeaderItem(3, __qtablewidgetitem76)
+        __qtablewidgetitem77 = QTableWidgetItem()
+        self.fleet_logs_table.setHorizontalHeaderItem(4, __qtablewidgetitem77)
+        self.fleet_logs_table.setObjectName(u"fleet_logs_table")
+        self.fleet_logs_table.setMinimumSize(QSize(0, 250))
+        self.fleet_logs_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.fleet_logs_table.setAlternatingRowColors(True)
+        self.fleet_logs_table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.fleet_logs_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.fleet_logs_table.setShowGrid(False)
+        self.fleet_logs_table.setSortingEnabled(False)
+        self.fleet_logs_table.setWordWrap(False)
+        self.fleet_logs_table.setRowCount(0)
+        self.fleet_logs_table.setColumnCount(5)
+
+        self.fleet_logs_entries_layout.addWidget(self.fleet_logs_table)
+
+
+        self.fleet_logs_legacy_controls_layout.addLayout(self.fleet_logs_entries_layout)
+
         self.fleet_logs_page_host_layout = QVBoxLayout(self.fleet_logs_page)
         self.fleet_logs_page_host_layout.setSpacing(0)
         self.fleet_logs_page_host_layout.setObjectName(u"fleet_logs_page_host_layout")
@@ -3369,11 +3459,16 @@ class Ui_MainWindow(object):
         self.fleet_logs_page_scroll.setWidgetResizable(True)
         self.fleet_logs_page_scroll_content = QWidget()
         self.fleet_logs_page_scroll_content.setObjectName(u"fleet_logs_page_scroll_content")
-        self.fleet_logs_page_scroll_content.setGeometry(QRect(0, 0, 387, 828))
+<<<<<<< HEAD
+        self.fleet_logs_page_scroll_content.setGeometry(QRect(0, 0, 1102, 958))
+=======
+        self.fleet_logs_page_scroll_content.setGeometry(QRect(0, 0, 1117, 940))
+>>>>>>> refs/remotes/origin/main
+        self.fleet_logs_page_scroll_content.setMinimumSize(QSize(0, 0))
         self.fleet_logs_page_layout = QVBoxLayout(self.fleet_logs_page_scroll_content)
-        self.fleet_logs_page_layout.setSpacing(10)
+        self.fleet_logs_page_layout.setSpacing(12)
         self.fleet_logs_page_layout.setObjectName(u"fleet_logs_page_layout")
-        self.fleet_logs_page_layout.setContentsMargins(6, 6, 6, 0)
+        self.fleet_logs_page_layout.setContentsMargins(12, 10, 12, 12)
         self.fleet_logs_heading_row = QHBoxLayout()
         self.fleet_logs_heading_row.setSpacing(12)
         self.fleet_logs_heading_row.setObjectName(u"fleet_logs_heading_row")
@@ -3417,101 +3512,488 @@ class Ui_MainWindow(object):
 
         self.fleet_logs_page_layout.addLayout(self.fleet_logs_heading_row)
 
-        self.line_11 = QFrame(self.fleet_logs_page_scroll_content)
-        self.line_11.setObjectName(u"line_11")
-        self.line_11.setFrameShape(QFrame.Shape.HLine)
-        self.line_11.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.fleet_logs_page_layout.addWidget(self.line_11)
-
+        self.fleet_logs_workspace_row = QHBoxLayout()
+        self.fleet_logs_workspace_row.setSpacing(14)
+        self.fleet_logs_workspace_row.setObjectName(u"fleet_logs_workspace_row")
+        self.fleet_logs_workspace_row.setContentsMargins(0, 0, 0, 0)
         self.fleet_logs_filters_panel = QFrame(self.fleet_logs_page_scroll_content)
         self.fleet_logs_filters_panel.setObjectName(u"fleet_logs_filters_panel")
+        self.fleet_logs_filters_panel.setMinimumSize(QSize(300, 0))
+        self.fleet_logs_filters_panel.setMaximumSize(QSize(405, 16777215))
         self.fleet_logs_filters_panel_host_layout = QVBoxLayout(self.fleet_logs_filters_panel)
         self.fleet_logs_filters_panel_host_layout.setObjectName(u"fleet_logs_filters_panel_host_layout")
         self.fleet_logs_filters_panel_host_layout.setContentsMargins(0, 0, 0, 0)
         self.fleet_logs_filters_panel_layout = QVBoxLayout()
-        self.fleet_logs_filters_panel_layout.setSpacing(12)
+        self.fleet_logs_filters_panel_layout.setSpacing(10)
         self.fleet_logs_filters_panel_layout.setObjectName(u"fleet_logs_filters_panel_layout")
-        self.fleet_logs_filters_panel_layout.setContentsMargins(6, 6, 6, 6)
+        self.fleet_logs_filters_panel_layout.setContentsMargins(14, 13, 14, 13)
+        self.fleet_logs_request_heading = QHBoxLayout()
+        self.fleet_logs_request_heading.setSpacing(10)
+        self.fleet_logs_request_heading.setObjectName(u"fleet_logs_request_heading")
+        self.fleet_logs_request_heading.setContentsMargins(0, 0, 0, 0)
         self.fleet_logs_filters_panel_header = QLabel(self.fleet_logs_filters_panel)
         self.fleet_logs_filters_panel_header.setObjectName(u"fleet_logs_filters_panel_header")
 
-        self.fleet_logs_filters_panel_layout.addWidget(self.fleet_logs_filters_panel_header)
+        self.fleet_logs_request_heading.addWidget(self.fleet_logs_filters_panel_header)
 
-        self.fleet_logs_filters_row = QHBoxLayout()
-        self.fleet_logs_filters_row.setSpacing(9)
-        self.fleet_logs_filters_row.setObjectName(u"fleet_logs_filters_row")
-        self.fleet_logs_filters_row.setContentsMargins(0, 0, 0, 0)
-        self.fleet_logs_search = QLineEdit(self.fleet_logs_filters_panel)
-        self.fleet_logs_search.setObjectName(u"fleet_logs_search")
-        self.fleet_logs_search.setMinimumSize(QSize(0, 0))
+        self.fleet_logs_request_heading_spacer = QSpacerItem(20, 10, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.fleet_logs_filters_row.addWidget(self.fleet_logs_search)
+        self.fleet_logs_request_heading.addItem(self.fleet_logs_request_heading_spacer)
+
+        self.fleet_logs_clear_filters_button = QPushButton(self.fleet_logs_filters_panel)
+        self.fleet_logs_clear_filters_button.setObjectName(u"fleet_logs_clear_filters_button")
+        self.fleet_logs_clear_filters_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.fleet_logs_request_heading.addWidget(self.fleet_logs_clear_filters_button)
+
+
+        self.fleet_logs_filters_panel_layout.addLayout(self.fleet_logs_request_heading)
+
+        self.fleet_logs_filters_caption = QLabel(self.fleet_logs_filters_panel)
+        self.fleet_logs_filters_caption.setObjectName(u"fleet_logs_filters_caption")
+        self.fleet_logs_filters_caption.setWordWrap(True)
+
+        self.fleet_logs_filters_panel_layout.addWidget(self.fleet_logs_filters_caption)
+
+        self.fleet_logs_source_grid = QGridLayout()
+        self.fleet_logs_source_grid.setSpacing(8)
+        self.fleet_logs_source_grid.setObjectName(u"fleet_logs_source_grid")
+        self.fleet_logs_source_grid.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_agent_field_label = QLabel(self.fleet_logs_filters_panel)
+        self.fleet_logs_agent_field_label.setObjectName(u"fleet_logs_agent_field_label")
+
+        self.fleet_logs_source_grid.addWidget(self.fleet_logs_agent_field_label, 0, 0, 1, 1)
+
+        self.fleet_logs_source_field_label = QLabel(self.fleet_logs_filters_panel)
+        self.fleet_logs_source_field_label.setObjectName(u"fleet_logs_source_field_label")
+
+        self.fleet_logs_source_grid.addWidget(self.fleet_logs_source_field_label, 0, 1, 1, 1)
 
         self.fleet_logs_agent_combo = QComboBox(self.fleet_logs_filters_panel)
-        self.fleet_logs_agent_combo.addItem("")
         self.fleet_logs_agent_combo.setObjectName(u"fleet_logs_agent_combo")
-        self.fleet_logs_agent_combo.setMinimumSize(QSize(0, 0))
 
-        self.fleet_logs_filters_row.addWidget(self.fleet_logs_agent_combo)
+        self.fleet_logs_source_grid.addWidget(self.fleet_logs_agent_combo, 1, 0, 1, 1)
 
-        self.fleet_logs_level_combo = QComboBox(self.fleet_logs_filters_panel)
+        self.fleet_logs_source_combo = QComboBox(self.fleet_logs_filters_panel)
+        self.fleet_logs_source_combo.setObjectName(u"fleet_logs_source_combo")
+
+        self.fleet_logs_source_grid.addWidget(self.fleet_logs_source_combo, 1, 1, 1, 1)
+
+
+        self.fleet_logs_filters_panel_layout.addLayout(self.fleet_logs_source_grid)
+
+        self.fleet_logs_command_identity_card = QFrame(self.fleet_logs_filters_panel)
+        self.fleet_logs_command_identity_card.setObjectName(u"fleet_logs_command_identity_card")
+        self.fleet_logs_command_identity_card.setFrameShape(QFrame.NoFrame)
+        self.fleet_logs_command_identity_card_layout = QVBoxLayout(self.fleet_logs_command_identity_card)
+        self.fleet_logs_command_identity_card_layout.setSpacing(7)
+        self.fleet_logs_command_identity_card_layout.setObjectName(u"fleet_logs_command_identity_card_layout")
+        self.fleet_logs_command_identity_card_layout.setContentsMargins(12, 12, 12, 12)
+        self.fleet_logs_command_identity_row = QHBoxLayout()
+        self.fleet_logs_command_identity_row.setSpacing(8)
+        self.fleet_logs_command_identity_row.setObjectName(u"fleet_logs_command_identity_row")
+        self.fleet_logs_command_identity_row.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_command_display_title = QLabel(self.fleet_logs_command_identity_card)
+        self.fleet_logs_command_display_title.setObjectName(u"fleet_logs_command_display_title")
+
+        self.fleet_logs_command_identity_row.addWidget(self.fleet_logs_command_display_title)
+
+        self.fleet_logs_command_identity_spacer = QSpacerItem(20, 10, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.fleet_logs_command_identity_row.addItem(self.fleet_logs_command_identity_spacer)
+
+        self.fleet_logs_command_risk_badge = QLabel(self.fleet_logs_command_identity_card)
+        self.fleet_logs_command_risk_badge.setObjectName(u"fleet_logs_command_risk_badge")
+
+        self.fleet_logs_command_identity_row.addWidget(self.fleet_logs_command_risk_badge)
+
+
+        self.fleet_logs_command_identity_card_layout.addLayout(self.fleet_logs_command_identity_row)
+
+        self.fleet_logs_command_command_key = QLabel(self.fleet_logs_command_identity_card)
+        self.fleet_logs_command_command_key.setObjectName(u"fleet_logs_command_command_key")
+
+        self.fleet_logs_command_identity_card_layout.addWidget(self.fleet_logs_command_command_key)
+
+        self.fleet_logs_command_description = QLabel(self.fleet_logs_command_identity_card)
+        self.fleet_logs_command_description.setObjectName(u"fleet_logs_command_description")
+        self.fleet_logs_command_description.setWordWrap(True)
+
+        self.fleet_logs_command_identity_card_layout.addWidget(self.fleet_logs_command_description)
+
+
+        self.fleet_logs_filters_panel_layout.addWidget(self.fleet_logs_command_identity_card)
+
+        self.fleet_logs_builder_workspace = QVBoxLayout()
+        self.fleet_logs_builder_workspace.setSpacing(12)
+        self.fleet_logs_builder_workspace.setObjectName(u"fleet_logs_builder_workspace")
+        self.fleet_logs_builder_workspace.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_builder_left = QWidget(self.fleet_logs_filters_panel)
+        self.fleet_logs_builder_left.setObjectName(u"fleet_logs_builder_left")
+        self.fleet_logs_builder_left_layout = QVBoxLayout(self.fleet_logs_builder_left)
+        self.fleet_logs_builder_left_layout.setSpacing(8)
+        self.fleet_logs_builder_left_layout.setObjectName(u"fleet_logs_builder_left_layout")
+        self.fleet_logs_builder_left_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_parameters_heading = QWidget(self.fleet_logs_builder_left)
+        self.fleet_logs_parameters_heading.setObjectName(u"fleet_logs_parameters_heading")
+        self.fleet_logs_parameters_heading.setMaximumSize(QSize(16777215, 60))
+        self.fleet_logs_parameters_heading_layout = QHBoxLayout(self.fleet_logs_parameters_heading)
+        self.fleet_logs_parameters_heading_layout.setSpacing(6)
+        self.fleet_logs_parameters_heading_layout.setObjectName(u"fleet_logs_parameters_heading_layout")
+        self.fleet_logs_parameters_heading_layout.setContentsMargins(1, 1, 1, 1)
+        self.fleet_logs_fields_label = QLabel(self.fleet_logs_parameters_heading)
+        self.fleet_logs_fields_label.setObjectName(u"fleet_logs_fields_label")
+
+        self.fleet_logs_parameters_heading_layout.addWidget(self.fleet_logs_fields_label)
+
+        self.fleet_logs_parameters_spacer = QSpacerItem(20, 10, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.fleet_logs_parameters_heading_layout.addItem(self.fleet_logs_parameters_spacer)
+
+        self.fleet_logs_command_fields_count = QLabel(self.fleet_logs_parameters_heading)
+        self.fleet_logs_command_fields_count.setObjectName(u"fleet_logs_command_fields_count")
+
+        self.fleet_logs_parameters_heading_layout.addWidget(self.fleet_logs_command_fields_count)
+
+
+        self.fleet_logs_builder_left_layout.addWidget(self.fleet_logs_parameters_heading)
+
+        self.fleet_logs_command_fields_scroll = QScrollArea(self.fleet_logs_builder_left)
+        self.fleet_logs_command_fields_scroll.setObjectName(u"fleet_logs_command_fields_scroll")
+        self.fleet_logs_command_fields_scroll.setMinimumSize(QSize(0, 128))
+        self.fleet_logs_command_fields_scroll.setMaximumSize(QSize(16777215, 216))
+        self.fleet_logs_command_fields_scroll.setFrameShape(QFrame.NoFrame)
+        self.fleet_logs_command_fields_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.fleet_logs_command_fields_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.fleet_logs_command_fields_scroll.setWidgetResizable(True)
+        self.fleet_logs_fields_scroll_content = QWidget()
+        self.fleet_logs_fields_scroll_content.setObjectName(u"fleet_logs_fields_scroll_content")
+<<<<<<< HEAD
+        self.fleet_logs_fields_scroll_content.setGeometry(QRect(0, 0, 324, 216))
+=======
+        self.fleet_logs_fields_scroll_content.setGeometry(QRect(0, 0, 329, 216))
+>>>>>>> refs/remotes/origin/main
+        self.fleet_logs_fields_scroll_content.setMinimumSize(QSize(0, 0))
+        self.fleet_logs_fields_scroll_content_layout = QVBoxLayout(self.fleet_logs_fields_scroll_content)
+        self.fleet_logs_fields_scroll_content_layout.setSpacing(0)
+        self.fleet_logs_fields_scroll_content_layout.setObjectName(u"fleet_logs_fields_scroll_content_layout")
+        self.fleet_logs_fields_scroll_content_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_command_fields_container = QFrame(self.fleet_logs_fields_scroll_content)
+        self.fleet_logs_command_fields_container.setObjectName(u"fleet_logs_command_fields_container")
+        self.fleet_logs_command_fields_container.setMinimumSize(QSize(0, 55))
+        self.fleet_logs_command_fields_container.setFrameShape(QFrame.NoFrame)
+        self.fleet_logs_command_fields_layout = QVBoxLayout(self.fleet_logs_command_fields_container)
+        self.fleet_logs_command_fields_layout.setSpacing(10)
+        self.fleet_logs_command_fields_layout.setObjectName(u"fleet_logs_command_fields_layout")
+        self.fleet_logs_command_fields_layout.setContentsMargins(12, 12, 12, 12)
+
+        self.fleet_logs_fields_scroll_content_layout.addWidget(self.fleet_logs_command_fields_container)
+
+        self.fleet_logs_command_fields_scroll.setWidget(self.fleet_logs_fields_scroll_content)
+
+        self.fleet_logs_builder_left_layout.addWidget(self.fleet_logs_command_fields_scroll)
+
+
+        self.fleet_logs_builder_workspace.addWidget(self.fleet_logs_builder_left)
+
+        self.fleet_logs_payload_panel = QFrame(self.fleet_logs_filters_panel)
+        self.fleet_logs_payload_panel.setObjectName(u"fleet_logs_payload_panel")
+        self.fleet_logs_payload_panel.setFrameShape(QFrame.NoFrame)
+        self.fleet_logs_payload_panel_layout = QVBoxLayout(self.fleet_logs_payload_panel)
+        self.fleet_logs_payload_panel_layout.setSpacing(8)
+        self.fleet_logs_payload_panel_layout.setObjectName(u"fleet_logs_payload_panel_layout")
+        self.fleet_logs_payload_panel_layout.setContentsMargins(10, 10, 10, 10)
+        self.fleet_logs_payload_heading_layout = QHBoxLayout()
+        self.fleet_logs_payload_heading_layout.setSpacing(8)
+        self.fleet_logs_payload_heading_layout.setObjectName(u"fleet_logs_payload_heading_layout")
+        self.fleet_logs_payload_heading_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_payload_label = QLabel(self.fleet_logs_payload_panel)
+        self.fleet_logs_payload_label.setObjectName(u"fleet_logs_payload_label")
+
+        self.fleet_logs_payload_heading_layout.addWidget(self.fleet_logs_payload_label)
+
+        self.fleet_logs_payload_heading_spacer = QSpacerItem(30, 10, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.fleet_logs_payload_heading_layout.addItem(self.fleet_logs_payload_heading_spacer)
+
+        self.fleet_logs_raw_mode_checkbox = QCheckBox(self.fleet_logs_payload_panel)
+        self.fleet_logs_raw_mode_checkbox.setObjectName(u"fleet_logs_raw_mode_checkbox")
+
+        self.fleet_logs_payload_heading_layout.addWidget(self.fleet_logs_raw_mode_checkbox)
+
+
+        self.fleet_logs_payload_panel_layout.addLayout(self.fleet_logs_payload_heading_layout)
+
+        self.fleet_logs_payload_tabs = QTabWidget(self.fleet_logs_payload_panel)
+        self.fleet_logs_payload_tabs.setObjectName(u"fleet_logs_payload_tabs")
+        self.fleet_logs_payload_tabs.setMinimumSize(QSize(0, 174))
+        self.fleet_logs_payload_tabs.setMaximumSize(QSize(16777215, 230))
+        self.fleet_logs_payload_json_tab = QWidget()
+        self.fleet_logs_payload_json_tab.setObjectName(u"fleet_logs_payload_json_tab")
+        self.fleet_logs_payload_json_tab_layout = QVBoxLayout(self.fleet_logs_payload_json_tab)
+        self.fleet_logs_payload_json_tab_layout.setSpacing(5)
+        self.fleet_logs_payload_json_tab_layout.setObjectName(u"fleet_logs_payload_json_tab_layout")
+        self.fleet_logs_payload_json_tab_layout.setContentsMargins(7, 7, 7, 7)
+        self.fleet_logs_payload_editor = QPlainTextEdit(self.fleet_logs_payload_json_tab)
+        self.fleet_logs_payload_editor.setObjectName(u"fleet_logs_payload_editor")
+        self.fleet_logs_payload_editor.setMinimumSize(QSize(0, 120))
+        self.fleet_logs_payload_editor.setReadOnly(True)
+
+        self.fleet_logs_payload_json_tab_layout.addWidget(self.fleet_logs_payload_editor)
+
+        self.fleet_logs_payload_tabs.addTab(self.fleet_logs_payload_json_tab, "")
+        self.fleet_logs_payload_preview_tab = QWidget()
+        self.fleet_logs_payload_preview_tab.setObjectName(u"fleet_logs_payload_preview_tab")
+        self.fleet_logs_payload_preview_tab_layout = QVBoxLayout(self.fleet_logs_payload_preview_tab)
+        self.fleet_logs_payload_preview_tab_layout.setSpacing(6)
+        self.fleet_logs_payload_preview_tab_layout.setObjectName(u"fleet_logs_payload_preview_tab_layout")
+        self.fleet_logs_payload_preview_tab_layout.setContentsMargins(7, 7, 7, 7)
+        self.fleet_logs_request_preview_label = QLabel(self.fleet_logs_payload_preview_tab)
+        self.fleet_logs_request_preview_label.setObjectName(u"fleet_logs_request_preview_label")
+
+        self.fleet_logs_payload_preview_tab_layout.addWidget(self.fleet_logs_request_preview_label)
+
+        self.fleet_logs_request_preview = QPlainTextEdit(self.fleet_logs_payload_preview_tab)
+        self.fleet_logs_request_preview.setObjectName(u"fleet_logs_request_preview")
+        self.fleet_logs_request_preview.setMinimumSize(QSize(0, 120))
+        self.fleet_logs_request_preview.setReadOnly(True)
+
+        self.fleet_logs_payload_preview_tab_layout.addWidget(self.fleet_logs_request_preview)
+
+        self.fleet_logs_payload_tabs.addTab(self.fleet_logs_payload_preview_tab, "")
+
+        self.fleet_logs_payload_panel_layout.addWidget(self.fleet_logs_payload_tabs)
+
+
+        self.fleet_logs_builder_workspace.addWidget(self.fleet_logs_payload_panel)
+
+
+        self.fleet_logs_filters_panel_layout.addLayout(self.fleet_logs_builder_workspace)
+
+
+        self.fleet_logs_filters_panel_host_layout.addLayout(self.fleet_logs_filters_panel_layout)
+
+
+        self.fleet_logs_workspace_row.addWidget(self.fleet_logs_filters_panel)
+
+        self.fleet_logs_results_column = QVBoxLayout()
+        self.fleet_logs_results_column.setSpacing(12)
+        self.fleet_logs_results_column.setObjectName(u"fleet_logs_results_column")
+        self.fleet_logs_results_column.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_table_panel = QFrame(self.fleet_logs_page_scroll_content)
+        self.fleet_logs_table_panel.setObjectName(u"fleet_logs_table_panel")
+<<<<<<< HEAD
+        self.fleet_logs_table_panel.setMinimumSize(QSize(0, 800))
+=======
+        self.fleet_logs_table_panel.setMinimumSize(QSize(0, 440))
+>>>>>>> refs/remotes/origin/main
+        self.fleet_logs_table_panel_host_layout = QVBoxLayout(self.fleet_logs_table_panel)
+        self.fleet_logs_table_panel_host_layout.setObjectName(u"fleet_logs_table_panel_host_layout")
+        self.fleet_logs_table_panel_host_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_table_panel_layout = QVBoxLayout()
+        self.fleet_logs_table_panel_layout.setSpacing(11)
+        self.fleet_logs_table_panel_layout.setObjectName(u"fleet_logs_table_panel_layout")
+        self.fleet_logs_table_panel_layout.setContentsMargins(16, 13, 16, 14)
+        self.fleet_logs_output_heading = QHBoxLayout()
+        self.fleet_logs_output_heading.setSpacing(10)
+        self.fleet_logs_output_heading.setObjectName(u"fleet_logs_output_heading")
+        self.fleet_logs_output_heading.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_table_panel_header = QLabel(self.fleet_logs_table_panel)
+        self.fleet_logs_table_panel_header.setObjectName(u"fleet_logs_table_panel_header")
+
+        self.fleet_logs_output_heading.addWidget(self.fleet_logs_table_panel_header)
+
+        self.fleet_logs_output_heading_spacer = QSpacerItem(30, 12, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.fleet_logs_output_heading.addItem(self.fleet_logs_output_heading_spacer)
+
+        self.fleet_logs_query_status = QLabel(self.fleet_logs_table_panel)
+        self.fleet_logs_query_status.setObjectName(u"fleet_logs_query_status")
+
+        self.fleet_logs_output_heading.addWidget(self.fleet_logs_query_status)
+
+        self.fleet_logs_count_label = QLabel(self.fleet_logs_table_panel)
+        self.fleet_logs_count_label.setObjectName(u"fleet_logs_count_label")
+
+        self.fleet_logs_output_heading.addWidget(self.fleet_logs_count_label)
+
+
+        self.fleet_logs_table_panel_layout.addLayout(self.fleet_logs_output_heading)
+
+        self.fleet_logs_table_panel_caption = QLabel(self.fleet_logs_table_panel)
+        self.fleet_logs_table_panel_caption.setObjectName(u"fleet_logs_table_panel_caption")
+        self.fleet_logs_table_panel_caption.setWordWrap(True)
+
+        self.fleet_logs_table_panel_layout.addWidget(self.fleet_logs_table_panel_caption)
+
+        self.fleet_logs_results_filter_grid = QGridLayout()
+        self.fleet_logs_results_filter_grid.setSpacing(8)
+        self.fleet_logs_results_filter_grid.setObjectName(u"fleet_logs_results_filter_grid")
+        self.fleet_logs_results_filter_grid.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_search_field_label = QLabel(self.fleet_logs_table_panel)
+        self.fleet_logs_search_field_label.setObjectName(u"fleet_logs_search_field_label")
+
+        self.fleet_logs_results_filter_grid.addWidget(self.fleet_logs_search_field_label, 0, 0, 1, 1)
+
+        self.fleet_logs_level_field_label = QLabel(self.fleet_logs_table_panel)
+        self.fleet_logs_level_field_label.setObjectName(u"fleet_logs_level_field_label")
+
+        self.fleet_logs_results_filter_grid.addWidget(self.fleet_logs_level_field_label, 0, 1, 1, 1)
+
+        self.fleet_logs_search = QLineEdit(self.fleet_logs_table_panel)
+        self.fleet_logs_search.setObjectName(u"fleet_logs_search")
+
+        self.fleet_logs_results_filter_grid.addWidget(self.fleet_logs_search, 1, 0, 1, 1)
+
+        self.fleet_logs_level_combo = QComboBox(self.fleet_logs_table_panel)
+        self.fleet_logs_level_combo.addItem("")
+        self.fleet_logs_level_combo.addItem("")
+        self.fleet_logs_level_combo.addItem("")
+        self.fleet_logs_level_combo.addItem("")
+        self.fleet_logs_level_combo.addItem("")
         self.fleet_logs_level_combo.addItem("")
         self.fleet_logs_level_combo.addItem("")
         self.fleet_logs_level_combo.addItem("")
         self.fleet_logs_level_combo.addItem("")
         self.fleet_logs_level_combo.addItem("")
         self.fleet_logs_level_combo.setObjectName(u"fleet_logs_level_combo")
-        self.fleet_logs_level_combo.setMinimumSize(QSize(0, 0))
 
-        self.fleet_logs_filters_row.addWidget(self.fleet_logs_level_combo)
-
-        self.fleet_logs_source_combo = QComboBox(self.fleet_logs_filters_panel)
-        self.fleet_logs_source_combo.addItem("")
-        self.fleet_logs_source_combo.addItem("")
-        self.fleet_logs_source_combo.addItem("")
-        self.fleet_logs_source_combo.addItem("")
-        self.fleet_logs_source_combo.setObjectName(u"fleet_logs_source_combo")
-        self.fleet_logs_source_combo.setMinimumSize(QSize(0, 0))
-
-        self.fleet_logs_filters_row.addWidget(self.fleet_logs_source_combo)
+        self.fleet_logs_results_filter_grid.addWidget(self.fleet_logs_level_combo, 1, 1, 1, 1)
 
 
-        self.fleet_logs_filters_panel_layout.addLayout(self.fleet_logs_filters_row)
+        self.fleet_logs_table_panel_layout.addLayout(self.fleet_logs_results_filter_grid)
+<<<<<<< HEAD
+
+        self.fleet_logs_requests_tab_layout = QVBoxLayout()
+        self.fleet_logs_requests_tab_layout.setSpacing(7)
+        self.fleet_logs_requests_tab_layout.setObjectName(u"fleet_logs_requests_tab_layout")
+        self.fleet_logs_requests_tab_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_requests_hint = QLabel(self.fleet_logs_table_panel)
+        self.fleet_logs_requests_hint.setObjectName(u"fleet_logs_requests_hint")
+        self.fleet_logs_requests_hint.setWordWrap(True)
+
+        self.fleet_logs_requests_tab_layout.addWidget(self.fleet_logs_requests_hint)
+
+        self.fleet_logs_request_history_table = QTableWidget(self.fleet_logs_table_panel)
+        if (self.fleet_logs_request_history_table.columnCount() < 6):
+            self.fleet_logs_request_history_table.setColumnCount(6)
+        __qtablewidgetitem78 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(0, __qtablewidgetitem78)
+        __qtablewidgetitem79 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(1, __qtablewidgetitem79)
+        __qtablewidgetitem80 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(2, __qtablewidgetitem80)
+        __qtablewidgetitem81 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(3, __qtablewidgetitem81)
+        __qtablewidgetitem82 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(4, __qtablewidgetitem82)
+        __qtablewidgetitem83 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(5, __qtablewidgetitem83)
+        self.fleet_logs_request_history_table.setObjectName(u"fleet_logs_request_history_table")
+        self.fleet_logs_request_history_table.setMinimumSize(QSize(0, 150))
+        self.fleet_logs_request_history_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.fleet_logs_request_history_table.setAlternatingRowColors(True)
+        self.fleet_logs_request_history_table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.fleet_logs_request_history_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.fleet_logs_request_history_table.setShowGrid(False)
+        self.fleet_logs_request_history_table.setSortingEnabled(False)
+        self.fleet_logs_request_history_table.setWordWrap(False)
+        self.fleet_logs_request_history_table.setRowCount(0)
+        self.fleet_logs_request_history_table.setColumnCount(6)
+        self.fleet_logs_request_history_table.horizontalHeader().setMinimumSectionSize(72)
+        self.fleet_logs_request_history_table.horizontalHeader().setHighlightSections(False)
+        self.fleet_logs_request_history_table.horizontalHeader().setStretchLastSection(True)
+        self.fleet_logs_request_history_table.verticalHeader().setVisible(False)
+
+        self.fleet_logs_requests_tab_layout.addWidget(self.fleet_logs_request_history_table)
 
 
-        self.fleet_logs_filters_panel_host_layout.addLayout(self.fleet_logs_filters_panel_layout)
+        self.fleet_logs_table_panel_layout.addLayout(self.fleet_logs_requests_tab_layout)
+
+        self.fleet_logs_view_tabs = QTabWidget(self.fleet_logs_table_panel)
+        self.fleet_logs_view_tabs.setObjectName(u"fleet_logs_view_tabs")
+        self.fleet_logs_view_tabs.setMinimumSize(QSize(0, 450))
+        self.fleet_logs_view_tabs.setTabBarAutoHide(True)
+        self.fleet_logs_raw_tab = QWidget()
+        self.fleet_logs_raw_tab.setObjectName(u"fleet_logs_raw_tab")
+        self.fleet_logs_raw_layout = QVBoxLayout(self.fleet_logs_raw_tab)
+        self.fleet_logs_raw_layout.setSpacing(0)
+        self.fleet_logs_raw_layout.setObjectName(u"fleet_logs_raw_layout")
+        self.fleet_logs_raw_layout.setContentsMargins(6, 6, 6, 6)
+        self.fleet_logs_output_toolbar = QHBoxLayout()
+        self.fleet_logs_output_toolbar.setSpacing(8)
+        self.fleet_logs_output_toolbar.setObjectName(u"fleet_logs_output_toolbar")
+        self.fleet_logs_output_toolbar.setContentsMargins(0, 0, 0, 6)
+        self.fleet_logs_output_tab_title = QLabel(self.fleet_logs_raw_tab)
+        self.fleet_logs_output_tab_title.setObjectName(u"fleet_logs_output_tab_title")
+
+        self.fleet_logs_output_toolbar.addWidget(self.fleet_logs_output_tab_title)
+
+        self.fleet_logs_output_toolbar_spacer = QSpacerItem(24, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.fleet_logs_output_toolbar.addItem(self.fleet_logs_output_toolbar_spacer)
+
+        self.fleet_logs_copy_output_button = QPushButton(self.fleet_logs_raw_tab)
+        self.fleet_logs_copy_output_button.setObjectName(u"fleet_logs_copy_output_button")
+        self.fleet_logs_copy_output_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.fleet_logs_output_toolbar.addWidget(self.fleet_logs_copy_output_button)
 
 
-        self.fleet_logs_page_layout.addWidget(self.fleet_logs_filters_panel)
+        self.fleet_logs_raw_layout.addLayout(self.fleet_logs_output_toolbar)
 
-        self.line_12 = QFrame(self.fleet_logs_page_scroll_content)
-        self.line_12.setObjectName(u"line_12")
-        self.line_12.setFrameShape(QFrame.Shape.HLine)
-        self.line_12.setFrameShadow(QFrame.Shadow.Sunken)
+        self.fleet_logs_stdout_view = QPlainTextEdit(self.fleet_logs_raw_tab)
+        self.fleet_logs_stdout_view.setObjectName(u"fleet_logs_stdout_view")
+        self.fleet_logs_stdout_view.setMinimumSize(QSize(0, 400))
+        self.fleet_logs_stdout_view.setLineWrapMode(QPlainTextEdit.NoWrap)
+        self.fleet_logs_stdout_view.setReadOnly(True)
 
-        self.fleet_logs_page_layout.addWidget(self.line_12)
+        self.fleet_logs_raw_layout.addWidget(self.fleet_logs_stdout_view)
 
-        self.fleet_logs_table_panel = QFrame(self.fleet_logs_page_scroll_content)
-        self.fleet_logs_table_panel.setObjectName(u"fleet_logs_table_panel")
-        self.fleet_logs_table_panel_host_layout = QVBoxLayout(self.fleet_logs_table_panel)
-        self.fleet_logs_table_panel_host_layout.setObjectName(u"fleet_logs_table_panel_host_layout")
-        self.fleet_logs_table_panel_host_layout.setContentsMargins(0, 0, 0, 0)
-        self.fleet_logs_table_panel_layout = QVBoxLayout()
-        self.fleet_logs_table_panel_layout.setSpacing(12)
-        self.fleet_logs_table_panel_layout.setObjectName(u"fleet_logs_table_panel_layout")
-        self.fleet_logs_table_panel_layout.setContentsMargins(6, 6, 6, 6)
-        self.fleet_logs_table_panel_header = QLabel(self.fleet_logs_table_panel)
-        self.fleet_logs_table_panel_header.setObjectName(u"fleet_logs_table_panel_header")
+        self.fleet_logs_view_tabs.addTab(self.fleet_logs_raw_tab, "")
+        self.fleet_logs_errors_tab = QWidget()
+        self.fleet_logs_errors_tab.setObjectName(u"fleet_logs_errors_tab")
+        self.fleet_logs_errors_tab_layout = QVBoxLayout(self.fleet_logs_errors_tab)
+        self.fleet_logs_errors_tab_layout.setSpacing(0)
+        self.fleet_logs_errors_tab_layout.setObjectName(u"fleet_logs_errors_tab_layout")
+        self.fleet_logs_errors_tab_layout.setContentsMargins(6, 6, 6, 6)
+        self.fleet_logs_errors_toolbar = QHBoxLayout()
+        self.fleet_logs_errors_toolbar.setSpacing(8)
+        self.fleet_logs_errors_toolbar.setObjectName(u"fleet_logs_errors_toolbar")
+        self.fleet_logs_errors_toolbar.setContentsMargins(0, 0, 0, 6)
+        self.fleet_logs_errors_tab_title = QLabel(self.fleet_logs_errors_tab)
+        self.fleet_logs_errors_tab_title.setObjectName(u"fleet_logs_errors_tab_title")
 
-        self.fleet_logs_table_panel_layout.addWidget(self.fleet_logs_table_panel_header)
+        self.fleet_logs_errors_toolbar.addWidget(self.fleet_logs_errors_tab_title)
 
-        self.fleet_logs_table_panel_caption = QLabel(self.fleet_logs_table_panel)
-        self.fleet_logs_table_panel_caption.setObjectName(u"fleet_logs_table_panel_caption")
+        self.fleet_logs_errors_toolbar_spacer = QSpacerItem(24, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.fleet_logs_table_panel_layout.addWidget(self.fleet_logs_table_panel_caption)
+        self.fleet_logs_errors_toolbar.addItem(self.fleet_logs_errors_toolbar_spacer)
 
-        self.fleet_logs_table = QTableWidget(self.fleet_logs_table_panel)
+        self.fleet_logs_copy_errors_button = QPushButton(self.fleet_logs_errors_tab)
+        self.fleet_logs_copy_errors_button.setObjectName(u"fleet_logs_copy_errors_button")
+
+        self.fleet_logs_errors_toolbar.addWidget(self.fleet_logs_copy_errors_button)
+
+
+        self.fleet_logs_errors_tab_layout.addLayout(self.fleet_logs_errors_toolbar)
+
+        self.fleet_logs_stderr_view = QPlainTextEdit(self.fleet_logs_errors_tab)
+        self.fleet_logs_stderr_view.setObjectName(u"fleet_logs_stderr_view")
+        self.fleet_logs_stderr_view.setMinimumSize(QSize(0, 400))
+        self.fleet_logs_stderr_view.setLineWrapMode(QPlainTextEdit.NoWrap)
+=======
+
+        self.fleet_logs_view_tabs = QTabWidget(self.fleet_logs_table_panel)
+        self.fleet_logs_view_tabs.setObjectName(u"fleet_logs_view_tabs")
+        self.fleet_logs_view_tabs.setMinimumSize(QSize(0, 310))
+        self.fleet_logs_entries_tab = QWidget()
+        self.fleet_logs_entries_tab.setObjectName(u"fleet_logs_entries_tab")
+        self.fleet_logs_entries_layout = QVBoxLayout(self.fleet_logs_entries_tab)
+        self.fleet_logs_entries_layout.setSpacing(0)
+        self.fleet_logs_entries_layout.setObjectName(u"fleet_logs_entries_layout")
+        self.fleet_logs_entries_layout.setContentsMargins(0, 9, 0, 0)
+        self.fleet_logs_table = QTableWidget(self.fleet_logs_entries_tab)
         if (self.fleet_logs_table.columnCount() < 5):
             self.fleet_logs_table.setColumnCount(5)
         __qtablewidgetitem73 = QTableWidgetItem()
@@ -3525,83 +4007,195 @@ class Ui_MainWindow(object):
         __qtablewidgetitem77 = QTableWidgetItem()
         self.fleet_logs_table.setHorizontalHeaderItem(4, __qtablewidgetitem77)
         self.fleet_logs_table.setObjectName(u"fleet_logs_table")
-        self.fleet_logs_table.setMinimumSize(QSize(0, 260))
+        self.fleet_logs_table.setMinimumSize(QSize(0, 250))
         self.fleet_logs_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.fleet_logs_table.setAlternatingRowColors(True)
         self.fleet_logs_table.setSelectionMode(QAbstractItemView.SingleSelection)
         self.fleet_logs_table.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.fleet_logs_table.setShowGrid(False)
+        self.fleet_logs_table.setSortingEnabled(False)
         self.fleet_logs_table.setWordWrap(False)
         self.fleet_logs_table.setRowCount(0)
         self.fleet_logs_table.setColumnCount(5)
 
-        self.fleet_logs_table_panel_layout.addWidget(self.fleet_logs_table)
+        self.fleet_logs_entries_layout.addWidget(self.fleet_logs_table)
+
+        self.fleet_logs_view_tabs.addTab(self.fleet_logs_entries_tab, "")
+        self.fleet_logs_raw_tab = QWidget()
+        self.fleet_logs_raw_tab.setObjectName(u"fleet_logs_raw_tab")
+        self.fleet_logs_raw_layout = QVBoxLayout(self.fleet_logs_raw_tab)
+        self.fleet_logs_raw_layout.setSpacing(0)
+        self.fleet_logs_raw_layout.setObjectName(u"fleet_logs_raw_layout")
+        self.fleet_logs_raw_layout.setContentsMargins(0, 9, 0, 0)
+        self.fleet_logs_raw_view = QPlainTextEdit(self.fleet_logs_raw_tab)
+        self.fleet_logs_raw_view.setObjectName(u"fleet_logs_raw_view")
+        self.fleet_logs_raw_view.setMinimumSize(QSize(0, 320))
+        self.fleet_logs_raw_view.setLineWrapMode(QPlainTextEdit.NoWrap)
+        self.fleet_logs_raw_view.setReadOnly(True)
+
+        self.fleet_logs_raw_layout.addWidget(self.fleet_logs_raw_view)
+
+        self.fleet_logs_view_tabs.addTab(self.fleet_logs_raw_tab, "")
+        self.fleet_logs_errors_tab = QWidget()
+        self.fleet_logs_errors_tab.setObjectName(u"fleet_logs_errors_tab")
+        self.fleet_logs_errors_tab_layout = QVBoxLayout(self.fleet_logs_errors_tab)
+        self.fleet_logs_errors_tab_layout.setSpacing(0)
+        self.fleet_logs_errors_tab_layout.setObjectName(u"fleet_logs_errors_tab_layout")
+        self.fleet_logs_errors_tab_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_stderr_view = QPlainTextEdit(self.fleet_logs_errors_tab)
+        self.fleet_logs_stderr_view.setObjectName(u"fleet_logs_stderr_view")
+>>>>>>> refs/remotes/origin/main
+        self.fleet_logs_stderr_view.setReadOnly(True)
+
+        self.fleet_logs_errors_tab_layout.addWidget(self.fleet_logs_stderr_view)
+
+        self.fleet_logs_view_tabs.addTab(self.fleet_logs_errors_tab, "")
+<<<<<<< HEAD
+=======
+        self.fleet_logs_requests_tab = QWidget()
+        self.fleet_logs_requests_tab.setObjectName(u"fleet_logs_requests_tab")
+        self.fleet_logs_requests_tab_layout = QVBoxLayout(self.fleet_logs_requests_tab)
+        self.fleet_logs_requests_tab_layout.setSpacing(7)
+        self.fleet_logs_requests_tab_layout.setObjectName(u"fleet_logs_requests_tab_layout")
+        self.fleet_logs_requests_tab_layout.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_requests_hint = QLabel(self.fleet_logs_requests_tab)
+        self.fleet_logs_requests_hint.setObjectName(u"fleet_logs_requests_hint")
+        self.fleet_logs_requests_hint.setWordWrap(True)
+
+        self.fleet_logs_requests_tab_layout.addWidget(self.fleet_logs_requests_hint)
+
+        self.fleet_logs_request_history_table = QTableWidget(self.fleet_logs_requests_tab)
+        if (self.fleet_logs_request_history_table.columnCount() < 6):
+            self.fleet_logs_request_history_table.setColumnCount(6)
+        __qtablewidgetitem78 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(0, __qtablewidgetitem78)
+        __qtablewidgetitem79 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(1, __qtablewidgetitem79)
+        __qtablewidgetitem80 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(2, __qtablewidgetitem80)
+        __qtablewidgetitem81 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(3, __qtablewidgetitem81)
+        __qtablewidgetitem82 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(4, __qtablewidgetitem82)
+        __qtablewidgetitem83 = QTableWidgetItem()
+        self.fleet_logs_request_history_table.setHorizontalHeaderItem(5, __qtablewidgetitem83)
+        self.fleet_logs_request_history_table.setObjectName(u"fleet_logs_request_history_table")
+        self.fleet_logs_request_history_table.setMinimumSize(QSize(0, 220))
+        self.fleet_logs_request_history_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.fleet_logs_request_history_table.setAlternatingRowColors(True)
+        self.fleet_logs_request_history_table.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.fleet_logs_request_history_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.fleet_logs_request_history_table.setShowGrid(False)
+        self.fleet_logs_request_history_table.setSortingEnabled(False)
+        self.fleet_logs_request_history_table.setRowCount(0)
+        self.fleet_logs_request_history_table.setColumnCount(6)
+
+        self.fleet_logs_requests_tab_layout.addWidget(self.fleet_logs_request_history_table)
+
+        self.fleet_logs_view_tabs.addTab(self.fleet_logs_requests_tab, "")
+>>>>>>> refs/remotes/origin/main
+
+        self.fleet_logs_table_panel_layout.addWidget(self.fleet_logs_view_tabs)
+
+        self.fleet_logs_results_footer = QHBoxLayout()
+        self.fleet_logs_results_footer.setSpacing(10)
+        self.fleet_logs_results_footer.setObjectName(u"fleet_logs_results_footer")
+        self.fleet_logs_results_footer.setContentsMargins(0, 0, 0, 0)
+        self.fleet_logs_format_label = QLabel(self.fleet_logs_table_panel)
+        self.fleet_logs_format_label.setObjectName(u"fleet_logs_format_label")
+
+        self.fleet_logs_results_footer.addWidget(self.fleet_logs_format_label)
+
+        self.fleet_logs_results_footer_spacer = QSpacerItem(20, 10, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.fleet_logs_results_footer.addItem(self.fleet_logs_results_footer_spacer)
+
+        self.fleet_logs_results_note = QLabel(self.fleet_logs_table_panel)
+        self.fleet_logs_results_note.setObjectName(u"fleet_logs_results_note")
+
+        self.fleet_logs_results_footer.addWidget(self.fleet_logs_results_note)
+
+
+        self.fleet_logs_table_panel_layout.addLayout(self.fleet_logs_results_footer)
 
 
         self.fleet_logs_table_panel_host_layout.addLayout(self.fleet_logs_table_panel_layout)
 
 
-        self.fleet_logs_page_layout.addWidget(self.fleet_logs_table_panel)
+        self.fleet_logs_results_column.addWidget(self.fleet_logs_table_panel)
+<<<<<<< HEAD
 
-        self.line_13 = QFrame(self.fleet_logs_page_scroll_content)
-        self.line_13.setObjectName(u"line_13")
-        self.line_13.setFrameShape(QFrame.Shape.HLine)
-        self.line_13.setFrameShadow(QFrame.Shadow.Sunken)
+        self.fleet_logs_results_column.setStretch(0, 1)
 
-        self.fleet_logs_page_layout.addWidget(self.line_13)
+        self.fleet_logs_workspace_row.addLayout(self.fleet_logs_results_column)
+
+        self.fleet_logs_workspace_row.setStretch(0, 4)
+        self.fleet_logs_workspace_row.setStretch(1, 8)
+
+=======
 
         self.fleet_logs_details_panel = QFrame(self.fleet_logs_page_scroll_content)
         self.fleet_logs_details_panel.setObjectName(u"fleet_logs_details_panel")
+        self.fleet_logs_details_panel.setMinimumSize(QSize(0, 175))
+        self.fleet_logs_details_panel.setMaximumSize(QSize(16777215, 270))
         self.fleet_logs_details_panel_host_layout = QVBoxLayout(self.fleet_logs_details_panel)
         self.fleet_logs_details_panel_host_layout.setObjectName(u"fleet_logs_details_panel_host_layout")
         self.fleet_logs_details_panel_host_layout.setContentsMargins(0, 0, 0, 0)
         self.fleet_logs_details_panel_layout = QVBoxLayout()
-        self.fleet_logs_details_panel_layout.setSpacing(12)
+        self.fleet_logs_details_panel_layout.setSpacing(10)
         self.fleet_logs_details_panel_layout.setObjectName(u"fleet_logs_details_panel_layout")
-        self.fleet_logs_details_panel_layout.setContentsMargins(6, 6, 6, 6)
+        self.fleet_logs_details_panel_layout.setContentsMargins(16, 13, 16, 14)
+        self.fleet_logs_details_heading_row = QHBoxLayout()
+        self.fleet_logs_details_heading_row.setSpacing(10)
+        self.fleet_logs_details_heading_row.setObjectName(u"fleet_logs_details_heading_row")
+        self.fleet_logs_details_heading_row.setContentsMargins(0, 0, 0, 0)
         self.fleet_logs_details_panel_header = QLabel(self.fleet_logs_details_panel)
         self.fleet_logs_details_panel_header.setObjectName(u"fleet_logs_details_panel_header")
 
-        self.fleet_logs_details_panel_layout.addWidget(self.fleet_logs_details_panel_header)
+        self.fleet_logs_details_heading_row.addWidget(self.fleet_logs_details_panel_header)
+
+        self.fleet_logs_details_heading_spacer = QSpacerItem(20, 12, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.fleet_logs_details_heading_row.addItem(self.fleet_logs_details_heading_spacer)
+
+        self.fleet_logs_copy_button = QPushButton(self.fleet_logs_details_panel)
+        self.fleet_logs_copy_button.setObjectName(u"fleet_logs_copy_button")
+
+        self.fleet_logs_details_heading_row.addWidget(self.fleet_logs_copy_button)
+
+
+        self.fleet_logs_details_panel_layout.addLayout(self.fleet_logs_details_heading_row)
 
         self.fleet_logs_event_metadata = QLabel(self.fleet_logs_details_panel)
         self.fleet_logs_event_metadata.setObjectName(u"fleet_logs_event_metadata")
+        self.fleet_logs_event_metadata.setWordWrap(True)
 
         self.fleet_logs_details_panel_layout.addWidget(self.fleet_logs_event_metadata)
 
         self.fleet_logs_details_view = QPlainTextEdit(self.fleet_logs_details_panel)
         self.fleet_logs_details_view.setObjectName(u"fleet_logs_details_view")
-        self.fleet_logs_details_view.setMinimumSize(QSize(0, 105))
+        self.fleet_logs_details_view.setMinimumSize(QSize(0, 100))
+        self.fleet_logs_details_view.setLineWrapMode(QPlainTextEdit.NoWrap)
         self.fleet_logs_details_view.setReadOnly(True)
 
         self.fleet_logs_details_panel_layout.addWidget(self.fleet_logs_details_view)
-
-        self.fleet_logs_details_actions = QHBoxLayout()
-        self.fleet_logs_details_actions.setSpacing(10)
-        self.fleet_logs_details_actions.setObjectName(u"fleet_logs_details_actions")
-        self.fleet_logs_details_actions.setContentsMargins(0, 0, 0, 0)
-        self.fleet_logs_copy_button = QPushButton(self.fleet_logs_details_panel)
-        self.fleet_logs_copy_button.setObjectName(u"fleet_logs_copy_button")
-        self.fleet_logs_copy_button.setMinimumSize(QSize(0, 0))
-        self.fleet_logs_copy_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.fleet_logs_details_actions.addWidget(self.fleet_logs_copy_button)
-
-        self.fleet_logs_clear_filters_button = QPushButton(self.fleet_logs_details_panel)
-        self.fleet_logs_clear_filters_button.setObjectName(u"fleet_logs_clear_filters_button")
-        self.fleet_logs_clear_filters_button.setMinimumSize(QSize(0, 0))
-        self.fleet_logs_clear_filters_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-
-        self.fleet_logs_details_actions.addWidget(self.fleet_logs_clear_filters_button)
-
-
-        self.fleet_logs_details_panel_layout.addLayout(self.fleet_logs_details_actions)
 
 
         self.fleet_logs_details_panel_host_layout.addLayout(self.fleet_logs_details_panel_layout)
 
 
-        self.fleet_logs_page_layout.addWidget(self.fleet_logs_details_panel)
+        self.fleet_logs_results_column.addWidget(self.fleet_logs_details_panel)
+
+        self.fleet_logs_results_column.setStretch(0, 7)
+        self.fleet_logs_results_column.setStretch(1, 3)
+
+        self.fleet_logs_workspace_row.addLayout(self.fleet_logs_results_column)
+
+        self.fleet_logs_workspace_row.setStretch(0, 4)
+        self.fleet_logs_workspace_row.setStretch(1, 8)
+
+>>>>>>> refs/remotes/origin/main
+        self.fleet_logs_page_layout.addLayout(self.fleet_logs_workspace_row)
 
         self.fleet_logs_page_scroll.setWidget(self.fleet_logs_page_scroll_content)
 
@@ -3620,11 +4214,11 @@ class Ui_MainWindow(object):
         self.preferences_page_scroll.setWidgetResizable(True)
         self.preferences_page_scroll_content = QWidget()
         self.preferences_page_scroll_content.setObjectName(u"preferences_page_scroll_content")
-        self.preferences_page_scroll_content.setGeometry(QRect(0, 0, 391, 382))
+        self.preferences_page_scroll_content.setGeometry(QRect(0, 0, 1010, 668))
         self.preferences_page_layout = QVBoxLayout(self.preferences_page_scroll_content)
-        self.preferences_page_layout.setSpacing(17)
+        self.preferences_page_layout.setSpacing(16)
         self.preferences_page_layout.setObjectName(u"preferences_page_layout")
-        self.preferences_page_layout.setContentsMargins(6, 6, 0, 0)
+        self.preferences_page_layout.setContentsMargins(16, 12, 16, 16)
         self.prefs_heading_row = QHBoxLayout()
         self.prefs_heading_row.setSpacing(0)
         self.prefs_heading_row.setObjectName(u"prefs_heading_row")
@@ -3663,18 +4257,36 @@ class Ui_MainWindow(object):
 
         self.preferences_connection_panel = QFrame(self.preferences_page_scroll_content)
         self.preferences_connection_panel.setObjectName(u"preferences_connection_panel")
-        self.preferences_connection_panel.setMaximumSize(QSize(820, 16777215))
+        self.preferences_connection_panel.setMaximumSize(QSize(16777215, 16777215))
+        self.preferences_connection_panel.setFrameShape(QFrame.NoFrame)
         self.preferences_connection_panel_host_layout = QVBoxLayout(self.preferences_connection_panel)
+        self.preferences_connection_panel_host_layout.setSpacing(0)
         self.preferences_connection_panel_host_layout.setObjectName(u"preferences_connection_panel_host_layout")
         self.preferences_connection_panel_host_layout.setContentsMargins(0, 0, 0, 0)
         self.preferences_connection_panel_layout = QVBoxLayout()
-        self.preferences_connection_panel_layout.setSpacing(12)
+        self.preferences_connection_panel_layout.setSpacing(10)
         self.preferences_connection_panel_layout.setObjectName(u"preferences_connection_panel_layout")
-        self.preferences_connection_panel_layout.setContentsMargins(12, 12, 12, 12)
+        self.preferences_connection_panel_layout.setContentsMargins(16, 14, 16, 14)
+        self.preferences_connection_panel_header_row = QHBoxLayout()
+        self.preferences_connection_panel_header_row.setSpacing(8)
+        self.preferences_connection_panel_header_row.setObjectName(u"preferences_connection_panel_header_row")
+        self.preferences_connection_panel_header_row.setContentsMargins(0, 0, 0, 0)
         self.preferences_connection_panel_header = QLabel(self.preferences_connection_panel)
         self.preferences_connection_panel_header.setObjectName(u"preferences_connection_panel_header")
 
-        self.preferences_connection_panel_layout.addWidget(self.preferences_connection_panel_header)
+        self.preferences_connection_panel_header_row.addWidget(self.preferences_connection_panel_header)
+
+        self.preferences_connection_panel_header_spacer = QSpacerItem(24, 12, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.preferences_connection_panel_header_row.addItem(self.preferences_connection_panel_header_spacer)
+
+        self.preferences_connection_status_label = QLabel(self.preferences_connection_panel)
+        self.preferences_connection_status_label.setObjectName(u"preferences_connection_status_label")
+
+        self.preferences_connection_panel_header_row.addWidget(self.preferences_connection_status_label)
+
+
+        self.preferences_connection_panel_layout.addLayout(self.preferences_connection_panel_header_row)
 
         self.preferences_connection_panel_caption = QLabel(self.preferences_connection_panel)
         self.preferences_connection_panel_caption.setObjectName(u"preferences_connection_panel_caption")
@@ -3686,26 +4298,36 @@ class Ui_MainWindow(object):
 
         self.preferences_connection_panel_layout.addWidget(self.preferences_endpoint_label)
 
+        self.preferences_endpoint_row = QHBoxLayout()
+        self.preferences_endpoint_row.setSpacing(10)
+        self.preferences_endpoint_row.setObjectName(u"preferences_endpoint_row")
+        self.preferences_endpoint_row.setContentsMargins(0, 0, 0, 0)
         self.preferences_endpoint_edit = QLineEdit(self.preferences_connection_panel)
         self.preferences_endpoint_edit.setObjectName(u"preferences_endpoint_edit")
-        self.preferences_endpoint_edit.setMinimumSize(QSize(0, 0))
+        self.preferences_endpoint_edit.setMinimumSize(QSize(0, 38))
+        self.preferences_endpoint_edit.setClearButtonEnabled(True)
 
-        self.preferences_connection_panel_layout.addWidget(self.preferences_endpoint_edit)
+        self.preferences_endpoint_row.addWidget(self.preferences_endpoint_edit)
 
-        self.preferences_interval_label = QLabel(self.preferences_connection_panel)
-        self.preferences_interval_label.setObjectName(u"preferences_interval_label")
+        self.preferences_test_connection_button = QPushButton(self.preferences_connection_panel)
+        self.preferences_test_connection_button.setObjectName(u"preferences_test_connection_button")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.preferences_test_connection_button.sizePolicy().hasHeightForWidth())
+        self.preferences_test_connection_button.setSizePolicy(sizePolicy3)
+        self.preferences_test_connection_button.setMinimumSize(QSize(0, 34))
+        self.preferences_test_connection_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.preferences_connection_panel_layout.addWidget(self.preferences_interval_label)
+        self.preferences_endpoint_row.addWidget(self.preferences_test_connection_button)
 
-        self.preferences_refresh_interval_combo = QComboBox(self.preferences_connection_panel)
-        self.preferences_refresh_interval_combo.addItem("")
-        self.preferences_refresh_interval_combo.addItem("")
-        self.preferences_refresh_interval_combo.addItem("")
-        self.preferences_refresh_interval_combo.addItem("")
-        self.preferences_refresh_interval_combo.setObjectName(u"preferences_refresh_interval_combo")
-        self.preferences_refresh_interval_combo.setMinimumSize(QSize(0, 0))
 
-        self.preferences_connection_panel_layout.addWidget(self.preferences_refresh_interval_combo)
+        self.preferences_connection_panel_layout.addLayout(self.preferences_endpoint_row)
+
+        self.preferences_endpoint_hint = QLabel(self.preferences_connection_panel)
+        self.preferences_endpoint_hint.setObjectName(u"preferences_endpoint_hint")
+
+        self.preferences_connection_panel_layout.addWidget(self.preferences_endpoint_hint)
 
 
         self.preferences_connection_panel_host_layout.addLayout(self.preferences_connection_panel_layout)
@@ -3713,17 +4335,197 @@ class Ui_MainWindow(object):
 
         self.preferences_page_layout.addWidget(self.preferences_connection_panel)
 
+        self.preferences_settings_grid = QGridLayout()
+<<<<<<< HEAD
+        self.preferences_settings_grid.setSpacing(14)
+        self.preferences_settings_grid.setObjectName(u"preferences_settings_grid")
+=======
+        self.preferences_settings_grid.setObjectName(u"preferences_settings_grid")
+        self.preferences_settings_grid.setHorizontalSpacing(14)
+        self.preferences_settings_grid.setVerticalSpacing(14)
+>>>>>>> refs/remotes/origin/main
+        self.preferences_settings_grid.setContentsMargins(0, 0, 0, 0)
+        self.preferences_refresh_panel = QFrame(self.preferences_page_scroll_content)
+        self.preferences_refresh_panel.setObjectName(u"preferences_refresh_panel")
+        self.preferences_refresh_panel.setFrameShape(QFrame.NoFrame)
+        self.preferences_refresh_panel_layout = QVBoxLayout(self.preferences_refresh_panel)
+        self.preferences_refresh_panel_layout.setSpacing(11)
+        self.preferences_refresh_panel_layout.setObjectName(u"preferences_refresh_panel_layout")
+        self.preferences_refresh_panel_layout.setContentsMargins(16, 14, 16, 14)
+        self.preferences_refresh_panel_header = QLabel(self.preferences_refresh_panel)
+        self.preferences_refresh_panel_header.setObjectName(u"preferences_refresh_panel_header")
+
+        self.preferences_refresh_panel_layout.addWidget(self.preferences_refresh_panel_header)
+
+        self.preferences_refresh_panel_caption = QLabel(self.preferences_refresh_panel)
+        self.preferences_refresh_panel_caption.setObjectName(u"preferences_refresh_panel_caption")
+
+        self.preferences_refresh_panel_layout.addWidget(self.preferences_refresh_panel_caption)
+
+        self.preferences_auto_refresh_checkbox = QCheckBox(self.preferences_refresh_panel)
+        self.preferences_auto_refresh_checkbox.setObjectName(u"preferences_auto_refresh_checkbox")
+        self.preferences_auto_refresh_checkbox.setChecked(True)
+
+        self.preferences_refresh_panel_layout.addWidget(self.preferences_auto_refresh_checkbox)
+
+        self.preferences_refresh_grid = QGridLayout()
+        self.preferences_refresh_grid.setObjectName(u"preferences_refresh_grid")
+        self.preferences_refresh_grid.setHorizontalSpacing(12)
+        self.preferences_refresh_grid.setVerticalSpacing(7)
+        self.preferences_refresh_grid.setContentsMargins(0, 0, 0, 0)
+        self.preferences_interval_label = QLabel(self.preferences_refresh_panel)
+        self.preferences_interval_label.setObjectName(u"preferences_interval_label")
+
+        self.preferences_refresh_grid.addWidget(self.preferences_interval_label, 0, 0, 1, 1)
+
+        self.preferences_request_timeout_label = QLabel(self.preferences_refresh_panel)
+        self.preferences_request_timeout_label.setObjectName(u"preferences_request_timeout_label")
+
+        self.preferences_refresh_grid.addWidget(self.preferences_request_timeout_label, 0, 1, 1, 1)
+
+        self.preferences_refresh_interval_combo = QComboBox(self.preferences_refresh_panel)
+        self.preferences_refresh_interval_combo.addItem("")
+        self.preferences_refresh_interval_combo.addItem("")
+        self.preferences_refresh_interval_combo.addItem("")
+        self.preferences_refresh_interval_combo.addItem("")
+        self.preferences_refresh_interval_combo.setObjectName(u"preferences_refresh_interval_combo")
+        self.preferences_refresh_interval_combo.setMinimumSize(QSize(0, 36))
+
+        self.preferences_refresh_grid.addWidget(self.preferences_refresh_interval_combo, 1, 0, 1, 1)
+
+        self.preferences_request_timeout_spin = QSpinBox(self.preferences_refresh_panel)
+        self.preferences_request_timeout_spin.setObjectName(u"preferences_request_timeout_spin")
+        self.preferences_request_timeout_spin.setMinimumSize(QSize(0, 36))
+        self.preferences_request_timeout_spin.setMinimum(3)
+        self.preferences_request_timeout_spin.setMaximum(120)
+        self.preferences_request_timeout_spin.setValue(15)
+
+        self.preferences_refresh_grid.addWidget(self.preferences_request_timeout_spin, 1, 1, 1, 1)
+
+
+        self.preferences_refresh_panel_layout.addLayout(self.preferences_refresh_grid)
+
+        self.preferences_refresh_interval_hint = QLabel(self.preferences_refresh_panel)
+        self.preferences_refresh_interval_hint.setObjectName(u"preferences_refresh_interval_hint")
+
+        self.preferences_refresh_panel_layout.addWidget(self.preferences_refresh_interval_hint)
+
+
+        self.preferences_settings_grid.addWidget(self.preferences_refresh_panel, 0, 0, 1, 1)
+
+        self.preferences_safety_panel = QFrame(self.preferences_page_scroll_content)
+        self.preferences_safety_panel.setObjectName(u"preferences_safety_panel")
+        self.preferences_safety_panel.setFrameShape(QFrame.NoFrame)
+        self.preferences_safety_panel_layout = QVBoxLayout(self.preferences_safety_panel)
+        self.preferences_safety_panel_layout.setSpacing(12)
+        self.preferences_safety_panel_layout.setObjectName(u"preferences_safety_panel_layout")
+        self.preferences_safety_panel_layout.setContentsMargins(16, 14, 16, 14)
+        self.preferences_safety_panel_header = QLabel(self.preferences_safety_panel)
+        self.preferences_safety_panel_header.setObjectName(u"preferences_safety_panel_header")
+
+        self.preferences_safety_panel_layout.addWidget(self.preferences_safety_panel_header)
+
+        self.preferences_safety_panel_caption = QLabel(self.preferences_safety_panel)
+        self.preferences_safety_panel_caption.setObjectName(u"preferences_safety_panel_caption")
+
+        self.preferences_safety_panel_layout.addWidget(self.preferences_safety_panel_caption)
+
+        self.preferences_confirm_dangerous_checkbox = QCheckBox(self.preferences_safety_panel)
+        self.preferences_confirm_dangerous_checkbox.setObjectName(u"preferences_confirm_dangerous_checkbox")
+        self.preferences_confirm_dangerous_checkbox.setChecked(True)
+
+        self.preferences_safety_panel_layout.addWidget(self.preferences_confirm_dangerous_checkbox)
+
+        self.preferences_notify_failures_checkbox = QCheckBox(self.preferences_safety_panel)
+        self.preferences_notify_failures_checkbox.setObjectName(u"preferences_notify_failures_checkbox")
+        self.preferences_notify_failures_checkbox.setChecked(True)
+
+        self.preferences_safety_panel_layout.addWidget(self.preferences_notify_failures_checkbox)
+
+        self.preferences_safety_note = QLabel(self.preferences_safety_panel)
+        self.preferences_safety_note.setObjectName(u"preferences_safety_note")
+
+        self.preferences_safety_panel_layout.addWidget(self.preferences_safety_note)
+
+
+        self.preferences_settings_grid.addWidget(self.preferences_safety_panel, 0, 1, 1, 1)
+
+
+        self.preferences_page_layout.addLayout(self.preferences_settings_grid)
+
+        self.preferences_application_panel = QFrame(self.preferences_page_scroll_content)
+        self.preferences_application_panel.setObjectName(u"preferences_application_panel")
+        self.preferences_application_panel.setFrameShape(QFrame.NoFrame)
+        self.preferences_application_panel_layout = QVBoxLayout(self.preferences_application_panel)
+        self.preferences_application_panel_layout.setSpacing(7)
+        self.preferences_application_panel_layout.setObjectName(u"preferences_application_panel_layout")
+        self.preferences_application_panel_layout.setContentsMargins(14, 11, 14, 11)
+        self.preferences_application_heading_row = QHBoxLayout()
+        self.preferences_application_heading_row.setSpacing(8)
+        self.preferences_application_heading_row.setObjectName(u"preferences_application_heading_row")
+        self.preferences_application_heading_row.setContentsMargins(0, 0, 0, 0)
+        self.preferences_app_version_label = QLabel(self.preferences_application_panel)
+        self.preferences_app_version_label.setObjectName(u"preferences_app_version_label")
+
+        self.preferences_application_heading_row.addWidget(self.preferences_app_version_label)
+
+        self.preferences_application_heading_spacer = QSpacerItem(24, 12, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.preferences_application_heading_row.addItem(self.preferences_application_heading_spacer)
+
+        self.preferences_app_version_value = QLabel(self.preferences_application_panel)
+        self.preferences_app_version_value.setObjectName(u"preferences_app_version_value")
+
+        self.preferences_application_heading_row.addWidget(self.preferences_app_version_value)
+
+
+        self.preferences_application_panel_layout.addLayout(self.preferences_application_heading_row)
+
+        self.preferences_app_info_caption = QLabel(self.preferences_application_panel)
+        self.preferences_app_info_caption.setObjectName(u"preferences_app_info_caption")
+
+        self.preferences_application_panel_layout.addWidget(self.preferences_app_info_caption)
+
+
+        self.preferences_page_layout.addWidget(self.preferences_application_panel)
+
+        self.preferences_actions_row = QHBoxLayout()
+        self.preferences_actions_row.setSpacing(10)
+        self.preferences_actions_row.setObjectName(u"preferences_actions_row")
+        self.preferences_actions_row.setContentsMargins(0, 2, 0, 0)
+        self.preferences_save_status_label = QLabel(self.preferences_page_scroll_content)
+        self.preferences_save_status_label.setObjectName(u"preferences_save_status_label")
+
+        self.preferences_actions_row.addWidget(self.preferences_save_status_label)
+
+        self.preferences_actions_spacer = QSpacerItem(24, 12, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.preferences_actions_row.addItem(self.preferences_actions_spacer)
+
+        self.preferences_reset_button = QPushButton(self.preferences_page_scroll_content)
+        self.preferences_reset_button.setObjectName(u"preferences_reset_button")
+        sizePolicy3.setHeightForWidth(self.preferences_reset_button.sizePolicy().hasHeightForWidth())
+        self.preferences_reset_button.setSizePolicy(sizePolicy3)
+        self.preferences_reset_button.setMinimumSize(QSize(0, 34))
+        self.preferences_reset_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.preferences_actions_row.addWidget(self.preferences_reset_button)
+
         self.preferences_save_button = QPushButton(self.preferences_page_scroll_content)
         self.preferences_save_button.setObjectName(u"preferences_save_button")
-        self.preferences_save_button.setMinimumSize(QSize(150, 0))
-        self.preferences_save_button.setMaximumSize(QSize(190, 34))
+        sizePolicy3.setHeightForWidth(self.preferences_save_button.sizePolicy().hasHeightForWidth())
+        self.preferences_save_button.setSizePolicy(sizePolicy3)
+        self.preferences_save_button.setMinimumSize(QSize(0, 34))
         self.preferences_save_button.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.preferences_page_layout.addWidget(self.preferences_save_button)
+        self.preferences_actions_row.addWidget(self.preferences_save_button)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.preferences_page_layout.addItem(self.verticalSpacer_3)
+        self.preferences_page_layout.addLayout(self.preferences_actions_row)
+
+        self.preferences_bottom_spacer = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
+
+        self.preferences_page_layout.addItem(self.preferences_bottom_spacer)
 
         self.preferences_page_scroll.setWidget(self.preferences_page_scroll_content)
 
@@ -3848,11 +4650,19 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.content_stack.setCurrentIndex(3)
+        self.content_stack.setCurrentIndex(4)
         self.agent_detail_stacked_content.setCurrentIndex(3)
         self.performance_stacked_content.setCurrentIndex(2)
         self.agent_command_result_tabs.setCurrentIndex(0)
+<<<<<<< HEAD
+        self.fleet_command_result_tabs.setCurrentIndex(0)
+        self.fleet_logs_payload_tabs.setCurrentIndex(0)
+        self.fleet_logs_view_tabs.setCurrentIndex(0)
+=======
         self.fleet_command_result_tabs.setCurrentIndex(1)
+        self.fleet_logs_payload_tabs.setCurrentIndex(1)
+        self.fleet_logs_view_tabs.setCurrentIndex(1)
+>>>>>>> refs/remotes/origin/main
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -4270,55 +5080,221 @@ class Ui_MainWindow(object):
         self.fleet_command_stderr_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"No stderr captured for the selected execution.", None))
         self.fleet_command_result_tabs.setTabText(self.fleet_command_result_tabs.indexOf(self.fleet_command_stderr_tab), QCoreApplication.translate("MainWindow", u"STDERR", None))
         self.fleet_command_copy_output_button.setText(QCoreApplication.translate("MainWindow", u"Copy output", None))
-        self.fleet_logs_title.setText(QCoreApplication.translate("MainWindow", u"Activity & logs", None))
-        self.fleet_logs_subtitle.setText(QCoreApplication.translate("MainWindow", u"Explore machine events, command execution records and operational history.", None))
-        self.fleet_logs_refresh_button.setText(QCoreApplication.translate("MainWindow", u"Refresh", None))
-        self.fleet_logs_export_button.setText(QCoreApplication.translate("MainWindow", u"Export", None))
-        self.fleet_logs_filters_panel_header.setText(QCoreApplication.translate("MainWindow", u"Event filters", None))
-        self.fleet_logs_search.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search events or command output", None))
-        self.fleet_logs_agent_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"All agents", None))
-
+<<<<<<< HEAD
+        self.fleet_logs_details_panel_header.setText(QCoreApplication.translate("MainWindow", u"SELECTED ENTRY", None))
+        self.fleet_logs_copy_button.setText(QCoreApplication.translate("MainWindow", u"Copy entry", None))
+        self.fleet_logs_event_metadata.setText(QCoreApplication.translate("MainWindow", u"No entry selected \u2014 choose a row to inspect its original message and metadata.", None))
+        self.fleet_logs_details_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Selected event payload and source metadata will appear here.", None))
+=======
+        self.fleet_logs_title.setText(QCoreApplication.translate("MainWindow", u"Logs explorer", None))
+        self.fleet_logs_subtitle.setText(QCoreApplication.translate("MainWindow", u"Source-aware log requests, dynamic parameters, and faithful log output.", None))
+        self.fleet_logs_refresh_button.setText(QCoreApplication.translate("MainWindow", u"Fetch logs", None))
+        self.fleet_logs_export_button.setText(QCoreApplication.translate("MainWindow", u"Export results", None))
+        self.fleet_logs_filters_panel_header.setText(QCoreApplication.translate("MainWindow", u"01  /  LOG REQUEST", None))
+        self.fleet_logs_clear_filters_button.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
+        self.fleet_logs_filters_caption.setText(QCoreApplication.translate("MainWindow", u"Choose a host and log source. Parameters are generated from the selected command schema.", None))
+        self.fleet_logs_agent_field_label.setText(QCoreApplication.translate("MainWindow", u"TARGET AGENT  *", None))
+        self.fleet_logs_source_field_label.setText(QCoreApplication.translate("MainWindow", u"LOG OPERATION  *", None))
+        self.fleet_logs_agent_combo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select a connected agent", None))
+        self.fleet_logs_source_combo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select command\u2026", None))
+        self.fleet_logs_command_display_title.setText(QCoreApplication.translate("MainWindow", u"No given command", None))
+        self.fleet_logs_command_risk_badge.setText("")
+        self.fleet_logs_command_command_key.setText(QCoreApplication.translate("MainWindow", u"Please select a command above", None))
+        self.fleet_logs_command_description.setText("")
+        self.fleet_logs_fields_label.setText(QCoreApplication.translate("MainWindow", u"COMMAND PARAMETERS", None))
+        self.fleet_logs_command_fields_count.setText(QCoreApplication.translate("MainWindow", u"4 FIELDS  /  1 REQUIRED", None))
+#if QT_CONFIG(tooltip)
+        self.fleet_logs_command_fields_container.setToolTip(QCoreApplication.translate("MainWindow", u"Empty at design time. CommandFieldBuilder populates fleet_logs_command_fields_layout.", None))
+#endif // QT_CONFIG(tooltip)
+        self.fleet_logs_payload_label.setText(QCoreApplication.translate("MainWindow", u"REQUEST PAYLOAD", None))
+#if QT_CONFIG(tooltip)
+        self.fleet_logs_raw_mode_checkbox.setToolTip(QCoreApplication.translate("MainWindow", u"Use advanced raw editing only after validating the JSON payload before dispatch.", None))
+#endif // QT_CONFIG(tooltip)
+        self.fleet_logs_raw_mode_checkbox.setText(QCoreApplication.translate("MainWindow", u"Edit raw JSON", None))
+#if QT_CONFIG(tooltip)
+        self.fleet_logs_payload_editor.setToolTip(QCoreApplication.translate("MainWindow", u"Generated command payload, editable when raw JSON mode is enabled.", None))
+#endif // QT_CONFIG(tooltip)
+        self.fleet_logs_payload_editor.setPlaceholderText(QCoreApplication.translate("MainWindow", u"{}", None))
+        self.fleet_logs_payload_tabs.setTabText(self.fleet_logs_payload_tabs.indexOf(self.fleet_logs_payload_json_tab), QCoreApplication.translate("MainWindow", u"Payload JSON", None))
+        self.fleet_logs_request_preview_label.setText(QCoreApplication.translate("MainWindow", u"FULL REQUEST PREVIEW", None))
+        self.fleet_logs_request_preview.setPlaceholderText(QCoreApplication.translate("MainWindow", u"{}", None))
+        self.fleet_logs_payload_tabs.setTabText(self.fleet_logs_payload_tabs.indexOf(self.fleet_logs_payload_preview_tab), QCoreApplication.translate("MainWindow", u"Request preview", None))
+        self.fleet_logs_table_panel_header.setText(QCoreApplication.translate("MainWindow", u"LOG OUTPUT", None))
+        self.fleet_logs_query_status.setText(QCoreApplication.translate("MainWindow", u"IDLE", None))
+        self.fleet_logs_count_label.setText(QCoreApplication.translate("MainWindow", u"0 ENTRIES", None))
+        self.fleet_logs_table_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Structured entries appear when the source provides metadata; raw output is always preserved.", None))
+        self.fleet_logs_search_field_label.setText(QCoreApplication.translate("MainWindow", u"SEARCH RESULTS", None))
+        self.fleet_logs_level_field_label.setText(QCoreApplication.translate("MainWindow", u"SEVERITY FILTER", None))
+        self.fleet_logs_search.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search loaded messages", None))
         self.fleet_logs_level_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"All levels", None))
-        self.fleet_logs_level_combo.setItemText(1, QCoreApplication.translate("MainWindow", u"Info", None))
-        self.fleet_logs_level_combo.setItemText(2, QCoreApplication.translate("MainWindow", u"Warning", None))
-        self.fleet_logs_level_combo.setItemText(3, QCoreApplication.translate("MainWindow", u"Error", None))
-        self.fleet_logs_level_combo.setItemText(4, QCoreApplication.translate("MainWindow", u"Critical", None))
+        self.fleet_logs_level_combo.setItemText(1, QCoreApplication.translate("MainWindow", u"Emergency", None))
+        self.fleet_logs_level_combo.setItemText(2, QCoreApplication.translate("MainWindow", u"Alert", None))
+        self.fleet_logs_level_combo.setItemText(3, QCoreApplication.translate("MainWindow", u"Critical", None))
+        self.fleet_logs_level_combo.setItemText(4, QCoreApplication.translate("MainWindow", u"Error", None))
+        self.fleet_logs_level_combo.setItemText(5, QCoreApplication.translate("MainWindow", u"Warning", None))
+        self.fleet_logs_level_combo.setItemText(6, QCoreApplication.translate("MainWindow", u"Notice", None))
+        self.fleet_logs_level_combo.setItemText(7, QCoreApplication.translate("MainWindow", u"Info", None))
+        self.fleet_logs_level_combo.setItemText(8, QCoreApplication.translate("MainWindow", u"Debug", None))
+        self.fleet_logs_level_combo.setItemText(9, QCoreApplication.translate("MainWindow", u"Unknown", None))
 
-        self.fleet_logs_source_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"All sources", None))
-        self.fleet_logs_source_combo.setItemText(1, QCoreApplication.translate("MainWindow", u"Agent", None))
-        self.fleet_logs_source_combo.setItemText(2, QCoreApplication.translate("MainWindow", u"Commands", None))
-        self.fleet_logs_source_combo.setItemText(3, QCoreApplication.translate("MainWindow", u"System", None))
-
-        self.fleet_logs_table_panel_header.setText(QCoreApplication.translate("MainWindow", u"Event log", None))
-        self.fleet_logs_table_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Newest records appear first. Select an event to inspect details.", None))
+>>>>>>> refs/remotes/origin/main
         ___qtablewidgetitem73 = self.fleet_logs_table.horizontalHeaderItem(0)
-        ___qtablewidgetitem73.setText(QCoreApplication.translate("MainWindow", u"TIMESTAMP", None))
+        ___qtablewidgetitem73.setText(QCoreApplication.translate("MainWindow", u"TIME", None))
         ___qtablewidgetitem74 = self.fleet_logs_table.horizontalHeaderItem(1)
         ___qtablewidgetitem74.setText(QCoreApplication.translate("MainWindow", u"AGENT", None))
         ___qtablewidgetitem75 = self.fleet_logs_table.horizontalHeaderItem(2)
-        ___qtablewidgetitem75.setText(QCoreApplication.translate("MainWindow", u"SOURCE", None))
+        ___qtablewidgetitem75.setText(QCoreApplication.translate("MainWindow", u"SOURCE / UNIT", None))
         ___qtablewidgetitem76 = self.fleet_logs_table.horizontalHeaderItem(3)
         ___qtablewidgetitem76.setText(QCoreApplication.translate("MainWindow", u"LEVEL", None))
         ___qtablewidgetitem77 = self.fleet_logs_table.horizontalHeaderItem(4)
-        ___qtablewidgetitem77.setText(QCoreApplication.translate("MainWindow", u"EVENT / MESSAGE", None))
-        self.fleet_logs_details_panel_header.setText(QCoreApplication.translate("MainWindow", u"Event details", None))
-        self.fleet_logs_event_metadata.setText(QCoreApplication.translate("MainWindow", u"No event selected", None))
-        self.fleet_logs_details_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select a row to inspect full details.", None))
-        self.fleet_logs_copy_button.setText(QCoreApplication.translate("MainWindow", u"Copy details", None))
-        self.fleet_logs_clear_filters_button.setText(QCoreApplication.translate("MainWindow", u"Clear filters", None))
-        self.prefs_title.setText(QCoreApplication.translate("MainWindow", u"Preferences", None))
-        self.prefs_subtitle.setText(QCoreApplication.translate("MainWindow", u"Configure local presentation and connectivity. Settings require application wiring.", None))
-        self.preferences_connection_panel_header.setText(QCoreApplication.translate("MainWindow", u"CONNECTION", None))
-        self.preferences_connection_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Specify the API endpoint and the preferred UI refresh interval.", None))
-        self.preferences_endpoint_label.setText(QCoreApplication.translate("MainWindow", u"BACKEND URL", None))
-        self.preferences_endpoint_edit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"https://example.com/api/v1/", None))
-        self.preferences_interval_label.setText(QCoreApplication.translate("MainWindow", u"REFRESH INTERVAL", None))
+        ___qtablewidgetitem77.setText(QCoreApplication.translate("MainWindow", u"MESSAGE / EVENT", None))
+<<<<<<< HEAD
+        self.fleet_logs_title.setText(QCoreApplication.translate("MainWindow", u"Logs explorer", None))
+        self.fleet_logs_subtitle.setText(QCoreApplication.translate("MainWindow", u"Source-aware log requests, dynamic parameters, and faithful log output.", None))
+        self.fleet_logs_refresh_button.setText(QCoreApplication.translate("MainWindow", u"Fetch logs", None))
+        self.fleet_logs_export_button.setText(QCoreApplication.translate("MainWindow", u"Export results", None))
+        self.fleet_logs_filters_panel_header.setText(QCoreApplication.translate("MainWindow", u"01  /  LOG REQUEST", None))
+        self.fleet_logs_clear_filters_button.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
+        self.fleet_logs_filters_caption.setText(QCoreApplication.translate("MainWindow", u"Choose a host and log source.", None))
+        self.fleet_logs_agent_field_label.setText(QCoreApplication.translate("MainWindow", u"TARGET AGENT  *", None))
+        self.fleet_logs_source_field_label.setText(QCoreApplication.translate("MainWindow", u"LOG OPERATION  *", None))
+        self.fleet_logs_agent_combo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select a connected agent", None))
+        self.fleet_logs_source_combo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select command\u2026", None))
+        self.fleet_logs_command_display_title.setText(QCoreApplication.translate("MainWindow", u"No given command", None))
+        self.fleet_logs_command_risk_badge.setText("")
+        self.fleet_logs_command_command_key.setText(QCoreApplication.translate("MainWindow", u"Please select a command above", None))
+        self.fleet_logs_command_description.setText("")
+        self.fleet_logs_fields_label.setText(QCoreApplication.translate("MainWindow", u"COMMAND PARAMETERS", None))
+        self.fleet_logs_command_fields_count.setText("")
+#if QT_CONFIG(tooltip)
+        self.fleet_logs_command_fields_container.setToolTip(QCoreApplication.translate("MainWindow", u"Empty at design time. CommandFieldBuilder populates fleet_logs_command_fields_layout.", None))
+#endif // QT_CONFIG(tooltip)
+        self.fleet_logs_payload_label.setText(QCoreApplication.translate("MainWindow", u"REQUEST PAYLOAD", None))
+#if QT_CONFIG(tooltip)
+        self.fleet_logs_raw_mode_checkbox.setToolTip(QCoreApplication.translate("MainWindow", u"Use advanced raw editing only after validating the JSON payload before dispatch.", None))
+#endif // QT_CONFIG(tooltip)
+        self.fleet_logs_raw_mode_checkbox.setText(QCoreApplication.translate("MainWindow", u"Edit raw JSON", None))
+#if QT_CONFIG(tooltip)
+        self.fleet_logs_payload_editor.setToolTip(QCoreApplication.translate("MainWindow", u"Generated command payload, editable when raw JSON mode is enabled.", None))
+#endif // QT_CONFIG(tooltip)
+        self.fleet_logs_payload_editor.setPlaceholderText(QCoreApplication.translate("MainWindow", u"{}", None))
+        self.fleet_logs_payload_tabs.setTabText(self.fleet_logs_payload_tabs.indexOf(self.fleet_logs_payload_json_tab), QCoreApplication.translate("MainWindow", u"Payload JSON", None))
+        self.fleet_logs_request_preview_label.setText(QCoreApplication.translate("MainWindow", u"FULL REQUEST PREVIEW", None))
+        self.fleet_logs_request_preview.setPlaceholderText(QCoreApplication.translate("MainWindow", u"{\n"
+"  \"command_type\": \"docker_logs\",\n"
+"  \"payload\": {}\n"
+"}", None))
+        self.fleet_logs_payload_tabs.setTabText(self.fleet_logs_payload_tabs.indexOf(self.fleet_logs_payload_preview_tab), QCoreApplication.translate("MainWindow", u"Request preview", None))
+        self.fleet_logs_table_panel_header.setText(QCoreApplication.translate("MainWindow", u"REQUEST HISTORY", None))
+        self.fleet_logs_query_status.setText(QCoreApplication.translate("MainWindow", u"IDLE", None))
+        self.fleet_logs_count_label.setText(QCoreApplication.translate("MainWindow", u"0 REQUESTS", None))
+        self.fleet_logs_table_panel_caption.setText(QCoreApplication.translate("MainWindow", u"All log requests are listed here. Select a request to inspect its captured output and errors.", None))
+        self.fleet_logs_search_field_label.setText(QCoreApplication.translate("MainWindow", u"SEARCH", None))
+        self.fleet_logs_level_field_label.setText(QCoreApplication.translate("MainWindow", u"LEVEL FILTER", None))
+        self.fleet_logs_search.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search request ID, command or status", None))
+        self.fleet_logs_level_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"All levels", None))
+        self.fleet_logs_level_combo.setItemText(1, QCoreApplication.translate("MainWindow", u"Emergency", None))
+        self.fleet_logs_level_combo.setItemText(2, QCoreApplication.translate("MainWindow", u"Alert", None))
+        self.fleet_logs_level_combo.setItemText(3, QCoreApplication.translate("MainWindow", u"Critical", None))
+        self.fleet_logs_level_combo.setItemText(4, QCoreApplication.translate("MainWindow", u"Error", None))
+        self.fleet_logs_level_combo.setItemText(5, QCoreApplication.translate("MainWindow", u"Warning", None))
+        self.fleet_logs_level_combo.setItemText(6, QCoreApplication.translate("MainWindow", u"Notice", None))
+        self.fleet_logs_level_combo.setItemText(7, QCoreApplication.translate("MainWindow", u"Info", None))
+        self.fleet_logs_level_combo.setItemText(8, QCoreApplication.translate("MainWindow", u"Debug", None))
+        self.fleet_logs_level_combo.setItemText(9, QCoreApplication.translate("MainWindow", u"Unknown", None))
+
+        self.fleet_logs_requests_hint.setText(QCoreApplication.translate("MainWindow", u"Select a request row to load its output and error stream in the tabs below.", None))
+=======
+        self.fleet_logs_view_tabs.setTabText(self.fleet_logs_view_tabs.indexOf(self.fleet_logs_entries_tab), QCoreApplication.translate("MainWindow", u"Entries", None))
+        self.fleet_logs_raw_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Fetch logs to inspect the native text returned by the selected source.", None))
+        self.fleet_logs_view_tabs.setTabText(self.fleet_logs_view_tabs.indexOf(self.fleet_logs_raw_tab), QCoreApplication.translate("MainWindow", u"Raw output", None))
+        self.fleet_logs_stderr_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Validation errors and command failures appear here.", None))
+        self.fleet_logs_view_tabs.setTabText(self.fleet_logs_view_tabs.indexOf(self.fleet_logs_errors_tab), QCoreApplication.translate("MainWindow", u"Errors", None))
+        self.fleet_logs_requests_hint.setText(QCoreApplication.translate("MainWindow", u"Select a previous log request to inspect its saved output.", None))
+>>>>>>> refs/remotes/origin/main
+        ___qtablewidgetitem78 = self.fleet_logs_request_history_table.horizontalHeaderItem(0)
+        ___qtablewidgetitem78.setText(QCoreApplication.translate("MainWindow", u"ID", None))
+        ___qtablewidgetitem79 = self.fleet_logs_request_history_table.horizontalHeaderItem(1)
+        ___qtablewidgetitem79.setText(QCoreApplication.translate("MainWindow", u"COMMAND", None))
+        ___qtablewidgetitem80 = self.fleet_logs_request_history_table.horizontalHeaderItem(2)
+        ___qtablewidgetitem80.setText(QCoreApplication.translate("MainWindow", u"STATUS", None))
+        ___qtablewidgetitem81 = self.fleet_logs_request_history_table.horizontalHeaderItem(3)
+        ___qtablewidgetitem81.setText(QCoreApplication.translate("MainWindow", u"CREATED", None))
+        ___qtablewidgetitem82 = self.fleet_logs_request_history_table.horizontalHeaderItem(4)
+        ___qtablewidgetitem82.setText(QCoreApplication.translate("MainWindow", u"STARTED", None))
+        ___qtablewidgetitem83 = self.fleet_logs_request_history_table.horizontalHeaderItem(5)
+        ___qtablewidgetitem83.setText(QCoreApplication.translate("MainWindow", u"FINISHED", None))
+<<<<<<< HEAD
+        self.fleet_logs_output_tab_title.setText(QCoreApplication.translate("MainWindow", u"SELECTED REQUEST OUTPUT", None))
+        self.fleet_logs_copy_output_button.setText(QCoreApplication.translate("MainWindow", u"Copy output", None))
+        self.fleet_logs_stdout_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select a request to inspect its captured output.", None))
+        self.fleet_logs_view_tabs.setTabText(self.fleet_logs_view_tabs.indexOf(self.fleet_logs_raw_tab), QCoreApplication.translate("MainWindow", u"Output", None))
+        self.fleet_logs_errors_tab_title.setText(QCoreApplication.translate("MainWindow", u"ERROR STREAM", None))
+        self.fleet_logs_copy_errors_button.setText(QCoreApplication.translate("MainWindow", u"Copy errors", None))
+        self.fleet_logs_stderr_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Errors and failure details for the selected request appear here.", None))
+        self.fleet_logs_view_tabs.setTabText(self.fleet_logs_view_tabs.indexOf(self.fleet_logs_errors_tab), QCoreApplication.translate("MainWindow", u"Errors", None))
+        self.fleet_logs_format_label.setText(QCoreApplication.translate("MainWindow", u"REQUEST HISTORY  /  SELECT A ROW", None))
+        self.fleet_logs_results_note.setText(QCoreApplication.translate("MainWindow", u"The Output and Errors tabs show the selected request.", None))
+        self.prefs_title.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.prefs_subtitle.setText(QCoreApplication.translate("MainWindow", u"Configure the backend connection and local desktop behavior.", None))
+        self.preferences_connection_panel_header.setText(QCoreApplication.translate("MainWindow", u"01  /  BACKEND CONNECTION", None))
+#if QT_CONFIG(tooltip)
+        self.preferences_connection_status_label.setToolTip(QCoreApplication.translate("MainWindow", u"The connection test has not been run yet.", None))
+#endif // QT_CONFIG(tooltip)
+        self.preferences_connection_status_label.setText(QCoreApplication.translate("MainWindow", u"NOT TESTED", None))
+        self.preferences_connection_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Set the API base URL used by the desktop client. Include the /api/v1/ prefix; do not add individual endpoint paths.", None))
+        self.preferences_endpoint_label.setText(QCoreApplication.translate("MainWindow", u"BACKEND API URL", None))
+#if QT_CONFIG(tooltip)
+        self.preferences_endpoint_edit.setToolTip(QCoreApplication.translate("MainWindow", u"Base URL used to build all desktop API requests.", None))
+#endif // QT_CONFIG(tooltip)
+        self.preferences_endpoint_edit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"http://127.0.0.1:8000/api/v1/", None))
+=======
+        self.fleet_logs_view_tabs.setTabText(self.fleet_logs_view_tabs.indexOf(self.fleet_logs_requests_tab), QCoreApplication.translate("MainWindow", u"Requests", None))
+        self.fleet_logs_format_label.setText(QCoreApplication.translate("MainWindow", u"SOURCE FORMAT  /  RAW OUTPUT PRESERVED", None))
+        self.fleet_logs_results_note.setText(QCoreApplication.translate("MainWindow", u"Previous fetches are available in Requests.", None))
+        self.fleet_logs_details_panel_header.setText(QCoreApplication.translate("MainWindow", u"SELECTED ENTRY", None))
+        self.fleet_logs_copy_button.setText(QCoreApplication.translate("MainWindow", u"Copy entry", None))
+        self.fleet_logs_event_metadata.setText(QCoreApplication.translate("MainWindow", u"No entry selected \u2014 choose a row to inspect its original message and metadata.", None))
+        self.fleet_logs_details_view.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Selected event payload and source metadata will appear here.", None))
+        self.prefs_title.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.prefs_subtitle.setText(QCoreApplication.translate("MainWindow", u"Configure the backend connection and local desktop behavior.", None))
+        self.preferences_connection_panel_header.setText(QCoreApplication.translate("MainWindow", u"01  /  BACKEND CONNECTION", None))
+        self.preferences_connection_status_label.setText(QCoreApplication.translate("MainWindow", u"NOT TESTED", None))
+#if QT_CONFIG(tooltip)
+        self.preferences_connection_status_label.setToolTip(QCoreApplication.translate("MainWindow", u"The connection test has not been run yet.", None))
+#endif // QT_CONFIG(tooltip)
+        self.preferences_connection_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Set the API base URL used by the desktop client. Include the /api/v1/ prefix; do not add individual endpoint paths.", None))
+        self.preferences_endpoint_label.setText(QCoreApplication.translate("MainWindow", u"BACKEND API URL", None))
+        self.preferences_endpoint_edit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"http://127.0.0.1:8000/api/v1/", None))
+#if QT_CONFIG(tooltip)
+        self.preferences_endpoint_edit.setToolTip(QCoreApplication.translate("MainWindow", u"Base URL used to build all desktop API requests.", None))
+#endif // QT_CONFIG(tooltip)
+>>>>>>> refs/remotes/origin/main
+        self.preferences_test_connection_button.setText(QCoreApplication.translate("MainWindow", u"Test connection", None))
+        self.preferences_endpoint_hint.setText(QCoreApplication.translate("MainWindow", u"Example: https://monitor.example.com/api/v1/  \u2022  Use HTTPS for remote deployments.", None))
+        self.preferences_refresh_panel_header.setText(QCoreApplication.translate("MainWindow", u"02  /  REFRESH BEHAVIOR", None))
+        self.preferences_refresh_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Control how often this desktop client refreshes information.", None))
+        self.preferences_auto_refresh_checkbox.setText(QCoreApplication.translate("MainWindow", u"Enable automatic dashboard refresh", None))
+        self.preferences_interval_label.setText(QCoreApplication.translate("MainWindow", u"DASHBOARD REFRESH INTERVAL", None))
+        self.preferences_request_timeout_label.setText(QCoreApplication.translate("MainWindow", u"API REQUEST TIMEOUT", None))
         self.preferences_refresh_interval_combo.setItemText(0, QCoreApplication.translate("MainWindow", u"5 seconds", None))
         self.preferences_refresh_interval_combo.setItemText(1, QCoreApplication.translate("MainWindow", u"10 seconds", None))
         self.preferences_refresh_interval_combo.setItemText(2, QCoreApplication.translate("MainWindow", u"30 seconds", None))
         self.preferences_refresh_interval_combo.setItemText(3, QCoreApplication.translate("MainWindow", u"60 seconds", None))
 
-        self.preferences_save_button.setText(QCoreApplication.translate("MainWindow", u"Save preferences", None))
+        self.preferences_request_timeout_spin.setSuffix(QCoreApplication.translate("MainWindow", u" s", None))
+        self.preferences_refresh_interval_hint.setText(QCoreApplication.translate("MainWindow", u"This affects desktop polling only. It does not change the agent heartbeat interval.", None))
+        self.preferences_safety_panel_header.setText(QCoreApplication.translate("MainWindow", u"03  /  SAFETY & NOTIFICATIONS", None))
+        self.preferences_safety_panel_caption.setText(QCoreApplication.translate("MainWindow", u"Local convenience settings. Server-side permissions remain authoritative.", None))
+        self.preferences_confirm_dangerous_checkbox.setText(QCoreApplication.translate("MainWindow", u"Confirm before sending dangerous commands", None))
+        self.preferences_notify_failures_checkbox.setText(QCoreApplication.translate("MainWindow", u"Notify when a request fails", None))
+        self.preferences_safety_note.setText(QCoreApplication.translate("MainWindow", u"A desktop confirmation is not a substitute for backend authorization.", None))
+        self.preferences_app_version_label.setText(QCoreApplication.translate("MainWindow", u"APPLICATION", None))
+        self.preferences_app_version_value.setText(QCoreApplication.translate("MainWindow", u"NexoraControl Desktop  \u2022  Development build", None))
+        self.preferences_app_info_caption.setText(QCoreApplication.translate("MainWindow", u"Use a tagged release version when packaging the application. Local settings should be stored per user, not in the repository.", None))
+        self.preferences_save_status_label.setText(QCoreApplication.translate("MainWindow", u"Changes are not saved yet.", None))
+        self.preferences_reset_button.setText(QCoreApplication.translate("MainWindow", u"Restore defaults", None))
+        self.preferences_save_button.setText(QCoreApplication.translate("MainWindow", u"Save settings", None))
         self.about_title.setText(QCoreApplication.translate("MainWindow", u"About NexoraControl", None))
         self.about_subtitle.setText(QCoreApplication.translate("MainWindow", u"Distributed agent monitoring, remote operations and infrastructure observability.", None))
         self.about_identity_panel_header.setText(QCoreApplication.translate("MainWindow", u"NexoraControl / Desktop", None))

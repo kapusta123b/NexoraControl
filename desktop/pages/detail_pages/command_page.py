@@ -35,10 +35,10 @@ class DetailCommandController(CommandController):
 
         self.agent = {}
 
-        self.setup_connections()
+        self._connect_signals()
         self.setup_style()
 
-    def setup_connections(self):
+    def _connect_signals(self):
         self.ui.agent_command_category_combo.currentTextChanged.connect(
             lambda text: self._change_command_list_by_category(
                 self.ui.agent_command_type_combo, text

@@ -22,6 +22,9 @@ wheels/
 node_modules/
 pyproject.toml
 
+#PySide
+pysidedeploy.spec
+
 # Django
 *.log
 local_settings.py

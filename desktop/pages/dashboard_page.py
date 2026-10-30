@@ -2,6 +2,7 @@ from PySide6.QtWidgets import QHeaderView
 
 from services.utils.widgets_utils import (
     apply_style_for_tables,
+    setup_table,
     update_or_create_row_item,
 )
 from services.pollers.agents_list_poller import AgentsListPoller
@@ -24,12 +25,12 @@ class DashboardController:
         self.dashboard_poller = poller
 
         self.setup_style()
-        self._setup_connections()
+        self.__connect_signals()
 
     def setup_style(self):
         apply_style_for_tables(self.ui.agents_table)
 
-    def _setup_connections(self) -> None:
+    def __connect_signals(self) -> None:
         self.ui.refresh_table_button.clicked.connect(self.dashboard_poller.refresh)
 
         self.dashboard_store.agents_changed.connect(self.populate_agents_table)
@@ -40,35 +41,11 @@ class DashboardController:
         online_count = sum(agent["status"] == "ON" for agent in agents)
         offline_count = len(agents) - online_count
 
-        for agent in agents:
-            name = agent["name"]
-            row = -1
-
-            for r in range(table.rowCount()):
-                item = table.item(r, 1)
-                if item and item.text() == name:
-                    row = r
-
-                    break
-
-            if row == -1:
-                row = table.rowCount()
-                table.insertRow(row)
-
-            last_seen = agent["last_seen"]
-
-            if last_seen:
-                dt = datetime.fromisoformat(last_seen)
-                last_seen_text = dt.strftime("%d %b %Y, %H:%M:%S")
-            else:
-                last_seen_text = "Never"
-
-            update_or_create_row_item(table, row, 0, agent["status"])
-            update_or_create_row_item(table, row, 1, name)
-            update_or_create_row_item(table, row, 2, agent["hostname"])
-            update_or_create_row_item(table, row, 3, str(agent["cpu_load"]))
-            update_or_create_row_item(table, row, 4, str(agent["ram_load"]))
-            update_or_create_row_item(table, row, 5, last_seen_text)
+        setup_table(
+            table,
+            agents,
+            ("status", "name", "hostname", "cpu_load", "ram_load", "last_seen"),
+        )
 
         self.ui.online_count.setText(str(online_count))
         self.ui.offline_count.setText(str(offline_count))

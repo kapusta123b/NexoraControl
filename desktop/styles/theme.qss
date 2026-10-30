@@ -1,25 +1,51 @@
-QWidget#central_content { background: #090E14; color: #D8E4ED;
-    font-family: "Segoe UI", "Inter", "Noto Sans", "DejaVu Sans", sans-serif;
-    font-size: 12px; }
-QWidget#left_panel { background: #0C131C; border-right: 1px solid #223340; }
-QWidget#dashboard_page, QWidget#agents_page, QWidget#agent_detail_page,
-QWidget#overview_detail_page, QWidget#performance_detail_page,
-QWidget#hardware_detail_page, QWidget#performance_compute_page,
-QWidget#performance_storage_page, QWidget#performance_thermal_page,
-QWidget#performance_network_page, QWidget#fleet_commands_page,
-QWidget#fleet_logs_page, QWidget#preferences_page,
-QWidget#application_about_page, QWidget#agent_commands_page {
-    background: #090E14; }
-QLabel { color: #D8E4ED; background: transparent; border: none; font-size: 12px; }
+QWidget#central_content {
+  background: #090e14;
+  color: #d8e4ed;
+  font-family: "Segoe UI", "Inter", "Noto Sans", "DejaVu Sans", sans-serif;
+  font-size: 12px;
+}
+QWidget#left_panel {
+  background: #0c131c;
+  border-right: 1px solid #223340;
+}
+QWidget#dashboard_page,
+QWidget#agents_page,
+QWidget#agent_detail_page,
+QWidget#overview_detail_page,
+QWidget#performance_detail_page,
+QWidget#hardware_detail_page,
+QWidget#performance_compute_page,
+QWidget#performance_storage_page,
+QWidget#performance_thermal_page,
+QWidget#performance_network_page,
+QWidget#fleet_commands_page,
+QWidget#fleet_logs_page,
+QWidget#preferences_page,
+QWidget#application_about_page,
+QWidget#agent_commands_page {
+  background: #090e14;
+}
+QLabel {
+  color: #d8e4ed;
+  background: transparent;
+  border: none;
+  font-size: 12px;
+}
 
 /* hero | 1 labels */
 QLabel#nexora_logo {
-    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 16px; font-weight: 700; color: #ECF3F8;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ecf3f8;
 }
 
 /* sidebar_micro | 1 labels */
 QLabel#sidebar_product_subtitle {
-    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 9px; font-weight: 500; color: #718897;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 9px;
+  font-weight: 500;
+  color: #718897;
 }
 
 /* page_title | 14 labels */
@@ -37,32 +63,45 @@ QLabel#fleet_cmd_title,
 QLabel#fleet_logs_title,
 QLabel#prefs_title,
 QLabel#about_title {
-    font-size: 17px; font-weight: 600; color: #EFF4F8;
+  font-size: 17px;
+  font-weight: 600;
+  color: #eff4f8;
 }
 
 /* hero_value | 7 labels */
 QLabel#agents_count,
 QLabel#online_count,
 QLabel#offline_count {
-    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 18px; font-weight: 600; color: #E4EFF5;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 18px;
+  font-weight: 600;
+  color: #e4eff5;
 }
 
 QLabel#cpu_load_label,
 QLabel#ram_load_label,
 QLabel#disk_load_label,
 QLabel#up_time_label {
-    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 12px; font-weight: 600; color: #E4EFF5;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e4eff5;
 }
 
 /* subject_value | 1 labels */
 QLabel#detail_top_agent_name_label {
-    font-size: 15px; font-weight: 600; color: #F0F5F8;
+  font-size: 15px;
+  font-weight: 600;
+  color: #f0f5f8;
 }
 
 /* status | 2 labels */
 QLabel#detail_top_agent_status_label,
 QLabel#agent_status_value_label {
-    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 11px; font-weight: 600; color: #ADC1CD;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #adc1cd;
 }
 
 /* page_caption | 15 labels */
@@ -81,7 +120,9 @@ QLabel#fleet_cmd_subtitle,
 QLabel#fleet_logs_subtitle,
 QLabel#prefs_subtitle,
 QLabel#about_subtitle {
-    font-size: 11px; font-weight: 400; color: #90A5B4;
+  font-size: 11px;
+  font-weight: 400;
+  color: #90a5b4;
 }
 
 /* section_title | 43 labels */
@@ -108,7 +149,6 @@ QLabel#network_health_errors_label,
 QLabel#network_health_drops_label,
 QLabel#network_health_total_label,
 QLabel#network_interfaces_label,
-
 QLabel#hardware_cpu_inventory_panel_header,
 QLabel#hardware_gpu_inventory_panel_header,
 QLabel#hardware_ram_modules_panel_header,
@@ -128,7 +168,9 @@ QLabel#fleet_logs_table_panel_header,
 QLabel#fleet_logs_details_panel_header,
 QLabel#preferences_connection_panel_header,
 QLabel#about_identity_panel_header {
-    font-size: 12px; font-weight: 600; color: #DDE9F0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #dde9f0;
 }
 
 /* section_caption | 11 labels */
@@ -143,33 +185,44 @@ QLabel#fleet_command_result_panel_caption,
 QLabel#fleet_logs_table_panel_caption,
 QLabel#preferences_connection_panel_caption,
 QLabel#about_identity_panel_caption {
-    font-size: 11px; font-weight: 400; color: #879DAE;
+  font-size: 11px;
+  font-weight: 400;
+  color: #879dae;
 }
 
 /* helper | 3 labels */
 QLabel#agent_command_safety_label,
 QLabel#fleet_command_library_help,
 QLabel#fleet_command_warning {
-    font-size: 11px; font-weight: 400; color: #B1A78F;
+  font-size: 11px;
+  font-weight: 400;
+  color: #b1a78f;
 }
 
 /* empty | 3 labels */
 QLabel#agent_command_result_summary,
 QLabel#fleet_command_result_metadata,
 QLabel#fleet_logs_event_metadata {
-    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 11px; color: #B4C5D0;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 11px;
+  color: #b4c5d0;
 }
 
 /* body | 1 labels */
 QLabel#about_description {
-    font-size: 12px; font-weight: 400; color: #C9D6DF;
+  font-size: 12px;
+  font-weight: 400;
+  color: #c9d6df;
 }
 
 /* meta | 3 labels */
 QLabel#about_version_value,
 QLabel#about_backend_value,
 QLabel#about_client_value {
-    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 11px; font-weight: 400; color: #C7D7E1;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: #c7d7e1;
 }
 
 /* field_emphasis | 12 labels */
@@ -185,7 +238,9 @@ QLabel#fleet_command_selected_label,
 QLabel#fleet_command_payload_label,
 QLabel#preferences_endpoint_label,
 QLabel#preferences_interval_label {
-    font-size: 10px; font-weight: 600; color: #9BB4C5;
+  font-size: 10px;
+  font-weight: 600;
+  color: #9bb4c5;
 }
 
 /* metric_label | 7 labels */
@@ -196,7 +251,9 @@ QLabel#cpu_label,
 QLabel#ram_label,
 QLabel#disk_label,
 QLabel#uptime_label {
-    font-size: 10px; font-weight: 600; color: #93A8B8;
+  font-size: 10px;
+  font-weight: 600;
+  color: #93a8b8;
 }
 
 /* data_value | 42 labels */
@@ -242,7 +299,10 @@ QLabel#hardware_chassis_vendor_value,
 QLabel#hardware_product_name_value,
 QLabel#hardware_chassis_type_value,
 QLabel#hardware_virtualization_value {
-    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 11px; font-weight: 500; color: #E0EAF1;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: #e0eaf1;
 }
 
 /* field | 43 labels */
@@ -289,410 +349,952 @@ QLabel#hardware_chassis_vendor_label,
 QLabel#hardware_product_name_label,
 QLabel#hardware_chassis_type_label,
 QLabel#hardware_virtualization_label {
-    font-size: 11px; font-weight: 400; color: #9AADB9;
+  font-size: 11px;
+  font-weight: 400;
+  color: #9aadb9;
 }
 
-
 /* Conditional state, driven by your existing Python dynamic properties. */
-QLabel[agent_status="online"] { color: #8AC9AF; }
-QLabel[agent_status="offline"] { color: #D5A1A7; }
-QLabel[load_level="low"] { color: #8AC9AF; }
-QLabel[load_level="medium"] { color: #D9BF91; }
-QLabel[load_level="high"] { color: #D5A1A7; }
-QLabel#online_count { color: #8AC9AF; }
-QLabel#offline_count { color: #D5A1A7; }
-QLabel#agent_command_safety_label, QLabel#fleet_command_warning {
-    color: #D7C29A; }
+QLabel[agent_status="online"] {
+  color: #8ac9af;
+}
+QLabel[agent_status="offline"] {
+  color: #d5a1a7;
+}
+QLabel[load_level="low"] {
+  color: #8ac9af;
+}
+QLabel[load_level="medium"] {
+  color: #d9bf91;
+}
+QLabel[load_level="high"] {
+  color: #d5a1a7;
+}
+QLabel#online_count {
+  color: #8ac9af;
+}
+QLabel#offline_count {
+  color: #d5a1a7;
+}
+QLabel#agent_command_safety_label,
+QLabel#fleet_command_warning {
+  color: #d7c29a;
+}
 
 /* Panels around commands, logs, preferences, and about: no new layout margins. */
-QFrame#fleet_command_library_panel, QFrame#fleet_command_execution_panel,
-QFrame#fleet_command_history_panel, QFrame#fleet_command_result_panel,
-QFrame#fleet_logs_filters_panel, QFrame#fleet_logs_table_panel,
-QFrame#fleet_logs_details_panel, QFrame#agent_command_form_panel,
-QFrame#agent_command_output_panel, QFrame#agent_command_history_panel,
-QFrame#preferences_connection_panel, QFrame#about_identity_panel {
-    background: #111B25; border: 1px solid #283A48; border-radius: 3px; }
-QFrame#fleet_command_execution_panel, QFrame#agent_command_form_panel {
-    border-top: 2px solid #698BA0; }
-QFrame#preferences_connection_panel, QFrame#about_identity_panel {
-    background: #101924; border-color: #2A3C4A; }
+QFrame#fleet_command_library_panel,
+QFrame#fleet_command_execution_panel,
+QFrame#fleet_command_history_panel,
+QFrame#fleet_command_result_panel,
+QFrame#fleet_logs_filters_panel,
+QFrame#fleet_logs_table_panel,
+QFrame#fleet_logs_details_panel,
+QFrame#agent_command_form_panel,
+QFrame#agent_command_output_panel,
+QFrame#agent_command_history_panel,
+QFrame#preferences_connection_panel,
+QFrame#about_identity_panel {
+  background: #111b25;
+  border: 1px solid #283a48;
+  border-radius: 3px;
+}
+QFrame#fleet_command_execution_panel,
+QFrame#agent_command_form_panel {
+  border-top: 2px solid #698ba0;
+}
+QFrame#preferences_connection_panel,
+QFrame#about_identity_panel {
+  background: #101924;
+  border-color: #2a3c4a;
+}
 
 /* Existing resource / inventory / overview panels. */
-QWidget#card_agents, QWidget#card_online, QWidget#card_offline,
-QWidget#cpu_widget, QWidget#ram_widget, QWidget#disk_widget,
-QWidget#uptime_widget, QWidget#system_status_box_widget,
+QWidget#card_agents,
+QWidget#card_online,
+QWidget#card_offline,
+QWidget#cpu_widget,
+QWidget#ram_widget,
+QWidget#disk_widget,
+QWidget#uptime_widget,
+QWidget#system_status_box_widget,
 QWidget#quick_actions_widget,
-QWidget#cpu_info_widget, QWidget#memory_info_widget,
-QWidget#gpu_info_widget, QWidget#motherboard_info_widget,
-QWidget#bios_info_widget, QWidget#disk_io_summary_widget,
-QWidget#ram_utilization_widget, QWidget#network_health_errors_widget,
-QWidget#network_health_drops_widget, QWidget#network_health_total_widget,
+QWidget#cpu_info_widget,
+QWidget#memory_info_widget,
+QWidget#gpu_info_widget,
+QWidget#motherboard_info_widget,
+QWidget#bios_info_widget,
+QWidget#disk_io_summary_widget,
+QWidget#ram_utilization_widget,
+QWidget#network_health_errors_widget,
+QWidget#network_health_drops_widget,
+QWidget#network_health_total_widget,
 QWidget#hardware_storage_inventory_panel,
 QWidget#hardware_network_inventory_panel,
 QWidget#hardware_platform_panel {
-    background: #111B25; border: 1px solid #283A48; border-radius: 3px; }
-QWidget#cpu_info_box_widget, QWidget#memory_info_box_widget,
-QWidget#gpu_info_box_widget, QWidget#motherboard_info_box_widget,
-QWidget#bios_info_box_widget, QWidget#recent_command_box_widget { background: transparent; border: none; }
-QWidget#compute_gauge_widget, QWidget#storage_gauge_widget,
-QWidget#thermals_gauge_widget, QWidget#network_gauge_widget {
-    background: #111B25; border: 1px solid #283A48; border-radius: 3px; }
-PlotWidget#cpu_ram_metric_graph, PlotWidget#load_average_metric_graph,
-PlotWidget#cpu_cores_metric_graph, PlotWidget#disk_write_read_graph,
-PlotWidget#thermals_graph, PlotWidget#network_graph {
-    background: #0B151F; border: 1px solid #273B49; border-radius: 2px; }
+  background: #111b25;
+  border: 1px solid #283a48;
+  border-radius: 3px;
+}
+QWidget#cpu_info_box_widget,
+QWidget#memory_info_box_widget,
+QWidget#gpu_info_box_widget,
+QWidget#motherboard_info_box_widget,
+QWidget#bios_info_box_widget,
+QWidget#recent_command_box_widget {
+  background: transparent;
+  border: none;
+}
+QWidget#compute_gauge_widget,
+QWidget#storage_gauge_widget,
+QWidget#thermals_gauge_widget,
+QWidget#network_gauge_widget {
+  background: #111b25;
+  border: 1px solid #283a48;
+  border-radius: 3px;
+}
+PlotWidget#cpu_ram_metric_graph,
+PlotWidget#load_average_metric_graph,
+PlotWidget#cpu_cores_metric_graph,
+PlotWidget#disk_write_read_graph,
+PlotWidget#thermals_graph,
+PlotWidget#network_graph {
+  background: #0b151f;
+  border: 1px solid #273b49;
+  border-radius: 2px;
+}
 
 /* Buttons: action-first hierarchy. No pill shapes or oversized back navigation. */
-QPushButton { background: #192631; border: 1px solid #314653;
-    color: #D2E0E9; border-radius: 3px; padding: 4px 10px;
-    font-size: 11px; font-weight: 500; min-height: 26px; }
-QPushButton:hover { background: #223442; border-color: #5B7B8E; color: #F3F7FA; }
-QPushButton:pressed { background: #101B25; }
-QPushButton:disabled { color: #637787; background: #111923; border-color: #283742; }
+QPushButton {
+  background: #192631;
+  border: 1px solid #314653;
+  color: #d2e0e9;
+  border-radius: 3px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  min-height: 26px;
+}
+QPushButton:hover {
+  background: #223442;
+  border-color: #5b7b8e;
+  color: #f3f7fa;
+}
+QPushButton:pressed {
+  background: #101b25;
+}
+QPushButton:disabled {
+  color: #637787;
+  background: #111923;
+  border-color: #283742;
+}
 QPushButton#back_to_agents_button {
-    background: transparent; border: 1px solid transparent;
-    color: #9AB0BF; font-size: 11px; font-weight: 500; text-align: left;
-    padding: 2px 4px; min-height: 27px; }
-QPushButton#back_to_agents_button:hover { color: #EAF1F5; background: #14212C; border-color: #283E4D; }
-QPushButton#back_to_agents_button:pressed { background: #1D303F; }
-QPushButton#fleet_command_send_button, QPushButton#agent_command_execute_button,
+  background: transparent;
+  border: 1px solid transparent;
+  color: #9ab0bf;
+  font-size: 11px;
+  font-weight: 500;
+  text-align: left;
+  padding: 2px 4px;
+  min-height: 27px;
+}
+QPushButton#back_to_agents_button:hover {
+  color: #eaf1f5;
+  background: #14212c;
+  border-color: #283e4d;
+}
+QPushButton#back_to_agents_button:pressed {
+  background: #1d303f;
+}
+QPushButton#fleet_command_send_button,
+QPushButton#agent_command_execute_button,
 QPushButton#preferences_save_button {
-    color: #09121A; background: #95B7CA; border-color: #A4C5D5; font-weight: 600; }
-QPushButton#fleet_command_send_button:hover, QPushButton#agent_command_execute_button:hover,
-QPushButton#preferences_save_button:hover { background: #B0CBD9; border-color: #C4D9E4; }
-QPushButton#fleet_command_validate_button, QPushButton#agent_command_validate_button {
-    color: #C6DBE8; background: #142532; border-color: #38556A; }
-QPushButton#reboot_quick_button, QPushButton#stop_all_docker_cont_quick_button {
-    color: #DBB9B5; background: #261D23; border-color: #6B4348; }
-QPushButton#reboot_quick_button:hover, QPushButton#stop_all_docker_cont_quick_button:hover {
-    background: #34252B; border-color: #9A666D; }
-QPushButton#fleet_logs_clear_filters_button { background: transparent; color: #A3B5C1; }
-QPushButton#fleet_logs_export_button { background: #17232D; }
+  color: #09121a;
+  background: #95b7ca;
+  border-color: #a4c5d5;
+  font-weight: 600;
+}
+QPushButton#fleet_command_send_button:hover,
+QPushButton#agent_command_execute_button:hover,
+QPushButton#preferences_save_button:hover {
+  background: #b0cbd9;
+  border-color: #c4d9e4;
+}
+QPushButton#fleet_command_validate_button,
+QPushButton#agent_command_validate_button {
+  color: #c6dbe8;
+  background: #142532;
+  border-color: #38556a;
+}
+QPushButton#reboot_quick_button,
+QPushButton#stop_all_docker_cont_quick_button {
+  color: #dbb9b5;
+  background: #261d23;
+  border-color: #6b4348;
+}
+QPushButton#reboot_quick_button:hover,
+QPushButton#stop_all_docker_cont_quick_button:hover {
+  background: #34252b;
+  border-color: #9a666d;
+}
+QPushButton#fleet_logs_clear_filters_button {
+  background: transparent;
+  color: #a3b5c1;
+}
+QPushButton#fleet_logs_export_button {
+  background: #17232d;
+}
 
 /* Main navigation */
-QPushButton#dashboard_button, QPushButton#agents_button,
-QPushButton#commands_button, QPushButton#logs_button,
-QPushButton#settings_button, QPushButton#about_button {
-    background: transparent; border: 1px solid transparent;
-    border-radius: 2px; color: #9BAFBD; text-align: left;
-    font-size: 12px; font-weight: 500; min-height: 30px; padding: 4px 11px; }
-QPushButton#dashboard_button:hover, QPushButton#agents_button:hover,
-QPushButton#commands_button:hover, QPushButton#logs_button:hover,
-QPushButton#settings_button:hover, QPushButton#about_button:hover {
-    background: #172733; color: #E3EDF3; }
-QPushButton#dashboard_button:checked, QPushButton#agents_button:checked,
-QPushButton#commands_button:checked, QPushButton#logs_button:checked,
-QPushButton#settings_button:checked, QPushButton#about_button:checked {
-    background: #1B2B37; border-left: 2px solid #8BAFBE; color: #EDF3F7; }
-QPushButton#overview_nav_button, QPushButton#performance_nav_button,
-QPushButton#hardware_nav_button, QPushButton#commands_nav_button,
-QPushButton#compute_button, QPushButton#storage_button,
-QPushButton#thermals_button, QPushButton#network_button,
-QPushButton#network_traffic_toggle_button, QPushButton#network_packets_toggle_button {
-    background: transparent; color: #94AABB; border: 1px solid transparent;
-    border-radius: 1px; min-height: 27px; padding: 4px 9px; font-weight: 500; }
-QPushButton#overview_nav_button:hover, QPushButton#performance_nav_button:hover,
-QPushButton#hardware_nav_button:hover, QPushButton#commands_nav_button:hover,
-QPushButton#compute_button:hover, QPushButton#storage_button:hover,
-QPushButton#thermals_button:hover, QPushButton#network_button:hover,
-QPushButton#network_traffic_toggle_button:hover, QPushButton#network_packets_toggle_button:hover {
-    color: #E7F0F5; background: #172733; }
-QPushButton#overview_nav_button:checked, QPushButton#performance_nav_button:checked,
-QPushButton#hardware_nav_button:checked, QPushButton#commands_nav_button:checked,
-QPushButton#compute_button:checked, QPushButton#storage_button:checked,
-QPushButton#thermals_button:checked, QPushButton#network_button:checked,
-QPushButton#network_traffic_toggle_button:checked, QPushButton#network_packets_toggle_button:checked {
-    color: #EDF4F8; background: #1A2A35; border-bottom: 2px solid #8BAFBE; }
+QPushButton#dashboard_button,
+QPushButton#agents_button,
+QPushButton#commands_button,
+QPushButton#logs_button,
+QPushButton#settings_button,
+QPushButton#about_button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  color: #9bafbd;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+  min-height: 30px;
+  padding: 4px 11px;
+}
+QPushButton#dashboard_button:hover,
+QPushButton#agents_button:hover,
+QPushButton#commands_button:hover,
+QPushButton#logs_button:hover,
+QPushButton#settings_button:hover,
+QPushButton#about_button:hover {
+  background: #172733;
+  color: #e3edf3;
+}
+QPushButton#dashboard_button:checked,
+QPushButton#agents_button:checked,
+QPushButton#commands_button:checked,
+QPushButton#logs_button:checked,
+QPushButton#settings_button:checked,
+QPushButton#about_button:checked {
+  background: #1b2b37;
+  border-left: 2px solid #8bafbe;
+  color: #edf3f7;
+}
+QPushButton#overview_nav_button,
+QPushButton#performance_nav_button,
+QPushButton#hardware_nav_button,
+QPushButton#commands_nav_button,
+QPushButton#compute_button,
+QPushButton#storage_button,
+QPushButton#thermals_button,
+QPushButton#network_button,
+QPushButton#network_traffic_toggle_button,
+QPushButton#network_packets_toggle_button {
+  background: transparent;
+  color: #94aabb;
+  border: 1px solid transparent;
+  border-radius: 1px;
+  min-height: 27px;
+  padding: 4px 9px;
+  font-weight: 500;
+}
+QPushButton#overview_nav_button:hover,
+QPushButton#performance_nav_button:hover,
+QPushButton#hardware_nav_button:hover,
+QPushButton#commands_nav_button:hover,
+QPushButton#compute_button:hover,
+QPushButton#storage_button:hover,
+QPushButton#thermals_button:hover,
+QPushButton#network_button:hover,
+QPushButton#network_traffic_toggle_button:hover,
+QPushButton#network_packets_toggle_button:hover {
+  color: #e7f0f5;
+  background: #172733;
+}
+QPushButton#overview_nav_button:checked,
+QPushButton#performance_nav_button:checked,
+QPushButton#hardware_nav_button:checked,
+QPushButton#commands_nav_button:checked,
+QPushButton#compute_button:checked,
+QPushButton#storage_button:checked,
+QPushButton#thermals_button:checked,
+QPushButton#network_button:checked,
+QPushButton#network_traffic_toggle_button:checked,
+QPushButton#network_packets_toggle_button:checked {
+  color: #edf4f8;
+  background: #1a2a35;
+  border-bottom: 2px solid #8bafbe;
+}
 
 /* Interactive controls */
-QLineEdit, QComboBox, QSpinBox {
-    background: #0C1720; border: 1px solid #304453; border-radius: 2px;
-    color: #E2EBF1; font-size: 11px; min-height: 26px;
-    padding: 3px 8px; selection-background-color: #345466; }
-QLineEdit:focus, QComboBox:focus, QSpinBox:focus { border: 1px solid #8EAFBF; background: #101F2A; }
-QLineEdit:disabled, QComboBox:disabled { color: #647A89; }
-QComboBox::drop-down { background: transparent; border: none; width: 23px; }
-QComboBox QAbstractItemView { background: #101E29; color: #E0EBF2;
-    border: 1px solid #385262; selection-background-color: #29485C;
-    selection-color: #F0F5F8; outline: 0; }
-QPlainTextEdit { background: #0A141D; color: #DAE6EE; border: 1px solid #304553;
-    border-radius: 2px; padding: 8px;
-    font-family: "JetBrains Mono", "Consolas", monospace; font-size: 11px;
-    selection-background-color: #38576A; }
-QPlainTextEdit:focus { border: 1px solid #87A9BC; }
-QTableWidget { background: #0D1720; alternate-background-color: #101D27;
-    color: #D8E4ED; gridline-color: #263846;
-    border: 1px solid #304553; border-radius: 2px; outline: 0;
-    selection-background-color: #28475C; selection-color: #F2F7FA; }
-QTableWidget::item { padding: 4px 7px; border-bottom: 1px solid #233643; }
-QTableWidget::item:hover { background: #182936; }
-QHeaderView::section { background: #172632; color: #BED0DB; border: 0;
-    border-bottom: 1px solid #344A59; padding: 6px 8px;
-    font-size: 10px; font-weight: 600; }
-QTableCornerButton::section { background: #172632; border: none; }
-QProgressBar { border: 1px solid #2B4050; background: #0C1720;
-    border-radius: 2px; color: #E0EAF0; text-align: center; font-size: 10px; }
-QProgressBar::chunk { background: #82A7BC; border-radius: 1px; }
-QProgressBar[load_level="low"]::chunk { background: #8AC9AF; }
-QProgressBar[load_level="medium"]::chunk { background: #D9BF91; }
-QProgressBar[load_level="high"]::chunk { background: #D5A1A7; }
-QScrollArea { background: transparent; border: none; }
-QScrollArea > QWidget > QWidget { background: transparent; }
-QScrollBar:vertical { background: #0C1620; border: 0; width: 8px; margin: 0; }
-QScrollBar::handle:vertical { background: #354C5B; border-radius: 2px; min-height: 25px; }
-QScrollBar::handle:vertical:hover { background: #587488; }
-QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical { background: none; }
-QScrollBar:horizontal { background: #0C1620; border: 0; height: 8px; margin: 0; }
-QScrollBar::handle:horizontal { background: #354C5B; border-radius: 2px; min-width: 25px; }
-QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0; }
-QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal { background: none; }
-Line { color: #263A47; background: #263A47; border: 0; }
-
-
+QLineEdit,
+QComboBox,
+QSpinBox {
+  background: #0c1720;
+  border: 1px solid #304453;
+  border-radius: 2px;
+  color: #e2ebf1;
+  font-size: 11px;
+  min-height: 26px;
+  padding: 3px 8px;
+  selection-background-color: #345466;
+}
+QLineEdit:focus,
+QComboBox:focus,
+QSpinBox:focus {
+  border: 1px solid #8eafbf;
+  background: #101f2a;
+}
+QLineEdit:disabled,
+QComboBox:disabled {
+  color: #647a89;
+}
+QComboBox::drop-down {
+  background: transparent;
+  border: none;
+  width: 23px;
+}
+QComboBox QAbstractItemView {
+  background: #101e29;
+  color: #e0ebf2;
+  border: 1px solid #385262;
+  selection-background-color: #29485c;
+  selection-color: #f0f5f8;
+  outline: 0;
+}
+QPlainTextEdit {
+  background: #0a141d;
+  color: #dae6ee;
+  border: 1px solid #304553;
+  border-radius: 2px;
+  padding: 8px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 11px;
+  selection-background-color: #38576a;
+}
+QPlainTextEdit:focus {
+  border: 1px solid #87a9bc;
+}
+QTableWidget {
+  background: #0d1720;
+  alternate-background-color: #101d27;
+  color: #d8e4ed;
+  gridline-color: #263846;
+  border: 1px solid #304553;
+  border-radius: 2px;
+  outline: 0;
+  selection-background-color: #28475c;
+  selection-color: #f2f7fa;
+}
+QTableWidget::item {
+  padding: 4px 7px;
+  border-bottom: 1px solid #233643;
+}
+QTableWidget::item:hover {
+  background: #182936;
+}
+QHeaderView::section {
+  background: #172632;
+  color: #bed0db;
+  border: 0;
+  border-bottom: 1px solid #344a59;
+  padding: 6px 8px;
+  font-size: 10px;
+  font-weight: 600;
+}
+QTableCornerButton::section {
+  background: #172632;
+  border: none;
+}
+QProgressBar {
+  border: 1px solid #2b4050;
+  background: #0c1720;
+  border-radius: 2px;
+  color: #e0eaf0;
+  text-align: center;
+  font-size: 10px;
+}
+QProgressBar::chunk {
+  background: #82a7bc;
+  border-radius: 1px;
+}
+QProgressBar[load_level="low"]::chunk {
+  background: #8ac9af;
+}
+QProgressBar[load_level="medium"]::chunk {
+  background: #d9bf91;
+}
+QProgressBar[load_level="high"]::chunk {
+  background: #d5a1a7;
+}
+QScrollArea {
+  background: transparent;
+  border: none;
+}
+QScrollArea > QWidget > QWidget {
+  background: transparent;
+}
+QScrollBar:vertical {
+  background: #0c1620;
+  border: 0;
+  width: 8px;
+  margin: 0;
+}
+QScrollBar::handle:vertical {
+  background: #354c5b;
+  border-radius: 2px;
+  min-height: 25px;
+}
+QScrollBar::handle:vertical:hover {
+  background: #587488;
+}
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+  height: 0;
+}
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+  background: none;
+}
+QScrollBar:horizontal {
+  background: #0c1620;
+  border: 0;
+  height: 8px;
+  margin: 0;
+}
+QScrollBar::handle:horizontal {
+  background: #354c5b;
+  border-radius: 2px;
+  min-width: 25px;
+}
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+  width: 0;
+}
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+  background: none;
+}
+Line {
+  color: #263a47;
+  background: #263a47;
+  border: 0;
+}
 
 /* agent_card form style */
 QWidget#card_form {
-    background-color: #151D27; border: 1px solid #2D3A47; border-radius: 2px;
-    font-family: "Noto Sans", "Segoe UI", sans-serif; font-size: 11px;
+  background-color: #151d27;
+  border: 1px solid #2d3a47;
+  border-radius: 2px;
+  font-family: "Noto Sans", "Segoe UI", sans-serif;
+  font-size: 11px;
 }
-QWidget#agent_information_widget, QWidget#system_information_widget,
-QWidget#right_widget {background: transparent; border: 0;}
-QLabel {background: transparent; border: 0; color: #96A8B6; font-size: 11px;}
-QLabel#vps_name_label {color: #E0E7EE; font-size: 12px; font-weight: 600;}
-QLabel#ip_os_label {color: #A8B5C2; font-size: 11px;}
-QLabel#cpu_ram_label {color: #8C9EAD; font-family:"JetBrains Mono","Consolas",monospace;font-size:10px;}
-QLabel#online_dot {color: #90BCAD; font-size: 12px;}
-QLabel#online_dot[agent_status="offline"] {color: #D19B9E;}
-QLabel#status_label {font-family:"JetBrains Mono","Consolas",monospace; font-size:10px; font-weight:600;color:#90BCAD;}
-QLabel#status_label[agent_status="online"] {color:#90BCAD;}
-QLabel#status_label[agent_status="offline"] {color:#D19B9E;}
-QPushButton#agent_open_button {background:#202D3A;border:1px solid #3E5567;border-radius:2px;color:#C8DAE4;
-    min-height:27px;padding:3px 12px;font-size:11px;font-weight:600;}
-QPushButton#agent_open_button:hover {background:#293B4A;border-color:#98B0C2;color:#ECF3F7;}
-QPushButton#agent_open_button:pressed {background:#0F202B;}
+QWidget#agent_information_widget,
+QWidget#system_information_widget,
+QWidget#right_widget {
+  background: transparent;
+  border: 0;
+}
+QLabel {
+  background: transparent;
+  border: 0;
+  color: #96a8b6;
+  font-size: 11px;
+}
+QLabel#vps_name_label {
+  color: #e0e7ee;
+  font-size: 12px;
+  font-weight: 600;
+}
+QLabel#ip_os_label {
+  color: #a8b5c2;
+  font-size: 11px;
+}
+QLabel#cpu_ram_label {
+  color: #8c9ead;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 10px;
+}
+QLabel#online_dot {
+  color: #90bcad;
+  font-size: 12px;
+}
+QLabel#online_dot[agent_status="offline"] {
+  color: #d19b9e;
+}
+QLabel#status_label {
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  color: #90bcad;
+}
+QLabel#status_label[agent_status="online"] {
+  color: #90bcad;
+}
+QLabel#status_label[agent_status="offline"] {
+  color: #d19b9e;
+}
+QPushButton#agent_open_button {
+  background: #202d3a;
+  border: 1px solid #3e5567;
+  border-radius: 2px;
+  color: #c8dae4;
+  min-height: 27px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+QPushButton#agent_open_button:hover {
+  background: #293b4a;
+  border-color: #98b0c2;
+  color: #ecf3f7;
+}
+QPushButton#agent_open_button:pressed {
+  background: #0f202b;
+}
 
 /* recent_command_widget form style */
-QWidget#recent_command_widget {background:#151D27;border-bottom:1px solid #2D3A47;
-    font-family:"Noto Sans","Segoe UI",sans-serif;font-size:11px;}
-QLabel {background:transparent;border:none;color:#BECBD5;font-size:11px;}
-QLabel#command_mark {font-size:12px;color:#90BCAD;}
-QLabel#command_mark[status="success"] {color:#90BCAD;}
-QLabel#command_mark[status="failed"] {color:#D19B9E;}
-QLabel#command_mark[status="pending"] {color:#D2B98F;}
-QLabel#command_name {color:#DAE4EA;font-family:"JetBrains Mono","Consolas",monospace;font-size:11px;}
-QLabel#command_status {color:#90BCAD;font-family:"JetBrains Mono","Consolas",monospace;font-size:10px;font-weight:600;}
-QLabel#command_status[status="success"] {color:#90BCAD;}
-QLabel#command_status[status="failed"] {color:#D19B9E;}
-QLabel#command_status[status="pending"] {color:#D2B98F;}
-QLabel#command_executed_time {color:#738897;font-size:10px;}
+QWidget#recent_command_widget {
+  background: #151d27;
+  border-bottom: 1px solid #2d3a47;
+  font-family: "Noto Sans", "Segoe UI", sans-serif;
+  font-size: 11px;
+}
+QLabel {
+  background: transparent;
+  border: none;
+  color: #becbd5;
+  font-size: 11px;
+}
+QLabel#command_mark {
+  font-size: 12px;
+  color: #90bcad;
+}
+QLabel#command_mark[status="success"] {
+  color: #90bcad;
+}
+QLabel#command_mark[status="failed"] {
+  color: #d19b9e;
+}
+QLabel#command_mark[status="pending"] {
+  color: #d2b98f;
+}
+QLabel#command_name {
+  color: #dae4ea;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 11px;
+}
+QLabel#command_status {
+  color: #90bcad;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 10px;
+  font-weight: 600;
+}
+QLabel#command_status[status="success"] {
+  color: #90bcad;
+}
+QLabel#command_status[status="failed"] {
+  color: #d19b9e;
+}
+QLabel#command_status[status="pending"] {
+  color: #d2b98f;
+}
+QLabel#command_executed_time {
+  color: #738897;
+  font-size: 10px;
+}
 
-
-#fleet_commands_page, #agent_commands_page,
-#fleet_commands_page_scroll, #agent_commands_page_scroll,
-#fleet_commands_page_scroll_content, #agent_commands_page_scroll_content {
-  background: #0C141D; color: #DCE5EC; font: 11px "Noto Sans", "Inter", "DejaVu Sans";
+#fleet_commands_page,
+#agent_commands_page,
+#fleet_commands_page_scroll,
+#agent_commands_page_scroll,
+#fleet_commands_page_scroll_content,
+#agent_commands_page_scroll_content {
+  background: #0c141d;
+  color: #dce5ec;
+  font:
+    11px "Noto Sans",
+    "Inter",
+    "DejaVu Sans";
 }
-#fleet_commands_page QLabel, #agent_commands_page QLabel {
-  background: transparent; border: none; color: #CEDAE2;
+#fleet_commands_page QLabel,
+#agent_commands_page QLabel {
+  background: transparent;
+  border: none;
+  color: #cedae2;
 }
-#fleet_cmd_title, #agent_cmd_title { font-size: 20px; font-weight: 650; color: #F2F5F7; }
-#fleet_cmd_subtitle, #agent_cmd_subtitle { color: #92A6B6; font-size: 11px; }
-#fleet_command_workspace_status, #agent_command_target_indicator {
-  color: #93BDCA; background: #152733; border: 1px solid #315064;
-  padding: 7px 10px; border-radius: 4px; font-size: 10px; font-weight: 600;
+#fleet_cmd_title,
+#agent_cmd_title {
+  font-size: 20px;
+  font-weight: 650;
+  color: #f2f5f7;
 }
-#fleet_command_process_strip, #agent_command_process_strip {
-  background: #10232E; border: 1px solid #234353; border-radius: 3px;
+#fleet_cmd_subtitle,
+#agent_cmd_subtitle {
+  color: #92a6b6;
+  font-size: 11px;
 }
-#fleet_command_process_steps, #agent_command_process_steps {
-  color: #91B4C8; font-size: 10px; font-weight: 600;
+#fleet_command_workspace_status,
+#agent_command_target_indicator {
+  color: #93bdca;
+  background: #152733;
+  border: 1px solid #315064;
+  padding: 7px 10px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
 }
-#fleet_command_library_panel, #fleet_command_execution_panel,
-#fleet_command_review_panel, #fleet_command_history_panel, #fleet_command_result_panel,
-#agent_command_form_panel, #agent_command_review_panel,
-#agent_command_output_panel, #agent_command_history_panel {
-  background: #141E29; border: 1px solid #2C3E4D; border-radius: 5px;
+#fleet_command_process_strip,
+#agent_command_process_strip {
+  background: #10232e;
+  border: 1px solid #234353;
+  border-radius: 3px;
 }
-#fleet_command_library_panel_header, #fleet_command_execution_panel_header,
-#fleet_command_review_header, #fleet_command_history_panel_header,
-#fleet_command_result_panel_header, #agent_command_form_panel_header,
-#agent_command_review_header, #agent_command_output_panel_header,
+#fleet_command_process_steps,
+#agent_command_process_steps {
+  color: #91b4c8;
+  font-size: 10px;
+  font-weight: 600;
+}
+#fleet_command_library_panel,
+#fleet_command_execution_panel,
+#fleet_command_review_panel,
+#fleet_command_history_panel,
+#fleet_command_result_panel,
+#agent_command_form_panel,
+#agent_command_review_panel,
+#agent_command_output_panel,
+#agent_command_history_panel {
+  background: #141e29;
+  border: 1px solid #2c3e4d;
+  border-radius: 5px;
+}
+#fleet_command_library_panel_header,
+#fleet_command_execution_panel_header,
+#fleet_command_review_header,
+#fleet_command_history_panel_header,
+#fleet_command_result_panel_header,
+#agent_command_form_panel_header,
+#agent_command_review_header,
+#agent_command_output_panel_header,
 #agent_command_history_panel_header {
-  color: #F0F4F7; font-size: 12px; font-weight: 700;
+  color: #f0f4f7;
+  font-size: 12px;
+  font-weight: 700;
 }
-#fleet_command_library_panel_caption, #fleet_command_execution_panel_caption,
-#fleet_command_review_caption, #fleet_command_history_panel_caption,
-#fleet_command_result_panel_caption, #agent_command_form_panel_caption,
-#agent_command_review_caption, #agent_command_output_panel_caption,
-#fleet_command_library_help, #fleet_command_catalog_summary,
-#fleet_command_target_hint, #fleet_command_raw_hint, #agent_command_raw_hint,
-#fleet_command_review_footer, #agent_command_review_footer {
-  color: #8EA4B4; font-size: 10px;
+#fleet_command_library_panel_caption,
+#fleet_command_execution_panel_caption,
+#fleet_command_review_caption,
+#fleet_command_history_panel_caption,
+#fleet_command_result_panel_caption,
+#agent_command_form_panel_caption,
+#agent_command_review_caption,
+#agent_command_output_panel_caption,
+#fleet_command_library_help,
+#fleet_command_catalog_summary,
+#fleet_command_target_hint,
+#fleet_command_raw_hint,
+#agent_command_raw_hint,
+#fleet_command_review_footer,
+#agent_command_review_footer {
+  color: #8ea4b4;
+  font-size: 10px;
 }
-#fleet_command_fields_label, #agent_command_fields_label,
-#fleet_command_payload_label, #agent_command_payload_label,
-#fleet_command_target_label, #fleet_command_selected_label,
-#agent_command_category_label, #agent_command_type_label,
-#fleet_command_review_payload_label, #agent_command_review_payload_label,
-#fleet_command_recent_section_label, #agent_command_recent_section_label {
-  color: #A8BAC6; font-size: 10px; font-weight: 700;
+#fleet_command_fields_label,
+#agent_command_fields_label,
+#fleet_command_payload_label,
+#agent_command_payload_label,
+#fleet_command_target_label,
+#fleet_command_selected_label,
+#agent_command_category_label,
+#agent_command_type_label,
+#fleet_command_review_payload_label,
+#agent_command_review_payload_label,
+#fleet_command_recent_section_label,
+#agent_command_recent_section_label {
+  color: #a8bac6;
+  font-size: 10px;
+  font-weight: 700;
 }
-#fleet_command_fields_count, #agent_command_fields_count {
-  color: #7FB8C7; font-size: 10px;
+#fleet_command_fields_count,
+#agent_command_fields_count {
+  color: #7fb8c7;
+  font-size: 10px;
 }
-#fleet_command_identity_card, #agent_command_identity_card {
-  background: #182A36; border: 1px solid #355365; border-radius: 4px;
+#fleet_command_identity_card,
+#agent_command_identity_card {
+  background: #182a36;
+  border: 1px solid #355365;
+  border-radius: 4px;
 }
-#fleet_command_display_title, #agent_command_display_title {
-  color: #F1F5F7; font-size: 15px; font-weight: 700;
+#fleet_command_display_title,
+#agent_command_display_title {
+  color: #f1f5f7;
+  font-size: 15px;
+  font-weight: 700;
 }
-#fleet_command_command_key, #agent_command_command_key {
-  color: #89A9BB; font-family: "JetBrains Mono", "DejaVu Sans Mono"; font-size: 10px;
+#fleet_command_command_key,
+#agent_command_command_key {
+  color: #89a9bb;
+  font-family: "JetBrains Mono", "DejaVu Sans Mono";
+  font-size: 10px;
 }
-#fleet_command_description, #agent_command_description {
-  color: #C0D0DB; font-size: 11px;
+#fleet_command_description,
+#agent_command_description {
+  color: #c0d0db;
+  font-size: 11px;
 }
-#fleet_command_risk_badge, #agent_command_risk_badge,
-#fleet_command_review_risk, #agent_command_review_risk {
-  color: #9ED5BD; background: #17372F; border: 1px solid #315B4B;
-  border-radius: 3px; padding: 4px 8px; font-size: 10px; font-weight: 700;
+#fleet_command_risk_badge,
+#agent_command_risk_badge,
+#fleet_command_review_risk,
+#agent_command_review_risk {
+  color: #9ed5bd;
+  background: #17372f;
+  border: 1px solid #315b4b;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 700;
 }
-#fleet_command_risk_badge[risk="moderate"], #agent_command_risk_badge[risk="moderate"],
-#fleet_command_review_risk[risk="moderate"], #agent_command_review_risk[risk="moderate"] {
-  color: #E9C48D; background: #3A2C21; border-color: #70563A;
+#fleet_command_risk_badge[risk="moderate"],
+#agent_command_risk_badge[risk="moderate"],
+#fleet_command_review_risk[risk="moderate"],
+#agent_command_review_risk[risk="moderate"] {
+  color: #e9c48d;
+  background: #3a2c21;
+  border-color: #70563a;
 }
-#fleet_command_risk_badge[risk="dangerous"], #agent_command_risk_badge[risk="dangerous"],
-#fleet_command_review_risk[risk="dangerous"], #agent_command_review_risk[risk="dangerous"] {
-  color: #EBA6A6; background: #3D252B; border-color: #754650;
+#fleet_command_risk_badge[risk="dangerous"],
+#agent_command_risk_badge[risk="dangerous"],
+#fleet_command_review_risk[risk="dangerous"],
+#agent_command_review_risk[risk="dangerous"] {
+  color: #eba6a6;
+  background: #3d252b;
+  border-color: #754650;
 }
-#fleet_command_fields_container, #agent_command_fields_container {
-  background: #0F1A24; border: 1px solid #34495B; border-radius: 4px;
+#fleet_command_fields_container,
+#agent_command_fields_container {
+  background: #0f1a24;
+  border: 1px solid #34495b;
+  border-radius: 4px;
 }
-#fleet_commands_page QLineEdit, #agent_commands_page QLineEdit,
-#fleet_commands_page QComboBox, #agent_commands_page QComboBox,
-#fleet_commands_page QPlainTextEdit, #agent_commands_page QPlainTextEdit,
-#fleet_commands_page QSpinBox, #agent_commands_page QSpinBox {
-  background: #0D1721; color: #DCE7EE; border: 1px solid #395061;
-  border-radius: 4px; selection-background-color: #395669;
-  padding: 6px 9px; font-size: 11px;
+#fleet_commands_page QLineEdit,
+#agent_commands_page QLineEdit,
+#fleet_commands_page QComboBox,
+#agent_commands_page QComboBox,
+#fleet_commands_page QPlainTextEdit,
+#agent_commands_page QPlainTextEdit,
+#fleet_commands_page QSpinBox,
+#agent_commands_page QSpinBox {
+  background: #0d1721;
+  color: #dce7ee;
+  border: 1px solid #395061;
+  border-radius: 4px;
+  selection-background-color: #395669;
+  padding: 6px 9px;
+  font-size: 11px;
 }
-#fleet_commands_page QLineEdit:focus, #agent_commands_page QLineEdit:focus,
-#fleet_commands_page QComboBox:focus, #agent_commands_page QComboBox:focus,
-#fleet_commands_page QSpinBox:focus, #agent_commands_page QSpinBox:focus,
-#fleet_commands_page QPlainTextEdit:focus, #agent_commands_page QPlainTextEdit:focus {
-  border: 1px solid #90B9CC;
+#fleet_commands_page QLineEdit:focus,
+#agent_commands_page QLineEdit:focus,
+#fleet_commands_page QComboBox:focus,
+#agent_commands_page QComboBox:focus,
+#fleet_commands_page QSpinBox:focus,
+#agent_commands_page QSpinBox:focus,
+#fleet_commands_page QPlainTextEdit:focus,
+#agent_commands_page QPlainTextEdit:focus {
+  border: 1px solid #90b9cc;
 }
-#fleet_commands_page QLineEdit[invalid="true"], #agent_commands_page QLineEdit[invalid="true"] {
-  border-color: #CA7F80;
+#fleet_commands_page QLineEdit[invalid="true"],
+#agent_commands_page QLineEdit[invalid="true"] {
+  border-color: #ca7f80;
 }
-#fleet_commands_page QComboBox, #agent_commands_page QComboBox,
-#fleet_commands_page QLineEdit, #agent_commands_page QLineEdit,
-#fleet_commands_page QSpinBox, #agent_commands_page QSpinBox { min-height: 29px; }
-#fleet_commands_page QComboBox::drop-down, #agent_commands_page QComboBox::drop-down {
-  border: none; width: 22px;
+#fleet_commands_page QComboBox,
+#agent_commands_page QComboBox,
+#fleet_commands_page QLineEdit,
+#agent_commands_page QLineEdit,
+#fleet_commands_page QSpinBox,
+#agent_commands_page QSpinBox {
+  min-height: 29px;
 }
-#fleet_commands_page QPlainTextEdit, #agent_commands_page QPlainTextEdit {
-  font-family: "JetBrains Mono", "DejaVu Sans Mono"; font-size: 10px;
+#fleet_commands_page QComboBox::drop-down,
+#agent_commands_page QComboBox::drop-down {
+  border: none;
+  width: 22px;
 }
-#fleet_command_request_preview, #agent_command_request_preview {
-  background: #09151E; border: 1px solid #264454; color: #B5D9E5;
+#fleet_commands_page QPlainTextEdit,
+#agent_commands_page QPlainTextEdit {
+  font-family: "JetBrains Mono", "DejaVu Sans Mono";
+  font-size: 10px;
 }
-#fleet_command_review_target, #agent_command_review_target,
-#fleet_command_review_operation, #agent_command_review_operation,
-#fleet_command_review_fields, #agent_command_review_fields {
-  font-family: "JetBrains Mono", "DejaVu Sans Mono"; color: #B4C7D3; font-size: 10px;
+#fleet_command_request_preview,
+#agent_command_request_preview {
+  background: #09151e;
+  border: 1px solid #264454;
+  color: #b5d9e5;
 }
-#fleet_command_validation_status, #agent_command_validation_status {
-  color: #B1C6D2; background: #172936; border-left: 3px solid #7EADC3;
-  padding: 9px 11px; font-weight: 600; font-size: 10px;
+#fleet_command_review_target,
+#agent_command_review_target,
+#fleet_command_review_operation,
+#agent_command_review_operation,
+#fleet_command_review_fields,
+#agent_command_review_fields {
+  font-family: "JetBrains Mono", "DejaVu Sans Mono";
+  color: #b4c7d3;
+  font-size: 10px;
 }
-#fleet_command_validation_status[state="valid"], #agent_command_validation_status[state="valid"] {
-  color: #B0DBC7; border-left-color: #73B596; background: #173126;
+#fleet_command_validation_status,
+#agent_command_validation_status {
+  color: #b1c6d2;
+  background: #172936;
+  border-left: 3px solid #7eadc3;
+  padding: 9px 11px;
+  font-weight: 600;
+  font-size: 10px;
 }
-#fleet_command_validation_status[state="invalid"], #agent_command_validation_status[state="invalid"] {
-  color: #E9B6B6; border-left-color: #D4888A; background: #34252A;
+#fleet_command_validation_status[state="valid"],
+#agent_command_validation_status[state="valid"] {
+  color: #b0dbc7;
+  border-left-color: #73b596;
+  background: #173126;
 }
-#fleet_command_warning, #agent_command_safety_label {
-  color: #AFC4D2; background: #1B2B37; border-left: 2px solid #537B91;
-  padding: 9px 11px; font-size: 10px;
+#fleet_command_validation_status[state="invalid"],
+#agent_command_validation_status[state="invalid"] {
+  color: #e9b6b6;
+  border-left-color: #d4888a;
+  background: #34252a;
 }
-#fleet_commands_page QTableWidget, #agent_commands_page QTableWidget {
-  background: #101C26; alternate-background-color: #17232E;
-  color: #DBE5EC; border: 1px solid #2E4353;
-  selection-background-color: #314F62; selection-color: #FAFCFD;
-  gridline-color: #273846; font-size: 10px;
+#fleet_command_warning,
+#agent_command_safety_label {
+  color: #afc4d2;
+  background: #1b2b37;
+  border-left: 2px solid #537b91;
+  padding: 9px 11px;
+  font-size: 10px;
 }
-#fleet_commands_page QHeaderView::section, #agent_commands_page QHeaderView::section {
-  background: #20313E; color: #A9BECF;
-  border: none; border-bottom: 1px solid #3B5364;
-  padding: 7px 8px; font-size: 10px; font-weight: 600;
+#fleet_commands_page QTableWidget,
+#agent_commands_page QTableWidget {
+  background: #101c26;
+  alternate-background-color: #17232e;
+  color: #dbe5ec;
+  border: 1px solid #2e4353;
+  selection-background-color: #314f62;
+  selection-color: #fafcfd;
+  gridline-color: #273846;
+  font-size: 10px;
 }
-#fleet_commands_page QPushButton, #agent_commands_page QPushButton {
-  background: #20313D; border: 1px solid #3A5364; border-radius: 4px;
-  color: #D7E6ED; padding: 6px 11px; font-size: 11px;
+#fleet_commands_page QHeaderView::section,
+#agent_commands_page QHeaderView::section {
+  background: #20313e;
+  color: #a9becf;
+  border: none;
+  border-bottom: 1px solid #3b5364;
+  padding: 7px 8px;
+  font-size: 10px;
+  font-weight: 600;
+}
+#fleet_commands_page QPushButton,
+#agent_commands_page QPushButton {
+  background: #20313d;
+  border: 1px solid #3a5364;
+  border-radius: 4px;
+  color: #d7e6ed;
+  padding: 6px 11px;
+  font-size: 11px;
   min-height: 25px;
 }
-#fleet_commands_page QPushButton:hover, #agent_commands_page QPushButton:hover {
-  background: #2A4251; border-color: #799BAF;
+#fleet_commands_page QPushButton:hover,
+#agent_commands_page QPushButton:hover {
+  background: #2a4251;
+  border-color: #799baf;
 }
-#fleet_commands_page QPushButton:disabled, #agent_commands_page QPushButton:disabled {
-  background: #1A2630; color: #748896; border-color: #2D4050;
+#fleet_commands_page QPushButton:disabled,
+#agent_commands_page QPushButton:disabled {
+  background: #1a2630;
+  color: #748896;
+  border-color: #2d4050;
 }
-#fleet_command_send_button, #agent_command_execute_button {
-  background: #92BCCD; color: #0D1922; border: 1px solid #ADCFDC; font-weight: 700;
+#fleet_command_send_button,
+#agent_command_execute_button {
+  background: #92bccd;
+  color: #0d1922;
+  border: 1px solid #adcfdc;
+  font-weight: 700;
 }
-#fleet_command_send_button:hover, #agent_command_execute_button:hover {
-  background: #B3D8E5; color: #0B1921;
+#fleet_command_send_button:hover,
+#agent_command_execute_button:hover {
+  background: #b3d8e5;
+  color: #0b1921;
 }
-#fleet_commands_page QCheckBox, #agent_commands_page QCheckBox {
-  color: #BFD0DC; font-size: 10px; spacing: 7px;
+#fleet_commands_page QCheckBox,
+#agent_commands_page QCheckBox {
+  color: #bfd0dc;
+  font-size: 10px;
+  spacing: 7px;
 }
-#fleet_commands_page QCheckBox::indicator, #agent_commands_page QCheckBox::indicator {
-  width: 14px; height: 14px;
+#fleet_commands_page QCheckBox::indicator,
+#agent_commands_page QCheckBox::indicator {
+  width: 14px;
+  height: 14px;
 }
-#fleet_commands_page QTabWidget::pane, #agent_commands_page QTabWidget::pane {
-  background: #101A24; border: 1px solid #2C4150;
+#fleet_commands_page QTabWidget::pane,
+#agent_commands_page QTabWidget::pane {
+  background: #101a24;
+  border: 1px solid #2c4150;
 }
-#fleet_commands_page QTabBar::tab, #agent_commands_page QTabBar::tab {
-  background: #192A36; border: 1px solid #2D4352; border-bottom: 0;
-  color: #8EA4B2; padding: 6px 16px;
+#fleet_commands_page QTabBar::tab,
+#agent_commands_page QTabBar::tab {
+  background: #192a36;
+  border: 1px solid #2d4352;
+  border-bottom: 0;
+  color: #8ea4b2;
+  padding: 6px 16px;
 }
-#fleet_commands_page QTabBar::tab:selected, #agent_commands_page QTabBar::tab:selected {
-  background: #263C4A; color: #EDF5F8; border-top: 2px solid #8EB7CB;
+#fleet_commands_page QTabBar::tab:selected,
+#agent_commands_page QTabBar::tab:selected {
+  background: #263c4a;
+  color: #edf5f8;
+  border-top: 2px solid #8eb7cb;
 }
-#fleet_commands_page QScrollBar:vertical, #agent_commands_page QScrollBar:vertical {
-  background: #111E28; width: 8px;
+#fleet_commands_page QScrollBar:vertical,
+#agent_commands_page QScrollBar:vertical {
+  background: #111e28;
+  width: 8px;
 }
-#fleet_commands_page QScrollBar::handle:vertical, #agent_commands_page QScrollBar::handle:vertical {
-  background: #3A5363; border-radius: 3px; min-height: 25px;
+#fleet_commands_page QScrollBar::handle:vertical,
+#agent_commands_page QScrollBar::handle:vertical {
+  background: #3a5363;
+  border-radius: 3px;
+  min-height: 25px;
 }
-#fleet_commands_page QScrollBar::add-line:vertical, #agent_commands_page QScrollBar::add-line:vertical,
-#fleet_commands_page QScrollBar::sub-line:vertical, #agent_commands_page QScrollBar::sub-line:vertical {
+#fleet_commands_page QScrollBar::add-line:vertical,
+#agent_commands_page QScrollBar::add-line:vertical,
+#fleet_commands_page QScrollBar::sub-line:vertical,
+#agent_commands_page QScrollBar::sub-line:vertical {
   height: 0px;
 }
 
 QFrame#agent_command_fields_container,
 QFrame#fleet_command_fields_container {
-    background-color: #0E1B26;
-    border: 1px solid #34495B;
-    border-radius: 5px;
+  background-color: #0e1b26;
+  border: 1px solid #34495b;
+  border-radius: 5px;
 }
 
 QFrame#agent_command_fields_container QWidget,
 QFrame#agent_command_fields_container QFrame,
 QFrame#fleet_command_fields_container QWidget,
 QFrame#fleet_command_fields_container QFrame {
-    color: #D8E4EC; background-color: transparent;
+  color: #d8e4ec;
+  background-color: transparent;
 }
 
 QFrame#agent_command_fields_container QFrame[commandField="true"],
 QFrame#agent_command_fields_container QWidget[commandField="true"],
 QFrame#fleet_command_fields_container QFrame[commandField="true"],
 QFrame#fleet_command_fields_container QWidget[commandField="true"] {
-    background-color: #13232E;
-    border: 1px solid #2D4657;
-    border-radius: 4px;
+  background-color: #13232e;
+  border: 1px solid #2d4657;
+  border-radius: 4px;
 }
 
 /* Generated rows should flow vertically without extra boxed borders.
@@ -702,38 +1304,38 @@ QFrame#agent_command_fields_container QFrame#command_field_row,
 QFrame#fleet_command_fields_container QFrame#command_field_row,
 QFrame#agent_command_fields_container QFrame[fieldRole="row"],
 QFrame#fleet_command_fields_container QFrame[fieldRole="row"] {
-    background: transparent;
-    border: none;
-    border-radius: 0px;
+  background: transparent;
+  border: none;
+  border-radius: 0px;
 }
 
 QFrame#agent_command_fields_container QGroupBox,
 QFrame#fleet_command_fields_container QGroupBox {
-    background-color: #12232F;
-    color: #D9E6EE;
-    border: 1px solid #344D5E;
-    border-radius: 4px;
-    margin-top: 14px;
-    padding: 12px 10px 8px 10px;
-    font-size: 11px;
-    font-weight: 600;
+  background-color: #12232f;
+  color: #d9e6ee;
+  border: 1px solid #344d5e;
+  border-radius: 4px;
+  margin-top: 14px;
+  padding: 12px 10px 8px 10px;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 QFrame#agent_command_fields_container QGroupBox::title,
 QFrame#fleet_command_fields_container QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-    left: 10px;
-    padding: 0 6px;
-    color: #AFC8D7;
+  subcontrol-origin: margin;
+  subcontrol-position: top left;
+  left: 10px;
+  padding: 0 6px;
+  color: #afc8d7;
 }
 
 QFrame#agent_command_fields_container QLabel,
 QFrame#fleet_command_fields_container QLabel {
-    background: transparent;
-    border: none;
-    color: #C5D5DF;
-    font-size: 11px;
+  background: transparent;
+  border: none;
+  color: #c5d5df;
+  font-size: 11px;
 }
 
 /* Dynamic field headings: match the original Qt Designer example. */
@@ -741,30 +1343,33 @@ QFrame#agent_command_fields_container QLabel[fieldRole="label"],
 QFrame#agent_command_fields_container QLabel[fieldRole="section"],
 QFrame#fleet_command_fields_container QLabel[fieldRole="label"],
 QFrame#fleet_command_fields_container QLabel[fieldRole="section"] {
-    background: transparent;
-    border: none;
-    color: #C0D3E0;
-    font-size: 10px;
-    font-weight: 700;
+  background: transparent;
+  border: none;
+  color: #c0d3e0;
+  font-size: 10px;
+  font-weight: 700;
 }
 
 QFrame#agent_command_fields_container QLabel[fieldRole="hint"],
 QFrame#fleet_command_fields_container QLabel[fieldRole="hint"] {
-    background: transparent;
-    border: none;
-    color: #829CAC;
-    font-size: 10px;
-    font-weight: 400;
+  background: transparent;
+  border: none;
+  color: #829cac;
+  font-size: 10px;
+  font-weight: 400;
 }
 
 QFrame#agent_command_fields_container QLabel[fieldRole="error"],
 QFrame#fleet_command_fields_container QLabel[fieldRole="error"] {
-    color: #DEA3A6; font-size: 10px;
+  color: #dea3a6;
+  font-size: 10px;
 }
 
 QFrame#agent_command_fields_container QLabel[fieldRole="required"],
 QFrame#fleet_command_fields_container QLabel[fieldRole="required"] {
-    color: #D9B387; font-size: 10px; font-weight: 600;
+  color: #d9b387;
+  font-size: 10px;
+  font-weight: 600;
 }
 
 QFrame#agent_command_fields_container QLineEdit,
@@ -789,14 +1394,14 @@ QFrame#fleet_command_fields_container QDateTimeEdit,
 QFrame#fleet_command_fields_container QTextEdit,
 QFrame#fleet_command_fields_container QPlainTextEdit,
 QFrame#fleet_command_fields_container QKeySequenceEdit {
-    background-color: #101F2B;
-    color: #DCE7EF;
-    border: 1px solid #385163;
-    border-radius: 4px;
-    padding: 6px 9px;
-    selection-background-color: #34566A;
-    selection-color: #F4F8FA;
-    font-size: 11px;
+  background-color: #101f2b;
+  color: #dce7ef;
+  border: 1px solid #385163;
+  border-radius: 4px;
+  padding: 6px 9px;
+  selection-background-color: #34566a;
+  selection-color: #f4f8fa;
+  font-size: 11px;
 }
 
 QFrame#agent_command_fields_container QLineEdit:hover,
@@ -821,7 +1426,7 @@ QFrame#fleet_command_fields_container QDateTimeEdit:hover,
 QFrame#fleet_command_fields_container QTextEdit:hover,
 QFrame#fleet_command_fields_container QPlainTextEdit:hover,
 QFrame#fleet_command_fields_container QKeySequenceEdit:hover {
-    border-color: #597A8E;
+  border-color: #597a8e;
 }
 
 QFrame#agent_command_fields_container QLineEdit:focus,
@@ -846,7 +1451,8 @@ QFrame#fleet_command_fields_container QDateTimeEdit:focus,
 QFrame#fleet_command_fields_container QTextEdit:focus,
 QFrame#fleet_command_fields_container QPlainTextEdit:focus,
 QFrame#fleet_command_fields_container QKeySequenceEdit:focus {
-    border-color: #91BCCE; background-color: #142838;
+  border-color: #91bcce;
+  background-color: #142838;
 }
 
 QFrame#agent_command_fields_container QLineEdit:disabled,
@@ -871,9 +1477,9 @@ QFrame#fleet_command_fields_container QDateTimeEdit:disabled,
 QFrame#fleet_command_fields_container QTextEdit:disabled,
 QFrame#fleet_command_fields_container QPlainTextEdit:disabled,
 QFrame#fleet_command_fields_container QKeySequenceEdit:disabled {
-    background-color: #13202B;
-    color: #6F8798;
-    border-color: #2A4050;
+  background-color: #13202b;
+  color: #6f8798;
+  border-color: #2a4050;
 }
 
 QFrame#agent_command_fields_container QLineEdit[invalid="true"],
@@ -898,7 +1504,8 @@ QFrame#fleet_command_fields_container QDateTimeEdit[invalid="true"],
 QFrame#fleet_command_fields_container QTextEdit[invalid="true"],
 QFrame#fleet_command_fields_container QPlainTextEdit[invalid="true"],
 QFrame#fleet_command_fields_container QKeySequenceEdit[invalid="true"] {
-    border: 1px solid #C8797C; background-color: #271C24;
+  border: 1px solid #c8797c;
+  background-color: #271c24;
 }
 
 QFrame#agent_command_fields_container QLineEdit,
@@ -919,38 +1526,39 @@ QFrame#fleet_command_fields_container QDateEdit,
 QFrame#fleet_command_fields_container QTimeEdit,
 QFrame#fleet_command_fields_container QDateTimeEdit,
 QFrame#fleet_command_fields_container QKeySequenceEdit {
-    min-height: 28px;
+  min-height: 28px;
 }
 
 QFrame#agent_command_fields_container QPlainTextEdit,
 QFrame#agent_command_fields_container QTextEdit,
 QFrame#fleet_command_fields_container QPlainTextEdit,
 QFrame#fleet_command_fields_container QTextEdit {
-    min-height: 75px; font-family: "JetBrains Mono", "DejaVu Sans Mono", monospace;
+  min-height: 75px;
+  font-family: "JetBrains Mono", "DejaVu Sans Mono", monospace;
 }
 
 QFrame#agent_command_fields_container QComboBox::drop-down,
 QFrame#agent_command_fields_container QFontComboBox::drop-down,
 QFrame#fleet_command_fields_container QComboBox::drop-down,
 QFrame#fleet_command_fields_container QFontComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 24px;
-    border: none;
-    border-left: 1px solid #30495A;
-    background: #192D3B;
+  subcontrol-origin: padding;
+  subcontrol-position: top right;
+  width: 24px;
+  border: none;
+  border-left: 1px solid #30495a;
+  background: #192d3b;
 }
 
 QFrame#agent_command_fields_container QComboBox QAbstractItemView,
 QFrame#agent_command_fields_container QFontComboBox QAbstractItemView,
 QFrame#fleet_command_fields_container QComboBox QAbstractItemView,
 QFrame#fleet_command_fields_container QFontComboBox QAbstractItemView {
-    background-color: #142431;
-    color: #D9E5EE;
-    border: 1px solid #466477;
-    selection-background-color: #31546A;
-    selection-color: #F3F7F9;
-    outline: 0;
+  background-color: #142431;
+  color: #d9e5ee;
+  border: 1px solid #466477;
+  selection-background-color: #31546a;
+  selection-color: #f3f7f9;
+  outline: 0;
 }
 
 /* Numeric values look like ordinary clean inputs: no spin-button chrome.
@@ -964,10 +1572,10 @@ QFrame#fleet_command_fields_container QSpinBox::up-button,
 QFrame#fleet_command_fields_container QSpinBox::down-button,
 QFrame#fleet_command_fields_container QDoubleSpinBox::up-button,
 QFrame#fleet_command_fields_container QDoubleSpinBox::down-button {
-    width: 0px;
-    height: 0px;
-    border: none;
-    background: transparent;
+  width: 0px;
+  height: 0px;
+  border: none;
+  background: transparent;
 }
 
 /* Date/time inputs may retain their native step controls. */
@@ -977,11 +1585,11 @@ QFrame#agent_command_fields_container QTimeEdit::up-button,
 QFrame#fleet_command_fields_container QDateEdit::up-button,
 QFrame#fleet_command_fields_container QDateTimeEdit::up-button,
 QFrame#fleet_command_fields_container QTimeEdit::up-button {
-    subcontrol-origin: border;
-    subcontrol-position: top right;
-    width: 20px;
-    border-left: 1px solid #30495A;
-    background-color: #1A303E;
+  subcontrol-origin: border;
+  subcontrol-position: top right;
+  width: 20px;
+  border-left: 1px solid #30495a;
+  background-color: #1a303e;
 }
 
 QFrame#agent_command_fields_container QDateEdit::down-button,
@@ -990,11 +1598,11 @@ QFrame#agent_command_fields_container QTimeEdit::down-button,
 QFrame#fleet_command_fields_container QDateEdit::down-button,
 QFrame#fleet_command_fields_container QDateTimeEdit::down-button,
 QFrame#fleet_command_fields_container QTimeEdit::down-button {
-    subcontrol-origin: border;
-    subcontrol-position: bottom right;
-    width: 20px;
-    border-left: 1px solid #30495A;
-    background-color: #1A303E;
+  subcontrol-origin: border;
+  subcontrol-position: bottom right;
+  width: 20px;
+  border-left: 1px solid #30495a;
+  background-color: #1a303e;
 }
 
 QFrame#agent_command_fields_container QDateEdit::drop-down,
@@ -1003,162 +1611,167 @@ QFrame#agent_command_fields_container QTimeEdit::drop-down,
 QFrame#fleet_command_fields_container QDateEdit::drop-down,
 QFrame#fleet_command_fields_container QDateTimeEdit::drop-down,
 QFrame#fleet_command_fields_container QTimeEdit::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 22px;
-    border-left: 1px solid #30495A;
-    background-color: #1A303E;
+  subcontrol-origin: padding;
+  subcontrol-position: top right;
+  width: 22px;
+  border-left: 1px solid #30495a;
+  background-color: #1a303e;
 }
 
 QFrame#agent_command_fields_container QCheckBox,
 QFrame#agent_command_fields_container QRadioButton,
 QFrame#fleet_command_fields_container QCheckBox,
 QFrame#fleet_command_fields_container QRadioButton {
-    color: #C0D3E0;
-    spacing: 9px;
-    font-size: 11px;
-    font-weight: 600;
-    background: transparent;
-    border: none;
+  color: #c0d3e0;
+  spacing: 9px;
+  font-size: 11px;
+  font-weight: 600;
+  background: transparent;
+  border: none;
 }
 
 QFrame#agent_command_fields_container QCheckBox::indicator,
 QFrame#agent_command_fields_container QRadioButton::indicator,
 QFrame#fleet_command_fields_container QCheckBox::indicator,
 QFrame#fleet_command_fields_container QRadioButton::indicator {
-    width: 16px; height: 16px;
+  width: 16px;
+  height: 16px;
 }
 
 /* Dynamic command parameter checkboxes: visible on dark surfaces.
    Scoped to the two command builders; no icons or extra files needed. */
 QFrame#agent_command_fields_container QCheckBox::indicator:unchecked,
 QFrame#fleet_command_fields_container QCheckBox::indicator:unchecked {
-    width: 16px;
-    height: 16px;
-    background-color: #101F2A;
-    border: 1px solid #7893A5;
-    border-radius: 4px;
+  width: 16px;
+  height: 16px;
+  background-color: #101f2a;
+  border: 1px solid #7893a5;
+  border-radius: 4px;
 }
 
 QFrame#agent_command_fields_container QCheckBox::indicator:unchecked:hover,
 QFrame#fleet_command_fields_container QCheckBox::indicator:unchecked:hover {
-    background-color: #1D3646;
-    border: 1px solid #A4C9DD;
+  background-color: #1d3646;
+  border: 1px solid #a4c9dd;
 }
 
 QFrame#agent_command_fields_container QCheckBox::indicator:checked,
 QFrame#fleet_command_fields_container QCheckBox::indicator:checked {
-    width: 16px;
-    height: 16px;
-    background-color: #91C3D7;
-    border: 1px solid #B5DEEB;
-    border-radius: 4px;
+  width: 16px;
+  height: 16px;
+  background-color: #91c3d7;
+  border: 1px solid #b5deeb;
+  border-radius: 4px;
 }
 
 QFrame#agent_command_fields_container QCheckBox::indicator:checked:hover,
 QFrame#fleet_command_fields_container QCheckBox::indicator:checked:hover {
-    background-color: #AAD7E8;
-    border: 1px solid #D2ECF5;
+  background-color: #aad7e8;
+  border: 1px solid #d2ecf5;
 }
 
 QFrame#agent_command_fields_container QCheckBox::indicator:unchecked:disabled,
 QFrame#fleet_command_fields_container QCheckBox::indicator:unchecked:disabled {
-    background-color: #172530;
-    border: 1px solid #425968;
+  background-color: #172530;
+  border: 1px solid #425968;
 }
 
 QFrame#agent_command_fields_container QCheckBox::indicator:checked:disabled,
 QFrame#fleet_command_fields_container QCheckBox::indicator:checked:disabled {
-    background-color: #567887;
-    border: 1px solid #6D8E9D;
+  background-color: #567887;
+  border: 1px solid #6d8e9d;
 }
 
 QFrame#agent_command_fields_container QCheckBox:disabled,
 QFrame#agent_command_fields_container QRadioButton:disabled,
 QFrame#fleet_command_fields_container QCheckBox:disabled,
 QFrame#fleet_command_fields_container QRadioButton:disabled {
-    color: #728A9C;
+  color: #728a9c;
 }
 
 QFrame#agent_command_fields_container QPushButton,
 QFrame#agent_command_fields_container QToolButton,
 QFrame#fleet_command_fields_container QPushButton,
 QFrame#fleet_command_fields_container QToolButton {
-    background-color: #1B3140;
-    border: 1px solid #3E5C6F;
-    border-radius: 4px;
-    color: #D8E8F0;
-    min-height: 27px;
-    padding: 5px 11px;
-    font-size: 11px;
+  background-color: #1b3140;
+  border: 1px solid #3e5c6f;
+  border-radius: 4px;
+  color: #d8e8f0;
+  min-height: 27px;
+  padding: 5px 11px;
+  font-size: 11px;
 }
 
 QFrame#agent_command_fields_container QPushButton:hover,
 QFrame#agent_command_fields_container QToolButton:hover,
 QFrame#fleet_command_fields_container QPushButton:hover,
 QFrame#fleet_command_fields_container QToolButton:hover {
-    background-color: #294658; border-color: #799EB1;
+  background-color: #294658;
+  border-color: #799eb1;
 }
 
 QFrame#agent_command_fields_container QPushButton:pressed,
 QFrame#agent_command_fields_container QToolButton:pressed,
 QFrame#fleet_command_fields_container QPushButton:pressed,
 QFrame#fleet_command_fields_container QToolButton:pressed {
-    background-color: #122633;
+  background-color: #122633;
 }
 
 QFrame#agent_command_fields_container QPushButton:disabled,
 QFrame#agent_command_fields_container QToolButton:disabled,
 QFrame#fleet_command_fields_container QPushButton:disabled,
 QFrame#fleet_command_fields_container QToolButton:disabled {
-    background-color: #182733; border-color: #2B4252; color: #718999;
+  background-color: #182733;
+  border-color: #2b4252;
+  color: #718999;
 }
 
 QFrame#agent_command_fields_container QSlider::groove:horizontal,
 QFrame#fleet_command_fields_container QSlider::groove:horizontal {
-    height: 5px;
-    border-radius: 2px;
-    background-color: #314959;
+  height: 5px;
+  border-radius: 2px;
+  background-color: #314959;
 }
 
 QFrame#agent_command_fields_container QSlider::handle:horizontal,
 QFrame#fleet_command_fields_container QSlider::handle:horizontal {
-    background-color: #9BBCCE;
-    border: 1px solid #B5D2E0;
-    border-radius: 7px;
-    width: 14px;
-    margin: -5px 0;
+  background-color: #9bbcce;
+  border: 1px solid #b5d2e0;
+  border-radius: 7px;
+  width: 14px;
+  margin: -5px 0;
 }
 
 QFrame#agent_command_fields_container QSlider::groove:vertical,
 QFrame#fleet_command_fields_container QSlider::groove:vertical {
-    width: 5px;
-    border-radius: 2px;
-    background-color: #314959;
+  width: 5px;
+  border-radius: 2px;
+  background-color: #314959;
 }
 
 QFrame#agent_command_fields_container QSlider::handle:vertical,
 QFrame#fleet_command_fields_container QSlider::handle:vertical {
-    background-color: #9BBCCE;
-    border: 1px solid #B5D2E0;
-    border-radius: 7px;
-    height: 14px;
-    margin: 0 -5px;
+  background-color: #9bbcce;
+  border: 1px solid #b5d2e0;
+  border-radius: 7px;
+  height: 14px;
+  margin: 0 -5px;
 }
 
 QFrame#agent_command_fields_container QProgressBar,
 QFrame#fleet_command_fields_container QProgressBar {
-    background-color: #162936;
-    color: #DCE8EE;
-    border: 1px solid #345063;
-    border-radius: 4px;
-    text-align: center;
-    min-height: 16px;
+  background-color: #162936;
+  color: #dce8ee;
+  border: 1px solid #345063;
+  border-radius: 4px;
+  text-align: center;
+  min-height: 16px;
 }
 
 QFrame#agent_command_fields_container QProgressBar::chunk,
 QFrame#fleet_command_fields_container QProgressBar::chunk {
-    background-color: #83B1C7; border-radius: 3px;
+  background-color: #83b1c7;
+  border-radius: 3px;
 }
 
 QFrame#agent_command_fields_container QListWidget,
@@ -1167,88 +1780,780 @@ QFrame#agent_command_fields_container QTableWidget,
 QFrame#fleet_command_fields_container QListWidget,
 QFrame#fleet_command_fields_container QTreeWidget,
 QFrame#fleet_command_fields_container QTableWidget {
-    background-color: #0E1D28;
-    alternate-background-color: #142735;
-    color: #CBDDE8;
-    border: 1px solid #365163;
-    border-radius: 4px;
-    selection-background-color: #2A4B60;
-    selection-color: #F1F7FA;
-    outline: none;
+  background-color: #0e1d28;
+  alternate-background-color: #142735;
+  color: #cbdde8;
+  border: 1px solid #365163;
+  border-radius: 4px;
+  selection-background-color: #2a4b60;
+  selection-color: #f1f7fa;
+  outline: none;
 }
 
 QFrame#agent_command_fields_container QListWidget::item,
 QFrame#agent_command_fields_container QTreeWidget::item,
 QFrame#fleet_command_fields_container QListWidget::item,
 QFrame#fleet_command_fields_container QTreeWidget::item {
-    padding: 5px 7px;
+  padding: 5px 7px;
 }
 
 QFrame#agent_command_fields_container QHeaderView::section,
 QFrame#fleet_command_fields_container QHeaderView::section {
-    background-color: #203847;
-    color: #AFC6D5;
-    border: none;
-    border-bottom: 1px solid #355366;
-    padding: 6px;
-    font-size: 10px;
+  background-color: #203847;
+  color: #afc6d5;
+  border: none;
+  border-bottom: 1px solid #355366;
+  padding: 6px;
+  font-size: 10px;
 }
 
 QFrame#agent_command_fields_container QScrollArea,
 QFrame#fleet_command_fields_container QScrollArea {
-    background: transparent; border: none;
+  background: transparent;
+  border: none;
 }
 
 QFrame#agent_command_fields_container QScrollBar:vertical,
 QFrame#fleet_command_fields_container QScrollBar:vertical {
-    background-color: #142633; border: 0; width: 9px; margin: 0;
+  background-color: #142633;
+  border: 0;
+  width: 9px;
+  margin: 0;
 }
 
 QFrame#agent_command_fields_container QScrollBar::handle:vertical,
 QFrame#fleet_command_fields_container QScrollBar::handle:vertical {
-    background-color: #476476; border-radius: 4px; min-height: 20px;
+  background-color: #476476;
+  border-radius: 4px;
+  min-height: 20px;
 }
 
 QFrame#agent_command_fields_container QScrollBar::add-line:vertical,
 QFrame#agent_command_fields_container QScrollBar::sub-line:vertical,
 QFrame#fleet_command_fields_container QScrollBar::add-line:vertical,
 QFrame#fleet_command_fields_container QScrollBar::sub-line:vertical {
-    height: 0px;
+  height: 0px;
 }
 
 QFrame#agent_command_fields_container QScrollBar:horizontal,
 QFrame#fleet_command_fields_container QScrollBar:horizontal {
-    background-color: #142633; border: 0; height: 9px; margin: 0;
+  background-color: #142633;
+  border: 0;
+  height: 9px;
+  margin: 0;
 }
 
 QFrame#agent_command_fields_container QScrollBar::handle:horizontal,
 QFrame#fleet_command_fields_container QScrollBar::handle:horizontal {
-    background-color: #476476; border-radius: 4px; min-width: 20px;
+  background-color: #476476;
+  border-radius: 4px;
+  min-width: 20px;
 }
 
 QFrame#agent_command_fields_container QScrollBar::add-line:horizontal,
 QFrame#agent_command_fields_container QScrollBar::sub-line:horizontal,
 QFrame#fleet_command_fields_container QScrollBar::add-line:horizontal,
 QFrame#fleet_command_fields_container QScrollBar::sub-line:horizontal {
-    width: 0px;
+  width: 0px;
 }
 
 QFrame#agent_command_fields_container QTabWidget::pane,
 QFrame#fleet_command_fields_container QTabWidget::pane {
-    background-color: #10212C; border: 1px solid #344D5C;
+  background-color: #10212c;
+  border: 1px solid #344d5c;
 }
 
 QFrame#agent_command_fields_container QTabBar::tab,
 QFrame#fleet_command_fields_container QTabBar::tab {
-    background-color: #1A303E;
-    color: #9CB3C1;
-    border: 1px solid #304B5D;
-    padding: 6px 13px;
+  background-color: #1a303e;
+  color: #9cb3c1;
+  border: 1px solid #304b5d;
+  padding: 6px 13px;
 }
 
 QFrame#agent_command_fields_container QTabBar::tab:selected,
 QFrame#fleet_command_fields_container QTabBar::tab:selected {
-    background-color: #294658; color: #F1F7FA; border-top: 2px solid #91BCCE;
+  background-color: #294658;
+  color: #f1f7fa;
+  border-top: 2px solid #91bcce;
 }
 
 /* Unhandled/custom Qt widgets keep their native rendering in this area. */
+
+/* -------------------------------------------------------------------------
+   Settings page | connection, refresh behavior, safety and app information
+   ------------------------------------------------------------------------- */
+QFrame#preferences_connection_panel,
+QFrame#preferences_refresh_panel,
+QFrame#preferences_safety_panel,
+QFrame#preferences_application_panel {
+  background: #101924;
+  border: 1px solid #2a3c4a;
+  border-radius: 4px;
+}
+
+QLabel#preferences_connection_panel_header,
+QLabel#preferences_refresh_panel_header,
+QLabel#preferences_safety_panel_header {
+  font-size: 12px;
+  font-weight: 700;
+  color: #dde9f0;
+}
+
+QLabel#preferences_connection_panel_caption,
+QLabel#preferences_refresh_panel_caption,
+QLabel#preferences_safety_panel_caption,
+QLabel#preferences_endpoint_hint,
+QLabel#preferences_refresh_interval_hint,
+QLabel#preferences_safety_note,
+QLabel#preferences_app_info_caption {
+  color: #879dae;
+  font-size: 11px;
+}
+
+QLabel#preferences_endpoint_label,
+QLabel#preferences_interval_label,
+QLabel#preferences_request_timeout_label,
+QLabel#preferences_app_version_label {
+  color: #b8cbd7;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+QLineEdit#preferences_endpoint_edit,
+QComboBox#preferences_refresh_interval_combo,
+QSpinBox#preferences_request_timeout_spin {
+  color: #d7e4ec;
+  background: #0b141d;
+  border: 1px solid #2e4555;
+  border-radius: 3px;
+  padding: 7px 9px;
+  selection-background-color: #456b82;
+  selection-color: #f4f8fa;
+}
+
+QLineEdit#preferences_endpoint_edit:focus,
+QComboBox#preferences_refresh_interval_combo:focus,
+QSpinBox#preferences_request_timeout_spin:focus {
+  border: 1px solid #80afc7;
+  background: #0d1923;
+}
+
+QLabel#preferences_connection_status_label {
+  color: #b4c5d0;
+  background: #172632;
+  border: 1px solid #354c5b;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+QPushButton#preferences_test_connection_button,
+QPushButton#preferences_reset_button {
+  color: #c6dbe8;
+  background: #142532;
+  border: 1px solid #38556a;
+  border-radius: 3px;
+  padding: 7px 13px;
+  font-weight: 600;
+}
+
+QPushButton#preferences_test_connection_button:hover,
+QPushButton#preferences_reset_button:hover {
+  background: #1a303f;
+  border-color: #587c91;
+}
+
+QPushButton#preferences_test_connection_button:pressed,
+QPushButton#preferences_reset_button:pressed {
+  background: #203847;
+}
+
+QPushButton#preferences_save_button {
+  min-height: 34px;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+QLabel#preferences_save_status_label {
+  color: #879dae;
+  font-size: 11px;
+}
+
+QLabel#preferences_app_version_value {
+  color: #b5c8d4;
+  font-size: 10px;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+}
+
+QWidget#preferences_page QCheckBox {
+  color: #c2d2dc;
+  spacing: 8px;
+  font-size: 11px;
+  background: transparent;
+}
+
+QWidget#preferences_page QCheckBox::indicator {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #587083;
+  border-radius: 3px;
+  background: #0b141d;
+}
+
+QWidget#preferences_page QCheckBox::indicator:hover {
+  border-color: #8bafc4;
+}
+
+QWidget#preferences_page QCheckBox::indicator:checked {
+  background: #8fb6cb;
+  border: 1px solid #b2d0df;
+}
+
+QWidget#preferences_page QCheckBox::indicator:disabled {
+  background: #17232d;
+  border-color: #344654;
+}
+
+
+/* Settings feedback states: connection test and local-save status only. */
+QLabel#preferences_connection_status_label[connectionState="connected"] {
+  color: #9adbc4;
+  background: #142b29;
+  border-color: #32665a;
+}
+
+QLabel#preferences_connection_status_label[connectionState="auth"] {
+  color: #e6c98a;
+  background: #2b261a;
+  border-color: #6a5832;
+}
+
+QLabel#preferences_connection_status_label[connectionState="testing"] {
+  color: #a8d4ed;
+  background: #172a39;
+  border-color: #365d75;
+}
+
+QLabel#preferences_connection_status_label[connectionState="warning"] {
+  color: #e6c98a;
+  background: #2b261a;
+  border-color: #6a5832;
+}
+
+QLabel#preferences_connection_status_label[connectionState="error"] {
+  color: #f1a6a8;
+  background: #301e24;
+  border-color: #75404a;
+}
+
+QLabel#preferences_connection_status_label[connectionState="neutral"] {
+  color: #b4c5d0;
+  background: #172632;
+  border-color: #354c5b;
+}
+
+QLabel#preferences_save_status_label[saveState="saved"] {
+  color: #9adbc4;
+}
+
+QLabel#preferences_save_status_label[saveState="dirty"] {
+  color: #e6c98a;
+}
+
+QLabel#preferences_save_status_label[saveState="error"] {
+  color: #f1a6a8;
+}
+
+QPushButton#preferences_test_connection_button:disabled {
+  color: #718795;
+  background: #101a23;
+  border-color: #293946;
+}
+<<<<<<< HEAD
+
+/* -------------------------------------------------------------------------
+   Logs Explorer — compact operator layout
+   Additive override for the existing Steel Console theme.
+   ------------------------------------------------------------------------- */
+QWidget#fleet_logs_page,
+QWidget#fleet_logs_page_scroll_content {
+    background: #090E14;
+}
+
+QLabel#fleet_logs_title {
+    font-size: 20px;
+    font-weight: 650;
+    color: #EEF4F8;
+}
+
+QLabel#fleet_logs_subtitle {
+    font-size: 11px;
+    color: #8CA2B1;
+}
+
+QFrame#fleet_logs_filters_panel,
+QFrame#fleet_logs_table_panel,
+QFrame#fleet_logs_details_panel {
+    background: #101923;
+    border: 1px solid #263A48;
+    border-radius: 5px;
+}
+
+QFrame#fleet_logs_filters_panel {
+    border-top: 2px solid #789CAF;
+}
+
+QFrame#fleet_logs_command_identity_card {
+    background: #13212C;
+    border: 1px solid #304654;
+    border-left: 3px solid #83AABD;
+    border-radius: 4px;
+}
+
+QFrame#fleet_logs_payload_panel {
+    background: #0C151E;
+    border: 1px solid #263A48;
+    border-radius: 4px;
+}
+
+QWidget#fleet_logs_builder_left,
+QWidget#fleet_logs_parameters_heading,
+QWidget#fleet_logs_fields_scroll_content {
+    background: transparent;
+    border: none;
+}
+
+QScrollArea#fleet_logs_command_fields_scroll {
+    background: transparent;
+    border: 1px solid #263A48;
+    border-radius: 4px;
+}
+
+QScrollArea#fleet_logs_command_fields_scroll > QWidget,
+QScrollArea#fleet_logs_command_fields_scroll > QWidget > QWidget {
+    background: transparent;
+    border: none;
+}
+
+QFrame#fleet_logs_command_fields_container {
+    background: transparent;
+    border: none;
+}
+
+QFrame#fleet_logs_command_fields_container QWidget,
+QFrame#fleet_logs_command_fields_container QFrame {
+    color: #D8E4EC;
+    background: transparent;
+}
+
+QFrame#fleet_logs_command_fields_container QFrame#command_field_row,
+QFrame#fleet_logs_command_fields_container QFrame[fieldRole="row"] {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+QFrame#fleet_logs_command_fields_container QLabel {
+    color: #C5D5DF;
+    background: transparent;
+    border: none;
+    font-size: 11px;
+}
+
+QFrame#fleet_logs_command_fields_container QLabel[fieldRole="label"],
+QFrame#fleet_logs_command_fields_container QLabel[fieldRole="section"] {
+    color: #C0D3E0;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+QFrame#fleet_logs_command_fields_container QLabel[fieldRole="hint"] {
+    color: #829CAC;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+QFrame#fleet_logs_command_fields_container QLabel[fieldRole="error"] {
+    color: #DEA3A6;
+    font-size: 10px;
+}
+
+QFrame#fleet_logs_command_fields_container QLineEdit,
+QFrame#fleet_logs_command_fields_container QSpinBox,
+QFrame#fleet_logs_command_fields_container QDoubleSpinBox,
+QFrame#fleet_logs_command_fields_container QComboBox,
+QFrame#fleet_logs_command_fields_container QPlainTextEdit,
+QFrame#fleet_logs_command_fields_container QTextEdit {
+    background: #0F1D28;
+    color: #DCE7EF;
+    border: 1px solid #344B5A;
+    border-radius: 4px;
+    padding: 5px 8px;
+    selection-background-color: #34566A;
+    selection-color: #F4F8FA;
+    font-size: 11px;
+}
+
+QFrame#fleet_logs_command_fields_container QLineEdit:hover,
+QFrame#fleet_logs_command_fields_container QSpinBox:hover,
+QFrame#fleet_logs_command_fields_container QDoubleSpinBox:hover,
+QFrame#fleet_logs_command_fields_container QComboBox:hover {
+    border-color: #597A8E;
+}
+
+QFrame#fleet_logs_command_fields_container QLineEdit:focus,
+QFrame#fleet_logs_command_fields_container QSpinBox:focus,
+QFrame#fleet_logs_command_fields_container QDoubleSpinBox:focus,
+QFrame#fleet_logs_command_fields_container QComboBox:focus {
+    border-color: #91BCCE;
+    background: #142838;
+}
+
+QFrame#fleet_logs_command_fields_container QSpinBox::up-button,
+QFrame#fleet_logs_command_fields_container QSpinBox::down-button,
+QFrame#fleet_logs_command_fields_container QDoubleSpinBox::up-button,
+QFrame#fleet_logs_command_fields_container QDoubleSpinBox::down-button {
+    width: 0;
+    border: none;
+}
+
+QFrame#fleet_logs_command_fields_container QCheckBox {
+    color: #CBD9E2;
+    spacing: 8px;
+    background: transparent;
+}
+
+QFrame#fleet_logs_command_fields_container QCheckBox::indicator {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #6F8B9E;
+    border-radius: 3px;
+    background: #0D1923;
+}
+
+QFrame#fleet_logs_command_fields_container QCheckBox::indicator:hover {
+    border-color: #A1C3D4;
+}
+
+QFrame#fleet_logs_command_fields_container QCheckBox::indicator:checked {
+    background: #8BAFC2;
+    border: 1px solid #B7D0DD;
+}
+
+QLabel#fleet_logs_fields_label,
+QLabel#fleet_logs_agent_field_label,
+QLabel#fleet_logs_source_field_label,
+QLabel#fleet_logs_search_field_label,
+QLabel#fleet_logs_level_field_label,
+QLabel#fleet_logs_payload_label,
+QLabel#fleet_logs_request_preview_label {
+    color: #9BB4C5;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+QLabel#fleet_logs_command_fields_count,
+QLabel#fleet_logs_count_label,
+QLabel#fleet_logs_query_status,
+QLabel#fleet_logs_format_label {
+    color: #8EA9B9;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+QLabel#fleet_logs_command_display_title {
+    color: #E9F2F7;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+QLabel#fleet_logs_command_command_key {
+    color: #87A0B1;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 10px;
+}
+
+QLabel#fleet_logs_command_description {
+    color: #A9BBC7;
+    font-size: 11px;
+}
+
+QLabel#fleet_logs_command_risk_badge {
+    color: #A7D3BB;
+    background: #172C27;
+    border: 1px solid #355849;
+    border-radius: 3px;
+    padding: 3px 7px;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+QLabel#fleet_logs_filters_caption,
+QLabel#fleet_logs_payload_note,
+QLabel#fleet_logs_execution_note,
+QLabel#fleet_logs_table_panel_caption,
+QLabel#fleet_logs_results_note,
+QLabel#fleet_logs_event_metadata {
+    color: #879DAE;
+    font-size: 10px;
+}
+
+QPlainTextEdit#fleet_logs_payload_editor,
+QPlainTextEdit#fleet_logs_request_preview,
+QPlainTextEdit#fleet_logs_raw_view,
+QPlainTextEdit#fleet_logs_stderr_view,
+QPlainTextEdit#fleet_logs_details_view {
+    background: #09131C;
+    color: #D5E2EA;
+    border: 1px solid #2A3F4E;
+    border-radius: 4px;
+    padding: 8px;
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 10px;
+    selection-background-color: #34566A;
+}
+
+QPlainTextEdit#fleet_logs_payload_editor:focus,
+QPlainTextEdit#fleet_logs_request_preview:focus,
+QPlainTextEdit#fleet_logs_raw_view:focus,
+QPlainTextEdit#fleet_logs_stderr_view:focus,
+QPlainTextEdit#fleet_logs_details_view:focus {
+    border-color: #7399AE;
+}
+
+QTabWidget#fleet_logs_view_tabs::pane,
+QTabWidget#fleet_logs_payload_tabs::pane {
+    background: #0D1720;
+    border: 1px solid #273B49;
+    border-radius: 3px;
+    top: -1px;
+}
+
+QTabWidget#fleet_logs_view_tabs QTabBar::tab,
+QTabWidget#fleet_logs_payload_tabs QTabBar::tab {
+    background: #111D27;
+    color: #8FA5B4;
+    border: 1px solid transparent;
+    border-bottom: 2px solid transparent;
+    padding: 7px 12px;
+    margin-right: 3px;
+    font-size: 10px;
+    min-height: 23px;
+}
+
+QTabWidget#fleet_logs_view_tabs QTabBar::tab:hover,
+QTabWidget#fleet_logs_payload_tabs QTabBar::tab:hover {
+    color: #DBE7EE;
+    background: #182733;
+}
+
+QTabWidget#fleet_logs_view_tabs QTabBar::tab:selected,
+QTabWidget#fleet_logs_payload_tabs QTabBar::tab:selected {
+    color: #E6F0F5;
+    background: #152633;
+    border-bottom: 2px solid #8CAFC1;
+}
+
+QTableWidget#fleet_logs_table,
+QTableWidget#fleet_logs_request_history_table {
+    background: #0B151E;
+    alternate-background-color: #101C26;
+    color: #D6E3EB;
+    border: none;
+    gridline-color: #233744;
+    selection-background-color: #1B3444;
+    selection-color: #F2F7FA;
+    outline: none;
+}
+
+QTableWidget#fleet_logs_table::item,
+QTableWidget#fleet_logs_request_history_table::item {
+    padding: 5px 7px;
+    border-bottom: 1px solid #223542;
+}
+
+QTableWidget#fleet_logs_table::item:selected,
+QTableWidget#fleet_logs_request_history_table::item:selected {
+    background: #1B3444;
+    color: #F2F7FA;
+}
+
+QTableWidget#fleet_logs_table QHeaderView::section,
+QTableWidget#fleet_logs_request_history_table QHeaderView::section {
+    background: #14232E;
+    color: #AFC2CE;
+    border: none;
+    border-bottom: 1px solid #2A414F;
+    padding: 7px 8px;
+    font-size: 10px;
+    font-weight: 650;
+}
+
+QLineEdit#fleet_logs_search,
+QComboBox#fleet_logs_agent_combo,
+QComboBox#fleet_logs_source_combo,
+QComboBox#fleet_logs_level_combo {
+    min-height: 28px;
+}
+
+QPushButton#fleet_logs_refresh_button {
+    color: #0A141B;
+    background: #94B8CB;
+    border: 1px solid #A9C7D6;
+    font-weight: 700;
+}
+
+QPushButton#fleet_logs_refresh_button:hover {
+    background: #B5CFDC;
+    border-color: #C4DCE6;
+}
+
+QPushButton#fleet_logs_export_button {
+    color: #D7E5ED;
+    background: #162531;
+    border: 1px solid #354C5B;
+}
+
+QPushButton#fleet_logs_export_button:hover {
+    background: #203544;
+    border-color: #58778B;
+}
+
+QPushButton#fleet_logs_clear_filters_button {
+    min-height: 24px;
+    padding: 2px 8px;
+    color: #93AABA;
+    background: transparent;
+    border: 1px solid #2A3E4C;
+}
+
+QPushButton#fleet_logs_clear_filters_button:hover {
+    color: #E0EBF1;
+    background: #172733;
+    border-color: #4A6576;
+}
+
+
+/* -------------------------------------------------------------------------
+   NexoraControl · compact Logs workflow and dynamic field states
+   ------------------------------------------------------------------------- */
+QFrame#fleet_logs_command_fields_container QLabel[fieldRole="required"] {
+    color: #D9B387;
+    font-size: 10px;
+    font-weight: 700;
+}
+QFrame#fleet_logs_command_fields_container QLineEdit[invalid="true"],
+QFrame#fleet_logs_command_fields_container QSpinBox[invalid="true"],
+QFrame#fleet_logs_command_fields_container QDoubleSpinBox[invalid="true"],
+QFrame#fleet_logs_command_fields_container QComboBox[invalid="true"],
+QFrame#fleet_logs_command_fields_container QPlainTextEdit[invalid="true"],
+QFrame#fleet_logs_command_fields_container QTextEdit[invalid="true"] {
+    border: 1px solid #C8797C;
+    background: #271C24;
+}
+QFrame#fleet_logs_command_fields_container QLineEdit:disabled,
+QFrame#fleet_logs_command_fields_container QSpinBox:disabled,
+QFrame#fleet_logs_command_fields_container QDoubleSpinBox:disabled,
+QFrame#fleet_logs_command_fields_container QComboBox:disabled,
+QFrame#fleet_logs_command_fields_container QPlainTextEdit:disabled,
+QFrame#fleet_logs_command_fields_container QTextEdit:disabled {
+    color: #728A9C;
+    background: #13202B;
+    border-color: #2A4050;
+}
+QTableWidget#fleet_logs_table::item:hover {
+    background: #172B38;
+}
+QFrame#fleet_logs_filters_panel QPushButton#fleet_logs_clear_filters_button {
+    min-height: 26px;
+}
+QWidget#fleet_logs_page QScrollBar:vertical {
+    width: 9px;
+    margin: 0;
+    background: #0D1821;
+}
+QWidget#fleet_logs_page QScrollBar::handle:vertical {
+    min-height: 22px;
+    border-radius: 4px;
+    background: #405D6F;
+}
+QWidget#fleet_logs_page QScrollBar::handle:vertical:hover {
+    background: #63879B;
+}
+QWidget#fleet_logs_page QScrollBar::add-line:vertical,
+QWidget#fleet_logs_page QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+/* -------------------------------------------------------------------------
+   NexoraControl · Logs request inspector
+   ------------------------------------------------------------------------- */
+QWidget#fleet_logs_requests_tab {
+    background: transparent;
+}
+
+QLabel#fleet_logs_output_tab_title,
+QLabel#fleet_logs_errors_tab_title {
+    color: #9BB4C5;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 0;
+}
+
+QPushButton#fleet_logs_copy_output_button,
+QPushButton#fleet_logs_copy_errors_button {
+    min-height: 26px;
+    padding: 3px 11px;
+    color: #D7E5ED;
+    background: #162531;
+    border: 1px solid #385364;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 650;
+}
+
+QPushButton#fleet_logs_copy_output_button:hover,
+QPushButton#fleet_logs_copy_errors_button:hover {
+    color: #F3F7FA;
+    background: #203A49;
+    border-color: #7EA4B8;
+}
+
+QPushButton#fleet_logs_copy_output_button:pressed,
+QPushButton#fleet_logs_copy_errors_button:pressed {
+    background: #101D27;
+    border-color: #91B4C7;
+}
+
+QPushButton#fleet_logs_copy_output_button:disabled,
+QPushButton#fleet_logs_copy_errors_button:disabled {
+    color: #667D8C;
+    background: #111B24;
+    border-color: #2B3D49;
+}
+
+QTableWidget#fleet_logs_request_history_table::item:hover {
+    background: #172B38;
+}
+
+QTableWidget#fleet_logs_request_history_table::item:selected {
+    background: #1B3444;
+    color: #F2F7FA;
+}
+
+QPlainTextEdit#fleet_logs_raw_view,
+QPlainTextEdit#fleet_logs_stderr_view {
+    selection-background-color: #34566A;
+    selection-color: #F4F8FA;
+}
+
+QTabWidget#fleet_logs_view_tabs {
+    min-height: 360px;
+}
+=======
+>>>>>>> refs/remotes/origin/main

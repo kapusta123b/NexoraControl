@@ -54,6 +54,7 @@ class BasePoller(QObject):
         self._active_workers.append(worker_context)
 
         thread.started.connect(worker_slot)
+        worker.success.connect(self._reset_api_error_notice)
         worker.success.connect(success_callback)
         worker.error.connect(error_callback or self._show_api_error)
 
@@ -71,7 +72,13 @@ class BasePoller(QObject):
         thread.finished.connect(cleanup)
         thread.start()
 
+    def _reset_api_error_notice(self, _result: Any = None) -> None:
+        self.api_error_shown = False
+
     def _show_api_error(self, message: str | None = None) -> None:
+        if not getattr(self.client, "notify_failures", True):
+            return
+
         if not self.api_error_shown:
             self.api_error_shown = True
             MessageBox().show_message(

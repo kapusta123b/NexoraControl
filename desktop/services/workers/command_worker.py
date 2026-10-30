@@ -12,8 +12,8 @@ class CommandsWorker(BaseWorker):
         self.agent_id = agent_id
 
     @Slot()
-    def get_agent_commands(self, count: int = 5):
-        self._run_async(self.client.commands.get_commands, self.agent_id, count)
+    def get_agent_commands(self, params: dict = {}):
+        self._run_async(self.client.commands.get_commands, self.agent_id, params)
 
     @Slot()
     def create_agent_command(self, command_type: str, payload: dict = {}):

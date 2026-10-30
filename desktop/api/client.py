@@ -21,9 +21,9 @@ class NexoraCommandClient:
         self._request = request_func
         self.path = "agents/"
 
-    async def get_commands(self, agent_id: int, count: int) -> list[dict]:
+    async def get_commands(self, agent_id: int, params: dict = {}) -> list[dict]:
         return await self._request(
-            "GET", f"{self.path}{agent_id}/commands/", params={"count": count}
+            "GET", f"{self.path}{agent_id}/commands/", params=params
         )
 
     async def create_command(
@@ -91,9 +91,15 @@ class NexoraHardwareInfoClient:
 
 
 class NexoraClient:
-    def __init__(self, base_url: str, token: str) -> None:
+    def __init__(
+        self, base_url: str, token: str, timeout_seconds: float = 15.0
+    ) -> None:
         self.base_url = base_url
         self.token = token
+        self.timeout_seconds = float(timeout_seconds)
+        # Desktop preferences shared by command controllers and pollers.
+        self.confirm_dangerous_commands = True
+        self.notify_failures = True
 
         self.agents = NexoraAgentClient(self._request)
         self.commands = NexoraCommandClient(self._request)
@@ -109,7 +115,7 @@ class NexoraClient:
                 "Authorization": f"Bearer {self.token}",
                 "Content-Type": "application/json",
             },
-            timeout=10.0,
+            timeout=self.timeout_seconds,
         ) as client:
             kwargs = {"params": params}
             if method in ("POST", "PUT", "PATCH") and json_data is not None:

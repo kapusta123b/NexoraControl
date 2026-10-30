@@ -88,7 +88,7 @@ class DetailOverviewPoller(BasePoller):
         else:
             self._start_worker(
                 worker=worker,
-                worker_slot=lambda: worker.get_agent_commands(count=5),
+                worker_slot=lambda: worker.get_agent_commands(params={"count": 5}),
                 success_callback=self.commands_store.set_commands,
             )
 
