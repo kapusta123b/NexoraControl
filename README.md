@@ -12,6 +12,9 @@
 
 > [!IMPORTANT]
 > **Status: experimental / under active development.** Core monitoring, hardware-inventory, and command-management flows are implemented in the source, but installation, authentication, failure recovery, and deployment still require hardening. **Do not expose this project to the public Internet or use it to administer production infrastructure in its current state.**
+<img width="333" height="230" alt="CPU/RAM Monitoring Page" src="https://github.com/user-attachments/assets/c0c6292f-8ce9-4182-b533-fcc122c1c8ad" />
+<img width="333" height="230" alt="Agents list" src="https://github.com/user-attachments/assets/d7a601cb-0974-412b-b41d-0301414e2f89" />
+<img width="333" height="230" alt="Current Agent Command Builder" src="https://github.com/user-attachments/assets/4033c191-6b03-49b8-a134-35519e3319ad" />
 
 ## Overview
 
